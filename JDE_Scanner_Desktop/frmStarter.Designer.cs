@@ -43,6 +43,12 @@
             this.obszaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.obszaryToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.zleceniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zleceniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.noweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.typyZleceńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.typuZleceńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nowyToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +59,9 @@
             this.użytkownicyToolStripMenuItem,
             this.zasobyToolStripMenuItem,
             this.instalacjeToolStripMenuItem,
-            this.obszaryToolStripMenuItem});
+            this.obszaryToolStripMenuItem,
+            this.zleceniaToolStripMenuItem,
+            this.typyZleceńToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(707, 24);
@@ -87,14 +95,14 @@
             // uzytkownicyToolStripMenuItem
             // 
             this.uzytkownicyToolStripMenuItem.Name = "uzytkownicyToolStripMenuItem";
-            this.uzytkownicyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uzytkownicyToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.uzytkownicyToolStripMenuItem.Text = "Uzytkownicy";
             this.uzytkownicyToolStripMenuItem.Click += new System.EventHandler(this.uzytkownicyToolStripMenuItem_Click);
             // 
             // nowyToolStripMenuItem
             // 
             this.nowyToolStripMenuItem.Name = "nowyToolStripMenuItem";
-            this.nowyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.nowyToolStripMenuItem.Text = "Nowy";
             this.nowyToolStripMenuItem.Click += new System.EventHandler(this.nowyToolStripMenuItem_Click);
             // 
@@ -110,14 +118,14 @@
             // zasobyToolStripMenuItem1
             // 
             this.zasobyToolStripMenuItem1.Name = "zasobyToolStripMenuItem1";
-            this.zasobyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.zasobyToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.zasobyToolStripMenuItem1.Text = "Zasoby";
             this.zasobyToolStripMenuItem1.Click += new System.EventHandler(this.zasobyToolStripMenuItem1_Click);
             // 
             // nowyToolStripMenuItem1
             // 
             this.nowyToolStripMenuItem1.Name = "nowyToolStripMenuItem1";
-            this.nowyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.nowyToolStripMenuItem1.Text = "Nowy";
             this.nowyToolStripMenuItem1.Click += new System.EventHandler(this.nowyToolStripMenuItem1_Click);
             // 
@@ -133,14 +141,14 @@
             // instalacjeToolStripMenuItem1
             // 
             this.instalacjeToolStripMenuItem1.Name = "instalacjeToolStripMenuItem1";
-            this.instalacjeToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.instalacjeToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
             this.instalacjeToolStripMenuItem1.Text = "Instalacje";
             this.instalacjeToolStripMenuItem1.Click += new System.EventHandler(this.instalacjeToolStripMenuItem1_Click);
             // 
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
             this.nowaToolStripMenuItem.Click += new System.EventHandler(this.nowaToolStripMenuItem_Click);
             // 
@@ -156,16 +164,62 @@
             // obszaryToolStripMenuItem1
             // 
             this.obszaryToolStripMenuItem1.Name = "obszaryToolStripMenuItem1";
-            this.obszaryToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.obszaryToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.obszaryToolStripMenuItem1.Text = "Obszary";
             this.obszaryToolStripMenuItem1.Click += new System.EventHandler(this.obszaryToolStripMenuItem1_Click);
             // 
             // nowyToolStripMenuItem2
             // 
             this.nowyToolStripMenuItem2.Name = "nowyToolStripMenuItem2";
-            this.nowyToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem2.Size = new System.Drawing.Size(116, 22);
             this.nowyToolStripMenuItem2.Text = "Nowy";
             this.nowyToolStripMenuItem2.Click += new System.EventHandler(this.nowyToolStripMenuItem2_Click);
+            // 
+            // zleceniaToolStripMenuItem
+            // 
+            this.zleceniaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zleceniaToolStripMenuItem1,
+            this.noweToolStripMenuItem});
+            this.zleceniaToolStripMenuItem.Name = "zleceniaToolStripMenuItem";
+            this.zleceniaToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.zleceniaToolStripMenuItem.Text = "Zlecenia";
+            // 
+            // zleceniaToolStripMenuItem1
+            // 
+            this.zleceniaToolStripMenuItem1.Name = "zleceniaToolStripMenuItem1";
+            this.zleceniaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.zleceniaToolStripMenuItem1.Text = "Zlecenia";
+            this.zleceniaToolStripMenuItem1.Click += new System.EventHandler(this.zleceniaToolStripMenuItem1_Click);
+            // 
+            // noweToolStripMenuItem
+            // 
+            this.noweToolStripMenuItem.Name = "noweToolStripMenuItem";
+            this.noweToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.noweToolStripMenuItem.Text = "Nowe";
+            this.noweToolStripMenuItem.Click += new System.EventHandler(this.noweToolStripMenuItem_Click);
+            // 
+            // typyZleceńToolStripMenuItem
+            // 
+            this.typyZleceńToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.typuZleceńToolStripMenuItem,
+            this.nowyToolStripMenuItem3});
+            this.typyZleceńToolStripMenuItem.Name = "typyZleceńToolStripMenuItem";
+            this.typyZleceńToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+            this.typyZleceńToolStripMenuItem.Text = "Typy zlecenia";
+            // 
+            // typuZleceńToolStripMenuItem
+            // 
+            this.typuZleceńToolStripMenuItem.Name = "typuZleceńToolStripMenuItem";
+            this.typuZleceńToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.typuZleceńToolStripMenuItem.Text = "Typu zlecenia";
+            this.typuZleceńToolStripMenuItem.Click += new System.EventHandler(this.typuZleceńToolStripMenuItem_Click);
+            // 
+            // nowyToolStripMenuItem3
+            // 
+            this.nowyToolStripMenuItem3.Name = "nowyToolStripMenuItem3";
+            this.nowyToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem3.Text = "Nowy";
+            this.nowyToolStripMenuItem3.Click += new System.EventHandler(this.nowyToolStripMenuItem3_Click);
             // 
             // frmStarter
             // 
@@ -200,5 +254,11 @@
         private System.Windows.Forms.ToolStripMenuItem obszaryToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem koniecToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zleceniaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem noweToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem typyZleceńToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem zleceniaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem typuZleceńToolStripMenuItem;
     }
 }

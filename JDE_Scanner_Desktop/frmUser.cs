@@ -17,6 +17,7 @@ namespace JDE_Scanner_Desktop
     {
         int mode; //1-add, 2-edit, 3-view
         User ThisUser;
+        frmLooper Looper;
 
         public frmUser(Form parent)
         {
@@ -57,81 +58,55 @@ namespace JDE_Scanner_Desktop
 
         private void FormLoaded(object sender, EventArgs e)
         {
-
+            Looper = new frmLooper(this);
         }
 
         private void SaveUser(object sender, EventArgs e)
         {
-            if (mode == 1)
+            try
             {
-                ThisUser.CreatedBy = 1;
-                ThisUser.CreatedOn = DateTime.Now;
-                ThisUser.Name = txtName.Text;
-                ThisUser.Surname = txtSurname.Text;
-                ThisUser.Password = txtPassword.Text;
-                
-                if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
+                Looper.Show(this);
+                if (mode == 1)
                 {
-                    ThisUser.IsMechanic = true;
-                }
-                else
-                {
-                    ThisUser.IsMechanic = false;
-                }
-                AddUser();
-            }else if(mode == 2)
-            {
-                ThisUser.Name = txtName.Text;
-                ThisUser.Surname = txtSurname.Text;
-                ThisUser.Password = txtPassword.Text;
+                    ThisUser.CreatedBy = 1;
+                    ThisUser.CreatedOn = DateTime.Now;
+                    ThisUser.Name = txtName.Text;
+                    ThisUser.Surname = txtSurname.Text;
+                    ThisUser.Password = txtPassword.Text;
 
-                if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
-                {
-                    ThisUser.IsMechanic = true;
+                    if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
+                    {
+                        ThisUser.IsMechanic = true;
+                    }
+                    else
+                    {
+                        ThisUser.IsMechanic = false;
+                    }
+                    ThisUser.Add();
                 }
-                else
+                else if (mode == 2)
                 {
-                    ThisUser.IsMechanic = false;
+                    ThisUser.Name = txtName.Text;
+                    ThisUser.Surname = txtSurname.Text;
+                    ThisUser.Password = txtPassword.Text;
+
+                    if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
+                    {
+                        ThisUser.IsMechanic = true;
+                    }
+                    else
+                    {
+                        ThisUser.IsMechanic = false;
+                    }
+                    ThisUser.Edit();
                 }
-                EditUser();
+            }catch(Exception ex)
+            {
+
             }
-        }
-
-        private async void AddUser()
-        {
-            using (var client = new HttpClient())
+            finally
             {
-                string url = "http://jde_api.robs23.webserwer.pl/CreateUser?token=" + RuntimeSettings.TenantToken;
-                var serializedProduct = JsonConvert.SerializeObject(ThisUser);
-                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                var result = await client.PostAsync(new Uri(url), content);
-                //if (result.IsSuccessStatusCode)
-                //{
-                    MessageBox.Show("Tworzenie użytkownika zakończone powodzeniem!");
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                //}
-            }
-        }
-
-        private async void EditUser()
-        {
-            using (var client = new HttpClient())
-            {
-                string url = "http://jde_api.robs23.webserwer.pl/EditUser?token=" + RuntimeSettings.TenantToken + "&id=";
-                var serializedProduct = JsonConvert.SerializeObject(ThisUser);
-                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url),ThisUser.UserId), content);
-                if (result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Edycja użytkownika zakończona powodzeniem!");
-                }
-                else
-                {
-                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji użytkownika. Wiadomość: " + result.ReasonPhrase);
-                }
+                Looper.Hide();
             }
             
         }

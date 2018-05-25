@@ -34,7 +34,7 @@ namespace JDE_Scanner_Desktop.Models
         {
             using (var client = new HttpClient())
             {
-                string url = "http://jde_api.robs23.webserwer.pl/DeleteSet?token=" + RuntimeSettings.TenantToken + "&id=";
+                string url = RuntimeSettings.ApiAddress + "DeleteSet?token=" + RuntimeSettings.TenantToken + "&id=";
                 var result = await client.DeleteAsync(String.Format("{0}{1}", new Uri(url), id));
                 if (!result.IsSuccessStatusCode)
                 {
@@ -52,7 +52,7 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = "http://jde_api.robs23.webserwer.pl/GetSets?token=" + RuntimeSettings.TenantToken;
+                string url = RuntimeSettings.ApiAddress + "GetSets?token=" + RuntimeSettings.TenantToken;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

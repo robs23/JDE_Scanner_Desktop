@@ -21,6 +21,7 @@ namespace JDE_Scanner_Desktop
         Place _this;
         AreasKeeper Areas = new AreasKeeper();
         SetsKeeper Sets = new SetsKeeper();
+        frmLooper Looper;
 
         public frmPlace(Form parent)
         {
@@ -59,8 +60,11 @@ namespace JDE_Scanner_Desktop
 
         private async void FormLoaded(object sender, EventArgs e)
         {
+            Looper = new frmLooper(this);
+            Looper.Show(this);
             await Sets.Refresh();
             await Areas.Refresh();
+            Looper.Hide();
             cmbArea.DataSource = Areas.Items;
             cmbSet.DataSource = Sets.Items;
             cmbArea.DisplayMember = "Name";
@@ -76,6 +80,8 @@ namespace JDE_Scanner_Desktop
             _this.Name = txtName.Text;
             _this.Number1 = txtNumber1.Text;
             _this.Number2 = txtNumber2.Text;
+            _this.Description = txtDescription.Text;
+            _this.Priority = txtPriority.Text;
             if (cmbArea.SelectedItem != null)
             {
                 _this.AreaId = Convert.ToInt32(cmbArea.SelectedValue.ToString());
@@ -87,18 +93,28 @@ namespace JDE_Scanner_Desktop
             _this.PlaceToken = Utilities.uniqueToken();
             if (_this.IsValid)
             {
-                if (mode == 1)
+                try
                 {
-                    _this.CreatedBy = 1;
-                    _this.CreatedOn = DateTime.Now;
-
-                    Add();
-                }
-                else if (mode == 2)
+                    Looper.Show(this);
+                    if (mode == 1)
+                    {
+                        _this.CreatedBy = 1;
+                        _this.CreatedOn = DateTime.Now;
+                        _this.Add();
+                    }
+                    else if (mode == 2)
+                    {
+                        _this.Edit();
+                    }
+                }catch(Exception ex)
                 {
 
-                    Edit();
                 }
+                finally
+                {
+                    Looper.Hide();
+                }
+                
             }
             else
             {
@@ -109,45 +125,6 @@ namespace JDE_Scanner_Desktop
         private void BringCombos()
         {
 
-        }
-
-        private async void Add()
-        {
-            using (var client = new HttpClient())
-            {
-                string url = "http://jde_api.robs23.webserwer.pl/CreatePlace?token=" + RuntimeSettings.TenantToken;
-                var serializedProduct = JsonConvert.SerializeObject(_this);
-                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                var result = await client.PostAsync(new Uri(url), content);
-                //if (result.IsSuccessStatusCode)
-                //{
-                    MessageBox.Show("Tworzenie zasobu zakończone powodzeniem!");
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                //}
-            }
-        }
-
-        private async void Edit()
-        {
-            using (var client = new HttpClient())
-            {
-                string url = "http://jde_api.robs23.webserwer.pl/EditPlace?token=" + RuntimeSettings.TenantToken + "&id=";
-                var serializedProduct = JsonConvert.SerializeObject(_this);
-                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), _this.PlaceId), content);
-                if (result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Edycja zasobu zakończona powodzeniem!");
-                }
-                else
-                {
-                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji użytkownika. Wiadomość: " + result.ReasonPhrase);
-                }
-            }
-            
         }
 
         private void GenerateQrCode(string qrStr)

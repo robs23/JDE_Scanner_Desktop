@@ -17,6 +17,7 @@ namespace JDE_Scanner_Desktop
     {
         int mode; //1-add, 2-edit, 3-view
         Area _this;
+        frmLooper Looper;
 
         public frmArea(Form parent)
         {
@@ -48,65 +49,38 @@ namespace JDE_Scanner_Desktop
 
         private void FormLoaded(object sender, EventArgs e)
         {
-
+            Looper = new frmLooper(this);
         }
 
         private void Save(object sender, EventArgs e)
         {
-            if (mode == 1)
+            try
             {
-                _this.CreatedBy = 1;
-                _this.CreatedOn = DateTime.Now;
-                _this.Name = txtName.Text;
-                _this.Description = txtDescription.Text;
- 
-                Add();
-            }else if(mode == 2)
-            {
-                _this.Name = txtName.Text;
-                _this.Description = txtDescription.Text;
-
-                Edit();
-            }
-        }
-
-        private async void Add()
-        {
-            using (var client = new HttpClient())
-            {
-                string url = "http://jde_api.robs23.webserwer.pl/CreateArea?token=" + RuntimeSettings.TenantToken;
-                var serializedProduct = JsonConvert.SerializeObject(_this);
-                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                var result = await client.PostAsync(new Uri(url), content);
-                //if (result.IsSuccessStatusCode)
-                //{
-                    MessageBox.Show("Tworzenie obszaru zakończone powodzeniem!");
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                //}
-            }
-        }
-
-        private async void Edit()
-        {
-            using (var client = new HttpClient())
-            {
-                string url = "http://jde_api.robs23.webserwer.pl/EditArea?token=" + RuntimeSettings.TenantToken + "&id=";
-                var serializedProduct = JsonConvert.SerializeObject(_this);
-                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), _this.AreaId), content);
-                if (result.IsSuccessStatusCode)
+                Looper.Show(this);
+                if (mode == 1)
                 {
-                    MessageBox.Show("Edycja obszaru zakończona powodzeniem!");
+                    _this.CreatedBy = 1;
+                    _this.CreatedOn = DateTime.Now;
+                    _this.Name = txtName.Text;
+                    _this.Description = txtDescription.Text;
+                    _this.Add();
                 }
-                else
+                else if (mode == 2)
                 {
-                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji obszaru. Wiadomość: " + result.ReasonPhrase);
+                    _this.Name = txtName.Text;
+                    _this.Description = txtDescription.Text;
+                    _this.Edit();
                 }
+            }catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                Looper.Hide();
             }
             
         }
+
     }
 }

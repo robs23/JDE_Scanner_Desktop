@@ -69,5 +69,29 @@ namespace JDE_Scanner_Desktop
             frmArea FrmArea = new frmArea(this);
             FrmArea.Show(this);
         }
+
+        private void nowyToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            frmActionType FrmActionType = new frmActionType(this);
+            FrmActionType.Show(this);
+        }
+
+        private void typuZleceńToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmActionTypes FrmActionTypes = new frmActionTypes(this);
+            FrmActionTypes.Show(this);
+        }
+
+        private void noweToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProcess FrmProcess = new frmProcess(this);
+            FrmProcess.Show(this);
+        }
+
+        private void zleceniaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmProcesses FrmProcesses = new frmProcesses(this);
+            FrmProcesses.Show(this);
+        }
     }
 }

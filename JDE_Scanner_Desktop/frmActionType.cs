@@ -13,32 +13,31 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class frmSet : Form
+    public partial class frmActionType : Form
     {
         int mode; //1-add, 2-edit, 3-view
-        Set _this;
+        ActionType _this;
         frmLooper Looper;
 
-        public frmSet(Form parent)
+        public frmActionType(Form parent)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 1;
             lblCreated.Visible = false;
-            this.Text = "Nowa instalacja";
-            _this = new Set();
+            this.Text = "Nowy typ zlecenia";
+            _this = new ActionType();
         }
 
-        public frmSet(Set Item, Form parent)
+        public frmActionType(ActionType Item, Form parent)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 2;
-            this.Text = "Szczegóły instalacji";
+            this.Text = "Szczegóły typu zlecenia";
             _this = Item;
-            txtNumber.Text = _this.Number;
             txtName.Text = _this.Name;
             txtDescription.Text = _this.Description;
             if(_this.CreatedOn != null && _this.CreatedBy != 0)
@@ -61,14 +60,12 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.CreatedBy = 1;
                     _this.CreatedOn = DateTime.Now;
-                    _this.Number = txtNumber.Text;
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
                     _this.Add();
                 }
                 else if (mode == 2)
                 {
-                    _this.Number = txtNumber.Text;
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
                     _this.Edit();
