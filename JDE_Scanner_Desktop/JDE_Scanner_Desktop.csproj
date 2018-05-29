@@ -39,6 +39,7 @@
       <HintPath>..\packages\QRCoder.1.3.3\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ModelValidator.cs" />
     <Compile Include="ClientSettings.cs" />
     <Compile Include="frmActionType.cs">
       <SubType>Form</SubType>

@@ -91,35 +91,28 @@ namespace JDE_Scanner_Desktop
                 _this.SetId = Convert.ToInt32(cmbSet.SelectedValue.ToString());
             }
             _this.PlaceToken = Utilities.uniqueToken();
-            if (_this.IsValid)
+            try
             {
-                try
+                Looper.Show(this);
+                if (mode == 1)
                 {
-                    Looper.Show(this);
-                    if (mode == 1)
-                    {
-                        _this.CreatedBy = 1;
-                        _this.CreatedOn = DateTime.Now;
-                        _this.Add();
-                    }
-                    else if (mode == 2)
-                    {
-                        _this.Edit();
-                    }
-                }catch(Exception ex)
+                    _this.CreatedBy = 1;
+                    _this.CreatedOn = DateTime.Now;
+                    _this.Add();
+                }
+                else if (mode == 2)
                 {
+                    _this.Edit();
+                }
+            }catch(Exception ex)
+            {
 
-                }
-                finally
-                {
-                    Looper.Hide();
-                }
-                
             }
-            else
+            finally
             {
-                MessageBox.Show("Pola Obszar i Instalacja są wymagane!");
+                Looper.Hide();
             }
+                
         }
 
         private void BringCombos()

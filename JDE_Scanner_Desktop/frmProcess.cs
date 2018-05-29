@@ -74,15 +74,55 @@ namespace JDE_Scanner_Desktop
             cmbActionType.ValueMember = "ActionTypeId";
             cmbPlace.DisplayMember = "Name";
             cmbPlace.ValueMember = "PlaceId";
+            cmbActionType.SelectedIndex = cmbActionType.FindStringExact(_this.ActionTypeName);
+            cmbPlace.SelectedIndex = cmbPlace.FindStringExact(_this.PlaceName);
+            cmbStartedBy.SelectedIndex = cmbStartedBy.FindStringExact(_this.StartedByName);
+            cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(_this.FinishedByName);
+            cmbStatus.SelectedIndex = cmbStatus.FindStringExact(_this.Status);
+            txtDescription.Text = _this.Description;
+            txtOutput.Text = _this.Output;
             Looper.Hide();
         }
 
         private void Save(object sender, EventArgs e)
         {
             _this.Description = txtDescription.Text;
+            _this.Output = txtOutput.Text;
+            if(txtStartedOn.Text == " ")
+            {
+                _this.StartedOn = null;
+            }
+            else
+            {
+                _this.StartedOn = txtStartedOn.Value;
+            }
+            if (txtFinishedOn.Text == " ")
+            {
+                _this.FinishedOn = null;
+            }
+            else
+            {
+                _this.FinishedOn = txtFinishedOn.Value;
+            }
+            if (cmbPlace.SelectedItem != null)
+            {
+                _this.PlaceId = Convert.ToInt32(cmbPlace.SelectedValue.ToString());
+            }
             if(cmbActionType.SelectedItem != null)
             {
-                _this.PlaceId = Convert.ToInt32(cmbActionType.SelectedValue.ToString());
+                _this.ActionTypeId = Convert.ToInt32(cmbActionType.SelectedValue.ToString());
+            }
+            if(cmbStatus.SelectedItem != null)
+            {
+                _this.Status = cmbStatus.SelectedItem.ToString();
+            }
+            if(cmbStartedBy.SelectedItem != null)
+            {
+                _this.StartedBy = Convert.ToInt32(cmbStartedBy.SelectedValue.ToString());
+            }
+            if(cmbFinishedBy.SelectedItem != null)
+            {
+                _this.FinishedBy = Convert.ToInt32(cmbFinishedBy.SelectedValue.ToString());
             }
 
             try
