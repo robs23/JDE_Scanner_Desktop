@@ -51,26 +51,35 @@ namespace JDE_Scanner_Desktop.Models
         public string PlaceToken { get; set; }
         [Browsable(false)]
 
-        public async void Add()
+        public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreatePlace?token=" + RuntimeSettings.TenantToken;
+                    string url = RuntimeSettings.ApiAddress + "CreatePlace?token=" + RuntimeSettings.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
-                    //if (result.IsSuccessStatusCode)
-                    //{
-                    MessageBox.Show("Tworzenie zasobu zakończone powodzeniem!");
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                    //}
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var rString = await result.Content.ReadAsStringAsync();
+                        Place _this = JsonConvert.DeserializeObject<Place>(rString);
+                        this.PlaceId = _this.PlaceId;
+                        MessageBox.Show("Tworzenie zasobu zakończone powodzeniem!");
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia zasobu. Wiadomość: " + result.ReasonPhrase);
+                        return false;
+                    }
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -81,10 +90,10 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditPlace?token=" + RuntimeSettings.TenantToken + "&id=";
+                    string url = RuntimeSettings.ApiAddress + "EditPlace?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), this.PlaceId), content);
+                    var result = await client.PutAsync(String.Format(url, this.PlaceId, RuntimeSettings.UserId), content);
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Edycja zasobu zakończona powodzeniem!");

@@ -131,22 +131,4 @@
   <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="btnStartedOnClear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfiBRkKGgTIfjxY
-        AAAAgklEQVQ4T9WUAQqAIBAEhd7We3xST63baMFk1TspqIEllL0xgky/ZL2eHobdbNkt27nqgw66mJHg
-        NBSYnpQypvmmdVFJPZ0bvYGwjKjBaRmpBWXCMqKk2FssU7SEUygZE5bWMqzVngs1iG+GhKUtWYlb+sqv
-        9+jlQIZXUkGk+wlSOgB0nmSBN+CtEAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btnFinishedOnClear.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfiBRkKGgTIfjxY
-        AAAAgklEQVQ4T9WUAQqAIBAEhd7We3xST63baMFk1TspqIEllL0xgky/ZL2eHobdbNkt27nqgw66mJHg
-        NBSYnpQypvmmdVFJPZ0bvYGwjKjBaRmpBWXCMqKk2FssU7SEUygZE5bWMqzVngs1iG+GhKUtWYlb+sqv
-        9+jlQIZXUkGk+wlSOgB0nmSBN+CtEAAAAABJRU5ErkJggg==
-</value>
-  </data>
 </root>

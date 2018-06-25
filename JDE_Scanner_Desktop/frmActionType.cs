@@ -26,7 +26,7 @@ namespace JDE_Scanner_Desktop
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 1;
             lblCreated.Visible = false;
-            this.Text = "Nowy typ zlecenia";
+            this.Text = "Nowy typ zgłoszenia";
             _this = new ActionType();
         }
 
@@ -36,7 +36,7 @@ namespace JDE_Scanner_Desktop
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 2;
-            this.Text = "Szczegóły typu zlecenia";
+            this.Text = "Szczegóły typu zgłoszenia";
             _this = Item;
             txtName.Text = _this.Name;
             txtDescription.Text = _this.Description;

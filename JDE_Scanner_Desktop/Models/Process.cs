@@ -127,18 +127,21 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreateProcess?token=" + RuntimeSettings.TenantToken;
+                    string url = RuntimeSettings.ApiAddress + "CreateProcess?token=" + RuntimeSettings.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
-                    //if (result.IsSuccessStatusCode)
-                    //{
-                    MessageBox.Show("Tworzenie zlecenia zakończone powodzeniem!");
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                    //}
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var rString = await result.Content.ReadAsStringAsync();
+                        Process _this = JsonConvert.DeserializeObject<Process>(rString);
+                        this.ProcessId = _this.ProcessId;
+                        MessageBox.Show("Tworzenie zlecenia zakończone powodzeniem!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia zlecenia. Wiadomość: " + result.ReasonPhrase);
+                    }
                 }
             }
         }
@@ -150,10 +153,10 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditProcess?token=" + RuntimeSettings.TenantToken + "&id=";
+                    string url = RuntimeSettings.ApiAddress + "EditProcess?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), this.ProcessId), content);
+                    var result = await client.PutAsync(String.Format(url, this.ProcessId, RuntimeSettings.UserId), content);
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Edycja zlecenia zakończona powodzeniem!");

@@ -32,7 +32,7 @@ namespace JDE_Scanner_Desktop
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 1;
             lblCreated.Visible = false;
-            this.Text = "Nowe zlecenie";
+            this.Text = "Nowe zgłoszenie";
             _this = new Process();
             DatesChange();
         }
@@ -43,7 +43,7 @@ namespace JDE_Scanner_Desktop
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 2;
-            this.Text = "Szczegóły zlecenia";
+            this.Text = "Szczegóły zgłoszenia";
             _this = Process;
             DatesChange();
             txtDescription.Text = _this.Description;
@@ -79,6 +79,14 @@ namespace JDE_Scanner_Desktop
             cmbStartedBy.SelectedIndex = cmbStartedBy.FindStringExact(_this.StartedByName);
             cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(_this.FinishedByName);
             cmbStatus.SelectedIndex = cmbStatus.FindStringExact(_this.Status);
+            if (_this.StartedOn != null)
+            {
+                txtStartedOn.Value = (DateTime)_this.StartedOn;
+            }
+            if (_this.FinishedOn != null)
+            {
+                txtFinishedOn.Value = (DateTime)_this.FinishedOn;
+            }
             txtDescription.Text = _this.Description;
             txtOutput.Text = _this.Output;
             Looper.Hide();
@@ -130,7 +138,7 @@ namespace JDE_Scanner_Desktop
                 Looper.Show(this);
                 if (mode == 1)
                 {
-                    _this.CreatedBy = 1;
+                    _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
                     _this.Add();
                 }

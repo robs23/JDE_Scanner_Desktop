@@ -15,6 +15,7 @@ namespace JDE_Scanner_Desktop
         public frmStarter()
         {
             InitializeComponent();
+            
         }
 
         private void koniecToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,6 +93,50 @@ namespace JDE_Scanner_Desktop
         {
             frmProcesses FrmProcesses = new frmProcesses(this);
             FrmProcesses.Show(this);
+        }
+
+        private void formLoaded(object sender, EventArgs e)
+        {
+            frmLogin FrmLogin = new frmLogin(this);
+            FrmLogin.ShowDialog(this);
+        }
+
+        private void frmStarter_Shown(object sender, EventArgs e)
+        {
+            if (RuntimeSettings.UserId == 0)
+            {
+                this.Close();
+            }
+        }
+
+        private void historiaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmLogs FrmLogs = new frmLogs(this);
+            FrmLogs.Show(this);
+        }
+
+        private void zgłoszeniaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmProcesses FrmProcesses = new frmProcesses(this);
+            FrmProcesses.Show(this);
+        }
+
+        private void noweToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmProcess FrmProcess = new frmProcess(this);
+            FrmProcess.Show(this);
+        }
+
+        private void typyZgłoszeniaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmActionTypes FrmActionTypes = new frmActionTypes(this);
+            FrmActionTypes.Show(this);
+        }
+
+        private void nowyToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            frmActionType FrmActionType = new frmActionType(this);
+            FrmActionType.Show(this);
         }
     }
 }

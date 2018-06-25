@@ -68,7 +68,7 @@ namespace JDE_Scanner_Desktop
                 Looper.Show(this);
                 if (mode == 1)
                 {
-                    ThisUser.CreatedBy = 1;
+                    ThisUser.CreatedBy = RuntimeSettings.UserId;
                     ThisUser.CreatedOn = DateTime.Now;
                     ThisUser.Name = txtName.Text;
                     ThisUser.Surname = txtSurname.Text;

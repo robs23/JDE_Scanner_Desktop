@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class PlacesKeeper
+    public class LogsKeeper
     {
-        public List<Place> Items { get; set; }
+        public List<Log> Items { get; set; }
 
-        public PlacesKeeper()
+        public LogsKeeper()
         {
-            Items = new List<Place>();
+            Items = new List<Log>();
         }
 
         public void Remove(List<int> ids)
@@ -34,11 +34,11 @@ namespace JDE_Scanner_Desktop.Models
         {
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "DeletePlace?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
-                var result = await client.DeleteAsync(String.Format(url, id, RuntimeSettings.UserId));
+                string url = RuntimeSettings.ApiAddress + "DeleteLog?token=" + RuntimeSettings.TenantToken + "&id=";
+                var result = await client.DeleteAsync(String.Format("{0}{1}", new Uri(url), id));
                 if (!result.IsSuccessStatusCode)
                 {
-                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia użytkownika {0}. Wiadomość: " + result.ReasonPhrase,id));
+                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia logu {0}. Wiadomość: " + result.ReasonPhrase,id));
                 }
             }
         }
@@ -52,13 +52,13 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "GetPlaces?token=" + RuntimeSettings.TenantToken;
+                string url = RuntimeSettings.ApiAddress + "GetLogs?token=" + RuntimeSettings.TenantToken;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
                     {
                         var userJsonString = await response.Content.ReadAsStringAsync();
-                        Items = JsonConvert.DeserializeObject<Place[]>(userJsonString).ToList();
+                        Items = JsonConvert.DeserializeObject<Log[]>(userJsonString).ToList();
                     }
                 }
             }

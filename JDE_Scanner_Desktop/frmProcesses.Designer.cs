@@ -148,7 +148,7 @@
             this.Controls.Add(this.tlpMain);
             this.Name = "frmProcesses";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Zlecenia";
+            this.Text = "Zgłoszenia";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);

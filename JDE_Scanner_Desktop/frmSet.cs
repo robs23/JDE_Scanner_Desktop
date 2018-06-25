@@ -59,7 +59,7 @@ namespace JDE_Scanner_Desktop
             {
                 if (mode == 1)
                 {
-                    _this.CreatedBy = 1;
+                    _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
                     _this.Number = txtNumber.Text;
                     _this.Name = txtName.Text;

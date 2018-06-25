@@ -34,8 +34,8 @@ namespace JDE_Scanner_Desktop.Models
         {
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "DeleteArea?token=" + RuntimeSettings.TenantToken + "&id=";
-                var result = await client.DeleteAsync(String.Format("{0}{1}", new Uri(url), id));
+                string url = RuntimeSettings.ApiAddress + "DeleteArea?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
+                var result = await client.DeleteAsync(String.Format(url, id, RuntimeSettings.UserId));
                 if (!result.IsSuccessStatusCode)
                 {
                     MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia użytkownika {0}. Wiadomość: " + result.ReasonPhrase,id));

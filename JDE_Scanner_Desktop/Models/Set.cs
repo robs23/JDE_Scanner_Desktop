@@ -41,18 +41,21 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreateSet?token=" + RuntimeSettings.TenantToken;
+                    string url = RuntimeSettings.ApiAddress + "CreateSet?token=" + RuntimeSettings.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
-                    //if (result.IsSuccessStatusCode)
-                    //{
-                    MessageBox.Show("Tworzenie instalacji zakończone powodzeniem!");
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                    //}
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var rString = await result.Content.ReadAsStringAsync();
+                        Set _this = JsonConvert.DeserializeObject<Set>(rString);
+                        this.SetId = _this.SetId;
+                        MessageBox.Show("Tworzenie instalacji zakończone powodzeniem!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia instalacji. Wiadomość: " + result.ReasonPhrase);
+                    }
                 }
             }
         }
@@ -64,10 +67,10 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditSet?token=" + RuntimeSettings.TenantToken + "&id=";
+                    string url = RuntimeSettings.ApiAddress + "EditSet?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), this.SetId), content);
+                    var result = await client.PutAsync(String.Format(url, this.SetId, RuntimeSettings.UserId), content);
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Edycja instalacji zakończona powodzeniem!");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JDE_Scanner_Desktop.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,7 @@ namespace JDE_Scanner_Desktop
                 return "http://jde_api.robs23.webserwer.pl/";
             }
         }
+
+        public static int UserId { get; set; }
     }
 }

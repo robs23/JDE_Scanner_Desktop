@@ -34,7 +34,6 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
-            this.txtFinishedOn = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,19 +44,20 @@
             this.cmbFinishedBy = new System.Windows.Forms.ComboBox();
             this.cmbActionType = new System.Windows.Forms.ComboBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
-            this.txtStartedOn = new System.Windows.Forms.DateTimePicker();
             this.cmbStartedBy = new System.Windows.Forms.ComboBox();
             this.cmbPlace = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cmbStatus = new System.Windows.Forms.ComboBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tlpStartedOn = new System.Windows.Forms.TableLayoutPanel();
-            this.tlpFinishedOn = new System.Windows.Forms.TableLayoutPanel();
+            this.txtStartedOn = new System.Windows.Forms.DateTimePicker();
             this.btnStartedOnClear = new System.Windows.Forms.Button();
+            this.tlpFinishedOn = new System.Windows.Forms.TableLayoutPanel();
+            this.txtFinishedOn = new System.Windows.Forms.DateTimePicker();
             this.btnFinishedOnClear = new System.Windows.Forms.Button();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -158,15 +158,6 @@
             this.tplTextboxes.Size = new System.Drawing.Size(591, 401);
             this.tplTextboxes.TabIndex = 1;
             // 
-            // txtFinishedOn
-            // 
-            this.txtFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFinishedOn.Location = new System.Drawing.Point(3, 3);
-            this.txtFinishedOn.Name = "txtFinishedOn";
-            this.txtFinishedOn.Size = new System.Drawing.Size(399, 20);
-            this.txtFinishedOn.TabIndex = 17;
-            this.txtFinishedOn.ValueChanged += new System.EventHandler(this.txtFinishedOn_ValueChanged);
-            // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -263,15 +254,6 @@
             this.txtDescription.Size = new System.Drawing.Size(435, 20);
             this.txtDescription.TabIndex = 7;
             // 
-            // txtStartedOn
-            // 
-            this.txtStartedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStartedOn.Location = new System.Drawing.Point(3, 3);
-            this.txtStartedOn.Name = "txtStartedOn";
-            this.txtStartedOn.Size = new System.Drawing.Size(399, 20);
-            this.txtStartedOn.TabIndex = 15;
-            this.txtStartedOn.ValueChanged += new System.EventHandler(this.txtStartedOn_ValueChanged);
-            // 
             // cmbStartedBy
             // 
             this.cmbStartedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -315,17 +297,6 @@
             this.cmbStatus.Size = new System.Drawing.Size(435, 21);
             this.cmbStatus.TabIndex = 20;
             // 
-            // lblCreated
-            // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 455);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // txtOutput
             // 
             this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -366,23 +337,14 @@
             this.tlpStartedOn.Size = new System.Drawing.Size(435, 24);
             this.tlpStartedOn.TabIndex = 23;
             // 
-            // tlpFinishedOn
+            // txtStartedOn
             // 
-            this.tlpFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpFinishedOn.ColumnCount = 2;
-            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpFinishedOn.Controls.Add(this.txtFinishedOn, 0, 0);
-            this.tlpFinishedOn.Controls.Add(this.btnFinishedOnClear, 1, 0);
-            this.tlpFinishedOn.Location = new System.Drawing.Point(153, 93);
-            this.tlpFinishedOn.Name = "tlpFinishedOn";
-            this.tlpFinishedOn.RowCount = 1;
-            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpFinishedOn.Size = new System.Drawing.Size(435, 24);
-            this.tlpFinishedOn.TabIndex = 24;
+            this.txtStartedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStartedOn.Location = new System.Drawing.Point(3, 3);
+            this.txtStartedOn.Name = "txtStartedOn";
+            this.txtStartedOn.Size = new System.Drawing.Size(399, 20);
+            this.txtStartedOn.TabIndex = 15;
+            this.txtStartedOn.ValueChanged += new System.EventHandler(this.txtStartedOn_ValueChanged);
             // 
             // btnStartedOnClear
             // 
@@ -398,6 +360,33 @@
             this.btnStartedOnClear.UseVisualStyleBackColor = true;
             this.btnStartedOnClear.Click += new System.EventHandler(this.btnStartedOnClear_Click);
             // 
+            // tlpFinishedOn
+            // 
+            this.tlpFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpFinishedOn.ColumnCount = 2;
+            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpFinishedOn.Controls.Add(this.txtFinishedOn, 0, 0);
+            this.tlpFinishedOn.Controls.Add(this.btnFinishedOnClear, 1, 0);
+            this.tlpFinishedOn.Location = new System.Drawing.Point(153, 93);
+            this.tlpFinishedOn.Name = "tlpFinishedOn";
+            this.tlpFinishedOn.RowCount = 1;
+            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tlpFinishedOn.Size = new System.Drawing.Size(435, 24);
+            this.tlpFinishedOn.TabIndex = 24;
+            // 
+            // txtFinishedOn
+            // 
+            this.txtFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFinishedOn.Location = new System.Drawing.Point(3, 3);
+            this.txtFinishedOn.Name = "txtFinishedOn";
+            this.txtFinishedOn.Size = new System.Drawing.Size(399, 20);
+            this.txtFinishedOn.TabIndex = 17;
+            this.txtFinishedOn.ValueChanged += new System.EventHandler(this.txtFinishedOn_ValueChanged);
+            // 
             // btnFinishedOnClear
             // 
             this.btnFinishedOnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -412,6 +401,17 @@
             this.btnFinishedOnClear.UseVisualStyleBackColor = true;
             this.btnFinishedOnClear.Click += new System.EventHandler(this.btnFinishedOnClear_Click);
             // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 455);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,7 +420,7 @@
             this.Controls.Add(this.tlpMain);
             this.Name = "frmProcess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Szczegóły zasobu";
+            this.Text = "Szczegóły zgłoszenia";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();

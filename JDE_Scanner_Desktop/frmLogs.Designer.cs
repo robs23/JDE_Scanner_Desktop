@@ -1,6 +1,6 @@
 ﻿namespace JDE_Scanner_Desktop
 {
-    partial class frmActionTypes
+    partial class frmLogs
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmActionTypes));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogs));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgItems = new System.Windows.Forms.DataGridView();
@@ -75,9 +74,8 @@
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpButtons.Controls.Add(this.btnAdd, 0, 0);
-            this.tlpButtons.Controls.Add(this.btnDelete, 1, 0);
-            this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
+            this.tlpButtons.Controls.Add(this.btnDelete, 0, 0);
+            this.tlpButtons.Controls.Add(this.btnRefresh, 1, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -85,27 +83,13 @@
             this.tlpButtons.Size = new System.Drawing.Size(565, 34);
             this.tlpButtons.TabIndex = 1;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(3, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(34, 28);
-            this.btnAdd.TabIndex = 0;
-            this.tooltip.SetToolTip(this.btnAdd, "Dodaj nowego użytkownika..");
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.Add);
-            // 
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(43, 3);
+            this.btnDelete.Location = new System.Drawing.Point(3, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(34, 28);
             this.btnDelete.TabIndex = 1;
@@ -119,7 +103,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(83, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(43, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnRefresh.Size = new System.Drawing.Size(34, 28);
@@ -140,15 +124,15 @@
             this.dgItems.TabIndex = 2;
             this.dgItems.DoubleClick += new System.EventHandler(this.View);
             // 
-            // frmActionTypes
+            // frmLogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 400);
             this.Controls.Add(this.tlpMain);
-            this.Name = "frmActionTypes";
+            this.Name = "frmLogs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Typy zgłoszenia";
+            this.Text = "Historia";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);
@@ -160,7 +144,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpMain;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TableLayoutPanel tlpButtons;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;

@@ -75,7 +75,7 @@ namespace JDE_Scanner_Desktop
             cmbSet.SelectedIndex = cmbSet.FindStringExact(_this.SetName);
         }
 
-        private void Save(object sender, EventArgs e)
+        private async void Save(object sender, EventArgs e)
         {
             _this.Name = txtName.Text;
             _this.Number1 = txtNumber1.Text;
@@ -90,15 +90,22 @@ namespace JDE_Scanner_Desktop
             {
                 _this.SetId = Convert.ToInt32(cmbSet.SelectedValue.ToString());
             }
-            _this.PlaceToken = Utilities.uniqueToken();
+
             try
             {
                 Looper.Show(this);
                 if (mode == 1)
                 {
-                    _this.CreatedBy = 1;
+                    _this.PlaceToken = Utilities.uniqueToken();
+                    _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
-                    _this.Add();
+                    if(await _this.Add())
+                    {
+                        mode = 2;
+                        this.Text = "Szczegóły zasobu";
+                        GenerateQrCode(_this.PlaceToken);
+                    }
+                    
                 }
                 else if (mode == 2)
                 {
