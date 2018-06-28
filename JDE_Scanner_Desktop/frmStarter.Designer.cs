@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStarter));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.koniecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,14 +44,14 @@
             this.obszaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.obszaryToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.historiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.historiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.noweToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.typyZgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typyZgłoszeniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.historiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.historiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -178,21 +179,6 @@
             this.nowyToolStripMenuItem2.Text = "Nowy";
             this.nowyToolStripMenuItem2.Click += new System.EventHandler(this.nowyToolStripMenuItem2_Click);
             // 
-            // historiaToolStripMenuItem
-            // 
-            this.historiaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.historiaToolStripMenuItem1});
-            this.historiaToolStripMenuItem.Name = "historiaToolStripMenuItem";
-            this.historiaToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.historiaToolStripMenuItem.Text = "Historia";
-            // 
-            // historiaToolStripMenuItem1
-            // 
-            this.historiaToolStripMenuItem1.Name = "historiaToolStripMenuItem1";
-            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.historiaToolStripMenuItem1.Text = "Historia";
-            this.historiaToolStripMenuItem1.Click += new System.EventHandler(this.historiaToolStripMenuItem1_Click);
-            // 
             // zgłoszeniaToolStripMenuItem
             // 
             this.zgłoszeniaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -205,14 +191,14 @@
             // zgłoszeniaToolStripMenuItem1
             // 
             this.zgłoszeniaToolStripMenuItem1.Name = "zgłoszeniaToolStripMenuItem1";
-            this.zgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.zgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.zgłoszeniaToolStripMenuItem1.Text = "Zgłoszenia";
             this.zgłoszeniaToolStripMenuItem1.Click += new System.EventHandler(this.zgłoszeniaToolStripMenuItem1_Click);
             // 
             // noweToolStripMenuItem1
             // 
             this.noweToolStripMenuItem1.Name = "noweToolStripMenuItem1";
-            this.noweToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.noweToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.noweToolStripMenuItem1.Text = "Nowe";
             this.noweToolStripMenuItem1.Click += new System.EventHandler(this.noweToolStripMenuItem1_Click);
             // 
@@ -228,16 +214,31 @@
             // typyZgłoszeniaToolStripMenuItem1
             // 
             this.typyZgłoszeniaToolStripMenuItem1.Name = "typyZgłoszeniaToolStripMenuItem1";
-            this.typyZgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.typyZgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.typyZgłoszeniaToolStripMenuItem1.Text = "Typy zgłoszenia";
             this.typyZgłoszeniaToolStripMenuItem1.Click += new System.EventHandler(this.typyZgłoszeniaToolStripMenuItem1_Click);
             // 
             // nowyToolStripMenuItem4
             // 
             this.nowyToolStripMenuItem4.Name = "nowyToolStripMenuItem4";
-            this.nowyToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem4.Size = new System.Drawing.Size(157, 22);
             this.nowyToolStripMenuItem4.Text = "Nowy";
             this.nowyToolStripMenuItem4.Click += new System.EventHandler(this.nowyToolStripMenuItem4_Click);
+            // 
+            // historiaToolStripMenuItem
+            // 
+            this.historiaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.historiaToolStripMenuItem1});
+            this.historiaToolStripMenuItem.Name = "historiaToolStripMenuItem";
+            this.historiaToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.historiaToolStripMenuItem.Text = "Historia";
+            // 
+            // historiaToolStripMenuItem1
+            // 
+            this.historiaToolStripMenuItem1.Name = "historiaToolStripMenuItem1";
+            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.historiaToolStripMenuItem1.Text = "Historia";
+            this.historiaToolStripMenuItem1.Click += new System.EventHandler(this.historiaToolStripMenuItem1_Click);
             // 
             // frmStarter
             // 
@@ -245,9 +246,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 450);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmStarter";
-            this.Text = "Zaczynamy";
+            this.Text = "JDE Scanner";
             this.Load += new System.EventHandler(this.formLoaded);
             this.Shown += new System.EventHandler(this.frmStarter_Shown);
             this.menuStrip1.ResumeLayout(false);

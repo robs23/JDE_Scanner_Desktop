@@ -22,10 +22,20 @@ namespace JDE_Scanner_Desktop.Models
         public string TenantName { get; set; }
         [Required(AllowEmptyStrings =false, ErrorMessage ="Pole imię nie może być puste!")]
         [DisplayName("Imię")]
+        [Browsable(false)]
         public string Name { get; set; }
         [Required(AllowEmptyStrings =false, ErrorMessage ="Pole nazwisko nie może być puste!")]
         [DisplayName("Nazwisko")]
+        [Browsable(false)]
         public string Surname { get; set; }
+        [DisplayName("Imię i nazwisko")]
+        public string FullName
+        {
+            get
+            {
+                return Name + " " + Surname;
+            }
+        }
         [Browsable(false)]
         [Required(AllowEmptyStrings =false, ErrorMessage ="Pole hasło nie może być puste!")]
         [StringLength(20,MinimumLength =4, ErrorMessage = "Hasło musi mieć od 4 do 20 znaków!")]
@@ -40,14 +50,7 @@ namespace JDE_Scanner_Desktop.Models
         public string CreatedByName { get; set; }
         [DisplayName("Ostatnie logowanie")]
         public DateTime? LastLoggedOn { get; set; }
-        [Browsable(false)]
-        public string FullName
-        {
-            get
-            {
-                return Name + " " + Surname;
-            }
-        }
+        
 
         public async void Add()
         {

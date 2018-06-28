@@ -196,6 +196,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 450);
             this.Controls.Add(this.tlpMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSet";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Szczegóły instalacji";

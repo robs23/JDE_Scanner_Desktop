@@ -27,7 +27,7 @@ namespace JDE_Scanner_Desktop
             Looper.Show(this);
             await Keeper.Refresh();
             cmbUsers.DataSource = Keeper.Items;
-            cmbUsers.DisplayMember = "Surname";
+            cmbUsers.DisplayMember = "FullName";
             cmbUsers.ValueMember = "UserId";
             txtPassword.Text = "Hasło";
             txtPassword.ForeColor = Color.Gray;
@@ -56,10 +56,16 @@ namespace JDE_Scanner_Desktop
 
         private void Login(object sender, EventArgs e)
         {
+
+            Login();
+        }
+
+        private void Login()
+        {
             if (txtPassword.ForeColor == Color.Black && cmbUsers.SelectedItem != null)
             {
                 int UserId = Convert.ToInt32(cmbUsers.SelectedValue.ToString());
-                if(Keeper.Items.Where(u=>u.UserId==UserId && u.Password == txtPassword.Text).Any())
+                if (Keeper.Items.Where(u => u.UserId == UserId && u.Password == txtPassword.Text).Any())
                 {
                     //login and password OK
                     RuntimeSettings.UserId = UserId;
@@ -70,8 +76,6 @@ namespace JDE_Scanner_Desktop
                 else
                 {
                     MessageBox.Show("Podano błędne hasło!");
-                    txtPassword.Text = "Hasło";
-                    txtPassword.ForeColor = Color.Gray;
                 }
 
             }
@@ -79,7 +83,6 @@ namespace JDE_Scanner_Desktop
             {
                 MessageBox.Show("Nie wybrano użytkownika lub nie podano hasła! Najpierw wybierz użytkownika i podaj hasło.");
             }
-
         }
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
@@ -89,6 +92,14 @@ namespace JDE_Scanner_Desktop
         private void tlpMain_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Login();
+            }
         }
     }
 }

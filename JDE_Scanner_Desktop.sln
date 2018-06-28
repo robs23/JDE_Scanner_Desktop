@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDE_Scanner_Desktop", "JDE_Scanner_Desktop\JDE_Scanner_Desktop.csproj", "{5BDD6C1B-F11D-473A-A8FD-6542BCE54DEF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "JDE_Scanner_Desktop_Setup", "JDE_Scanner_Desktop_Setup\JDE_Scanner_Desktop_Setup.vdproj", "{34D16828-1E11-45F3-9447-938A27350BB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{5BDD6C1B-F11D-473A-A8FD-6542BCE54DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BDD6C1B-F11D-473A-A8FD-6542BCE54DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BDD6C1B-F11D-473A-A8FD-6542BCE54DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D16828-1E11-45F3-9447-938A27350BB7}.Debug|Any CPU.ActiveCfg = Debug
+		{34D16828-1E11-45F3-9447-938A27350BB7}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
