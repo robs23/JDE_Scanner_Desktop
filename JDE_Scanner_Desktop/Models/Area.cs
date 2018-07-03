@@ -32,7 +32,7 @@ namespace JDE_Scanner_Desktop.Models
         [Browsable(false)]
         public string TenantName { get; set; }
 
-        public async void Add()
+        public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -49,12 +49,18 @@ namespace JDE_Scanner_Desktop.Models
                         Area _this = JsonConvert.DeserializeObject<Area>(rString);
                         this.AreaId = _this.AreaId;
                         MessageBox.Show("Tworzenie obszaru zakończone powodzeniem!");
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
+                        return false;
                     }
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 

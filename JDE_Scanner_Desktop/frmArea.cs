@@ -52,7 +52,7 @@ namespace JDE_Scanner_Desktop
             Looper = new frmLooper(this);
         }
 
-        private void Save(object sender, EventArgs e)
+        private async void Save(object sender, EventArgs e)
         {
             try
             {
@@ -63,7 +63,11 @@ namespace JDE_Scanner_Desktop
                     _this.CreatedOn = DateTime.Now;
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
-                    _this.Add();
+                    if (await _this.Add())
+                    {
+                        mode = 2;
+                        this.Text = "Szczegóły obszaru";
+                    }
                 }
                 else if (mode == 2)
                 {

@@ -52,7 +52,7 @@ namespace JDE_Scanner_Desktop.Models
         public DateTime? LastLoggedOn { get; set; }
         
 
-        public async void Add()
+        public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -69,12 +69,18 @@ namespace JDE_Scanner_Desktop.Models
                         User _this = JsonConvert.DeserializeObject<User>(rString);
                         this.UserId = _this.UserId;
                         MessageBox.Show("Tworzenie użytkownika zakończone powodzeniem!");
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
+                        return false;
                     }
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 

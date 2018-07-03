@@ -4,15 +4,21 @@
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
 "ProjectName" = "8:JDE_Scanner_Desktop_Setup"
-"LanguageId" = "3:1033"
-"CodePage" = "3:1252"
-"UILanguageId" = "3:1033"
+"LanguageId" = "3:1045"
+"CodePage" = "3:1250"
+"UILanguageId" = "3:1045"
 "SccProjectName" = "8:"
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
 "SccProvider" = "8:"
     "Hierarchy"
     {
+        "Entry"
+        {
+        "MsmKey" = "8:_235A60C9FC9544408813EFE7A37B7B9F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
         "Entry"
         {
         "MsmKey" = "8:_509D47CD459B45014EA1BB877F95801C"
@@ -23,12 +29,6 @@
         {
         "MsmKey" = "8:_509D47CD459B45014EA1BB877F95801C"
         "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5C79D42C638D4E4F9053493AB6E9088E"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,12 +58,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D391D4A602658365AB30B859A9C3EF3A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -85,6 +79,12 @@
         "OwnerKey" = "8:_509D47CD459B45014EA1BB877F95801C"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D391D4A602658365AB30B859A9C3EF3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -103,6 +103,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -119,6 +135,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -140,7 +172,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.6.1"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.5.2"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=671728"
                 }
@@ -148,6 +180,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_235A60C9FC9544408813EFE7A37B7B9F"
+            {
+            "SourcePath" = "8:C:\\Users\\robert.roszak\\Desktop\\icon.ico"
+            "TargetName" = "8:icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_509D47CD459B45014EA1BB877F95801C"
             {
             "AssemblyRegister" = "3:1"
@@ -177,26 +229,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C79D42C638D4E4F9053493AB6E9088E"
-            {
-            "SourcePath" = "8:C:\\Users\\robert.roszak\\Desktop\\xamarin.ico"
-            "TargetName" = "8:xamarin.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6FC497981636A9B4CADCEA13909AEFBF"
@@ -352,7 +384,7 @@
         }
         "MsiBootstrapper"
         {
-        "LangId" = "3:1033"
+        "LangId" = "3:1045"
         "RequiresElevation" = "11:FALSE"
         }
         "Product"
@@ -360,7 +392,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:JDE Scanner"
         "ProductCode" = "8:{B71491BC-E782-4ABD-8DF6-DAD3EFA6ADEA}"
-        "PackageCode" = "8:{836C6BD6-7DC4-44D3-B84B-4B4E46F14B28}"
+        "PackageCode" = "8:{FF1EFF27-B3F9-4DF7-A772-CFA0E989A63B}"
         "UpgradeCode" = "8:{C2E5CE09-E7CB-4892-AD98-66DA0089C5CA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -377,7 +409,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_5C79D42C638D4E4F9053493AB6E9088E"
+        "ARPPRODUCTICON" = "8:_235A60C9FC9544408813EFE7A37B7B9F"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -491,7 +523,7 @@
             "Target" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
             "Folder" = "8:_713730BB722B4F748C82417A71FD746F"
             "WorkingFolder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
-            "Icon" = "8:_5C79D42C638D4E4F9053493AB6E9088E"
+            "Icon" = "8:_235A60C9FC9544408813EFE7A37B7B9F"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7A4AC452C0504B8C9BC6FAF4D802967D"
@@ -505,7 +537,7 @@
             "Target" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
             "Folder" = "8:_C1E19C2FC79041C495469AA11CFB51B9"
             "WorkingFolder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
-            "Icon" = "8:_5C79D42C638D4E4F9053493AB6E9088E"
+            "Icon" = "8:_235A60C9FC9544408813EFE7A37B7B9F"
             "Feature" = "8:"
             }
         }
@@ -909,7 +941,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A9A88224D9DA4C52A2E150AF8964DADF"
             {
-            "SourcePath" = "8:..\\JDE_Scanner_Desktop\\obj\\Debug\\JDE_Scanner_Desktop.exe"
+            "SourcePath" = "8:..\\JDE_Scanner_Desktop\\obj\\Release\\JDE_Scanner_Desktop.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"

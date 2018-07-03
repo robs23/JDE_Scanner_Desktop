@@ -21,5 +21,16 @@ namespace JDE_Scanner_Desktop
             this.Location = new Point(parent.Location.X + (parent.Width - this.Width) / 2, parent.Location.Y + (parent.Height - this.Height) / 2);
         }
 
+        private void frmLooper_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
+                this.Owner.Enabled = false;
+            }
+            else
+            {
+                this.Owner.Enabled = true;
+            }
+        }
     }
 }

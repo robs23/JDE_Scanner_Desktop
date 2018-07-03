@@ -138,6 +138,7 @@
             this.dgUsers.Name = "dgUsers";
             this.dgUsers.Size = new System.Drawing.Size(565, 330);
             this.dgUsers.TabIndex = 2;
+            this.dgUsers.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgUsers_DataError);
             this.dgUsers.DoubleClick += new System.EventHandler(this.ViewUser);
             // 
             // frmUsers

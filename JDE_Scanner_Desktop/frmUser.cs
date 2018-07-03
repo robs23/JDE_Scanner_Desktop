@@ -61,7 +61,7 @@ namespace JDE_Scanner_Desktop
             Looper = new frmLooper(this);
         }
 
-        private void SaveUser(object sender, EventArgs e)
+        private async void SaveUser(object sender, EventArgs e)
         {
             try
             {
@@ -82,7 +82,11 @@ namespace JDE_Scanner_Desktop
                     {
                         ThisUser.IsMechanic = false;
                     }
-                    ThisUser.Add();
+                    if (await ThisUser.Add())
+                    {
+                        mode = 2;
+                        this.Text = "Szczegóły użytkownika";
+                    }
                 }
                 else if (mode == 2)
                 {

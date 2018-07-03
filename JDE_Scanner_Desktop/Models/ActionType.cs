@@ -32,7 +32,7 @@ namespace JDE_Scanner_Desktop.Models
         [Browsable(false)]
         public string TenantName { get; set; }
 
-        public async void Add()
+        public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -49,12 +49,18 @@ namespace JDE_Scanner_Desktop.Models
                         ActionType _this = JsonConvert.DeserializeObject<ActionType>(rString);
                         this.ActionTypeId = _this.ActionTypeId;
                         MessageBox.Show("Tworzenie typu zlecenia zakończone powodzeniem!");
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia typu zlecenia. Wiadomość: " + result.ReasonPhrase);
+                        return false;
                     }
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 

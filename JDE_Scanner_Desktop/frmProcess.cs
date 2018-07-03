@@ -35,6 +35,11 @@ namespace JDE_Scanner_Desktop
             this.Text = "Nowe zgłoszenie";
             _this = new Process();
             DatesChange();
+            cmbStatus.Enabled = false;
+            cmbStartedBy.Enabled = false;
+            cmbFinishedBy.Enabled = false;
+            txtFinishedOn.Enabled = false;
+            txtStartedOn.Enabled = false;
         }
 
         public frmProcess(Process Process, Form parent)
@@ -92,7 +97,7 @@ namespace JDE_Scanner_Desktop
             Looper.Hide();
         }
 
-        private void Save(object sender, EventArgs e)
+        private async void Save(object sender, EventArgs e)
         {
             _this.Description = txtDescription.Text;
             _this.Output = txtOutput.Text;
@@ -140,7 +145,11 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
-                    _this.Add();
+                    if (await _this.Add())
+                    {
+                        mode = 2;
+                        this.Text = "Szczegóły zgłoszenia";
+                    }
                 }
                 else if (mode == 2)
                 {

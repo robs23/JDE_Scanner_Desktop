@@ -65,6 +65,7 @@
             this.Name = "frmLooper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmLooper";
+            this.VisibleChanged += new System.EventHandler(this.frmLooper_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

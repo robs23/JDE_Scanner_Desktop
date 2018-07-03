@@ -80,5 +80,12 @@ namespace JDE_Scanner_Desktop
                 Reload();
             }
         }
+
+        private void dgItems_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(this, "Wystąpił problem z dostępem do danych. Szczegóły: " + e.Exception.Message, "Error");
+            e.ThrowException = false;
+            e.Cancel = false;
+        }
     }
 }

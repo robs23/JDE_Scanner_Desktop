@@ -120,7 +120,7 @@ namespace JDE_Scanner_Desktop.Models
             }
             }
 
-        public async void Add()
+        public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -137,12 +137,18 @@ namespace JDE_Scanner_Desktop.Models
                         Process _this = JsonConvert.DeserializeObject<Process>(rString);
                         this.ProcessId = _this.ProcessId;
                         MessageBox.Show("Tworzenie zlecenia zakończone powodzeniem!");
+                        return true;
                     }
                     else
                     {
                         MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia zlecenia. Wiadomość: " + result.ReasonPhrase);
+                        return false;
                     }
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 
