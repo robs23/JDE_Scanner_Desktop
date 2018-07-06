@@ -17,6 +17,7 @@ namespace JDE_Scanner_Desktop
     {
         PlacesKeeper Keeper = new PlacesKeeper();
         frmLooper looper;
+        int page;
 
         public frmPlaces(frmStarter parent)
         {
@@ -29,8 +30,10 @@ namespace JDE_Scanner_Desktop
         {
             looper.Show(this);
             await Keeper.Refresh();
+            dgItems.DataSource = null;
             dgItems.DataSource = Keeper.Items;
             looper.Hide();
+            page = 1;
         }
 
         private void FormLoaded(object sender, EventArgs e)
@@ -86,6 +89,39 @@ namespace JDE_Scanner_Desktop
             MessageBox.Show(this, "Wystąpił problem z dostępem do danych. Szczegóły: " + e.Exception.Message, "Error");
             e.ThrowException = false;
             e.Cancel = false;
+        }
+
+        private async void dgItems_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (e.OldValue < e.NewValue)
+            {
+                var visibleRowsCount = dgItems.DisplayedRowCount(true);
+                var firstDisplayedRowIndex = dgItems.FirstDisplayedScrollingRowIndex;
+                var lastvisibleRowIndex = (firstDisplayedRowIndex + visibleRowsCount);
+                if (lastvisibleRowIndex == RuntimeSettings.PageSize * page)
+                {
+                    int x = dgItems.FirstDisplayedScrollingRowIndex;
+                    looper.Show(this);
+                    page++;
+                    //int nextPage = (int)Math.Ceiling((double)((double)dgItems.Rows.Count / (double)RuntimeSettings.PageSize)) + 1;
+                    bool _IsMore = await Keeper.GetMore(page);
+                    if (_IsMore)
+                    {
+                        dgItems.DataSource = null;
+                        dgItems.DataSource = Keeper.Items;
+                        dgItems.Refresh();
+                        dgItems.FirstDisplayedScrollingRowIndex = x;
+                        looper.Hide();
+                    }
+                    else
+                    {
+                        looper.Hide();
+                        frmToast FrmToast = new frmToast(this, "Osiągnięto koniec rekordów");
+                        FrmToast.Show(this);
+                    }
+                    dgItems.Select();
+                }
+            }
         }
     }
 }

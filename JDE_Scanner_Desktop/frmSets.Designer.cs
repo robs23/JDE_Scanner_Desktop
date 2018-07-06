@@ -139,6 +139,7 @@
             this.dgItems.Size = new System.Drawing.Size(565, 330);
             this.dgItems.TabIndex = 2;
             this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
             this.dgItems.DoubleClick += new System.EventHandler(this.View);
             // 
             // frmSets

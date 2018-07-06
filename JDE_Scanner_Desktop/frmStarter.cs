@@ -15,7 +15,7 @@ namespace JDE_Scanner_Desktop
         public frmStarter()
         {
             InitializeComponent();
-            
+            RuntimeSettings.GetPageSize();
         }
 
         private void koniecToolStripMenuItem_Click(object sender, EventArgs e)

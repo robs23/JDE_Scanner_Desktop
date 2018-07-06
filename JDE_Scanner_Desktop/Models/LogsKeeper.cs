@@ -52,13 +52,39 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "GetLogs?token=" + RuntimeSettings.TenantToken;
+
+                string url = RuntimeSettings.ApiAddress + "GetLogs?token=" + RuntimeSettings.TenantToken + "&page=" + 1;
+
+                
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
                     {
                         var userJsonString = await response.Content.ReadAsStringAsync();
                         Items = JsonConvert.DeserializeObject<Log[]>(userJsonString).ToList();
+                    }
+                }
+            }
+        }
+
+        public async Task<bool> GetMore(int page)
+        {
+
+            using (var client = new HttpClient())
+            {
+                string url = RuntimeSettings.ApiAddress + "GetLogs?token=" + RuntimeSettings.TenantToken + "&page=" + page;
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userJsonString = await response.Content.ReadAsStringAsync();
+                        var vItems = JsonConvert.DeserializeObject<Log[]>(userJsonString).ToList();
+                        Items.AddRange(vItems);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
             }

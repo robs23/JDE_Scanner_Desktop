@@ -63,5 +63,28 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public async Task<bool> GetMore(int page)
+        {
+
+            using (var client = new HttpClient())
+            {
+                string url = RuntimeSettings.ApiAddress + "GetUsers?token=" + RuntimeSettings.TenantToken + "&page=" + page;
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userJsonString = await response.Content.ReadAsStringAsync();
+                        var vItems = JsonConvert.DeserializeObject<User[]>(userJsonString).ToList();
+                        Items.AddRange(vItems);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }
