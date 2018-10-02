@@ -31,7 +31,7 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Obszar")]
         public string AreaName { get; set; }
         [Browsable(false)]
-        [Range(1,int.MaxValue, ErrorMessage ="Wybierz instalacje z rozwijanej listy!")]
+        [Range(1, int.MaxValue, ErrorMessage = "Wybierz instalacje z rozwijanej listy!")]
         public int SetId { get; set; }
         [DisplayName("Instalacja")]
         public string SetName { get; set; }
@@ -47,9 +47,9 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
-        [Browsable(false)]
+        [DisplayName("Token")]
         public string PlaceToken { get; set; }
-        [Browsable(false)]
+
 
         public async Task<bool> Add()
         {

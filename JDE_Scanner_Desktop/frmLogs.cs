@@ -118,5 +118,28 @@ namespace JDE_Scanner_Desktop
             }
             
         }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            Filter Filter = new Filter();
+            for (int i = 0; i < 15; i++)
+            {
+                FilterColumn Column = new FilterColumn();
+                Column.Name = "Kolumna" + i + 1;
+                Column.Text = Column.Name;
+                for (int x = 0; x < 20; x++)
+                {
+                    FilterRow Row = new FilterRow
+                    {
+                        ValueMember = x,
+                        DisplayMember = "Wiersz"+x
+                    };
+                    Column.Items.Add(Row);
+                }
+                Filter.Columns.Add(Column);
+            }
+            frmFilter FrmFilter = new frmFilter(this, Filter);
+            FrmFilter.Show();
+        }
     }
 }
