@@ -9,6 +9,6 @@ namespace JDE_Scanner_Desktop.Models
     public class FilterRow
     {
         public int ValueMember { get; set; }
-        public string DisplayMember { get; set; }
+        public object DisplayMember { get; set; }
     }
 }

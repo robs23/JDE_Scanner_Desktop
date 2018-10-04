@@ -122,22 +122,26 @@ namespace JDE_Scanner_Desktop
         private void btnFilter_Click(object sender, EventArgs e)
         {
             Filter Filter = new Filter();
-            for (int i = 0; i < 15; i++)
+            List<FilterRow> Rows = new List<FilterRow>();
+            for (int i = 0; i < 12; i++)
             {
-                FilterColumn Column = new FilterColumn();
-                Column.Name = "Kolumna" + i + 1;
-                Column.Text = Column.Name;
+                Rows.Clear();
                 for (int x = 0; x < 20; x++)
                 {
                     FilterRow Row = new FilterRow
                     {
                         ValueMember = x,
-                        DisplayMember = "Wiersz"+x
+                        DisplayMember = "Wiersz" + x
                     };
-                    Column.Items.Add(Row);
+                    Rows.Add(Row);
                 }
-                Filter.Columns.Add(Column);
+                
+                FilterColumn Column = new FilterColumn(Rows, Filter, "Kolumna" + i);
+                
             }
+            FilterColumn column = new FilterColumn("Length", Filter);
+            column = new FilterColumn("Height", Filter);
+            column = new FilterColumn("Depth", Filter);
             frmFilter FrmFilter = new frmFilter(this, Filter);
             FrmFilter.Show();
         }

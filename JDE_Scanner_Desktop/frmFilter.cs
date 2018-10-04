@@ -41,14 +41,40 @@ namespace JDE_Scanner_Desktop
                     nLabel.Text = col.Name;
                     tlpItems.Controls.Add(nLabel, 0, rowIndex);
                     nLabel.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
-                    ComboBox nCombo = new ComboBox();
-                    nCombo.Name = col.Name;
-                    nCombo.DataSource = col.Items;
-                    nCombo.ValueMember = "ValueMember";
-                    nCombo.DisplayMember = "DisplayMember";
-                    tlpItems.Controls.Add(nCombo, 1, rowIndex);
-                    nCombo.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
-                    nCombo.SelectionLength = 0;
+                    List<string> Options = new List<string>();
+
+                    ComboBox nComb = new ComboBox();
+                    nComb.Name = "RangeCombo" + counter;
+
+                    if (col.Type == FilterColumnType.List)
+                    {
+                        Options.Add("Zawiera");
+                        Options.Add("Nie zawiera");
+                        ComboBox nCombo = new ComboBox();
+                        nCombo.Name = col.Name;
+                        nCombo.DataSource = col.Items;
+                        nCombo.ValueMember = "ValueMember";
+                        nCombo.DisplayMember = "DisplayMember";
+                        tlpItems.Controls.Add(nCombo, 2, rowIndex);
+                        nCombo.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
+                        nCombo.SelectionLength = 0;
+                    }
+                    else
+                    {
+                        Options.Add("<=");
+                        Options.Add("<");
+                        Options.Add("=");
+                        Options.Add(">");
+                        Options.Add(">=");
+                        TextBox nText = new TextBox();
+                        nText.Name = col.Name;
+                        tlpItems.Controls.Add(nText, 2, rowIndex);
+                        nText.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
+                    }
+                    nComb.DataSource = Options;
+                    tlpItems.Controls.Add(nComb, 1, rowIndex);
+                    nComb.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
+                    nComb.SelectionLength = 0;
                     counter++;
                 }
             }

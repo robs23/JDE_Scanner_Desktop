@@ -16,7 +16,7 @@ namespace JDE_Scanner_Desktop.Models
     {
         [DisplayName("ID")]
         public int ProcessId { get; set; }
-        [DisplayName("Opis")]
+        [Browsable(false)]
         [Required(AllowEmptyStrings =false, ErrorMessage ="Pole opis nie może być puste!")]
         public string Description { get; set; }
         [DisplayName("Data rozpoczęcia")]
@@ -31,6 +31,71 @@ namespace JDE_Scanner_Desktop.Models
         public int? FinishedBy { get; set; }
         [DisplayName("Zakończył")]
         public string FinishedByName { get; set; }
+        [DisplayName("Status")]
+        public string Status
+        {
+            get
+            {
+                if (IsSuccessfull)
+                {
+                    return "Zrealizowany";
+                }
+                else if (IsCompleted)
+                {
+                    return "Zakończony";
+                }
+                else if (IsFrozen && !(IsSuccessfull || IsCompleted))
+                {
+                    return "Wstrzymany";
+                }
+                else if (IsActive)
+                {
+                    return "Rozpoczęty";
+                }
+                else
+                {
+                    return "Nierozpoczęty";
+                }
+            }
+            set
+            {
+                if (value == "Zrealizowany")
+                {
+                    IsSuccessfull = true;
+                    IsCompleted = false;
+                    IsActive = false;
+                    IsFrozen = false;
+                }
+                else if (value == "Zakończony")
+                {
+                    IsSuccessfull = false;
+                    IsCompleted = true;
+                    IsFrozen = false;
+                    IsActive = false;
+                }
+                else if (value == "Wstrzymany")
+                {
+                    IsSuccessfull = false;
+                    IsCompleted = false;
+                    IsFrozen = true;
+                    IsActive = false;
+                }
+                else if (value == "Rozpoczęty")
+                {
+                    IsSuccessfull = false;
+                    IsCompleted = false;
+                    IsFrozen = false;
+                    IsActive = true;
+                }
+                else
+                {
+                    IsSuccessfull = false;
+                    IsCompleted = false;
+                    IsFrozen = false;
+                    IsActive = false;
+                }
+            }
+        }
         [Browsable(false)]
         [Range(1,int.MaxValue,ErrorMessage ="Wybierz typ zlecenia z rozwijanej listy!")]
         public int ActionTypeId { get; set; }
@@ -49,6 +114,8 @@ namespace JDE_Scanner_Desktop.Models
         public int PlaceId { get; set; }
         [DisplayName("Zasób")]
         public string PlaceName { get; set; }
+        [DisplayName("Długość [min]")]
+        public int Length { get; set; }
         [DisplayName("Rezultat")]
         public string Output { get; set; }
         [DisplayName("Data utworzenia")]
@@ -61,64 +128,7 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
-        [DisplayName("Status")]
-        public string Status { get
-            {
-                if (IsSuccessfull)
-                {
-                    return "Zrealizowany";
-                }
-                else if (IsCompleted)
-                {
-                    return "Zakończony";
-                } else if (IsFrozen && !(IsSuccessfull || IsCompleted))
-                {
-                    return "Wstrzymany";
-                } else if (IsActive)
-                {
-                    return "Rozpoczęty";
-                }
-                else
-                {
-                    return "Nierozpoczęty";
-                }
-            }
-            set
-            {
-                if(value == "Zrealizowany")
-                {
-                    IsSuccessfull = true;
-                    IsCompleted = false;
-                    IsActive = false;
-                    IsFrozen = false;
-                }else if(value == "Zakończony")
-                {
-                    IsSuccessfull = false;
-                    IsCompleted = true;
-                    IsFrozen = false;
-                    IsActive = false;
-                }else if(value == "Wstrzymany")
-                {
-                    IsSuccessfull = false;
-                    IsCompleted = false;
-                    IsFrozen = true;
-                    IsActive = false;
-                }else if(value == "Rozpoczęty")
-                {
-                    IsSuccessfull = false;
-                    IsCompleted = false;
-                    IsFrozen = false;
-                    IsActive = true;
-                }
-                else
-                {
-                    IsSuccessfull = false;
-                    IsCompleted = false;
-                    IsFrozen = false;
-                    IsActive = false;
-                }
-            }
-            }
+        
 
         public async Task<bool> Add()
         {

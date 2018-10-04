@@ -29,7 +29,7 @@ namespace JDE_Scanner_Desktop
             _this = Item;
             txtTimeStamp.Text = _this.TimeStamp.ToString();
             txtUserName.Text = _this.UserName;
-            txtDescription.Text = _this.Descripiton;
+            txtDescription.Text = _this.Description;
             txtOldValue.Text = _this.OldValue;
             txtNewValue.Text = _this.NewValue;
         }

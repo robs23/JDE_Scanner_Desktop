@@ -19,18 +19,20 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Czas")]
         public DateTime TimeStamp { get; set; }
         [DisplayName("Opis")]
-        public string Descripiton { get; set; }
+        public string Description { get; set; }
         [Browsable(false)]
         public int UserId { get; set; }
         [DisplayName("Użytkownik")]
         public string UserName { get; set; }
+        [DisplayName("Szczegóły")]
+        public string ExtDescription { get; set; }
         [Browsable(false)]
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
-        [DisplayName("Poprzednia wartość")]
+        [Browsable(false)]
         public string OldValue { get; set; }
-        [DisplayName("Nowa wartość")]
+        [Browsable(false)]
         public string NewValue { get; set; }
     }
 }
