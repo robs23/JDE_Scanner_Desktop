@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -59,7 +60,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreateUser?token=" + RuntimeSettings.TenantToken + "&UserId="+RuntimeSettings.UserId;
+                    string url = Secrets.ApiAddress + "CreateUser?token=" + Secrets.TenantToken + "&UserId="+RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
@@ -91,7 +92,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditUser?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
+                    string url = Secrets.ApiAddress + "EditUser?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.UserId, RuntimeSettings.UserId), content);
@@ -111,7 +112,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "LogIn?token=" + RuntimeSettings.TenantToken + "&id=";
+                    string url = Secrets.ApiAddress + "LogIn?token=" + Secrets.TenantToken + "&id=";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), this.UserId), content);

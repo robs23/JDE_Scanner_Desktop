@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JDE_Scanner_Desktop.Static;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace JDE_Scanner_Desktop.Models
         {
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "DeleteProcess?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
+                string url = Secrets.ApiAddress + "DeleteProcess?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                 var result = await client.DeleteAsync(String.Format(url, id, RuntimeSettings.UserId));
                 if (!result.IsSuccessStatusCode)
                 {
@@ -52,7 +53,7 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "GetProcesses?token=" + RuntimeSettings.TenantToken;
+                string url = Secrets.ApiAddress + "GetProcesses?token=" + Secrets.TenantToken;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
@@ -69,7 +70,7 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "GetProcesses?token=" + RuntimeSettings.TenantToken + "&page=" + page;
+                string url = Secrets.ApiAddress + "GetProcesses?token=" + Secrets.TenantToken + "&page=" + page;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

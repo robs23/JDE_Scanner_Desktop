@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JDE_Scanner_Desktop.Static;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace JDE_Scanner_Desktop.Models
         {
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "DeleteLog?token=" + RuntimeSettings.TenantToken + "&id=";
+                string url = Secrets.ApiAddress + "DeleteLog?token=" + Secrets.TenantToken + "&id=";
                 var result = await client.DeleteAsync(String.Format("{0}{1}", new Uri(url), id));
                 if (!result.IsSuccessStatusCode)
                 {
@@ -53,7 +54,7 @@ namespace JDE_Scanner_Desktop.Models
             using (var client = new HttpClient())
             {
 
-                string url = RuntimeSettings.ApiAddress + "GetLogs?token=" + RuntimeSettings.TenantToken + "&page=" + 1;
+                string url = Secrets.ApiAddress + "GetLogs?token=" + Secrets.TenantToken + "&page=" + 1;
 
                 
                 using (var response = await client.GetAsync(new Uri(url)))
@@ -72,7 +73,7 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "GetLogs?token=" + RuntimeSettings.TenantToken + "&page=" + page;
+                string url = Secrets.ApiAddress + "GetLogs?token=" + Secrets.TenantToken + "&page=" + page;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

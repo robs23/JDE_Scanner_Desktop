@@ -28,6 +28,8 @@ namespace JDE_Scanner_Desktop
             lblCreated.Visible = false;
             this.Text = "Nowy typ zgłoszenia";
             _this = new ActionType();
+            cmbMesSync.DataSource = new List<bool> { false, true };
+            cmbShowInPlanning.DataSource = new List<bool> { false,true };
         }
 
         public frmActionType(ActionType Item, Form parent)
@@ -45,6 +47,10 @@ namespace JDE_Scanner_Desktop
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
             }
+            cmbMesSync.DataSource = new List<bool> { false, true };
+            cmbShowInPlanning.DataSource = new List<bool> { false, true };
+            cmbMesSync.SelectedIndex = cmbMesSync.FindStringExact(_this.MesSync.ToString());
+            cmbShowInPlanning.SelectedIndex = cmbShowInPlanning.FindStringExact(_this.ShowInPlanning.ToString());
         }
 
         private void FormLoaded(object sender, EventArgs e)
@@ -62,6 +68,8 @@ namespace JDE_Scanner_Desktop
                     _this.CreatedOn = DateTime.Now;
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
+                    _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
+                    _this.MesSync = bool.Parse(cmbMesSync.Text);
                     if (await _this.Add())
                     {
                         mode = 2;
@@ -72,6 +80,8 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
+                    _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
+                    _this.MesSync = bool.Parse(cmbMesSync.Text);
                     _this.Edit();
                 }
             }catch(Exception ex)

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -17,7 +18,6 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("ID")]
         public int ProcessId { get; set; }
         [Browsable(false)]
-        [Required(AllowEmptyStrings =false, ErrorMessage ="Pole opis nie może być puste!")]
         public string Description { get; set; }
         [DisplayName("Data rozpoczęcia")]
         public DateTime? StartedOn { get; set; }
@@ -128,7 +128,18 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
-        
+        [DisplayName("MES ID")]
+        public string MesId { get; set; }
+        [DisplayName("Wstępne rozpoznanie")]
+        public string InitialDiagnosis { get; set; }
+        [DisplayName("Czynności naprawcze")]
+        public string RepairActions { get; set; }
+        [Browsable(false)]
+        public string Reason { get; set; }
+        [Browsable(false)]
+        public DateTime? MesDate { get; set; }
+        [Browsable(false)]
+        public bool? MesSync { get; set; }
 
         public async Task<bool> Add()
         {
@@ -137,7 +148,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreateProcess?token=" + RuntimeSettings.TenantToken + "&UserId=" + RuntimeSettings.UserId;
+                    string url = Secrets.ApiAddress + "CreateProcess?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
@@ -169,7 +180,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditProcess?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
+                    string url = Secrets.ApiAddress + "EditProcess?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.ProcessId, RuntimeSettings.UserId), content);

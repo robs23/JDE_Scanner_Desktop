@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 
 Static/RuntimeSettings.cs
+/JDE_Scanner_Desktop/Static/Secrets.cs

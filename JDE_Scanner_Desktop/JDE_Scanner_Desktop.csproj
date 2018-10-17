@@ -196,6 +196,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static\Extensions.cs" />
     <Compile Include="Static\RuntimeSettings.cs" />
+    <Compile Include="Static\Secrets.cs" />
     <Compile Include="Static\Utilities.cs" />
     <EmbeddedResource Include="frmActionType.resx">
       <DependentUpon>frmActionType.cs</DependentUpon>

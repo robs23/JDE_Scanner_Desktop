@@ -51,12 +51,34 @@ namespace JDE_Scanner_Desktop
             this.Text = "Szczegóły zgłoszenia";
             _this = Process;
             DatesChange();
-            txtDescription.Text = _this.Description;
-            if(_this.CreatedOn != null && _this.CreatedBy != 0)
+            if ((bool)_this.MesSync)
+            {
+                txtMesId.Text = _this.MesId;
+                lblDescription.Text = "Powód";
+                txtDescription.Text = _this.Reason;
+                txtInitialDiagnosis.Text = _this.InitialDiagnosis;
+                txtRepairActions.Text = _this.RepairActions;
+                txtOutput.Enabled = false;
+            }
+            else
+            {
+                lblMesId.Visible = false;
+                txtMesId.Visible = false;
+                lblDescription.Text = "Opis";
+                txtDescription.Text = _this.Description;
+                txtRepairActions.Visible = false;
+                txtInitialDiagnosis.Visible = false;
+                lblRepairActions.Visible = false;
+                lblInitialDiagnosis.Visible = false;
+            }
+            if (_this.CreatedOn != null && _this.CreatedBy != 0)
             {
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
             }
+            txtOutput.Text = _this.Output;
+
+
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -92,15 +114,25 @@ namespace JDE_Scanner_Desktop
             {
                 txtFinishedOn.Value = (DateTime)_this.FinishedOn;
             }
-            txtDescription.Text = _this.Description;
-            txtOutput.Text = _this.Output;
+            
             Looper.Hide();
         }
 
         private async void Save(object sender, EventArgs e)
         {
-            _this.Description = txtDescription.Text;
             _this.Output = txtOutput.Text;
+            _this.InitialDiagnosis = txtInitialDiagnosis.Text;
+            _this.RepairActions = txtRepairActions.Text;
+            if((bool)_this.MesSync)
+            {
+                _this.MesId = txtMesId.Text;
+                _this.Reason = txtDescription.Text;
+            }
+            else
+            {
+                _this.Description = txtDescription.Text;
+            }
+                    
             if(txtStartedOn.Text == " ")
             {
                 _this.StartedOn = null;

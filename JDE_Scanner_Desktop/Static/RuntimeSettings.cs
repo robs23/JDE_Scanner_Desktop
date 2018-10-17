@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +12,7 @@ namespace JDE_Scanner_Desktop
     public static class RuntimeSettings
     {
         public static int TenantId { get; set; }
-        public static string TenantToken
-        {
-            get
-            {
-                return "zyjp7h38DE205BpjzLqWw";
-            }
-        }
-        public static string ApiAddress
-        {
-            get
-            {
-                return "http://jde_api_test.robs23.webserwer.pl/";
-            }
-        }
-
+        
         public static int UserId { get; set; }
 
         public static int PageSize { get; set; }
@@ -34,7 +21,7 @@ namespace JDE_Scanner_Desktop
         {
             using (var client = new HttpClient())
             {
-                string url = RuntimeSettings.ApiAddress + "PageSize";
+                string url = Secrets.ApiAddress + "PageSize";
                 using (HttpResponseMessage response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

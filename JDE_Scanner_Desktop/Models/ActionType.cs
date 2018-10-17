@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -31,6 +32,10 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
+        [DisplayName("Pokaż w planowaniu")]
+        public bool? ShowInPlanning { get; set; }
+        [DisplayName("Synchronizacja z MES")]
+        public bool? MesSync { get; set; }
 
         public async Task<bool> Add()
         {
@@ -39,7 +44,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreateActionType?token=" + RuntimeSettings.TenantToken + "&UserId=" + RuntimeSettings.UserId;
+                    string url = Secrets.ApiAddress + "CreateActionType?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
@@ -71,7 +76,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditActionType?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
+                    string url = Secrets.ApiAddress + "EditActionType?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.ActionTypeId, RuntimeSettings.UserId), content);

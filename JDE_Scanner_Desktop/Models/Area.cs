@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -39,7 +40,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "CreateArea?token=" + RuntimeSettings.TenantToken + "&UserId=" + RuntimeSettings.UserId;
+                    string url = Secrets.ApiAddress + "CreateArea?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);
@@ -71,7 +72,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    string url = RuntimeSettings.ApiAddress + "EditArea?token=" + RuntimeSettings.TenantToken + "&id={0}&UserId={1}";
+                    string url = Secrets.ApiAddress + "EditArea?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.AreaId, RuntimeSettings.UserId), content);
