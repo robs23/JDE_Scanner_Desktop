@@ -24,6 +24,7 @@ namespace JDE_Scanner_Desktop
         UsersKeeper FinishingUsers = new UsersKeeper();
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
         frmLooper Looper;
+        public bool ForceRefresh = false;
 
         public frmProcess(Form parent)
         {
@@ -40,6 +41,14 @@ namespace JDE_Scanner_Desktop
             cmbFinishedBy.Enabled = false;
             txtFinishedOn.Enabled = false;
             txtStartedOn.Enabled = false;
+            lblMesId.Visible = false;
+            txtMesId.Visible = false;
+            lblDescription.Text = "Opis";
+            txtDescription.Text = _this.Description;
+            txtRepairActions.Visible = false;
+            txtInitialDiagnosis.Visible = false;
+            lblRepairActions.Visible = false;
+            lblInitialDiagnosis.Visible = false;
         }
 
         public frmProcess(Process Process, Form parent)
@@ -51,34 +60,67 @@ namespace JDE_Scanner_Desktop
             this.Text = "Szczegóły zgłoszenia";
             _this = Process;
             DatesChange();
-            if ((bool)_this.MesSync)
-            {
-                txtMesId.Text = _this.MesId;
-                lblDescription.Text = "Powód";
-                txtDescription.Text = _this.Reason;
-                txtInitialDiagnosis.Text = _this.InitialDiagnosis;
-                txtRepairActions.Text = _this.RepairActions;
-                txtOutput.Enabled = false;
-            }
-            else
-            {
-                lblMesId.Visible = false;
-                txtMesId.Visible = false;
-                lblDescription.Text = "Opis";
-                txtDescription.Text = _this.Description;
-                txtRepairActions.Visible = false;
-                txtInitialDiagnosis.Visible = false;
-                lblRepairActions.Visible = false;
-                lblInitialDiagnosis.Visible = false;
-            }
+            
             if (_this.CreatedOn != null && _this.CreatedBy != 0)
             {
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
             }
             txtOutput.Text = _this.Output;
+        }
 
+        private bool IsMesSyncSelected()
+        {
+            int sel = 0;
+            bool val = false;
 
+            if(cmbActionType.ValueMember != "")
+            {
+                if (cmbActionType.SelectedItem != null)
+                {
+                    sel = (int)cmbActionType.SelectedValue;
+
+                    if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).Any())
+                    {
+                        if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).FirstOrDefault().MesSync==true)
+                        {
+                            val = true;
+                        }
+                    }
+                }
+                
+            }
+            
+            return val;
+        }
+
+        private void ChangeLook()
+        {
+
+                if(IsMesSyncSelected())
+                {
+                    lblMesId.Visible = true;
+                    txtMesId.Visible = true;
+                    txtMesId.Text = _this.MesId;
+                    lblDescription.Text = "Powód";
+                    txtInitialDiagnosis.Visible = true;
+                    txtRepairActions.Visible = true;
+                    txtDescription.Text = _this.Reason;
+                    txtInitialDiagnosis.Text = _this.InitialDiagnosis;
+                    txtRepairActions.Text = _this.RepairActions;
+                    txtOutput.Enabled = false;
+                }
+                else
+                {
+                    lblMesId.Visible = false;
+                    txtMesId.Visible = false;
+                    lblDescription.Text = "Opis";
+                    txtDescription.Text = _this.Description;
+                    txtRepairActions.Visible = false;
+                    txtInitialDiagnosis.Visible = false;
+                    lblRepairActions.Visible = false;
+                    lblInitialDiagnosis.Visible = false;
+                }
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -114,16 +156,16 @@ namespace JDE_Scanner_Desktop
             {
                 txtFinishedOn.Value = (DateTime)_this.FinishedOn;
             }
-            
             Looper.Hide();
         }
 
         private async void Save(object sender, EventArgs e)
         {
+            ForceRefresh = true;
             _this.Output = txtOutput.Text;
             _this.InitialDiagnosis = txtInitialDiagnosis.Text;
             _this.RepairActions = txtRepairActions.Text;
-            if((bool)_this.MesSync)
+            if(IsMesSyncSelected())
             {
                 _this.MesId = txtMesId.Text;
                 _this.Reason = txtDescription.Text;
@@ -244,6 +286,11 @@ namespace JDE_Scanner_Desktop
                 txtFinishedOn.CustomFormat = "yyyy-MM-dd";
                 txtFinishedOn.Format = DateTimePickerFormat.Custom;
             }
+        }
+
+        private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeLook();
         }
     }
 }

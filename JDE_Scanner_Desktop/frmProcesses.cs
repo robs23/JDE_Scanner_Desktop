@@ -58,6 +58,10 @@ namespace JDE_Scanner_Desktop
             Process = Keeper.Items.Where(u => u.ProcessId == id).FirstOrDefault();
             frmProcess FrmProcess = new frmProcess(Process, this);
             FrmProcess.Show();
+            if (FrmProcess.ForceRefresh)
+            {
+                Reload();
+            }
         }
 
 

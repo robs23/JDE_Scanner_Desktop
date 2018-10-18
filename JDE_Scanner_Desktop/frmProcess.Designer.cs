@@ -61,9 +61,9 @@
             this.lblRepairActions = new System.Windows.Forms.Label();
             this.txtInitialDiagnosis = new System.Windows.Forms.TextBox();
             this.txtRepairActions = new System.Windows.Forms.TextBox();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.lblMesId = new System.Windows.Forms.Label();
             this.txtMesId = new System.Windows.Forms.TextBox();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -272,6 +272,7 @@
             this.cmbActionType.Name = "cmbActionType";
             this.cmbActionType.Size = new System.Drawing.Size(440, 21);
             this.cmbActionType.TabIndex = 13;
+            this.cmbActionType.SelectedIndexChanged += new System.EventHandler(this.cmbActionType_SelectedIndexChanged);
             // 
             // txtDescription
             // 

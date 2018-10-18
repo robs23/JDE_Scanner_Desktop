@@ -87,5 +87,23 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public async Task<ActionType> Get(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + "GetActionType?token=" + Secrets.TenantToken + "&id=" + id;
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    ActionType at = new ActionType();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userJsonString = await response.Content.ReadAsStringAsync();
+                        at = JsonConvert.DeserializeObject<ActionType>(userJsonString);
+                    }
+                    return at;
+                }
+            }
+        }
     }
 }

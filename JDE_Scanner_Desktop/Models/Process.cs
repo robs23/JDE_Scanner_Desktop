@@ -138,8 +138,6 @@ namespace JDE_Scanner_Desktop.Models
         public string Reason { get; set; }
         [Browsable(false)]
         public DateTime? MesDate { get; set; }
-        [Browsable(false)]
-        public bool? MesSync { get; set; }
 
         public async Task<bool> Add()
         {

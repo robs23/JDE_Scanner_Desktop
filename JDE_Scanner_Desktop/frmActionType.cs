@@ -68,8 +68,15 @@ namespace JDE_Scanner_Desktop
                     _this.CreatedOn = DateTime.Now;
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
-                    _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
-                    _this.MesSync = bool.Parse(cmbMesSync.Text);
+                    if (cmbShowInPlanning.SelectedItem != null)
+                    {
+                        _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
+                    }
+                    if(cmbMesSync.SelectedItem != null)
+                    {
+                        _this.MesSync = bool.Parse(cmbMesSync.Text);
+                    }
+                    
                     if (await _this.Add())
                     {
                         mode = 2;
@@ -80,8 +87,14 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.Name = txtName.Text;
                     _this.Description = txtDescription.Text;
-                    _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
-                    _this.MesSync = bool.Parse(cmbMesSync.Text);
+                    if (cmbShowInPlanning.SelectedItem != null)
+                    {
+                        _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
+                    }
+                    if (cmbMesSync.SelectedItem != null)
+                    {
+                        _this.MesSync = bool.Parse(cmbMesSync.Text);
+                    }
                     _this.Edit();
                 }
             }catch(Exception ex)
