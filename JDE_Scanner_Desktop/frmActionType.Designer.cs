@@ -34,16 +34,18 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.cmbShowInPlanning = new System.Windows.Forms.ComboBox();
             this.cmbMesSync = new System.Windows.Forms.ComboBox();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbRequireInitialDiagnosis = new System.Windows.Forms.ComboBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -109,14 +111,16 @@
             this.tplTextboxes.ColumnCount = 2;
             this.tplTextboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tplTextboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplTextboxes.Controls.Add(this.label1, 0, 2);
             this.tplTextboxes.Controls.Add(this.label2, 0, 0);
             this.tplTextboxes.Controls.Add(this.txtName, 1, 0);
             this.tplTextboxes.Controls.Add(this.label3, 0, 1);
             this.tplTextboxes.Controls.Add(this.txtDescription, 1, 1);
-            this.tplTextboxes.Controls.Add(this.label4, 0, 3);
-            this.tplTextboxes.Controls.Add(this.cmbShowInPlanning, 1, 2);
-            this.tplTextboxes.Controls.Add(this.cmbMesSync, 1, 3);
+            this.tplTextboxes.Controls.Add(this.label4, 0, 4);
+            this.tplTextboxes.Controls.Add(this.cmbMesSync, 1, 4);
+            this.tplTextboxes.Controls.Add(this.label1, 0, 3);
+            this.tplTextboxes.Controls.Add(this.cmbShowInPlanning, 1, 3);
+            this.tplTextboxes.Controls.Add(this.label5, 0, 2);
+            this.tplTextboxes.Controls.Add(this.cmbRequireInitialDiagnosis, 1, 2);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 6;
@@ -128,6 +132,16 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.Size = new System.Drawing.Size(591, 350);
             this.tplTextboxes.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 98);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Pokaż w planowaniu";
             // 
             // label2
             // 
@@ -165,6 +179,24 @@
             this.txtDescription.Size = new System.Drawing.Size(435, 20);
             this.txtDescription.TabIndex = 5;
             // 
+            // cmbShowInPlanning
+            // 
+            this.cmbShowInPlanning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbShowInPlanning.FormattingEnabled = true;
+            this.cmbShowInPlanning.Location = new System.Drawing.Point(153, 94);
+            this.cmbShowInPlanning.Name = "cmbShowInPlanning";
+            this.cmbShowInPlanning.Size = new System.Drawing.Size(435, 21);
+            this.cmbShowInPlanning.TabIndex = 7;
+            // 
+            // cmbMesSync
+            // 
+            this.cmbMesSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbMesSync.FormattingEnabled = true;
+            this.cmbMesSync.Location = new System.Drawing.Point(153, 124);
+            this.cmbMesSync.Name = "cmbMesSync";
+            this.cmbMesSync.Size = new System.Drawing.Size(435, 21);
+            this.cmbMesSync.TabIndex = 8;
+            // 
             // lblCreated
             // 
             this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -176,43 +208,34 @@
             this.lblCreated.Text = "lblCreated";
             this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Pokaż w planowaniu";
-            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 98);
+            this.label4.Location = new System.Drawing.Point(3, 128);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(144, 13);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 9;
             this.label4.Text = "Synchronizacja z MES";
             // 
-            // cmbShowInPlanning
+            // label5
             // 
-            this.cmbShowInPlanning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbShowInPlanning.FormattingEnabled = true;
-            this.cmbShowInPlanning.Location = new System.Drawing.Point(153, 64);
-            this.cmbShowInPlanning.Name = "cmbShowInPlanning";
-            this.cmbShowInPlanning.Size = new System.Drawing.Size(435, 21);
-            this.cmbShowInPlanning.TabIndex = 7;
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Wymaga wstępnej diagnozy";
             // 
-            // cmbMesSync
+            // cmbRequireInitialDiagnosis
             // 
-            this.cmbMesSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbMesSync.FormattingEnabled = true;
-            this.cmbMesSync.Location = new System.Drawing.Point(153, 94);
-            this.cmbMesSync.Name = "cmbMesSync";
-            this.cmbMesSync.Size = new System.Drawing.Size(435, 21);
-            this.cmbMesSync.TabIndex = 8;
+            this.cmbRequireInitialDiagnosis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbRequireInitialDiagnosis.FormattingEnabled = true;
+            this.cmbRequireInitialDiagnosis.Location = new System.Drawing.Point(153, 64);
+            this.cmbRequireInitialDiagnosis.Name = "cmbRequireInitialDiagnosis";
+            this.cmbRequireInitialDiagnosis.Size = new System.Drawing.Size(435, 21);
+            this.cmbRequireInitialDiagnosis.TabIndex = 11;
             // 
             // frmActionType
             // 
@@ -247,8 +270,10 @@
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbShowInPlanning;
         private System.Windows.Forms.ComboBox cmbMesSync;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbRequireInitialDiagnosis;
     }
 }

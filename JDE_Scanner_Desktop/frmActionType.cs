@@ -30,6 +30,7 @@ namespace JDE_Scanner_Desktop
             _this = new ActionType();
             cmbMesSync.DataSource = new List<bool> { false, true };
             cmbShowInPlanning.DataSource = new List<bool> { false,true };
+            cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
         }
 
         public frmActionType(ActionType Item, Form parent)
@@ -49,8 +50,11 @@ namespace JDE_Scanner_Desktop
             }
             cmbMesSync.DataSource = new List<bool> { false, true };
             cmbShowInPlanning.DataSource = new List<bool> { false, true };
+            cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
             cmbMesSync.SelectedIndex = cmbMesSync.FindStringExact(_this.MesSync.ToString());
             cmbShowInPlanning.SelectedIndex = cmbShowInPlanning.FindStringExact(_this.ShowInPlanning.ToString());
+            cmbRequireInitialDiagnosis.SelectedIndex = cmbRequireInitialDiagnosis.FindStringExact(_this.RequireInitialDiagnosis.ToString());
+            
         }
 
         private void FormLoaded(object sender, EventArgs e)
@@ -76,6 +80,10 @@ namespace JDE_Scanner_Desktop
                     {
                         _this.MesSync = bool.Parse(cmbMesSync.Text);
                     }
+                    if(cmbRequireInitialDiagnosis.SelectedItem != null)
+                    {
+                        _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
+                    }
                     
                     if (await _this.Add())
                     {
@@ -94,6 +102,10 @@ namespace JDE_Scanner_Desktop
                     if (cmbMesSync.SelectedItem != null)
                     {
                         _this.MesSync = bool.Parse(cmbMesSync.Text);
+                    }
+                    if (cmbRequireInitialDiagnosis.SelectedItem != null)
+                    {
+                        _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
                     }
                     _this.Edit();
                 }

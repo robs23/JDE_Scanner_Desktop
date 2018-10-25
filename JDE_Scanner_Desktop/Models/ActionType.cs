@@ -32,10 +32,13 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
+        [DisplayName("Wymaga wstępnej diagnozy")]
+        public bool? RequireInitialDiagnosis { get; set; }
         [DisplayName("Pokaż w planowaniu")]
         public bool? ShowInPlanning { get; set; }
         [DisplayName("Synchronizacja z MES")]
         public bool? MesSync { get; set; }
+        
 
         public async Task<bool> Add()
         {
