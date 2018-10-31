@@ -94,33 +94,71 @@ namespace JDE_Scanner_Desktop
             return val;
         }
 
+        private bool IsInitialDiagnosisRequiredSelected()
+        {
+            int sel = 0;
+            bool val = false;
+
+            if (cmbActionType.ValueMember != "")
+            {
+                if (cmbActionType.SelectedItem != null)
+                {
+                    sel = (int)cmbActionType.SelectedValue;
+
+                    if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).Any())
+                    {
+                        if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).FirstOrDefault().RequireInitialDiagnosis == true)
+                        {
+                            val = true;
+                        }
+                    }
+                }
+
+            }
+
+            return val;
+        }
+
         private void ChangeLook()
         {
-
-                if(IsMesSyncSelected())
-                {
-                    lblMesId.Visible = true;
-                    txtMesId.Visible = true;
-                    txtMesId.Text = _this.MesId;
-                    lblDescription.Text = "Powód";
-                    txtInitialDiagnosis.Visible = true;
-                    txtRepairActions.Visible = true;
-                    txtDescription.Text = _this.Reason;
-                    txtInitialDiagnosis.Text = _this.InitialDiagnosis;
-                    txtRepairActions.Text = _this.RepairActions;
-                    txtOutput.Enabled = false;
-                }
-                else
-                {
-                    lblMesId.Visible = false;
-                    txtMesId.Visible = false;
-                    lblDescription.Text = "Opis";
-                    txtDescription.Text = _this.Description;
-                    txtRepairActions.Visible = false;
-                    txtInitialDiagnosis.Visible = false;
-                    lblRepairActions.Visible = false;
-                    lblInitialDiagnosis.Visible = false;
-                }
+            if (!string.IsNullOrEmpty(_this.MesId))
+            {
+                cmbActionType.Enabled = false;
+            }
+            if(IsMesSyncSelected())
+            {
+                lblMesId.Visible = true;
+                txtMesId.Visible = true;
+                txtMesId.Text = _this.MesId;
+                lblDescription.Text = "Powód";
+                txtDescription.Text = _this.Reason;
+            }
+            else
+            {
+                lblMesId.Visible = false;
+                txtMesId.Visible = false;
+                lblDescription.Text = "Opis";
+                txtDescription.Text = _this.Description;
+            }
+            if (IsInitialDiagnosisRequiredSelected())
+            {
+                txtInitialDiagnosis.Visible = true;
+                txtRepairActions.Visible = true;
+                lblDescription.Text = "Powód";
+                txtDescription.Text = _this.Reason;
+                txtInitialDiagnosis.Text = _this.InitialDiagnosis;
+                txtRepairActions.Text = _this.RepairActions;
+                txtOutput.Enabled = false;
+            }
+            else
+            {
+                txtRepairActions.Visible = false;
+                txtInitialDiagnosis.Visible = false;
+                lblRepairActions.Visible = false;
+                lblInitialDiagnosis.Visible = false;
+                lblDescription.Text = "Opis";
+                txtDescription.Text = _this.Description;
+            }
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -156,6 +194,7 @@ namespace JDE_Scanner_Desktop
             {
                 txtFinishedOn.Value = (DateTime)_this.FinishedOn;
             }
+            ChangeLook();
             Looper.Hide();
         }
 

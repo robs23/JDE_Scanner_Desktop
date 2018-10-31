@@ -34,6 +34,7 @@ namespace JDE_Scanner_Desktop
             dgItems.DataSource = Keeper.Items;
             looper.Hide();
             page = 1;
+            adjustColumnWidths();
         }
 
         private void FormLoaded(object sender, EventArgs e)
@@ -64,6 +65,10 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        private void adjustColumnWidths()
+        {
+            dgItems.Columns[0].Width = 45;
+        }
 
         private void Refresh(object sender, EventArgs e)
         {
@@ -123,6 +128,7 @@ namespace JDE_Scanner_Desktop
                         frmToast FrmToast = new frmToast(this, "Osiągnięto koniec rekordów");
                         FrmToast.Show(this);
                     }
+                    adjustColumnWidths();
                     dgItems.Select();
                 }
             }

@@ -44,6 +44,8 @@
             this.cmbMechanic = new System.Windows.Forms.ComboBox();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtMesLogin = new System.Windows.Forms.TextBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -117,6 +119,8 @@
             this.tplTextboxes.Controls.Add(this.label5, 0, 3);
             this.tplTextboxes.Controls.Add(this.txtName, 1, 0);
             this.tplTextboxes.Controls.Add(this.cmbMechanic, 1, 3);
+            this.tplTextboxes.Controls.Add(this.label1, 0, 4);
+            this.tplTextboxes.Controls.Add(this.txtMesLogin, 1, 4);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 6;
@@ -216,6 +220,24 @@
             this.lblCreated.Text = "lblCreated";
             this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Login MES";
+            // 
+            // txtMesLogin
+            // 
+            this.txtMesLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMesLogin.Location = new System.Drawing.Point(153, 125);
+            this.txtMesLogin.Name = "txtMesLogin";
+            this.txtMesLogin.Size = new System.Drawing.Size(435, 20);
+            this.txtMesLogin.TabIndex = 9;
+            // 
             // frmUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,5 +274,7 @@
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ComboBox cmbMechanic;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtMesLogin;
     }
 }

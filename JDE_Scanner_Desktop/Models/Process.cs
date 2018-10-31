@@ -118,16 +118,6 @@ namespace JDE_Scanner_Desktop.Models
         public int Length { get; set; }
         [DisplayName("Rezultat")]
         public string Output { get; set; }
-        [DisplayName("Data utworzenia")]
-        public DateTime CreatedOn { get; set; }
-        [Browsable(false)]
-        public int CreatedBy { get; set; }
-        [DisplayName("Utworzył")]
-        public string CreatedByName { get; set; }
-        [Browsable(false)]
-        public int TenantId { get; set; }
-        [Browsable(false)]
-        public string TenantName { get; set; }
         [DisplayName("MES ID")]
         public string MesId { get; set; }
         [DisplayName("Wstępne rozpoznanie")]
@@ -138,6 +128,16 @@ namespace JDE_Scanner_Desktop.Models
         public string Reason { get; set; }
         [Browsable(false)]
         public DateTime? MesDate { get; set; }
+        [DisplayName("Data utworzenia")]
+        public DateTime CreatedOn { get; set; }
+        [Browsable(false)]
+        public int CreatedBy { get; set; }
+        [DisplayName("Utworzył")]
+        public string CreatedByName { get; set; }
+        [Browsable(false)]
+        public int TenantId { get; set; }
+        [Browsable(false)]
+        public string TenantName { get; set; }
 
         public async Task<bool> Add()
         {

@@ -43,6 +43,9 @@ namespace JDE_Scanner_Desktop.Models
         public string Password { get; set; }
         [DisplayName("Mechanik?")]
         public bool IsMechanic { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Pole Login MES nie może być puste!")]
+        [DisplayName("Login MES")]
+        public string MesLogin { get; set; }
         [DisplayName("Data utworzenia")]
         public DateTime? CreatedOn { get; set; }
         [Browsable(false)]

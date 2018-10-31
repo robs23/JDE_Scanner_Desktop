@@ -34,6 +34,7 @@ namespace JDE_Scanner_Desktop
             dgItems.DataSource = Keeper.Items;
             looper.Hide();
             page = 1;
+            adjustColumnWidths();
         }
 
         private void FormLoaded(object sender, EventArgs e)
@@ -113,10 +114,20 @@ namespace JDE_Scanner_Desktop
                         frmToast FrmToast = new frmToast(this, "Osiągnięto koniec rekordów");
                         FrmToast.Show(this);
                     }
+                    adjustColumnWidths();
                     dgItems.Select();
                 }
             }
             
+        }
+
+        private void adjustColumnWidths()
+        {
+            dgItems.Columns[0].Width = 45;
+            dgItems.Columns[2].Width = 130;
+            dgItems.Columns[4].Width = 600;
+            dgItems.Columns[4].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         private void btnFilter_Click(object sender, EventArgs e)

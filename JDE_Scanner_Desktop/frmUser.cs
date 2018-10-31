@@ -41,6 +41,7 @@ namespace JDE_Scanner_Desktop
             txtName.Text = ThisUser.Name;
             txtSurname.Text = ThisUser.Surname;
             txtPassword.Text = ThisUser.Password;
+            txtMesLogin.Text = ThisUser.MesLogin;
             if (ThisUser.IsMechanic)
             {
                 cmbMechanic.SelectedIndex = cmbMechanic.FindStringExact("Tak");
@@ -73,7 +74,7 @@ namespace JDE_Scanner_Desktop
                     ThisUser.Name = txtName.Text;
                     ThisUser.Surname = txtSurname.Text;
                     ThisUser.Password = txtPassword.Text;
-
+                    ThisUser.MesLogin = txtMesLogin.Text;
                     if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
                     {
                         ThisUser.IsMechanic = true;
@@ -93,7 +94,7 @@ namespace JDE_Scanner_Desktop
                     ThisUser.Name = txtName.Text;
                     ThisUser.Surname = txtSurname.Text;
                     ThisUser.Password = txtPassword.Text;
-
+                    ThisUser.MesLogin = txtMesLogin.Text;
                     if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
                     {
                         ThisUser.IsMechanic = true;
