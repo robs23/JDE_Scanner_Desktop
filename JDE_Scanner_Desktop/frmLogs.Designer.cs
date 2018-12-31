@@ -34,13 +34,13 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgItems = new System.Windows.Forms.DataGridView();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.btnFilter = new System.Windows.Forms.Button();
             this.dFrom = new System.Windows.Forms.DateTimePicker();
             this.dTo = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.dgItems = new System.Windows.Forms.DataGridView();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -120,25 +120,12 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.Refresh);
             // 
-            // dgItems
-            // 
-            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgItems.Location = new System.Drawing.Point(3, 43);
-            this.dgItems.Name = "dgItems";
-            this.dgItems.Size = new System.Drawing.Size(565, 330);
-            this.dgItems.TabIndex = 2;
-            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
-            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
-            this.dgItems.DoubleClick += new System.EventHandler(this.View);
-            // 
             // btnFilter
             // 
             this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.Enabled = false;
             this.btnFilter.Image = global::JDE_Scanner_Desktop.Properties.Resources.icon_filter_off;
             this.btnFilter.Location = new System.Drawing.Point(323, 3);
             this.btnFilter.Name = "btnFilter";
@@ -146,11 +133,13 @@
             this.btnFilter.TabIndex = 3;
             this.tooltip.SetToolTip(this.btnFilter, "Konfiguracja filtra..");
             this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Visible = false;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // dFrom
             // 
             this.dFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dFrom.Enabled = false;
             this.dFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dFrom.Location = new System.Drawing.Point(83, 7);
             this.dFrom.Name = "dFrom";
@@ -161,6 +150,7 @@
             // dTo
             // 
             this.dTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dTo.Enabled = false;
             this.dTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dTo.Location = new System.Drawing.Point(223, 7);
             this.dTo.Name = "dTo";
@@ -186,6 +176,20 @@
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Do";
+            // 
+            // dgItems
+            // 
+            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.Location = new System.Drawing.Point(3, 43);
+            this.dgItems.Name = "dgItems";
+            this.dgItems.Size = new System.Drawing.Size(565, 330);
+            this.dgItems.TabIndex = 2;
+            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.View);
             // 
             // frmLogs
             // 
