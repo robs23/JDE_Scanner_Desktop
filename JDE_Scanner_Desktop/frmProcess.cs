@@ -186,9 +186,15 @@ namespace JDE_Scanner_Desktop
             cmbStartedBy.SelectedIndex = cmbStartedBy.FindStringExact(_this.StartedByName);
             cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(_this.FinishedByName);
             cmbStatus.SelectedIndex = cmbStatus.FindStringExact(_this.Status);
+            _this.Handlings = new HandlingsKeeper();
             if (_this.StartedOn != null)
             {
                 txtStartedOn.Value = (DateTime)_this.StartedOn;
+                if(!await LoadHandlings())
+                {
+                    lvHandlings.View = View.List;
+                    lvHandlings.Items.Add(new ListViewItem("Brak danych"));
+                }
             }
             if (_this.FinishedOn != null)
             {
@@ -196,6 +202,47 @@ namespace JDE_Scanner_Desktop
             }
             ChangeLook();
             Looper.Hide();
+        }
+
+        private async Task<bool> LoadHandlings()
+        {
+            await _this.Handlings.GetByProcessId(_this.ProcessId);
+            if (_this.Handlings.Items.Any())
+            {
+                lvHandlings.Columns.Add("ID");
+                lvHandlings.Columns.Add("Użytkownik");
+                lvHandlings.Columns.Add("Status");
+                lvHandlings.Columns.Add("Rozpoczęcie");
+                lvHandlings.Columns.Add("Zakończenie");
+                lvHandlings.Columns.Add("Długotrwałość [min]");
+                lvHandlings.Columns.Add("Rezultat");
+                foreach (Handling h in _this.Handlings.Items)
+                {
+                    string[] row =
+                    {
+                        h.HandlingId.ToString(),
+                        h.UserName,
+                        h.Status,
+                        h.StartedOn.ToString(),
+                        h.FinishedOn.ToString(),
+                        h.Length.ToString(),
+                        h.Output
+                    };
+                    ListViewItem item = new ListViewItem(row);
+                    lvHandlings.Items.Add(item);
+                }
+                for (int i = 0; i < lvHandlings.Columns.Count; i++)
+                {
+                    //adjust column's widht to the content
+                    lvHandlings.Columns[i].Width = -2;
+                }
+                lvHandlings.GridLines = true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private async void Save(object sender, EventArgs e)

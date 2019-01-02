@@ -193,5 +193,7 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public HandlingsKeeper Handlings { get; set; }
     }
 }

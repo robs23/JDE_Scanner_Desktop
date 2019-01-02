@@ -180,6 +180,8 @@
     <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\FilterColumn.cs" />
     <Compile Include="Models\FilterRow.cs" />
+    <Compile Include="Models\Handling.cs" />
+    <Compile Include="Models\HandlingsKeeper.cs" />
     <Compile Include="Models\LogsKeeper.cs" />
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\ProcessesKeeper.cs" />

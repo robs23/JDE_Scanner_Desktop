@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class ProcessesKeeper
+    public class HandlingsKeeper
     {
-        public List<Process> Items { get; set; }
+        public List<Handling> Items { get; set; }
 
-        public ProcessesKeeper()
+        public HandlingsKeeper()
         {
-            Items = new List<Process>();
+            Items = new List<Handling>();
         }
 
         public void Remove(List<int> ids)
@@ -35,11 +35,11 @@ namespace JDE_Scanner_Desktop.Models
         {
             using (var client = new HttpClient())
             {
-                string url = Secrets.ApiAddress + "DeleteProcess?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
+                string url = Secrets.ApiAddress + "DeleteHandling?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                 var result = await client.DeleteAsync(String.Format(url, id, RuntimeSettings.UserId));
                 if (!result.IsSuccessStatusCode)
                 {
-                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, id));
+                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia obsługi {0}. Wiadomość: " + result.ReasonPhrase, id));
                 }
             }
         }
@@ -53,13 +53,13 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = Secrets.ApiAddress + "GetProcesses?token=" + Secrets.TenantToken;
+                string url = Secrets.ApiAddress + "GetHandlings?token=" + Secrets.TenantToken;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
                     {
                         var userJsonString = await response.Content.ReadAsStringAsync();
-                        Items = JsonConvert.DeserializeObject<Process[]>(userJsonString).ToList();
+                        Items = JsonConvert.DeserializeObject<Handling[]>(userJsonString).ToList();
                     }
                 }
             }
@@ -70,19 +70,40 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = Secrets.ApiAddress + "GetProcesses?token=" + Secrets.TenantToken + "&page=" + page;
+                string url = Secrets.ApiAddress + "GetHandlings?token=" + Secrets.TenantToken + "&page=" + page;
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
                     {
                         var userJsonString = await response.Content.ReadAsStringAsync();
-                        var vItems = JsonConvert.DeserializeObject<Process[]>(userJsonString).ToList();
+                        var vItems = JsonConvert.DeserializeObject<Handling[]>(userJsonString).ToList();
                         Items.AddRange(vItems);
                         return true;
                     }
                     else
                     {
                         return false;
+                    }
+                }
+            }
+        }
+
+        public async Task GetByProcessId(int ProcessId)
+        {
+            if (Items.Any())
+            {
+                Items.Clear();
+            }
+
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + string.Format("GetHandlings?token={0}&query=ProcessId={1}", Secrets.TenantToken, ProcessId);
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userJsonString = await response.Content.ReadAsStringAsync();
+                        Items = JsonConvert.DeserializeObject<Handling[]>(userJsonString).ToList();
                     }
                 }
             }

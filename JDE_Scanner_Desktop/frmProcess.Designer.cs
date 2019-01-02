@@ -31,13 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProcess));
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnStartedOnClear = new System.Windows.Forms.Button();
+            this.btnFinishedOnClear = new System.Windows.Forms.Button();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSave = new System.Windows.Forms.Button();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tab = new System.Windows.Forms.TabControl();
             this.pgProcess = new System.Windows.Forms.TabPage();
-            this.pgHandling = new System.Windows.Forms.TabPage();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
             this.lblDescription = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,16 +58,16 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tlpStartedOn = new System.Windows.Forms.TableLayoutPanel();
             this.txtStartedOn = new System.Windows.Forms.DateTimePicker();
-            this.btnStartedOnClear = new System.Windows.Forms.Button();
             this.tlpFinishedOn = new System.Windows.Forms.TableLayoutPanel();
             this.txtFinishedOn = new System.Windows.Forms.DateTimePicker();
-            this.btnFinishedOnClear = new System.Windows.Forms.Button();
             this.lblInitialDiagnosis = new System.Windows.Forms.Label();
             this.lblRepairActions = new System.Windows.Forms.Label();
             this.txtInitialDiagnosis = new System.Windows.Forms.TextBox();
             this.txtRepairActions = new System.Windows.Forms.TextBox();
             this.lblMesId = new System.Windows.Forms.Label();
             this.txtMesId = new System.Windows.Forms.TextBox();
+            this.pgHandling = new System.Windows.Forms.TabPage();
+            this.lvHandlings = new System.Windows.Forms.ListView();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -74,7 +75,48 @@
             this.tplTextboxes.SuspendLayout();
             this.tlpStartedOn.SuspendLayout();
             this.tlpFinishedOn.SuspendLayout();
+            this.pgHandling.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(3, 3);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(34, 28);
+            this.btnSave.TabIndex = 0;
+            this.tooltip.SetToolTip(this.btnSave, "Zapisz zmiany..");
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.Save);
+            // 
+            // btnStartedOnClear
+            // 
+            this.btnStartedOnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnStartedOnClear.Image")));
+            this.btnStartedOnClear.Location = new System.Drawing.Point(425, 3);
+            this.btnStartedOnClear.Name = "btnStartedOnClear";
+            this.btnStartedOnClear.Size = new System.Drawing.Size(24, 18);
+            this.btnStartedOnClear.TabIndex = 16;
+            this.tooltip.SetToolTip(this.btnStartedOnClear, "Wyczyść datę..");
+            this.btnStartedOnClear.UseVisualStyleBackColor = true;
+            // 
+            // btnFinishedOnClear
+            // 
+            this.btnFinishedOnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFinishedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnFinishedOnClear.Image")));
+            this.btnFinishedOnClear.Location = new System.Drawing.Point(425, 3);
+            this.btnFinishedOnClear.Name = "btnFinishedOnClear";
+            this.btnFinishedOnClear.Size = new System.Drawing.Size(24, 18);
+            this.btnFinishedOnClear.TabIndex = 18;
+            this.tooltip.SetToolTip(this.btnFinishedOnClear, "Wyczyść datę..");
+            this.btnFinishedOnClear.UseVisualStyleBackColor = true;
             // 
             // lblCreated
             // 
@@ -104,20 +146,6 @@
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tlpButtons.Size = new System.Drawing.Size(596, 34);
             this.tlpButtons.TabIndex = 0;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.Location = new System.Drawing.Point(3, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(34, 28);
-            this.btnSave.TabIndex = 0;
-            this.tooltip.SetToolTip(this.btnSave, "Zapisz zmiany..");
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.Save);
             // 
             // tlpMain
             // 
@@ -162,16 +190,6 @@
             this.pgProcess.TabIndex = 0;
             this.pgProcess.Text = "Zgłoszenie";
             this.pgProcess.UseVisualStyleBackColor = true;
-            // 
-            // pgHandling
-            // 
-            this.pgHandling.Location = new System.Drawing.Point(4, 22);
-            this.pgHandling.Name = "pgHandling";
-            this.pgHandling.Padding = new System.Windows.Forms.Padding(3);
-            this.pgHandling.Size = new System.Drawing.Size(588, 424);
-            this.pgHandling.TabIndex = 1;
-            this.pgHandling.Text = "Obsługa";
-            this.pgHandling.UseVisualStyleBackColor = true;
             // 
             // tplTextboxes
             // 
@@ -411,19 +429,6 @@
             this.txtStartedOn.Size = new System.Drawing.Size(416, 20);
             this.txtStartedOn.TabIndex = 15;
             // 
-            // btnStartedOnClear
-            // 
-            this.btnStartedOnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStartedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnStartedOnClear.Image")));
-            this.btnStartedOnClear.Location = new System.Drawing.Point(425, 3);
-            this.btnStartedOnClear.Name = "btnStartedOnClear";
-            this.btnStartedOnClear.Size = new System.Drawing.Size(24, 18);
-            this.btnStartedOnClear.TabIndex = 16;
-            this.tooltip.SetToolTip(this.btnStartedOnClear, "Wyczyść datę..");
-            this.btnStartedOnClear.UseVisualStyleBackColor = true;
-            // 
             // tlpFinishedOn
             // 
             this.tlpFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -449,19 +454,6 @@
             this.txtFinishedOn.Name = "txtFinishedOn";
             this.txtFinishedOn.Size = new System.Drawing.Size(416, 20);
             this.txtFinishedOn.TabIndex = 17;
-            // 
-            // btnFinishedOnClear
-            // 
-            this.btnFinishedOnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFinishedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnFinishedOnClear.Image")));
-            this.btnFinishedOnClear.Location = new System.Drawing.Point(425, 3);
-            this.btnFinishedOnClear.Name = "btnFinishedOnClear";
-            this.btnFinishedOnClear.Size = new System.Drawing.Size(24, 18);
-            this.btnFinishedOnClear.TabIndex = 18;
-            this.tooltip.SetToolTip(this.btnFinishedOnClear, "Wyczyść datę..");
-            this.btnFinishedOnClear.UseVisualStyleBackColor = true;
             // 
             // lblInitialDiagnosis
             // 
@@ -523,6 +515,27 @@
             this.txtMesId.Size = new System.Drawing.Size(452, 20);
             this.txtMesId.TabIndex = 30;
             // 
+            // pgHandling
+            // 
+            this.pgHandling.Controls.Add(this.lvHandlings);
+            this.pgHandling.Location = new System.Drawing.Point(4, 22);
+            this.pgHandling.Name = "pgHandling";
+            this.pgHandling.Padding = new System.Windows.Forms.Padding(3);
+            this.pgHandling.Size = new System.Drawing.Size(588, 424);
+            this.pgHandling.TabIndex = 1;
+            this.pgHandling.Text = "Obsługa";
+            this.pgHandling.UseVisualStyleBackColor = true;
+            // 
+            // lvHandlings
+            // 
+            this.lvHandlings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvHandlings.Location = new System.Drawing.Point(3, 3);
+            this.lvHandlings.Name = "lvHandlings";
+            this.lvHandlings.Size = new System.Drawing.Size(582, 418);
+            this.lvHandlings.TabIndex = 0;
+            this.lvHandlings.UseCompatibleStateImageBehavior = false;
+            this.lvHandlings.View = System.Windows.Forms.View.Details;
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -543,6 +556,7 @@
             this.tplTextboxes.PerformLayout();
             this.tlpStartedOn.ResumeLayout(false);
             this.tlpFinishedOn.ResumeLayout(false);
+            this.pgHandling.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -585,5 +599,6 @@
         private System.Windows.Forms.Label lblMesId;
         private System.Windows.Forms.TextBox txtMesId;
         private System.Windows.Forms.TabPage pgHandling;
+        private System.Windows.Forms.ListView lvHandlings;
     }
 }
