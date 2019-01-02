@@ -34,18 +34,20 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
-            this.cmbShowInPlanning = new System.Windows.Forms.ComboBox();
-            this.cmbMesSync = new System.Windows.Forms.ComboBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.label4 = new System.Windows.Forms.Label();
+            this.cmbMesSync = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbShowInPlanning = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbRequireInitialDiagnosis = new System.Windows.Forms.ComboBox();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbAllowDuplicates = new System.Windows.Forms.ComboBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -121,9 +123,12 @@
             this.tplTextboxes.Controls.Add(this.cmbShowInPlanning, 1, 3);
             this.tplTextboxes.Controls.Add(this.label5, 0, 2);
             this.tplTextboxes.Controls.Add(this.cmbRequireInitialDiagnosis, 1, 2);
+            this.tplTextboxes.Controls.Add(this.label6, 0, 5);
+            this.tplTextboxes.Controls.Add(this.cmbAllowDuplicates, 1, 5);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
-            this.tplTextboxes.RowCount = 6;
+            this.tplTextboxes.RowCount = 7;
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -132,16 +137,6 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.Size = new System.Drawing.Size(591, 350);
             this.tplTextboxes.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 98);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Pokaż w planowaniu";
             // 
             // label2
             // 
@@ -179,14 +174,15 @@
             this.txtDescription.Size = new System.Drawing.Size(435, 20);
             this.txtDescription.TabIndex = 5;
             // 
-            // cmbShowInPlanning
+            // label4
             // 
-            this.cmbShowInPlanning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbShowInPlanning.FormattingEnabled = true;
-            this.cmbShowInPlanning.Location = new System.Drawing.Point(153, 94);
-            this.cmbShowInPlanning.Name = "cmbShowInPlanning";
-            this.cmbShowInPlanning.Size = new System.Drawing.Size(435, 21);
-            this.cmbShowInPlanning.TabIndex = 7;
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(144, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Synchronizacja z MES";
             // 
             // cmbMesSync
             // 
@@ -196,6 +192,52 @@
             this.cmbMesSync.Name = "cmbMesSync";
             this.cmbMesSync.Size = new System.Drawing.Size(435, 21);
             this.cmbMesSync.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 98);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Pokaż w planowaniu";
+            this.tooltip.SetToolTip(this.label1, "Czy dany typ operacji można planować? Jeśli tak, będzie można utworzyć planowane " +
+        "zgłoszenie tego typu z przyszłą datą realizacji.");
+            // 
+            // cmbShowInPlanning
+            // 
+            this.cmbShowInPlanning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbShowInPlanning.FormattingEnabled = true;
+            this.cmbShowInPlanning.Location = new System.Drawing.Point(153, 94);
+            this.cmbShowInPlanning.Name = "cmbShowInPlanning";
+            this.cmbShowInPlanning.Size = new System.Drawing.Size(435, 21);
+            this.cmbShowInPlanning.TabIndex = 7;
+            this.tooltip.SetToolTip(this.cmbShowInPlanning, "Czy dany typ operacji można planować? Jeśli tak, będzie można utworzyć planowane " +
+        "zgłoszenie tego typu z przyszłą datą realizacji");
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Wymaga wstępnej diagnozy";
+            this.tooltip.SetToolTip(this.label5, "Czy wymagana jest wstępna diagnoza? Jeśli tak, pole rezultat jest zastępywane pol" +
+        "ami wstępna diagnoza i czynności naprawcze.");
+            // 
+            // cmbRequireInitialDiagnosis
+            // 
+            this.cmbRequireInitialDiagnosis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbRequireInitialDiagnosis.FormattingEnabled = true;
+            this.cmbRequireInitialDiagnosis.Location = new System.Drawing.Point(153, 64);
+            this.cmbRequireInitialDiagnosis.Name = "cmbRequireInitialDiagnosis";
+            this.cmbRequireInitialDiagnosis.Size = new System.Drawing.Size(435, 21);
+            this.cmbRequireInitialDiagnosis.TabIndex = 11;
+            this.tooltip.SetToolTip(this.cmbRequireInitialDiagnosis, "Czy wymagana jest wstępna diagnoza? Jeśli tak, pole rezultat jest zastępywane pol" +
+        "ami wstępna diagnoza i czynności naprawcze.");
             // 
             // lblCreated
             // 
@@ -208,34 +250,28 @@
             this.lblCreated.Text = "lblCreated";
             this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // label6
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(144, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Synchronizacja z MES";
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 158);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(144, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Zezwalaj na duplikaty";
+            this.tooltip.SetToolTip(this.label6, "Czy mogą być otwarte 2 operacje tego samego typu (np. awaria) na tym samym zasobi" +
+        "e w tym samym czasie?");
             // 
-            // label5
+            // cmbAllowDuplicates
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 68);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Wymaga wstępnej diagnozy";
-            // 
-            // cmbRequireInitialDiagnosis
-            // 
-            this.cmbRequireInitialDiagnosis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbRequireInitialDiagnosis.FormattingEnabled = true;
-            this.cmbRequireInitialDiagnosis.Location = new System.Drawing.Point(153, 64);
-            this.cmbRequireInitialDiagnosis.Name = "cmbRequireInitialDiagnosis";
-            this.cmbRequireInitialDiagnosis.Size = new System.Drawing.Size(435, 21);
-            this.cmbRequireInitialDiagnosis.TabIndex = 11;
+            this.cmbAllowDuplicates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbAllowDuplicates.FormattingEnabled = true;
+            this.cmbAllowDuplicates.Location = new System.Drawing.Point(153, 154);
+            this.cmbAllowDuplicates.Name = "cmbAllowDuplicates";
+            this.cmbAllowDuplicates.Size = new System.Drawing.Size(435, 21);
+            this.cmbAllowDuplicates.TabIndex = 13;
+            this.tooltip.SetToolTip(this.cmbAllowDuplicates, "Czy mogą być otwarte 2 operacje tego samego typu (np. awaria) na tym samym zasobi" +
+        "e w tym samym czasie?");
             // 
             // frmActionType
             // 
@@ -275,5 +311,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbRequireInitialDiagnosis;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbAllowDuplicates;
     }
 }

@@ -31,6 +31,7 @@ namespace JDE_Scanner_Desktop
             cmbMesSync.DataSource = new List<bool> { false, true };
             cmbShowInPlanning.DataSource = new List<bool> { false,true };
             cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
+            cmbAllowDuplicates.DataSource = new List<bool> {  true, false };
         }
 
         public frmActionType(ActionType Item, Form parent)
@@ -50,11 +51,12 @@ namespace JDE_Scanner_Desktop
             }
             cmbMesSync.DataSource = new List<bool> { false, true };
             cmbShowInPlanning.DataSource = new List<bool> { false, true };
+            cmbAllowDuplicates.DataSource = new List<bool> { true, false };
             cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
             cmbMesSync.SelectedIndex = cmbMesSync.FindStringExact(_this.MesSync.ToString());
             cmbShowInPlanning.SelectedIndex = cmbShowInPlanning.FindStringExact(_this.ShowInPlanning.ToString());
             cmbRequireInitialDiagnosis.SelectedIndex = cmbRequireInitialDiagnosis.FindStringExact(_this.RequireInitialDiagnosis.ToString());
-            
+            cmbAllowDuplicates.SelectedIndex = cmbAllowDuplicates.FindStringExact(_this.AllowDuplicates.ToString());
         }
 
         private void FormLoaded(object sender, EventArgs e)
@@ -76,15 +78,18 @@ namespace JDE_Scanner_Desktop
                     {
                         _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
                     }
-                    if(cmbMesSync.SelectedItem != null)
+                    if (cmbMesSync.SelectedItem != null)
                     {
                         _this.MesSync = bool.Parse(cmbMesSync.Text);
                     }
-                    if(cmbRequireInitialDiagnosis.SelectedItem != null)
+                    if (cmbRequireInitialDiagnosis.SelectedItem != null)
                     {
                         _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
                     }
-                    
+                    if (cmbAllowDuplicates.SelectedItem != null)
+                    {
+                        _this.AllowDuplicates = bool.Parse(cmbAllowDuplicates.Text);
+                    }
                     if (await _this.Add())
                     {
                         mode = 2;
@@ -106,6 +111,10 @@ namespace JDE_Scanner_Desktop
                     if (cmbRequireInitialDiagnosis.SelectedItem != null)
                     {
                         _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
+                    }
+                    if (cmbAllowDuplicates.SelectedItem != null)
+                    {
+                        _this.AllowDuplicates = bool.Parse(cmbAllowDuplicates.Text);
                     }
                     _this.Edit();
                 }

@@ -328,7 +328,7 @@ namespace JDE_Scanner_Desktop
 
         private void txtStartedOn_ValueChanged(object sender, EventArgs e)
         {
-            txtStartedOn.CustomFormat = "yyyy-MM-dd";
+            txtStartedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
             txtStartedOn.Format = DateTimePickerFormat.Custom;
         }
 
@@ -346,7 +346,7 @@ namespace JDE_Scanner_Desktop
 
         private void txtFinishedOn_ValueChanged(object sender, EventArgs e)
         {
-            txtFinishedOn.CustomFormat = "yyyy-MM-dd";
+            txtFinishedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
             txtFinishedOn.Format = DateTimePickerFormat.Custom;
         }
 
@@ -359,7 +359,7 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
-                txtStartedOn.CustomFormat = "yyyy-MM-dd";
+                txtStartedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
                 txtStartedOn.Format = DateTimePickerFormat.Custom;
             }
             if (_this.FinishedOn == null)
@@ -369,7 +369,7 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
-                txtFinishedOn.CustomFormat = "yyyy-MM-dd";
+                txtFinishedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
                 txtFinishedOn.Format = DateTimePickerFormat.Custom;
             }
         }
@@ -377,6 +377,11 @@ namespace JDE_Scanner_Desktop
         private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ChangeLook();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

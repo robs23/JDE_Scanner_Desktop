@@ -38,7 +38,8 @@ namespace JDE_Scanner_Desktop.Models
         public bool? ShowInPlanning { get; set; }
         [DisplayName("Synchronizacja z MES")]
         public bool? MesSync { get; set; }
-        
+        [DisplayName("Zezwalaj na duplikaty")]
+        public bool? AllowDuplicates { get; set; }
 
         public async Task<bool> Add()
         {

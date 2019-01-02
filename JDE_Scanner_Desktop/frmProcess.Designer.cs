@@ -56,9 +56,8 @@
             this.cmbStatus = new System.Windows.Forms.ComboBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.tlpStartedOn = new System.Windows.Forms.TableLayoutPanel();
             this.txtStartedOn = new System.Windows.Forms.DateTimePicker();
-            this.tlpFinishedOn = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpStartedOn = new System.Windows.Forms.TableLayoutPanel();
             this.txtFinishedOn = new System.Windows.Forms.DateTimePicker();
             this.lblInitialDiagnosis = new System.Windows.Forms.Label();
             this.lblRepairActions = new System.Windows.Forms.Label();
@@ -68,14 +67,17 @@
             this.txtMesId = new System.Windows.Forms.TextBox();
             this.pgHandling = new System.Windows.Forms.TabPage();
             this.lvHandlings = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tlpFinishedOn = new System.Windows.Forms.TableLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
             this.pgProcess.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
             this.tlpStartedOn.SuspendLayout();
-            this.tlpFinishedOn.SuspendLayout();
             this.pgHandling.SuspendLayout();
+            this.tlpFinishedOn.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -98,7 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStartedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnStartedOnClear.Image")));
-            this.btnStartedOnClear.Location = new System.Drawing.Point(425, 3);
+            this.btnStartedOnClear.Location = new System.Drawing.Point(189, 3);
             this.btnStartedOnClear.Name = "btnStartedOnClear";
             this.btnStartedOnClear.Size = new System.Drawing.Size(24, 18);
             this.btnStartedOnClear.TabIndex = 16;
@@ -111,7 +113,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinishedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnFinishedOnClear.Image")));
-            this.btnFinishedOnClear.Location = new System.Drawing.Point(425, 3);
+            this.btnFinishedOnClear.Location = new System.Drawing.Point(189, 3);
             this.btnFinishedOnClear.Name = "btnFinishedOnClear";
             this.btnFinishedOnClear.Size = new System.Drawing.Size(24, 18);
             this.btnFinishedOnClear.TabIndex = 18;
@@ -206,23 +208,21 @@
             this.tplTextboxes.Controls.Add(this.label1, 0, 5);
             this.tplTextboxes.Controls.Add(this.label6, 0, 6);
             this.tplTextboxes.Controls.Add(this.label7, 0, 7);
-            this.tplTextboxes.Controls.Add(this.cmbFinishedBy, 1, 5);
             this.tplTextboxes.Controls.Add(this.cmbActionType, 1, 6);
             this.tplTextboxes.Controls.Add(this.txtDescription, 1, 1);
-            this.tplTextboxes.Controls.Add(this.cmbStartedBy, 1, 3);
             this.tplTextboxes.Controls.Add(this.cmbPlace, 1, 7);
             this.tplTextboxes.Controls.Add(this.label8, 0, 8);
             this.tplTextboxes.Controls.Add(this.cmbStatus, 1, 8);
             this.tplTextboxes.Controls.Add(this.txtOutput, 1, 9);
             this.tplTextboxes.Controls.Add(this.label9, 0, 9);
-            this.tplTextboxes.Controls.Add(this.tlpStartedOn, 1, 2);
-            this.tplTextboxes.Controls.Add(this.tlpFinishedOn, 1, 4);
+            this.tplTextboxes.Controls.Add(this.tlpStartedOn, 1, 4);
             this.tplTextboxes.Controls.Add(this.lblInitialDiagnosis, 0, 10);
             this.tplTextboxes.Controls.Add(this.lblRepairActions, 0, 11);
             this.tplTextboxes.Controls.Add(this.txtInitialDiagnosis, 1, 10);
             this.tplTextboxes.Controls.Add(this.txtRepairActions, 1, 11);
             this.tplTextboxes.Controls.Add(this.lblMesId, 0, 0);
             this.tplTextboxes.Controls.Add(this.txtMesId, 1, 0);
+            this.tplTextboxes.Controls.Add(this.tlpFinishedOn, 1, 5);
             this.tplTextboxes.Location = new System.Drawing.Point(-4, 3);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 13;
@@ -260,7 +260,8 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 13);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Data rozpoczęcia";
+            this.label3.Text = "Planowane rozpoczęcie";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -270,7 +271,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(128, 13);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Rozpoczęty przez";
+            this.label4.Text = "Planowane zakończenie";
             // 
             // label5
             // 
@@ -280,7 +281,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 13);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Data zakończenia";
+            this.label5.Text = "Rozpoczęcie";
             // 
             // label1
             // 
@@ -290,7 +291,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 13);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Zakończony przez";
+            this.label1.Text = "Zakończenie";
             // 
             // label6
             // 
@@ -316,9 +317,9 @@
             // 
             this.cmbFinishedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFinishedBy.FormattingEnabled = true;
-            this.cmbFinishedBy.Location = new System.Drawing.Point(137, 154);
+            this.cmbFinishedBy.Location = new System.Drawing.Point(269, 3);
             this.cmbFinishedBy.Name = "cmbFinishedBy";
-            this.cmbFinishedBy.Size = new System.Drawing.Size(452, 21);
+            this.cmbFinishedBy.Size = new System.Drawing.Size(180, 21);
             this.cmbFinishedBy.TabIndex = 12;
             // 
             // cmbActionType
@@ -342,9 +343,9 @@
             // 
             this.cmbStartedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStartedBy.FormattingEnabled = true;
-            this.cmbStartedBy.Location = new System.Drawing.Point(137, 94);
+            this.cmbStartedBy.Location = new System.Drawing.Point(269, 3);
             this.cmbStartedBy.Name = "cmbStartedBy";
-            this.cmbStartedBy.Size = new System.Drawing.Size(452, 21);
+            this.cmbStartedBy.Size = new System.Drawing.Size(180, 21);
             this.cmbStartedBy.TabIndex = 16;
             // 
             // cmbPlace
@@ -404,55 +405,45 @@
             this.label9.TabIndex = 22;
             this.label9.Text = "Rezultat";
             // 
+            // txtStartedOn
+            // 
+            this.txtStartedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStartedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            this.txtStartedOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtStartedOn.Location = new System.Drawing.Point(3, 3);
+            this.txtStartedOn.Name = "txtStartedOn";
+            this.txtStartedOn.Size = new System.Drawing.Size(180, 20);
+            this.txtStartedOn.TabIndex = 15;
+            // 
             // tlpStartedOn
             // 
             this.tlpStartedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpStartedOn.ColumnCount = 2;
-            this.tlpStartedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpStartedOn.ColumnCount = 4;
+            this.tlpStartedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpStartedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpStartedOn.Controls.Add(this.txtStartedOn, 0, 0);
+            this.tlpStartedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpStartedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpStartedOn.Controls.Add(this.label10, 2, 0);
             this.tlpStartedOn.Controls.Add(this.btnStartedOnClear, 1, 0);
-            this.tlpStartedOn.Location = new System.Drawing.Point(137, 63);
+            this.tlpStartedOn.Controls.Add(this.txtStartedOn, 0, 0);
+            this.tlpStartedOn.Controls.Add(this.cmbStartedBy, 3, 0);
+            this.tlpStartedOn.Location = new System.Drawing.Point(137, 123);
             this.tlpStartedOn.Name = "tlpStartedOn";
             this.tlpStartedOn.RowCount = 1;
             this.tlpStartedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpStartedOn.Size = new System.Drawing.Size(452, 24);
-            this.tlpStartedOn.TabIndex = 23;
-            // 
-            // txtStartedOn
-            // 
-            this.txtStartedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStartedOn.Location = new System.Drawing.Point(3, 3);
-            this.txtStartedOn.Name = "txtStartedOn";
-            this.txtStartedOn.Size = new System.Drawing.Size(416, 20);
-            this.txtStartedOn.TabIndex = 15;
-            // 
-            // tlpFinishedOn
-            // 
-            this.tlpFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpFinishedOn.ColumnCount = 2;
-            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpFinishedOn.Controls.Add(this.txtFinishedOn, 0, 0);
-            this.tlpFinishedOn.Controls.Add(this.btnFinishedOnClear, 1, 0);
-            this.tlpFinishedOn.Location = new System.Drawing.Point(137, 123);
-            this.tlpFinishedOn.Name = "tlpFinishedOn";
-            this.tlpFinishedOn.RowCount = 1;
-            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tlpFinishedOn.Size = new System.Drawing.Size(452, 24);
-            this.tlpFinishedOn.TabIndex = 24;
+            this.tlpStartedOn.TabIndex = 24;
             // 
             // txtFinishedOn
             // 
             this.txtFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFinishedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            this.txtFinishedOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtFinishedOn.Location = new System.Drawing.Point(3, 3);
             this.txtFinishedOn.Name = "txtFinishedOn";
-            this.txtFinishedOn.Size = new System.Drawing.Size(416, 20);
+            this.txtFinishedOn.Size = new System.Drawing.Size(180, 20);
             this.txtFinishedOn.TabIndex = 17;
             // 
             // lblInitialDiagnosis
@@ -536,6 +527,46 @@
             this.lvHandlings.UseCompatibleStateImageBehavior = false;
             this.lvHandlings.View = System.Windows.Forms.View.Details;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(219, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "przez";
+            // 
+            // tlpFinishedOn
+            // 
+            this.tlpFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpFinishedOn.ColumnCount = 4;
+            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpFinishedOn.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpFinishedOn.Controls.Add(this.cmbFinishedBy, 3, 0);
+            this.tlpFinishedOn.Controls.Add(this.label2, 2, 0);
+            this.tlpFinishedOn.Controls.Add(this.btnFinishedOnClear, 1, 0);
+            this.tlpFinishedOn.Controls.Add(this.txtFinishedOn, 0, 0);
+            this.tlpFinishedOn.Location = new System.Drawing.Point(137, 153);
+            this.tlpFinishedOn.Name = "tlpFinishedOn";
+            this.tlpFinishedOn.RowCount = 1;
+            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpFinishedOn.Size = new System.Drawing.Size(452, 24);
+            this.tlpFinishedOn.TabIndex = 31;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(219, 5);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 13);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "przez";
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,8 +586,10 @@
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
             this.tlpStartedOn.ResumeLayout(false);
-            this.tlpFinishedOn.ResumeLayout(false);
+            this.tlpStartedOn.PerformLayout();
             this.pgHandling.ResumeLayout(false);
+            this.tlpFinishedOn.ResumeLayout(false);
+            this.tlpFinishedOn.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -586,10 +619,9 @@
         private System.Windows.Forms.ComboBox cmbStatus;
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TableLayoutPanel tlpStartedOn;
         private System.Windows.Forms.DateTimePicker txtStartedOn;
         private System.Windows.Forms.Button btnStartedOnClear;
-        private System.Windows.Forms.TableLayoutPanel tlpFinishedOn;
+        private System.Windows.Forms.TableLayoutPanel tlpStartedOn;
         private System.Windows.Forms.DateTimePicker txtFinishedOn;
         private System.Windows.Forms.Button btnFinishedOnClear;
         private System.Windows.Forms.Label lblInitialDiagnosis;
@@ -600,5 +632,8 @@
         private System.Windows.Forms.TextBox txtMesId;
         private System.Windows.Forms.TabPage pgHandling;
         private System.Windows.Forms.ListView lvHandlings;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TableLayoutPanel tlpFinishedOn;
+        private System.Windows.Forms.Label label10;
     }
 }
