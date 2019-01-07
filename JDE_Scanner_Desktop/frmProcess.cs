@@ -169,7 +169,36 @@ namespace JDE_Scanner_Desktop
             await StartingUsers.Refresh();
             FinishingUsers.Items = new List<User>(StartingUsers.Items); 
             await ActionTypes.Refresh();
-            cmbActionType.DataSource = ActionTypes.Items;
+            if (mode == 1)
+            {
+                cmbActionType.DataSource = ActionTypes.Items.Where(i => i.ShowInPlanning == true).ToList();
+                txtPlannedStart.Enabled = true;
+                txtPlannedFinish.Enabled = true;
+                txtPlannedStart.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 0, 0);
+                txtPlannedFinish.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
+            }
+            else
+            {
+                cmbActionType.DataSource = ActionTypes.Items;
+                if (_this.PlannedStart == null)
+                {
+                    txtPlannedStart.CustomFormat = " ";
+                    txtPlannedFinish.CustomFormat = " ";
+                    txtPlannedStart.Enabled = false;
+                    txtPlannedFinish.Enabled = false;
+                }
+                if(_this.Status == "Nierozpoczęty")
+                {
+                    txtPlannedStart.Enabled = true;
+                    txtPlannedFinish.Enabled = true;
+                }
+                else
+                {
+                    txtPlannedStart.Enabled = false;
+                    txtPlannedFinish.Enabled = false;
+                }
+                
+            }
             cmbStartedBy.DataSource = StartingUsers.Items;
             cmbFinishedBy.DataSource = FinishingUsers.Items;
             cmbPlace.DataSource = Places.Items;
@@ -328,7 +357,7 @@ namespace JDE_Scanner_Desktop
 
         private void txtStartedOn_ValueChanged(object sender, EventArgs e)
         {
-            txtStartedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            txtStartedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
             txtStartedOn.Format = DateTimePickerFormat.Custom;
         }
 
@@ -346,7 +375,7 @@ namespace JDE_Scanner_Desktop
 
         private void txtFinishedOn_ValueChanged(object sender, EventArgs e)
         {
-            txtFinishedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            txtFinishedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
             txtFinishedOn.Format = DateTimePickerFormat.Custom;
         }
 
@@ -359,7 +388,7 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
-                txtStartedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+                txtStartedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
                 txtStartedOn.Format = DateTimePickerFormat.Custom;
             }
             if (_this.FinishedOn == null)
@@ -369,7 +398,7 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
-                txtFinishedOn.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+                txtFinishedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
                 txtFinishedOn.Format = DateTimePickerFormat.Custom;
             }
         }

@@ -121,7 +121,7 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Zasób")]
         public string PlaceName { get; set; }
         [DisplayName("Długość [min]")]
-        public int Length { get; set; }
+        public int? Length { get; set; }
         [DisplayName("Rezultat")]
         public string Output { get; set; }
         [DisplayName("MES ID")]
