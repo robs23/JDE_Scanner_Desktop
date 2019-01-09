@@ -187,6 +187,14 @@ namespace JDE_Scanner_Desktop
                     txtPlannedStart.Enabled = false;
                     txtPlannedFinish.Enabled = false;
                 }
+                else
+                {
+                    txtPlannedStart.Value = (DateTime)_this.PlannedStart;
+                    if(_this.PlannedFinish != null)
+                    {
+                        txtPlannedFinish.Value = (DateTime)_this.PlannedFinish;
+                    }
+                }
                 if(_this.Status == "Planowany")
                 {
                     txtPlannedStart.Enabled = true;
