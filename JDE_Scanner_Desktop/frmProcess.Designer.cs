@@ -358,7 +358,7 @@
             this.cmbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStatus.FormattingEnabled = true;
             this.cmbStatus.Items.AddRange(new object[] {
-            "Nierozpoczęty",
+            "Planowany",
             "Rozpoczęty",
             "Wstrzymany",
             "Zakończony",
@@ -431,6 +431,7 @@
             this.txtStartedOn.Name = "txtStartedOn";
             this.txtStartedOn.Size = new System.Drawing.Size(180, 20);
             this.txtStartedOn.TabIndex = 15;
+            this.txtStartedOn.ValueChanged += new System.EventHandler(this.txtStartedOn_ValueChanged);
             // 
             // cmbStartedBy
             // 
@@ -549,6 +550,7 @@
             this.txtFinishedOn.Name = "txtFinishedOn";
             this.txtFinishedOn.Size = new System.Drawing.Size(180, 20);
             this.txtFinishedOn.TabIndex = 17;
+            this.txtFinishedOn.ValueChanged += new System.EventHandler(this.txtFinishedOn_ValueChanged);
             // 
             // txtPlannedStart
             // 

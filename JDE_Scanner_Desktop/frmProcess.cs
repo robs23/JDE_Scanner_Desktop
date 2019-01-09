@@ -187,7 +187,7 @@ namespace JDE_Scanner_Desktop
                     txtPlannedStart.Enabled = false;
                     txtPlannedFinish.Enabled = false;
                 }
-                if(_this.Status == "Nierozpoczęty")
+                if(_this.Status == "Planowany")
                 {
                     txtPlannedStart.Enabled = true;
                     txtPlannedFinish.Enabled = true;
@@ -305,6 +305,22 @@ namespace JDE_Scanner_Desktop
             else
             {
                 _this.FinishedOn = txtFinishedOn.Value;
+            }
+            if(txtPlannedStart.Text == " ")
+            {
+                _this.PlannedStart = null;
+            }
+            else
+            {
+                _this.PlannedStart = txtPlannedStart.Value;
+            }
+            if (txtPlannedFinish.Text == " ")
+            {
+                _this.PlannedFinish = null;
+            }
+            else
+            {
+                _this.PlannedFinish = txtPlannedFinish.Value;
             }
             if (cmbPlace.SelectedItem != null)
             {

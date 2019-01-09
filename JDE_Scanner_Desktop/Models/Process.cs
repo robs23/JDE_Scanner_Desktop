@@ -60,7 +60,7 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 else
                 {
-                    return "Nierozpoczęty";
+                    return "Planowany";
                 }
             }
             set

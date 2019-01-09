@@ -138,5 +138,11 @@ namespace JDE_Scanner_Desktop
             frmActionType FrmActionType = new frmActionType(this);
             FrmActionType.Show(this);
         }
+
+        private void obsługaZgłoszeńToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmHandlings FrmHandlings = new frmHandlings(this);
+            FrmHandlings.Show(this);
+        }
     }
 }
