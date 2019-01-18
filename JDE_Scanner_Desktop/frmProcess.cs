@@ -227,17 +227,8 @@ namespace JDE_Scanner_Desktop
             _this.Logs = new LogsKeeper();
             if (_this.StartedOn != null)
             {
-                txtStartedOn.Value = (DateTime)_this.StartedOn;
-                if(!await LoadHandlings())
-                {
-                    lvHandlings.View = View.List;
-                    lvHandlings.Items.Add(new ListViewItem("Brak danych"));
-                }
-                if(!await LoadHistory())
-                {
-                    lvHistory.View = View.List;
-                    lvHistory.Items.Add(new ListViewItem("Brak danych"));
-                }
+                LoadHandlings();
+                LoadHistory();
             }
             if (_this.FinishedOn != null)
             {
@@ -284,6 +275,8 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
+                lvHandlings.View = View.List;
+                lvHandlings.Items.Add(new ListViewItem("Brak danych"));
                 return false;
             }
         }
@@ -319,6 +312,8 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
+                lvHandlings.View = View.List;
+                lvHandlings.Items.Add(new ListViewItem("Brak danych"));
                 return false;
             }
         }
