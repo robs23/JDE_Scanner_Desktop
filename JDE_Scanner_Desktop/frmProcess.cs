@@ -224,6 +224,7 @@ namespace JDE_Scanner_Desktop
             cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(_this.FinishedByName);
             cmbStatus.SelectedIndex = cmbStatus.FindStringExact(_this.Status);
             _this.Handlings = new HandlingsKeeper();
+            _this.Logs = new LogsKeeper();
             if (_this.StartedOn != null)
             {
                 txtStartedOn.Value = (DateTime)_this.StartedOn;
@@ -231,6 +232,11 @@ namespace JDE_Scanner_Desktop
                 {
                     lvHandlings.View = View.List;
                     lvHandlings.Items.Add(new ListViewItem("Brak danych"));
+                }
+                if(!await LoadHistory())
+                {
+                    lvHistory.View = View.List;
+                    lvHistory.Items.Add(new ListViewItem("Brak danych"));
                 }
             }
             if (_this.FinishedOn != null)
@@ -274,6 +280,41 @@ namespace JDE_Scanner_Desktop
                     lvHandlings.Columns[i].Width = -2;
                 }
                 lvHandlings.GridLines = true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private async Task<bool> LoadHistory()
+        {
+            await _this.Logs.GetProcessHistory(_this.ProcessId);
+            if (_this.Logs.Items.Any())
+            {
+                lvHistory.Columns.Add("ID logu");
+                lvHistory.Columns.Add("Czas");
+                lvHistory.Columns.Add("Użytkownik");
+                lvHistory.Columns.Add("Opis");
+                foreach (Log l in _this.Logs.Items)
+                {
+                    string[] row =
+                    {
+                        l.LogId.ToString(),
+                        l.TimeStamp.ToString(),
+                        l.UserName,
+                        l.Description
+                    };
+                    ListViewItem item = new ListViewItem(row);
+                    lvHistory.Items.Add(item);
+                }
+                for (int i = 0; i < lvHistory.Columns.Count; i++)
+                {
+                    //adjust column's widht to the content
+                    lvHistory.Columns[i].Width = -2;
+                }
+                lvHistory.GridLines = true;
                 return true;
             }
             else

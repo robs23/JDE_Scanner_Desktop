@@ -90,5 +90,29 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public async Task GetProcessHistory(int ProcessId)
+        {
+            if (Items.Any())
+            {
+                Items.Clear();
+            }
+
+            using (var client = new HttpClient())
+            {
+
+                string url = Secrets.ApiAddress + "GetProcessHistory?token=" + Secrets.TenantToken + $"&id={ProcessId}";
+
+
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userJsonString = await response.Content.ReadAsStringAsync();
+                        Items = JsonConvert.DeserializeObject<Log[]>(userJsonString).ToList();
+                    }
+                }
+            }
+        }
     }
 }

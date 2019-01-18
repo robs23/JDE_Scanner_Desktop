@@ -72,6 +72,8 @@
             this.txtPlannedFinish = new System.Windows.Forms.DateTimePicker();
             this.pgHandling = new System.Windows.Forms.TabPage();
             this.lvHandlings = new System.Windows.Forms.ListView();
+            this.pgHistory = new System.Windows.Forms.TabPage();
+            this.lvHistory = new System.Windows.Forms.ListView();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -80,6 +82,7 @@
             this.tlpStartedOn.SuspendLayout();
             this.tlpFinishedOn.SuspendLayout();
             this.pgHandling.SuspendLayout();
+            this.pgHistory.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -178,6 +181,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tab.Controls.Add(this.pgProcess);
             this.tab.Controls.Add(this.pgHandling);
+            this.tab.Controls.Add(this.pgHistory);
             this.tab.Location = new System.Drawing.Point(3, 43);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
@@ -593,6 +597,27 @@
             this.lvHandlings.UseCompatibleStateImageBehavior = false;
             this.lvHandlings.View = System.Windows.Forms.View.Details;
             // 
+            // pgHistory
+            // 
+            this.pgHistory.Controls.Add(this.lvHistory);
+            this.pgHistory.Location = new System.Drawing.Point(4, 22);
+            this.pgHistory.Name = "pgHistory";
+            this.pgHistory.Padding = new System.Windows.Forms.Padding(3);
+            this.pgHistory.Size = new System.Drawing.Size(588, 424);
+            this.pgHistory.TabIndex = 2;
+            this.pgHistory.Text = "Historia";
+            this.pgHistory.UseVisualStyleBackColor = true;
+            // 
+            // lvHistory
+            // 
+            this.lvHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvHistory.Location = new System.Drawing.Point(3, 3);
+            this.lvHistory.Name = "lvHistory";
+            this.lvHistory.Size = new System.Drawing.Size(582, 418);
+            this.lvHistory.TabIndex = 0;
+            this.lvHistory.UseCompatibleStateImageBehavior = false;
+            this.lvHistory.View = System.Windows.Forms.View.Details;
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -616,6 +641,7 @@
             this.tlpFinishedOn.ResumeLayout(false);
             this.tlpFinishedOn.PerformLayout();
             this.pgHandling.ResumeLayout(false);
+            this.pgHistory.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -663,5 +689,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker txtPlannedStart;
         private System.Windows.Forms.DateTimePicker txtPlannedFinish;
+        private System.Windows.Forms.TabPage pgHistory;
+        private System.Windows.Forms.ListView lvHistory;
     }
 }

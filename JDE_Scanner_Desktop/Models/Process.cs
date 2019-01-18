@@ -145,6 +145,9 @@ namespace JDE_Scanner_Desktop.Models
         [Browsable(false)]
         public string TenantName { get; set; }
 
+        public HandlingsKeeper Handlings { get; set; }
+        public LogsKeeper Logs { get; set; }
+
         public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
@@ -200,6 +203,6 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public HandlingsKeeper Handlings { get; set; }
+        
     }
 }
