@@ -229,6 +229,7 @@ namespace JDE_Scanner_Desktop
             {
                 LoadHandlings();
                 LoadHistory();
+                txtStartedOn.Value = (DateTime)_this.StartedOn;
             }
             if (_this.FinishedOn != null)
             {
@@ -402,7 +403,7 @@ namespace JDE_Scanner_Desktop
                 }
                 else if (mode == 2)
                 {
-                    _this.Edit();
+                    await _this.Edit();
                 }
             }catch(Exception ex)
             {
@@ -471,6 +472,11 @@ namespace JDE_Scanner_Desktop
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -140,12 +140,19 @@ namespace JDE_Scanner_Desktop.Models
         public int CreatedBy { get; set; }
         [DisplayName("Utworzył")]
         public string CreatedByName { get; set; }
-        [Browsable(false)]
+        [Browsable(false)]  
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
-
+        [DisplayName("Ostatni status")]
+        public ProcessStatus? LastStatus { get; set; }
+        [Browsable(false)]
+        public int? LastStatusBy { get; set; }
+        [Browsable(false)]
+        public DateTime? LastStatusOn { get; set; }
+        [Browsable(false)]
         public HandlingsKeeper Handlings { get; set; }
+        [Browsable(false)]
         public LogsKeeper Logs { get; set; }
 
         public async Task<bool> Add()
@@ -180,29 +187,99 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void Edit()
+        public async Task<bool> Edit()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
             {
-                using (var client = new HttpClient())
+                
+                if (this.AdditionalValidation())
                 {
-                    string url = Secrets.ApiAddress + "EditProcess?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format(url, this.ProcessId, RuntimeSettings.UserId), content);
-                    if (result.IsSuccessStatusCode)
+                    using (var client = new HttpClient())
                     {
-                        MessageBox.Show("Edycja zlecenia zakończona powodzeniem!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie edycji użytkownika. Wiadomość: " + result.ReasonPhrase);
+                        string url = Secrets.ApiAddress + "EditProcess?token=" + Secrets.TenantToken + "&id={0}&UserId={1}&UseServerDates=false";
+                        var serializedProduct = JsonConvert.SerializeObject(this);
+                        var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                        var result = await client.PutAsync(String.Format(url, this.ProcessId, RuntimeSettings.UserId), content);
+                        if (result.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Edycja zlecenia zakończona powodzeniem!");
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Serwer zwrócił błąd przy próbie edycji użytkownika. Wiadomość: " + result.ReasonPhrase);
+                            return false;
+                        }
                     }
                 }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
+        private bool AdditionalValidation()
+        {
+            bool _isOk = true;
+            if ((this.IsActive || this.IsFrozen || this.IsCompleted || this.IsSuccessfull) && (this.StartedOn == null || this.StartedBy == null))
+            {
+                MessageBox.Show("Pole Data rozpoczęcia i Rozpoczęcie przez nie mogą być puste! Uzupełnij dane!");
+                _isOk = false;
+            }
+            else if ((this.IsCompleted || this.IsSuccessfull) && (this.FinishedOn == null || this.FinishedBy == null))
+            {
+                MessageBox.Show("Pole Data zakończenia i Zakończenie przez nie mogą być puste! Uzupełnij dane!");
+                _isOk = false;
+            }
+            else if (this.StartedOn != null && this.StartedBy == null)
+            {
+                MessageBox.Show("Wybierz z listy rozwijanej użytkownika, który rozpoczął zgłoszenie!");
+                _isOk = false;
+            }
+            else if (this.StartedOn == null && this.StartedBy != null)
+            {
+                MessageBox.Show("Podaj datę rozpoczęcia zgłoszenia!");
+                _isOk = false;
+            }
+            else if (this.FinishedOn != null && this.FinishedBy == null)
+            {
+                MessageBox.Show("Wybierz z listy rozwijanej użytkownika, który zakończył zgłoszenie!");
+                _isOk = false;
+            }
+            else if (this.FinishedOn == null && this.FinishedBy != null)
+            {
+                MessageBox.Show("Podaj datę zakończenia zgłoszenia!");
+                _isOk = false;
+            }
+            else if ((this.FinishedOn != null && this.FinishedBy != null) && !this.IsCompleted)
+            {
+                //Close it
+                this.IsCompleted = true;
+            }
+            else if ((this.StartedOn != null && this.StartedBy != null) && !(this.IsActive || this.IsFrozen || this.IsCompleted || this.IsSuccessfull))
+            {
+                //Start it
+                this.IsActive = true;
+            }
+            return _isOk;
+        }
+
         
+    }
+
+    public enum ProcessStatus
+    {
+        Brak,
+        Planowany,
+        Rozpoczęty,
+        Wstrzymany,
+        Wznowiony,
+        Zakończony
     }
 }
