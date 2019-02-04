@@ -35,6 +35,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnFinish = new System.Windows.Forms.Button();
             this.dgItems = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
@@ -78,6 +79,7 @@
             this.tlpButtons.Controls.Add(this.btnAdd, 0, 0);
             this.tlpButtons.Controls.Add(this.btnDelete, 1, 0);
             this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
+            this.tlpButtons.Controls.Add(this.btnFinish, 3, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -128,6 +130,20 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.Refresh);
             // 
+            // btnFinish
+            // 
+            this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFinish.Image = global::JDE_Scanner_Desktop.Properties.Resources.finish_icon;
+            this.btnFinish.Location = new System.Drawing.Point(123, 3);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(34, 28);
+            this.btnFinish.TabIndex = 3;
+            this.tooltip.SetToolTip(this.btnFinish, "Zakończ zaznaczone zgłoszenia..");
+            this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
+            // 
             // dgItems
             // 
             this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -169,6 +185,7 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.DataGridView dgItems;
+        private System.Windows.Forms.Button btnFinish;
     }
 }
 

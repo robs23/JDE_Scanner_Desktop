@@ -44,6 +44,31 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public void Finish(List<int> ids)
+        {
+            DialogResult result = MessageBox.Show("Czy jesteś pewien, że chcesz zamknąć " + ids.Count.ToString() + " zaznaczone zgłoszenia?", "Potwierdź zamknięcie zgłoszeń", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                foreach (int id in ids)
+                {
+                    _Finish(id);
+                }
+            }
+        }
+
+        private async void _Finish(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + "CompleteProcess?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
+                var result = await client.PutAsync(String.Format(url, id, RuntimeSettings.UserId),null);
+                if (!result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, id));
+                }
+            }
+        }
+
         public async Task Refresh()
         {
             if (Items.Any())

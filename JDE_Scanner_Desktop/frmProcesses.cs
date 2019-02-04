@@ -133,5 +133,23 @@ namespace JDE_Scanner_Desktop
                 }
             }
         }
+
+        private void btnFinish_Click(object sender, EventArgs e)
+        {
+            if (dgItems.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby zamknąć wybrane zgłoszenia, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgItems.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
+                }
+                Keeper.Finish(SelectedRows);
+                Reload();
+            }
+        }
     }
 }
