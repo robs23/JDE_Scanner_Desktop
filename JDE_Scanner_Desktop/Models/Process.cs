@@ -122,6 +122,14 @@ namespace JDE_Scanner_Desktop.Models
         public string PlaceName { get; set; }
         [DisplayName("Długość [min]")]
         public int? Length { get; set; }
+        [DisplayName("Obsługujący")]
+        public string HandlingStatus
+        {
+            get
+            {
+                return OpenHandlings + " z " + AllHandlings;
+            }
+        }
         [DisplayName("Rezultat")]
         public string Output { get; set; }
         [DisplayName("MES ID")]
@@ -150,6 +158,10 @@ namespace JDE_Scanner_Desktop.Models
         public int? LastStatusBy { get; set; }
         [Browsable(false)]
         public DateTime? LastStatusOn { get; set; }
+        [Browsable(false)]
+        public int? OpenHandlings { get; set; }
+        [Browsable(false)]
+        public int? AllHandlings { get; set; }
         [Browsable(false)]
         public HandlingsKeeper Handlings { get; set; }
         [Browsable(false)]
