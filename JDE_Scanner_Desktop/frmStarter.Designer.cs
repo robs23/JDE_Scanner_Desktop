@@ -47,12 +47,13 @@
             this.zgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.noweToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.obsługaZgłoszeńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typyZgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.typyZgłoszeniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.historiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.obsługaZgłoszeńToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zasobyXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,7 +116,8 @@
             // 
             this.zasobyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zasobyToolStripMenuItem1,
-            this.nowyToolStripMenuItem1});
+            this.nowyToolStripMenuItem1,
+            this.zasobyXToolStripMenuItem});
             this.zasobyToolStripMenuItem.Name = "zasobyToolStripMenuItem";
             this.zasobyToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.zasobyToolStripMenuItem.Text = "Zasoby";
@@ -123,14 +125,14 @@
             // zasobyToolStripMenuItem1
             // 
             this.zasobyToolStripMenuItem1.Name = "zasobyToolStripMenuItem1";
-            this.zasobyToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.zasobyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.zasobyToolStripMenuItem1.Text = "Zasoby";
             this.zasobyToolStripMenuItem1.Click += new System.EventHandler(this.zasobyToolStripMenuItem1_Click);
             // 
             // nowyToolStripMenuItem1
             // 
             this.nowyToolStripMenuItem1.Name = "nowyToolStripMenuItem1";
-            this.nowyToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+            this.nowyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.nowyToolStripMenuItem1.Text = "Nowy";
             this.nowyToolStripMenuItem1.Click += new System.EventHandler(this.nowyToolStripMenuItem1_Click);
             // 
@@ -193,16 +195,23 @@
             // zgłoszeniaToolStripMenuItem1
             // 
             this.zgłoszeniaToolStripMenuItem1.Name = "zgłoszeniaToolStripMenuItem1";
-            this.zgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.zgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.zgłoszeniaToolStripMenuItem1.Text = "Zgłoszenia";
             this.zgłoszeniaToolStripMenuItem1.Click += new System.EventHandler(this.zgłoszeniaToolStripMenuItem1_Click);
             // 
             // noweToolStripMenuItem1
             // 
             this.noweToolStripMenuItem1.Name = "noweToolStripMenuItem1";
-            this.noweToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.noweToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.noweToolStripMenuItem1.Text = "Nowe zgłoszenie";
             this.noweToolStripMenuItem1.Click += new System.EventHandler(this.noweToolStripMenuItem1_Click);
+            // 
+            // obsługaZgłoszeńToolStripMenuItem
+            // 
+            this.obsługaZgłoszeńToolStripMenuItem.Name = "obsługaZgłoszeńToolStripMenuItem";
+            this.obsługaZgłoszeńToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.obsługaZgłoszeńToolStripMenuItem.Text = "Obsługa zgłoszeń";
+            this.obsługaZgłoszeńToolStripMenuItem.Click += new System.EventHandler(this.obsługaZgłoszeńToolStripMenuItem_Click);
             // 
             // typyZgłoszeniaToolStripMenuItem
             // 
@@ -216,14 +225,14 @@
             // typyZgłoszeniaToolStripMenuItem1
             // 
             this.typyZgłoszeniaToolStripMenuItem1.Name = "typyZgłoszeniaToolStripMenuItem1";
-            this.typyZgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.typyZgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.typyZgłoszeniaToolStripMenuItem1.Text = "Typy zgłoszenia";
             this.typyZgłoszeniaToolStripMenuItem1.Click += new System.EventHandler(this.typyZgłoszeniaToolStripMenuItem1_Click);
             // 
             // nowyToolStripMenuItem4
             // 
             this.nowyToolStripMenuItem4.Name = "nowyToolStripMenuItem4";
-            this.nowyToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem4.Size = new System.Drawing.Size(157, 22);
             this.nowyToolStripMenuItem4.Text = "Nowy";
             this.nowyToolStripMenuItem4.Click += new System.EventHandler(this.nowyToolStripMenuItem4_Click);
             // 
@@ -238,16 +247,16 @@
             // historiaToolStripMenuItem1
             // 
             this.historiaToolStripMenuItem1.Name = "historiaToolStripMenuItem1";
-            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.historiaToolStripMenuItem1.Text = "Historia";
             this.historiaToolStripMenuItem1.Click += new System.EventHandler(this.historiaToolStripMenuItem1_Click);
             // 
-            // obsługaZgłoszeńToolStripMenuItem
+            // zasobyXToolStripMenuItem
             // 
-            this.obsługaZgłoszeńToolStripMenuItem.Name = "obsługaZgłoszeńToolStripMenuItem";
-            this.obsługaZgłoszeńToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.obsługaZgłoszeńToolStripMenuItem.Text = "Obsługa zgłoszeń";
-            this.obsługaZgłoszeńToolStripMenuItem.Click += new System.EventHandler(this.obsługaZgłoszeńToolStripMenuItem_Click);
+            this.zasobyXToolStripMenuItem.Name = "zasobyXToolStripMenuItem";
+            this.zasobyXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zasobyXToolStripMenuItem.Text = "Zasoby X";
+            this.zasobyXToolStripMenuItem.Click += new System.EventHandler(this.zasobyXToolStripMenuItem_Click);
             // 
             // frmStarter
             // 
@@ -294,5 +303,6 @@
         private System.Windows.Forms.ToolStripMenuItem typyZgłoszeniaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem obsługaZgłoszeńToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zasobyXToolStripMenuItem;
     }
 }

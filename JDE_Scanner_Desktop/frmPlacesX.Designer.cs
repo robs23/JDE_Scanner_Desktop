@@ -1,6 +1,6 @@
 ﻿namespace JDE_Scanner_Desktop
 {
-    partial class frmPlacesX
+    partial class frmPlaces
     {
         /// <summary>
         /// Required designer variable.
@@ -35,8 +35,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgItems = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.dgItems = new ADGV.AdvancedDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -130,17 +130,17 @@
             // 
             // dgItems
             // 
-            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgItems.AllowUserToAddRows = false;
+            this.dgItems.AllowUserToDeleteRows = false;
+            this.dgItems.AutoGenerateContextFilters = true;
             this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.DateWithTime = false;
+            this.dgItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgItems.Location = new System.Drawing.Point(3, 43);
             this.dgItems.Name = "dgItems";
             this.dgItems.Size = new System.Drawing.Size(565, 330);
             this.dgItems.TabIndex = 2;
-            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
-            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
-            this.dgItems.DoubleClick += new System.EventHandler(this.View);
+            this.dgItems.TimeFilter = false;
             // 
             // frmPlaces
             // 
@@ -168,7 +168,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ToolTip tooltip;
-        private System.Windows.Forms.DataGridView dgItems;
+        private ADGV.AdvancedDataGridView dgItems;
     }
 }
 

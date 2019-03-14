@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,13 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class frmPlacesX : Form
+    public partial class frmPlaces : Form
     {
         PlacesKeeper Keeper = new PlacesKeeper();
         frmLooper looper;
         int page;
 
-        public frmPlacesX(frmStarter parent)
+        public frmPlaces(frmStarter parent)
         {
             InitializeComponent();
             this.Owner = parent;
@@ -30,8 +31,9 @@ namespace JDE_Scanner_Desktop
         {
             looper.Show(this);
             await Keeper.Refresh();
+            
             dgItems.DataSource = null;
-            dgItems.DataSource = Keeper.Items;
+            dgItems.DataSource = Keeper.Items.ToDataTable();
             looper.Hide();
             page = 1;
         }
