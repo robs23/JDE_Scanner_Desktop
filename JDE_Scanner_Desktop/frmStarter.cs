@@ -147,8 +147,8 @@ namespace JDE_Scanner_Desktop
 
         private void zasobyXToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPlacesX FrmPlacesX = new frmPlacesX(this);
-            FrmPlacesX.Show(this);
+            frmPlacesY FrmPlacesY = new frmPlacesY(this);
+            FrmPlacesY.Show(this);
         }
     }
 }

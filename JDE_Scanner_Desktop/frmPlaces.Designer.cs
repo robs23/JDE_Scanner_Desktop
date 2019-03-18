@@ -1,6 +1,6 @@
 ﻿namespace JDE_Scanner_Desktop
 {
-    partial class frmPlacesX
+    partial class frmPlaces
     {
         /// <summary>
         /// Required designer variable.

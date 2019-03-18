@@ -1,6 +1,6 @@
 ﻿namespace JDE_Scanner_Desktop
 {
-    partial class frmPlaces
+    partial class frmPlacesY
     {
         /// <summary>
         /// Required designer variable.
@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlaces));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlacesY));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.dgItems = new ADGV.AdvancedDataGridView();
+            this.dgItems = new Zuby.ADGV.AdvancedDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -130,26 +130,23 @@
             // 
             // dgItems
             // 
-            this.dgItems.AllowUserToAddRows = false;
-            this.dgItems.AllowUserToDeleteRows = false;
-            this.dgItems.AutoGenerateContextFilters = true;
             this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgItems.DateWithTime = false;
             this.dgItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgItems.FilterAndSortEnabled = true;
             this.dgItems.Location = new System.Drawing.Point(3, 43);
             this.dgItems.Name = "dgItems";
             this.dgItems.Size = new System.Drawing.Size(565, 330);
             this.dgItems.TabIndex = 2;
-            this.dgItems.TimeFilter = false;
+            this.dgItems.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.dgItems_FilterStringChanged);
             // 
-            // frmPlaces
+            // frmPlacesY
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 400);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmPlaces";
+            this.Name = "frmPlacesY";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Zasoby";
             this.Load += new System.EventHandler(this.FormLoaded);
@@ -168,7 +165,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ToolTip tooltip;
-        private ADGV.AdvancedDataGridView dgItems;
+        private Zuby.ADGV.AdvancedDataGridView dgItems;
     }
 }
 

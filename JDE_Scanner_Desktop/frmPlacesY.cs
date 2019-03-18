@@ -1,39 +1,39 @@
 ﻿using JDE_Scanner_Desktop.Models;
-using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class frmPlaces : Form
+    public partial class frmPlacesY : Form
     {
         PlacesKeeper Keeper = new PlacesKeeper();
         frmLooper looper;
         int page;
 
-        public frmPlaces(frmStarter parent)
+        public frmPlacesY(frmStarter parent)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
         }
 
-        private async void Reload()
+        private async Task Reload(string query = null)
         {
             looper.Show(this);
-            await Keeper.Refresh();
-            
+            await Keeper.Refresh(query);
             dgItems.DataSource = null;
-            dgItems.DataSource = Keeper.Items.ToDataTable();
+            dgItems.DataSource = new BindingList<Place>(Keeper.Items);
             looper.Hide();
             page = 1;
         }
@@ -47,8 +47,10 @@ namespace JDE_Scanner_Desktop
 
         private void Add(object sender, EventArgs e)
         {
-            frmPlace FrmPlace = new frmPlace(this);
-            FrmPlace.Show();
+            //frmPlace FrmPlace = new frmPlace(this);
+            //FrmPlace.Show();
+            string x = Static.Utilities.FilterStringconverter(dgItems.FilterString);
+            Reload(x);
         }
 
         private void View(object sender, EventArgs e)
@@ -123,6 +125,28 @@ namespace JDE_Scanner_Desktop
                     }
                     dgItems.Select();
                 }
+            }
+        }
+
+        private async void dgItems_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
+        {
+
+            try
+            {
+                if (string.IsNullOrEmpty(dgItems.FilterString) == true)
+                {
+                    Reload();
+                }
+                else
+                {
+                    var listfilter = Static.Utilities.FilterStringconverter(dgItems.FilterString);
+                    Reload(listfilter);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                //Log.Error(ex, MethodBase.GetCurrentMethod().Name);
             }
         }
     }

@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class frmPlacesX : Form
+    public partial class frmPlaces : Form
     {
         PlacesKeeper Keeper = new PlacesKeeper();
         frmLooper looper;
         int page;
 
-        public frmPlacesX(frmStarter parent)
+        public frmPlaces(frmStarter parent)
         {
             InitializeComponent();
             this.Owner = parent;

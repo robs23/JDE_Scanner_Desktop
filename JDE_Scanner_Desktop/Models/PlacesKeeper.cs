@@ -44,7 +44,7 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async Task Refresh()
+        public async Task Refresh(string query = null)
         {
             if (Items.Any())
             {
@@ -54,6 +54,10 @@ namespace JDE_Scanner_Desktop.Models
             using (var client = new HttpClient())
             {
                 string url = Secrets.ApiAddress + "GetPlaces?token=" + Secrets.TenantToken;
+                if(query != null)
+                {
+                    url += "&query=" + query;
+                }
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
