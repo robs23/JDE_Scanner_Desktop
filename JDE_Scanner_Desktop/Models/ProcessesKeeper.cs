@@ -78,7 +78,7 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = Secrets.ApiAddress + "GetProcesses?token=" + Secrets.TenantToken;
+                string url = Secrets.ApiAddress + "GetProcesses?token=" + Secrets.TenantToken + "&page=1";
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

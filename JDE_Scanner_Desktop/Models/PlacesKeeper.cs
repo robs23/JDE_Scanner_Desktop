@@ -53,7 +53,7 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = Secrets.ApiAddress + "GetPlaces?token=" + Secrets.TenantToken;
+                string url = Secrets.ApiAddress + "GetPlaces?token=" + Secrets.TenantToken + "&page=1";
                 if(query != null)
                 {
                     url += "&query=" + query;

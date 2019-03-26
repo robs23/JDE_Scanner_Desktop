@@ -42,10 +42,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.cmbMechanic = new System.Windows.Forms.ComboBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txtMesLogin = new System.Windows.Forms.TextBox();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.txtToken = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -121,15 +123,19 @@
             this.tplTextboxes.Controls.Add(this.cmbMechanic, 1, 3);
             this.tplTextboxes.Controls.Add(this.label1, 0, 4);
             this.tplTextboxes.Controls.Add(this.txtMesLogin, 1, 4);
+            this.tplTextboxes.Controls.Add(this.txtToken, 1, 5);
+            this.tplTextboxes.Controls.Add(this.label6, 0, 5);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
-            this.tplTextboxes.RowCount = 6;
+            this.tplTextboxes.RowCount = 8;
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tplTextboxes.Size = new System.Drawing.Size(591, 350);
             this.tplTextboxes.TabIndex = 1;
             // 
@@ -209,17 +215,6 @@
             this.cmbMechanic.Size = new System.Drawing.Size(435, 21);
             this.cmbMechanic.TabIndex = 7;
             // 
-            // lblCreated
-            // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 404);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -237,6 +232,36 @@
             this.txtMesLogin.Name = "txtMesLogin";
             this.txtMesLogin.Size = new System.Drawing.Size(435, 20);
             this.txtMesLogin.TabIndex = 9;
+            // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 404);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtToken
+            // 
+            this.txtToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtToken.Location = new System.Drawing.Point(153, 155);
+            this.txtToken.Name = "txtToken";
+            this.txtToken.ReadOnly = true;
+            this.txtToken.Size = new System.Drawing.Size(435, 20);
+            this.txtToken.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 158);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(144, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Token";
             // 
             // frmUser
             // 
@@ -276,5 +301,7 @@
         private System.Windows.Forms.ComboBox cmbMechanic;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMesLogin;
+        private System.Windows.Forms.TextBox txtToken;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -42,6 +42,7 @@ namespace JDE_Scanner_Desktop
             txtSurname.Text = ThisUser.Surname;
             txtPassword.Text = ThisUser.Password;
             txtMesLogin.Text = ThisUser.MesLogin;
+            txtToken.Text = $"[UID={User.UserId};PASS={User.Password}]";
             if (ThisUser.IsMechanic)
             {
                 cmbMechanic.SelectedIndex = cmbMechanic.FindStringExact("Tak");
@@ -86,6 +87,7 @@ namespace JDE_Scanner_Desktop
                     if (await ThisUser.Add())
                     {
                         mode = 2;
+                        txtToken.Text = $"[UID={ThisUser.UserId};PASS={ThisUser.Password}]";
                         this.Text = "Szczegóły użytkownika";
                     }
                 }
@@ -103,7 +105,7 @@ namespace JDE_Scanner_Desktop
                     {
                         ThisUser.IsMechanic = false;
                     }
-                    ThisUser.Edit();
+                    ThisUser.Edit();           
                 }
             }catch(Exception ex)
             {
