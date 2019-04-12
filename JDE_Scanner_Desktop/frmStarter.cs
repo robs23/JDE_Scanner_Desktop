@@ -35,42 +35,6 @@ namespace JDE_Scanner_Desktop
             FrmUser.Show(this);
         }
 
-        private void zasobyToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmPlaces FrmPlaces = new frmPlaces(this);
-            FrmPlaces.Show(this);
-        }
-
-        private void nowyToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmPlace FrmPlace = new frmPlace(this);
-            FrmPlace.Show(this);
-        }
-
-        private void instalacjeToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmSets FrmSets = new frmSets(this);
-            FrmSets.Show(this);
-        }
-
-        private void nowaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmSet FrmSet = new frmSet(this);
-            FrmSet.Show(this);
-        }
-
-        private void obszaryToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmAreas FrmAreas = new frmAreas(this);
-            FrmAreas.Show(this);
-        }
-
-        private void nowyToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            frmArea FrmArea = new frmArea(this);
-            FrmArea.Show(this);
-        }
-
         private void nowyToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             frmActionType FrmActionType = new frmActionType(this);
@@ -127,18 +91,6 @@ namespace JDE_Scanner_Desktop
             FrmProcess.Show(this);
         }
 
-        private void typyZgłoszeniaToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmActionTypes FrmActionTypes = new frmActionTypes(this);
-            FrmActionTypes.Show(this);
-        }
-
-        private void nowyToolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-            frmActionType FrmActionType = new frmActionType(this);
-            FrmActionType.Show(this);
-        }
-
         private void obsługaZgłoszeńToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmHandlings FrmHandlings = new frmHandlings(this);
@@ -149,6 +101,54 @@ namespace JDE_Scanner_Desktop
         {
             frmPlacesY FrmPlacesY = new frmPlacesY(this);
             FrmPlacesY.Show(this);
+        }
+
+        private void nowyToolStripMenuItem3_Click_1(object sender, EventArgs e)
+        {
+            frmActionType FrmActionType = new frmActionType(this);
+            FrmActionType.Show(this);
+        }
+
+        private void wszystkieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmActionTypes FrmActionTypes = new frmActionTypes(this);
+            FrmActionTypes.Show(this);
+        }
+
+        private void nowyToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            frmPlace FrmPlace = new frmPlace(this);
+            FrmPlace.Show(this);
+        }
+
+        private void wszystkieToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmPlaces FrmPlaces = new frmPlaces(this);
+            FrmPlaces.Show(this);
+        }
+
+        private void nowaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmSet FrmSet = new frmSet(this);
+            FrmSet.Show(this);
+        }
+
+        private void wszystkieToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            frmSets FrmSets = new frmSets(this);
+            FrmSets.Show(this);
+        }
+
+        private void nowyToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            frmArea FrmArea = new frmArea(this);
+            FrmArea.Show(this);
+        }
+
+        private void wszystkieToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            frmAreas FrmAreas = new frmAreas(this);
+            FrmAreas.Show(this);
         }
     }
 }
