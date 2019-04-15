@@ -93,6 +93,18 @@
     <Compile Include="frmHandlings.Designer.cs">
       <DependentUpon>frmHandlings.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCompanies.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCompanies.Designer.cs">
+      <DependentUpon>frmCompanies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCompany.Designer.cs">
+      <DependentUpon>frmCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPlacesY.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,12 +204,14 @@
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\ActionTypesKeeper.cs" />
     <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\FilterColumn.cs" />
     <Compile Include="Models\FilterRow.cs" />
     <Compile Include="Models\Handling.cs" />
     <Compile Include="Models\HandlingsKeeper.cs" />
     <Compile Include="Models\LogsKeeper.cs" />
+    <Compile Include="Models\CompaniesKeeper.cs" />
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\ProcessesKeeper.cs" />
     <Compile Include="Models\Log.cs" />
@@ -229,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmHandlings.resx">
       <DependentUpon>frmHandlings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCompanies.resx">
+      <DependentUpon>frmCompanies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCompany.resx">
+      <DependentUpon>frmCompany.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlacesY.resx">
       <DependentUpon>frmPlacesY.cs</DependentUpon>

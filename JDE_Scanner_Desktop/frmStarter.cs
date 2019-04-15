@@ -150,5 +150,11 @@ namespace JDE_Scanner_Desktop
             frmAreas FrmAreas = new frmAreas(this);
             FrmAreas.Show(this);
         }
+
+        private void wszystkieToolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            frmCompanies FrmCompanies = new frmCompanies(this);
+            FrmCompanies.Show(this);
+        }
     }
 }
