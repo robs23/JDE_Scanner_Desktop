@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JDE_Scanner_Desktop.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -155,6 +156,15 @@ namespace JDE_Scanner_Desktop
         {
             frmCompanies FrmCompanies = new frmCompanies(this);
             FrmCompanies.Show(this);
+        }
+
+        private async void nowaToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            //new company
+
+            bKeeper keeper = new bKeeper(typeof(Area), "Areas");
+            await keeper.Refresh();
+            MessageBox.Show(keeper.Items.Count.ToString());
         }
     }
 }

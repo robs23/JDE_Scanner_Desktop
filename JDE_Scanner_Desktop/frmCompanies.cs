@@ -15,7 +15,7 @@ namespace JDE_Scanner_Desktop
 {
     public partial class frmCompanies : Form
     {
-        CompaniesKeeper Keeper = new CompaniesKeeper();
+        bKeeper Keeper = new bKeeper(typeof(Company),"Companies");
         frmLooper looper;
         int page;
 
@@ -54,10 +54,10 @@ namespace JDE_Scanner_Desktop
 
             int id = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
 
-            Company company = new Company();
-            company = Keeper.Items.Where(u => u.CompanyId == id).FirstOrDefault();
-            frmCompany FrmCompany = new frmCompany(company, this);
-            FrmCompany.Show();
+            //Company company = new Company();
+            //company = Keeper.Items.Where(u => u.CompanyId == id).FirstOrDefault();
+            //frmCompany FrmCompany = new frmCompany(company, this);
+            //FrmCompany.Show();
         }
 
 

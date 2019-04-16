@@ -17,7 +17,7 @@ namespace JDE_Scanner_Desktop
 {
     public partial class frmPlacesY : Form
     {
-        PlacesKeeper Keeper = new PlacesKeeper();
+        bKeeper Keeper = new bKeeper(typeof(Place),"Places");
         frmLooper looper;
         int page;
 
@@ -33,7 +33,7 @@ namespace JDE_Scanner_Desktop
             looper.Show(this);
             await Keeper.Refresh(query);
             dgItems.DataSource = null;
-            dgItems.DataSource = new BindingList<Place>(Keeper.Items);
+            dgItems.DataSource = Keeper.Items; //new BindingList<Place>(Keeper.Items);
             looper.Hide();
             page = 1;
         }
