@@ -20,6 +20,7 @@ namespace JDE_Scanner_Desktop
         int mode; //1-add, 2-edit, 3-view
         Company _this;
         frmLooper Looper;
+        CompanyTypesKeeper companyTypes;
 
         public frmCompany(Form parent)
         {
@@ -58,6 +59,15 @@ namespace JDE_Scanner_Desktop
         {
             Looper = new frmLooper(this);
             Looper.Show(this);
+            companyTypes = new CompanyTypesKeeper();
+            await companyTypes.Refresh();
+            cmbType.DataSource = companyTypes.Items;
+            cmbType.DisplayMember = "Name";
+            cmbType.ValueMember = "CompanyTypeId";
+            if (mode != 1)
+            {
+                cmbType.SelectedIndex = cmbType.FindStringExact(_this.CompanyTypeName);
+            }
             Looper.Hide();
         }
 
@@ -70,7 +80,7 @@ namespace JDE_Scanner_Desktop
             _this.ZipCode = txtZipCode.Text;
             _this.City = txtCity.Text;
             _this.Country = txtCountry.Text;
-
+            _this.TypeId = Convert.ToInt32(cmbType.SelectedValue.ToString());
             try
             {
                 Looper.Show(this);

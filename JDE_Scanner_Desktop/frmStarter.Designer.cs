@@ -66,8 +66,6 @@
             this.wgZasobuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.wgZgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.firmyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nowaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.wszystkieToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.typyFirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,6 +78,9 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.firmyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.nowaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wszystkieToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -372,26 +373,11 @@
             // firmyToolStripMenuItem
             // 
             this.firmyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nowaToolStripMenuItem2,
-            this.wszystkieToolStripMenuItem5,
-            this.typyFirmToolStripMenuItem});
+            this.typyFirmToolStripMenuItem,
+            this.firmyToolStripMenuItem1});
             this.firmyToolStripMenuItem.Name = "firmyToolStripMenuItem";
             this.firmyToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.firmyToolStripMenuItem.Text = "Firmy";
-            // 
-            // nowaToolStripMenuItem2
-            // 
-            this.nowaToolStripMenuItem2.Name = "nowaToolStripMenuItem2";
-            this.nowaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.nowaToolStripMenuItem2.Text = "Nowa";
-            this.nowaToolStripMenuItem2.Click += new System.EventHandler(this.nowaToolStripMenuItem2_Click);
-            // 
-            // wszystkieToolStripMenuItem5
-            // 
-            this.wszystkieToolStripMenuItem5.Name = "wszystkieToolStripMenuItem5";
-            this.wszystkieToolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
-            this.wszystkieToolStripMenuItem5.Text = "Wszystkie";
-            this.wszystkieToolStripMenuItem5.Click += new System.EventHandler(this.wszystkieToolStripMenuItem5_Click);
             // 
             // typyFirmToolStripMenuItem
             // 
@@ -431,7 +417,7 @@
             this.noweToolStripMenuItem,
             this.wszystkieToolStripMenuItem6});
             this.zamówieniaToolStripMenuItem.Name = "zamówieniaToolStripMenuItem";
-            this.zamówieniaToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.zamówieniaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zamówieniaToolStripMenuItem.Text = "Zamówienia";
             // 
             // noweToolStripMenuItem
@@ -452,7 +438,7 @@
             this.nowaToolStripMenuItem3,
             this.wszystkieToolStripMenuItem7});
             this.dostawyToolStripMenuItem.Name = "dostawyToolStripMenuItem";
-            this.dostawyToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.dostawyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dostawyToolStripMenuItem.Text = "Dostawy";
             // 
             // nowaToolStripMenuItem3
@@ -480,6 +466,29 @@
             this.wgCzęściToolStripMenuItem.Name = "wgCzęściToolStripMenuItem";
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
+            // 
+            // firmyToolStripMenuItem1
+            // 
+            this.firmyToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nowaToolStripMenuItem2,
+            this.wszystkieToolStripMenuItem5});
+            this.firmyToolStripMenuItem1.Name = "firmyToolStripMenuItem1";
+            this.firmyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.firmyToolStripMenuItem1.Text = "Firmy";
+            // 
+            // nowaToolStripMenuItem2
+            // 
+            this.nowaToolStripMenuItem2.Name = "nowaToolStripMenuItem2";
+            this.nowaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.nowaToolStripMenuItem2.Text = "Nowa";
+            this.nowaToolStripMenuItem2.Click += new System.EventHandler(this.nowaToolStripMenuItem2_Click_1);
+            // 
+            // wszystkieToolStripMenuItem5
+            // 
+            this.wszystkieToolStripMenuItem5.Name = "wszystkieToolStripMenuItem5";
+            this.wszystkieToolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.wszystkieToolStripMenuItem5.Text = "Wszystkie";
+            this.wszystkieToolStripMenuItem5.Click += new System.EventHandler(this.wszystkieToolStripMenuItem5_Click_1);
             // 
             // frmStarter
             // 
@@ -535,8 +544,6 @@
         private System.Windows.Forms.ToolStripMenuItem bOMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wgZasobuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem firmyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nowaToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem zaopatrzenieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zamówieniaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noweToolStripMenuItem;
@@ -553,5 +560,8 @@
         private System.Windows.Forms.ToolStripMenuItem typyFirmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem8;
+        private System.Windows.Forms.ToolStripMenuItem firmyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem nowaToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem5;
     }
 }

@@ -54,10 +54,10 @@ namespace JDE_Scanner_Desktop
 
             int id = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
 
-            //Company company = new Company();
-            //company = Keeper.Items.Where(u => u.CompanyId == id).FirstOrDefault();
-            //frmCompany FrmCompany = new frmCompany(company, this);
-            //FrmCompany.Show();
+            Company item = new Company();
+            item = Keeper.Items.Where(u => u.CompanyId == id).FirstOrDefault();
+            frmCompany ItemForm = new frmCompany(item, this);
+            ItemForm.Show();
         }
 
 

@@ -20,6 +20,8 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Nazwa")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pole nazwa nie może być puste!")]
         public string Name { get; set; }
+        [DisplayName("Typ")]
+        public string CompanyTypeName { get; set; }
         [DisplayName("Ulica")]
         public string Street { get; set; }
         [DisplayName("Ulica2")]
@@ -43,11 +45,11 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Data utworzenia")]
         public DateTime CreatedOn { get; set; }
         [Browsable(false)]
-        public int LmBy { get; set; }
+        public int? LmBy { get; set; }
         [DisplayName("Zmodyfikował")]
         public string LmByName { get; set; }
         [DisplayName("Data modyfikacji")]
-        public DateTime LmOn { get; set; }
+        public DateTime? LmOn { get; set; }
         [Browsable(false)]
         public int TenantId { get; set; }
         [Browsable(false)]

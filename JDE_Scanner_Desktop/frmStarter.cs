@@ -152,18 +152,6 @@ namespace JDE_Scanner_Desktop
             FrmAreas.Show(this);
         }
 
-        private void wszystkieToolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            frmCompanies FrmCompanies = new frmCompanies(this);
-            FrmCompanies.Show(this);
-        }
-
-        private async void nowaToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            //new company
-
-        }
-
         private void wszystkieToolStripMenuItem8_Click(object sender, EventArgs e)
         {
             frmCompanyTypes FrmCompanyTypes = new frmCompanyTypes(this);
@@ -174,6 +162,19 @@ namespace JDE_Scanner_Desktop
         {
             frmCompanyType FrmCompanyType = new frmCompanyType(this);
             FrmCompanyType.Show(this);
+        }
+
+        private void wszystkieToolStripMenuItem5_Click_1(object sender, EventArgs e)
+        {
+            frmCompanies FrmCompanies = new frmCompanies(this);
+            FrmCompanies.Show(this);
+        }
+
+        private void nowaToolStripMenuItem2_Click_1(object sender, EventArgs e)
+        {
+            //new company
+            frmCompany FrmCompany = new frmCompany(this);
+            FrmCompany.Show(this);
         }
     }
 }
