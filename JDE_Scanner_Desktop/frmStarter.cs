@@ -162,9 +162,18 @@ namespace JDE_Scanner_Desktop
         {
             //new company
 
-            bKeeper keeper = new bKeeper(typeof(Area), "Areas");
-            await keeper.Refresh();
-            MessageBox.Show(keeper.Items.Count.ToString());
+        }
+
+        private void wszystkieToolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            frmCompanyTypes FrmCompanyTypes = new frmCompanyTypes(this);
+            FrmCompanyTypes.Show(this);
+        }
+
+        private void nowyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCompanyType FrmCompanyType = new frmCompanyType(this);
+            FrmCompanyType.Show(this);
         }
     }
 }

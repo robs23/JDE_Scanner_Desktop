@@ -13,13 +13,13 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class frmCompanies : Form
+    public partial class frmCompanyTypes : Form
     {
-        CompaniesKeeper Keeper = new CompaniesKeeper();
+        CompanyTypesKeeper Keeper = new CompanyTypesKeeper();
         frmLooper looper;
         int page;
 
-        public frmCompanies(frmStarter parent)
+        public frmCompanyTypes(frmStarter parent)
         {
             InitializeComponent();
             this.Owner = parent;
@@ -45,8 +45,8 @@ namespace JDE_Scanner_Desktop
 
         private void Add(object sender, EventArgs e)
         {
-            frmCompany FrmCompany = new frmCompany(this);
-            FrmCompany.Show();
+            frmCompany ItemForm = new frmCompany(this);
+            ItemForm.Show();
         }
 
         private void View(object sender, EventArgs e)
@@ -54,10 +54,10 @@ namespace JDE_Scanner_Desktop
 
             int id = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
 
-            //Company company = new Company();
-            //company = Keeper.Items.Where(u => u.CompanyId == id).FirstOrDefault();
-            //frmCompany FrmCompany = new frmCompany(company, this);
-            //FrmCompany.Show();
+            CompanyType item = new CompanyType();
+            item = Keeper.Items.Where(u => u.CompanyTypeId == id).FirstOrDefault();
+            frmCompanyType ItemForm = new frmCompanyType(item, this);
+            ItemForm.Show();
         }
 
 

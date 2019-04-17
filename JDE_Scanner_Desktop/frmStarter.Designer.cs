@@ -68,6 +68,9 @@
             this.firmyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nowaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.typyFirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nowyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wszystkieToolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.zaopatrzenieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zamówieniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -370,7 +373,8 @@
             // 
             this.firmyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nowaToolStripMenuItem2,
-            this.wszystkieToolStripMenuItem5});
+            this.wszystkieToolStripMenuItem5,
+            this.typyFirmToolStripMenuItem});
             this.firmyToolStripMenuItem.Name = "firmyToolStripMenuItem";
             this.firmyToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.firmyToolStripMenuItem.Text = "Firmy";
@@ -389,6 +393,29 @@
             this.wszystkieToolStripMenuItem5.Text = "Wszystkie";
             this.wszystkieToolStripMenuItem5.Click += new System.EventHandler(this.wszystkieToolStripMenuItem5_Click);
             // 
+            // typyFirmToolStripMenuItem
+            // 
+            this.typyFirmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nowyToolStripMenuItem1,
+            this.wszystkieToolStripMenuItem8});
+            this.typyFirmToolStripMenuItem.Name = "typyFirmToolStripMenuItem";
+            this.typyFirmToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.typyFirmToolStripMenuItem.Text = "Typy firm";
+            // 
+            // nowyToolStripMenuItem1
+            // 
+            this.nowyToolStripMenuItem1.Name = "nowyToolStripMenuItem1";
+            this.nowyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.nowyToolStripMenuItem1.Text = "Nowy";
+            this.nowyToolStripMenuItem1.Click += new System.EventHandler(this.nowyToolStripMenuItem1_Click);
+            // 
+            // wszystkieToolStripMenuItem8
+            // 
+            this.wszystkieToolStripMenuItem8.Name = "wszystkieToolStripMenuItem8";
+            this.wszystkieToolStripMenuItem8.Size = new System.Drawing.Size(180, 22);
+            this.wszystkieToolStripMenuItem8.Text = "Wszystkie";
+            this.wszystkieToolStripMenuItem8.Click += new System.EventHandler(this.wszystkieToolStripMenuItem8_Click);
+            // 
             // zaopatrzenieToolStripMenuItem
             // 
             this.zaopatrzenieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -404,7 +431,7 @@
             this.noweToolStripMenuItem,
             this.wszystkieToolStripMenuItem6});
             this.zamówieniaToolStripMenuItem.Name = "zamówieniaToolStripMenuItem";
-            this.zamówieniaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zamówieniaToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.zamówieniaToolStripMenuItem.Text = "Zamówienia";
             // 
             // noweToolStripMenuItem
@@ -425,7 +452,7 @@
             this.nowaToolStripMenuItem3,
             this.wszystkieToolStripMenuItem7});
             this.dostawyToolStripMenuItem.Name = "dostawyToolStripMenuItem";
-            this.dostawyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dostawyToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.dostawyToolStripMenuItem.Text = "Dostawy";
             // 
             // nowaToolStripMenuItem3
@@ -523,5 +550,8 @@
         private System.Windows.Forms.ToolStripMenuItem wgZgłoszeniaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zapasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wgCzęściToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem typyFirmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem8;
     }
 }

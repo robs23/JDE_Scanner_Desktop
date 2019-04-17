@@ -10,21 +10,15 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class bKeeper
+    public abstract class Keeper<T>
     {
-        public List<dynamic> Items { get; set; } 
-        public Type ObjectType { get; set; }
-        public string ObjectName { get
-            {
-                return nameof(ObjectType);
-            } }
-        public string PluralizedObjectName { get; set; }
+        public List<T> Items { get; set; } 
+        protected abstract string ObjectName { get;}
+        protected abstract string PluralizedObjectName { get;}
 
-        public bKeeper(Type type, string pluralizedName)
+        public Keeper()
         {
-            ObjectType = type;
-            PluralizedObjectName = pluralizedName;
-            Items = new List<dynamic>();
+            Items = new List<T>();
         }
 
         public void Remove(List<int> ids)
@@ -71,7 +65,7 @@ namespace JDE_Scanner_Desktop.Models
                     if (response.IsSuccessStatusCode)
                     {
                         var userJsonString = await response.Content.ReadAsStringAsync();
-                        Items = JsonConvert.DeserializeObject<dynamic[]>(userJsonString).ToList();
+                        Items = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
                     }
                 }
             }
@@ -88,7 +82,7 @@ namespace JDE_Scanner_Desktop.Models
                     if (response.IsSuccessStatusCode)
                     {
                         var userJsonString = await response.Content.ReadAsStringAsync();
-                        var vItems = JsonConvert.DeserializeObject<dynamic[]>(userJsonString).ToList();
+                        var vItems = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
                         Items.AddRange(vItems);
                         return true;
                     }

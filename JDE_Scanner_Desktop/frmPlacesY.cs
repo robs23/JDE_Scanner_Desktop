@@ -17,7 +17,7 @@ namespace JDE_Scanner_Desktop
 {
     public partial class frmPlacesY : Form
     {
-        bKeeper Keeper = new bKeeper(typeof(Place),"Places");
+        PlacesKeeper Keeper = new PlacesKeeper();
         frmLooper looper;
         int page;
 
