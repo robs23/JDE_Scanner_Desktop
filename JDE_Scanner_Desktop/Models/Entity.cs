@@ -15,6 +15,8 @@ namespace JDE_Scanner_Desktop.Models
     public abstract class Entity<T>
     {
         [Browsable(false)]
+        public abstract int Id { get; set; }
+        [Browsable(false)]
         public int CreatedBy { get; set; }
         [DisplayName("Utworzył")]
         public string CreatedByName { get; set; }
@@ -31,8 +33,6 @@ namespace JDE_Scanner_Desktop.Models
         [Browsable(false)]
         public string TenantName { get; set; }
 
-        protected abstract int ID { get; }
-
         public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
@@ -47,8 +47,15 @@ namespace JDE_Scanner_Desktop.Models
                     if (result.IsSuccessStatusCode)
                     {
                         var rString = await result.Content.ReadAsStringAsync();
-                        T _this = JsonConvert.DeserializeObject<T>(rString);
-                        this.CompanyId = _this.CompanyId;
+                        try
+                        {
+                            Entity<T> _this = JsonConvert.DeserializeObject<Entity<T>>(rString);
+                            this.Id = _this.Id;
+                        }catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        
                         MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
                         return true;
                     }
@@ -75,7 +82,7 @@ namespace JDE_Scanner_Desktop.Models
                     string url = Secrets.ApiAddress + $"Edit{typeof(T).Name}?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format(url, ID, RuntimeSettings.UserId), content);
+                    var result = await client.PutAsync(String.Format(url, this.Id, RuntimeSettings.UserId), content);
                     if (result.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Edycja zakończona powodzeniem!");

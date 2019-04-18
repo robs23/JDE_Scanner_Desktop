@@ -8,6 +8,7 @@ namespace JDE_Scanner_Desktop.Models
 {
     public class Part : Entity<Part>
     {
-        protected override int ID => throw new NotImplementedException();
+        public int PartId { get; set; }
+        public override int Id { set => value=PartId; get => PartId; }
     }
 }
