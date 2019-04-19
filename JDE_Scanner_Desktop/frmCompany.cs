@@ -97,7 +97,7 @@ namespace JDE_Scanner_Desktop
                 }
                 else if (mode == 2)
                 {
-                    //_this.Edit();
+                    _this.Edit();
                 }
             }catch(Exception ex)
             {

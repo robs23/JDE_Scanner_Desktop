@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public abstract class Entity<T>
+    public class Entity<T>
     {
         [Browsable(false)]
-        public abstract int Id { get; set; }
+        public virtual int Id { get; set; }
         [Browsable(false)]
         public int CreatedBy { get; set; }
         [DisplayName("Utworzył")]

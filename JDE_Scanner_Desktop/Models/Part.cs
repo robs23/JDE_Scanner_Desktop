@@ -8,7 +8,7 @@ namespace JDE_Scanner_Desktop.Models
 {
     public class Part : Entity<Part>
     {
-        public int PartId { get; set; }
-        public override int Id { set => value=PartId; get => PartId; }
+        //public int PartId { get; set; }
+        //public override int Id { set => value = PartId; get => PartId; }
     }
 }

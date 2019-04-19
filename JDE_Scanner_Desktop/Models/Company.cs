@@ -17,7 +17,10 @@ namespace JDE_Scanner_Desktop.Models
     {
         [DisplayName("ID")]
         public int CompanyId { get; set; }
-        public override int Id { set => value = CompanyId; get => CompanyId; }
+        public override int Id {
+            set => value = CompanyId;
+            get => CompanyId;
+        }
         [DisplayName("Nazwa")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pole nazwa nie może być puste!")]
         public string Name { get; set; }
