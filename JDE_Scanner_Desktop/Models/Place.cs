@@ -68,6 +68,7 @@ namespace JDE_Scanner_Desktop.Models
                         var rString = await result.Content.ReadAsStringAsync();
                         Place _this = JsonConvert.DeserializeObject<Place>(rString);
                         this.PlaceId = _this.PlaceId;
+                        this.PlaceToken = _this.PlaceToken;
                         MessageBox.Show("Tworzenie zasobu zakończone powodzeniem!");
                         return true;
                     }

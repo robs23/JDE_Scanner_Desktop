@@ -62,11 +62,13 @@
             this.txtUsedOn = new System.Windows.Forms.TextBox();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.pbQrCode = new System.Windows.Forms.PictureBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
             this.tlpSupplier.SuspendLayout();
             this.tlpProducer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -149,6 +151,7 @@
             this.tplTextboxes.Controls.Add(this.txtDestination, 1, 7);
             this.tplTextboxes.Controls.Add(this.txtAppliance, 1, 8);
             this.tplTextboxes.Controls.Add(this.txtUsedOn, 1, 9);
+            this.tplTextboxes.Controls.Add(this.pbQrCode, 1, 10);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 11;
@@ -452,6 +455,14 @@
             this.lblCreated.Text = "lblCreated";
             this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pbQrCode
+            // 
+            this.pbQrCode.Location = new System.Drawing.Point(123, 313);
+            this.pbQrCode.Name = "pbQrCode";
+            this.pbQrCode.Size = new System.Drawing.Size(100, 85);
+            this.pbQrCode.TabIndex = 25;
+            this.pbQrCode.TabStop = false;
+            // 
             // frmPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,6 +481,7 @@
             this.tplTextboxes.PerformLayout();
             this.tlpSupplier.ResumeLayout(false);
             this.tlpProducer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -508,5 +520,6 @@
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.TextBox txtAppliance;
         private System.Windows.Forms.TextBox txtUsedOn;
+        private System.Windows.Forms.PictureBox pbQrCode;
     }
 }

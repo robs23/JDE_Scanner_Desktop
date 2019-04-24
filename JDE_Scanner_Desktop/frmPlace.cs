@@ -96,7 +96,6 @@ namespace JDE_Scanner_Desktop
                 Looper.Show(this);
                 if (mode == 1)
                 {
-                    _this.PlaceToken = Utilities.uniqueToken();
                     _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
                     if(await _this.Add())

@@ -59,6 +59,16 @@ namespace JDE_Scanner_Desktop
 
         private async void SetComboboxes()
         {
+            //int sId;
+            //int pId;
+            //if (cmbProducer.SelectedItem != null)
+            //{
+            //    pId = (int)cmbProducer.SelectedValue;
+            //}
+            //if(cmbSupplier.SelectedItem != null)
+            //{
+            //    sId = (int)cmbSupplier.SelectedValue;
+            //}
             await producers.Refresh("TypeId=2");
             await suppliers.Refresh("TypeId=1");
             cmbProducer.DataSource = producers.Items;
@@ -144,6 +154,7 @@ namespace JDE_Scanner_Desktop
             Company item = new Company();
             item = producers.Items.Where(u => u.CompanyId == id).FirstOrDefault();
             frmCompany ItemForm = new frmCompany(item, this);
+            ItemForm.FormClosed += Company_FormClosed;
             ItemForm.Show();
         }
 
@@ -154,7 +165,17 @@ namespace JDE_Scanner_Desktop
             Company item = new Company();
             item = suppliers.Items.Where(u => u.CompanyId == id).FirstOrDefault();
             frmCompany ItemForm = new frmCompany(item, this);
+            ItemForm.FormClosed += Company_FormClosed;
             ItemForm.Show();
+        }
+
+        private void GenerateQrCode(string qrStr)
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrStr, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrImage = qrCode.GetGraphic(5);
+            pbQrCode.Image = qrImage;
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,17 +13,6 @@ namespace JDE_Scanner_Desktop.Static
 {
     static class Utilities
     {
-        public static string uniqueToken()
-        {
-            string token;
-            Guid g = Guid.NewGuid();
-            token = Convert.ToBase64String(g.ToByteArray());
-            token = token.Replace("=", "");
-            token = token.Replace("+", "");
-            token = token.Replace("/", "");
-            token = token.Replace("\\", "");
-            return token;
-        }
 
         public static string EnumString(Enum Tenum, int i)
         {
