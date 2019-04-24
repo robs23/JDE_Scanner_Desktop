@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class Entity<T>
+    public abstract class Entity<T>
     {
         [Browsable(false)]
-        public virtual int Id { get; set; }
+        public abstract int Id { get; set; }
         [Browsable(false)]
         public int CreatedBy { get; set; }
         [DisplayName("Utworzył")]
@@ -32,8 +32,10 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
+        [Browsable(false)]
+        public string AddedItem { get; set; }
 
-        public async Task<bool> Add()
+        public virtual async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -47,16 +49,7 @@ namespace JDE_Scanner_Desktop.Models
                     if (result.IsSuccessStatusCode)
                     {
                         var rString = await result.Content.ReadAsStringAsync();
-                        try
-                        {
-                            Entity<T> _this = JsonConvert.DeserializeObject<Entity<T>>(rString);
-                            this.Id = _this.Id;
-                        }catch(Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                        
-                        MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
+                        AddedItem = rString;
                         return true;
                     }
                     else
