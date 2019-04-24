@@ -75,6 +75,12 @@
     <Compile Include="frmActionTypes.Designer.cs">
       <DependentUpon>frmActionTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPart.Designer.cs">
+      <DependentUpon>frmPart.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmParts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,6 +265,9 @@
     <EmbeddedResource Include="frmActionTypes.resx">
       <DependentUpon>frmActionTypes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPart.resx">
+      <DependentUpon>frmPart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmParts.resx">
       <DependentUpon>frmParts.cs</DependentUpon>
     </EmbeddedResource>
@@ -369,6 +378,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\finish_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

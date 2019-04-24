@@ -46,24 +46,6 @@ namespace JDE_Scanner_Desktop.Models
         public string UsedOn { get; set; }
         [DisplayName("Token")]
         public string Token { get; set; }
-        [DisplayName("Typ")]
-        public string CompanyTypeName { get; set; }
-        [DisplayName("Ulica")]
-        public string Street { get; set; }
-        [DisplayName("Ulica2")]
-        public string Street2 { get; set; }
-        [DisplayName("Numer budynku")]
-        public string BuildingNo { get; set; }
-        [DisplayName("Numer lokalu")]
-        public string LocalNo { get; set; }
-        [DisplayName("Kod")]
-        public string ZipCode { get; set; }
-        [DisplayName("Miasto")]
-        public string City { get; set; }
-        [DisplayName("Kraj")]
-        public string Country { get; set; }
-        [Browsable(false)]
-        public int TypeId { get; set; }
 
         public async override Task<bool> Add()
         {

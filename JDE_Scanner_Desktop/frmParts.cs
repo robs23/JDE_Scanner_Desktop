@@ -45,8 +45,8 @@ namespace JDE_Scanner_Desktop
 
         private void Add(object sender, EventArgs e)
         {
-            frmCompany FrmCompany = new frmCompany(this);
-            FrmCompany.Show();
+            frmPart FrmPart = new frmPart(this);
+            FrmPart.Show();
         }
 
         private void View(object sender, EventArgs e)
@@ -56,8 +56,8 @@ namespace JDE_Scanner_Desktop
 
             Part item = new Part();
             item = Keeper.Items.Where(u => u.PartId == id).FirstOrDefault();
-            //frmPart ItemForm = new frmCompany(item, this);
-            //ItemForm.Show();
+            frmPart ItemForm = new frmPart(item, this);
+            ItemForm.Show();
         }
 
 
