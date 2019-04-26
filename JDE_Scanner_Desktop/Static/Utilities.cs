@@ -1,9 +1,11 @@
 ﻿using JDE_Scanner_Desktop.Models;
 using Newtonsoft.Json;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -115,6 +117,15 @@ namespace JDE_Scanner_Desktop.Static
 
             // replace all single quotes with double quotes
             return newColFilter.Replace("'", "\"");
+        }
+
+        public static Bitmap GetQR(string toCode, int size)
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(toCode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Bitmap qrImage = qrCode.GetGraphic(size);
+            return qrImage;
         }
 
     }
