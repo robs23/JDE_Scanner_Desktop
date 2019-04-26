@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -181,6 +182,32 @@ namespace JDE_Scanner_Desktop
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrImage = qrCode.GetGraphic(2);
             pbQrCode.Image = qrImage;
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            //print
+            printQrCode();
+        }
+
+        private void printQrCode()
+        {
+            PrintDialog pd = new PrintDialog();
+            PrintDocument doc = new PrintDocument();
+            doc.PrintPage += Doc_PrintPage;
+            pd.Document = doc;
+            if (pd.ShowDialog() == DialogResult.OK)
+            {
+                doc.Print();
+            }
+        }
+
+        private void Doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Bitmap bm = new Bitmap(590,590);
+            pbQrCode.DrawToBitmap(bm, new Rectangle(0, 0, 590,590));
+            e.Graphics.DrawImage(bm, 0, 0);
+            bm.Dispose();
         }
     }
 }

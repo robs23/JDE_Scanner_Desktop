@@ -33,6 +33,7 @@
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
             this.txtEAN = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
@@ -60,9 +61,9 @@
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.txtAppliance = new System.Windows.Forms.TextBox();
             this.txtUsedOn = new System.Windows.Forms.TextBox();
+            this.pbQrCode = new System.Windows.Forms.PictureBox();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.pbQrCode = new System.Windows.Forms.PictureBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -101,6 +102,7 @@
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 511F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
+            this.tlpButtons.Controls.Add(this.btnPrint, 1, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -122,6 +124,20 @@
             this.tooltip.SetToolTip(this.btnSave, "Zapisz zmiany..");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.Save);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Image = global::JDE_Scanner_Desktop.Properties.Resources.print_24;
+            this.btnPrint.Location = new System.Drawing.Point(43, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(34, 28);
+            this.btnPrint.TabIndex = 1;
+            this.tooltip.SetToolTip(this.btnPrint, "Drukuj QR..");
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // tplTextboxes
             // 
@@ -444,6 +460,14 @@
             this.txtUsedOn.Size = new System.Drawing.Size(465, 20);
             this.txtUsedOn.TabIndex = 24;
             // 
+            // pbQrCode
+            // 
+            this.pbQrCode.Location = new System.Drawing.Point(123, 313);
+            this.pbQrCode.Name = "pbQrCode";
+            this.pbQrCode.Size = new System.Drawing.Size(100, 85);
+            this.pbQrCode.TabIndex = 25;
+            this.pbQrCode.TabStop = false;
+            // 
             // lblCreated
             // 
             this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -454,14 +478,6 @@
             this.lblCreated.TabIndex = 2;
             this.lblCreated.Text = "lblCreated";
             this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pbQrCode
-            // 
-            this.pbQrCode.Location = new System.Drawing.Point(123, 313);
-            this.pbQrCode.Name = "pbQrCode";
-            this.pbQrCode.Size = new System.Drawing.Size(100, 85);
-            this.pbQrCode.TabIndex = 25;
-            this.pbQrCode.TabStop = false;
             // 
             // frmPart
             // 
@@ -521,5 +537,6 @@
         private System.Windows.Forms.TextBox txtAppliance;
         private System.Windows.Forms.TextBox txtUsedOn;
         private System.Windows.Forms.PictureBox pbQrCode;
+        private System.Windows.Forms.Button btnPrint;
     }
 }
