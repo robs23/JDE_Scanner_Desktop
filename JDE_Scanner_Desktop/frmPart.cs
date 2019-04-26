@@ -55,6 +55,10 @@ namespace JDE_Scanner_Desktop
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
             }
+            if (_this.Token != null)
+            {
+                GenerateQrCode(_this.Token);
+            }
         }
 
         private async void SetComboboxes()
@@ -117,6 +121,7 @@ namespace JDE_Scanner_Desktop
                     {
                         mode = 2;
                         this.Text = "Szczegóły części";
+                        GenerateQrCode(_this.Token);
                     }
                     
                 }
@@ -174,7 +179,7 @@ namespace JDE_Scanner_Desktop
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrStr, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrImage = qrCode.GetGraphic(5);
+            Bitmap qrImage = qrCode.GetGraphic(2);
             pbQrCode.Image = qrImage;
         }
     }
