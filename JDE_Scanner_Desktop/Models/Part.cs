@@ -46,6 +46,24 @@ namespace JDE_Scanner_Desktop.Models
         public string UsedOn { get; set; }
         [DisplayName("Token")]
         public string Token { get; set; }
+        [Browsable(false)]
+        public string Identifier { get
+            {
+                if (!string.IsNullOrEmpty(this.ProducentsCode))
+                {
+                    return this.ProducentsCode;
+                }else if (!string.IsNullOrEmpty(this.Symbol))
+                {
+                    return this.Symbol;
+                }else if (!string.IsNullOrEmpty(this.EAN))
+                {
+                    return this.EAN;
+                }
+                else
+                {
+                    return $"ID: {this.PartId}";
+                }
+            } }
 
         public async override Task<bool> Add()
         {

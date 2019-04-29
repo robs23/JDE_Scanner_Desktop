@@ -198,20 +198,21 @@ namespace JDE_Scanner_Desktop
             pd.Document = doc;
             if (pd.ShowDialog() == DialogResult.OK)
             {
+                doc.DefaultPageSettings.Landscape = false;
                 doc.Print();
             }
         }
 
         private void Doc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            Bitmap bm = Utilities.GetQR(_this.Token,3);
-            e.Graphics.DrawImage(bm, 0, 0);
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bicubic;
+            Bitmap bm = Utilities.GetQR(_this.Token, 3);
+            e.Graphics.DrawImage(bm, 30, 10);
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-            RectangleF rectF = new RectangleF(0, 120, 130, 50);
-            RectangleF rectFB = new RectangleF(20, 160, 130, 50);
+            RectangleF rectF = new RectangleF(10, 130, 150, 50);//part's name
+            RectangleF rectFB = new RectangleF(15, 170, 150, 50);//part's code
             e.Graphics.DrawString(_this.Name, new Font("Tahoma", 8), Brushes.Black, rectF);
-            e.Graphics.DrawString(_this.Symbol, new Font("Tahoma", 9, FontStyle.Bold),Brushes.Black,rectFB);
+            e.Graphics.DrawString(_this.Identifier, new Font("Tahoma", 9, FontStyle.Bold), Brushes.Black, rectFB);
             e.Graphics.Flush();
             bm.Dispose();
         }
