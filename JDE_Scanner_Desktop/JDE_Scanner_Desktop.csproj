@@ -75,11 +75,23 @@
     <Compile Include="frmActionTypes.Designer.cs">
       <DependentUpon>frmActionTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmBomItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBomItem.Designer.cs">
+      <DependentUpon>frmBomItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPart.Designer.cs">
       <DependentUpon>frmPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBoms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBoms.Designer.cs">
+      <DependentUpon>frmBoms.cs</DependentUpon>
     </Compile>
     <Compile Include="frmParts.cs">
       <SubType>Form</SubType>
@@ -228,6 +240,8 @@
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\ActionTypesKeeper.cs" />
     <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\Bom.cs" />
+    <Compile Include="Models\BomKeeper.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\Keeper.cs" />
     <Compile Include="Models\Company.cs" />
@@ -265,8 +279,14 @@
     <EmbeddedResource Include="frmActionTypes.resx">
       <DependentUpon>frmActionTypes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBomItem.resx">
+      <DependentUpon>frmBomItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPart.resx">
       <DependentUpon>frmPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBoms.resx">
+      <DependentUpon>frmBoms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmParts.resx">
       <DependentUpon>frmParts.cs</DependentUpon>
@@ -390,6 +410,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\print_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

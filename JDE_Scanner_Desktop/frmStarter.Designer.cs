@@ -60,7 +60,6 @@
             this.nowaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.bOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wgZasobuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zużycieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.wgZasobuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,6 +80,7 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wszystkieToolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -319,29 +319,23 @@
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
             // 
             // wszystkieToolStripMenuItem4
             // 
             this.wszystkieToolStripMenuItem4.Name = "wszystkieToolStripMenuItem4";
-            this.wszystkieToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.wszystkieToolStripMenuItem4.Size = new System.Drawing.Size(125, 22);
             this.wszystkieToolStripMenuItem4.Text = "Wszystkie";
             this.wszystkieToolStripMenuItem4.Click += new System.EventHandler(this.wszystkieToolStripMenuItem4_Click);
             // 
             // bOMToolStripMenuItem
             // 
             this.bOMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wgZasobuToolStripMenuItem});
+            this.wszystkieToolStripMenuItem9});
             this.bOMToolStripMenuItem.Name = "bOMToolStripMenuItem";
             this.bOMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bOMToolStripMenuItem.Text = "BOM";
-            // 
-            // wgZasobuToolStripMenuItem
-            // 
-            this.wgZasobuToolStripMenuItem.Name = "wgZasobuToolStripMenuItem";
-            this.wgZasobuToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.wgZasobuToolStripMenuItem.Text = "Wg zasobu";
             // 
             // zużycieToolStripMenuItem
             // 
@@ -491,6 +485,13 @@
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
             // 
+            // wszystkieToolStripMenuItem9
+            // 
+            this.wszystkieToolStripMenuItem9.Name = "wszystkieToolStripMenuItem9";
+            this.wszystkieToolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
+            this.wszystkieToolStripMenuItem9.Text = "Wszystkie";
+            this.wszystkieToolStripMenuItem9.Click += new System.EventHandler(this.wszystkieToolStripMenuItem9_Click);
+            // 
             // frmStarter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -543,7 +544,6 @@
         private System.Windows.Forms.ToolStripMenuItem nowaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem bOMToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wgZasobuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem firmyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zaopatrzenieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zamówieniaToolStripMenuItem;
@@ -564,5 +564,6 @@
         private System.Windows.Forms.ToolStripMenuItem firmyToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem nowaToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem9;
     }
 }
