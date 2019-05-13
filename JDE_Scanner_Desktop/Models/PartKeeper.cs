@@ -30,9 +30,13 @@ namespace JDE_Scanner_Desktop.Models
             if (pd.ShowDialog() == DialogResult.OK)
             {
                 doc.DefaultPageSettings.Landscape = false;
+                doc.DefaultPageSettings.PaperSize = new PaperSize("Etykieta", 400, 200);
+                doc.DefaultPageSettings.Margins = new Margins(0, 0, 0,0);
+                doc.OriginAtMargins = false;
+                pd.PrinterSettings.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
                 //doc.DefaultPageSettings.PaperSource = pd.PrinterSettings.DefaultPageSettings.PaperSource;
                 //string printerName = pd.PrinterSettings.PrinterName;
-                if(ids.Count > 1)
+                if (ids.Count > 1)
                 {
                     ToPrint[0] = aId[0];
                     ToPrint[1] = aId[1];

@@ -55,6 +55,8 @@ namespace JDE_Scanner_Desktop
             cmbPart.DataSource = parts.Items;
             cmbPart.DisplayMember = "Name";
             cmbPart.ValueMember = "PartId";
+            cmbPlace.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cmbPlace.AutoCompleteSource = AutoCompleteSource.ListItems;
             if (mode != 1)
             {
                 cmbPlace.SelectedIndex = cmbPlace.FindStringExact(_this.PlaceName);
