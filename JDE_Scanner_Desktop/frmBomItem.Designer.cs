@@ -223,6 +223,7 @@
             this.btnSearchPlace.TabIndex = 28;
             this.tooltip.SetToolTip(this.btnSearchPlace, "Wyszukaj..");
             this.btnSearchPlace.UseVisualStyleBackColor = true;
+            this.btnSearchPlace.Click += new System.EventHandler(this.btnSearchPlace_Click);
             // 
             // tlpPart
             // 
@@ -274,14 +275,14 @@
             this.label10.TabIndex = 28;
             this.label10.Text = "Część";
             // 
-            // frmBom
+            // frmBomItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 279);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmBom";
+            this.Name = "frmBomItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Szczegóły pozycji w bomie";
             this.Load += new System.EventHandler(this.FormLoaded);

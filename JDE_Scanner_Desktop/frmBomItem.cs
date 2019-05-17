@@ -103,5 +103,11 @@ namespace JDE_Scanner_Desktop
                 Looper.Hide();
             }
         }
+
+        private void btnSearchPlace_Click(object sender, EventArgs e)
+        {
+            frmResourceFinder ResourceFinder = new frmResourceFinder(this);
+            ResourceFinder.Show(this);
+        }
     }
 }

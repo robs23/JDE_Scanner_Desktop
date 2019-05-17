@@ -188,5 +188,11 @@ namespace JDE_Scanner_Desktop
             frmBoms FrmBoms = new frmBoms(this);
             FrmBoms.Show(this);
         }
+
+        private void nowaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPart FrmPart = new frmPart(this);
+            FrmPart.Show(this);
+        }
     }
 }

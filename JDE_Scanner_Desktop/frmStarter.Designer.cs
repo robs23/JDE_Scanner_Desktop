@@ -60,6 +60,7 @@
             this.nowaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.bOMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wszystkieToolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.zużycieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.wgZasobuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +81,6 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wszystkieToolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -293,7 +293,7 @@
             // historiaToolStripMenuItem1
             // 
             this.historiaToolStripMenuItem1.Name = "historiaToolStripMenuItem1";
-            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.historiaToolStripMenuItem1.Text = "Historia";
             this.historiaToolStripMenuItem1.Click += new System.EventHandler(this.historiaToolStripMenuItem1_Click);
             // 
@@ -319,13 +319,14 @@
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
+            this.nowaToolStripMenuItem.Click += new System.EventHandler(this.nowaToolStripMenuItem_Click);
             // 
             // wszystkieToolStripMenuItem4
             // 
             this.wszystkieToolStripMenuItem4.Name = "wszystkieToolStripMenuItem4";
-            this.wszystkieToolStripMenuItem4.Size = new System.Drawing.Size(125, 22);
+            this.wszystkieToolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
             this.wszystkieToolStripMenuItem4.Text = "Wszystkie";
             this.wszystkieToolStripMenuItem4.Click += new System.EventHandler(this.wszystkieToolStripMenuItem4_Click);
             // 
@@ -336,6 +337,13 @@
             this.bOMToolStripMenuItem.Name = "bOMToolStripMenuItem";
             this.bOMToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bOMToolStripMenuItem.Text = "BOM";
+            // 
+            // wszystkieToolStripMenuItem9
+            // 
+            this.wszystkieToolStripMenuItem9.Name = "wszystkieToolStripMenuItem9";
+            this.wszystkieToolStripMenuItem9.Size = new System.Drawing.Size(125, 22);
+            this.wszystkieToolStripMenuItem9.Text = "Wszystkie";
+            this.wszystkieToolStripMenuItem9.Click += new System.EventHandler(this.wszystkieToolStripMenuItem9_Click);
             // 
             // zużycieToolStripMenuItem
             // 
@@ -484,13 +492,6 @@
             this.wgCzęściToolStripMenuItem.Name = "wgCzęściToolStripMenuItem";
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
-            // 
-            // wszystkieToolStripMenuItem9
-            // 
-            this.wszystkieToolStripMenuItem9.Name = "wszystkieToolStripMenuItem9";
-            this.wszystkieToolStripMenuItem9.Size = new System.Drawing.Size(180, 22);
-            this.wszystkieToolStripMenuItem9.Text = "Wszystkie";
-            this.wszystkieToolStripMenuItem9.Click += new System.EventHandler(this.wszystkieToolStripMenuItem9_Click);
             // 
             // frmStarter
             // 
