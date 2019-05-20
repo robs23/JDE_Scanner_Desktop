@@ -47,7 +47,7 @@ namespace JDE_Scanner_Desktop
 
         private async void SetComboboxes()
         {
-            await places.Refresh();
+            await places.Refresh(null,'a');
             await parts.Refresh();
             cmbPlace.DataSource = places.Items;
             cmbPlace.DisplayMember = "Name";
@@ -106,8 +106,19 @@ namespace JDE_Scanner_Desktop
 
         private void btnSearchPlace_Click(object sender, EventArgs e)
         {
-            frmResourceFinder ResourceFinder = new frmResourceFinder(this);
-            ResourceFinder.Show(this);
+            using (frmResourceFinder ResourceFinder = new frmResourceFinder(this))
+            {
+                var res = ResourceFinder.ShowDialog(this);
+                if (res == DialogResult.OK)
+                {
+                    int? placeId = ResourceFinder.PlaceId;
+                    if (placeId != null)
+                    {
+                        cmbPlace.SelectedValue = placeId;
+                    }
+                }
+            }
+            
         }
     }
 }

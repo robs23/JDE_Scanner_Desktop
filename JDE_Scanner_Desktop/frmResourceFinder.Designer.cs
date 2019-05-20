@@ -34,7 +34,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.cmbSet = new System.Windows.Forms.ComboBox();
-            this.cmbResource = new System.Windows.Forms.ComboBox();
+            this.cmbPlace = new System.Windows.Forms.ComboBox();
             this.tlpMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +51,7 @@
             this.tlpMain.Controls.Add(this.label3, 0, 2);
             this.tlpMain.Controls.Add(this.cmbArea, 1, 0);
             this.tlpMain.Controls.Add(this.cmbSet, 1, 1);
-            this.tlpMain.Controls.Add(this.cmbResource, 1, 2);
+            this.tlpMain.Controls.Add(this.cmbPlace, 1, 2);
             this.tlpMain.Location = new System.Drawing.Point(3, 2);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
@@ -110,15 +110,16 @@
             this.cmbSet.Name = "cmbSet";
             this.cmbSet.Size = new System.Drawing.Size(336, 21);
             this.cmbSet.TabIndex = 4;
+            this.cmbSet.SelectedIndexChanged += new System.EventHandler(this.cmbSet_SelectedIndexChanged);
             // 
-            // cmbResource
+            // cmbPlace
             // 
-            this.cmbResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbResource.FormattingEnabled = true;
-            this.cmbResource.Location = new System.Drawing.Point(133, 84);
-            this.cmbResource.Name = "cmbResource";
-            this.cmbResource.Size = new System.Drawing.Size(336, 21);
-            this.cmbResource.TabIndex = 5;
+            this.cmbPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbPlace.FormattingEnabled = true;
+            this.cmbPlace.Location = new System.Drawing.Point(133, 84);
+            this.cmbPlace.Name = "cmbPlace";
+            this.cmbPlace.Size = new System.Drawing.Size(336, 21);
+            this.cmbPlace.TabIndex = 5;
             // 
             // frmResourceFinder
             // 
@@ -128,6 +129,7 @@
             this.Controls.Add(this.tlpMain);
             this.Name = "frmResourceFinder";
             this.Text = "Znajdź zasób";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmResourceFinder_FormClosing);
             this.Load += new System.EventHandler(this.frmResourceFinder_Load);
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
@@ -143,6 +145,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbArea;
         private System.Windows.Forms.ComboBox cmbSet;
-        private System.Windows.Forms.ComboBox cmbResource;
+        private System.Windows.Forms.ComboBox cmbPlace;
     }
 }
