@@ -34,6 +34,9 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.pgGeneral = new System.Windows.Forms.TabPage();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
             this.txtEAN = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
@@ -62,14 +65,26 @@
             this.txtAppliance = new System.Windows.Forms.TextBox();
             this.txtUsedOn = new System.Windows.Forms.TextBox();
             this.pbQrCode = new System.Windows.Forms.PictureBox();
-            this.lblCreated = new System.Windows.Forms.Label();
+            this.pgBoms = new System.Windows.Forms.TabPage();
+            this.tlpBoms = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpBomsControl = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRefreshBoms = new System.Windows.Forms.Button();
+            this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnRemove = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.pgGeneral.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
             this.tlpSupplier.SuspendLayout();
             this.tlpProducer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
+            this.pgBoms.SuspendLayout();
+            this.tlpBoms.SuspendLayout();
+            this.tlpBomsControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -80,8 +95,8 @@
             this.tlpMain.ColumnCount = 1;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.Controls.Add(this.tlpButtons, 0, 0);
-            this.tlpMain.Controls.Add(this.tplTextboxes, 0, 1);
             this.tlpMain.Controls.Add(this.lblCreated, 0, 2);
+            this.tlpMain.Controls.Add(this.tabControl, 0, 1);
             this.tlpMain.Location = new System.Drawing.Point(12, 12);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
@@ -89,7 +104,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(597, 477);
+            this.tlpMain.Size = new System.Drawing.Size(597, 500);
             this.tlpMain.TabIndex = 0;
             // 
             // tlpButtons
@@ -139,6 +154,41 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 478);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Controls.Add(this.pgGeneral);
+            this.tabControl.Controls.Add(this.pgBoms);
+            this.tabControl.Location = new System.Drawing.Point(3, 43);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(591, 424);
+            this.tabControl.TabIndex = 3;
+            // 
+            // pgGeneral
+            // 
+            this.pgGeneral.Controls.Add(this.tplTextboxes);
+            this.pgGeneral.Location = new System.Drawing.Point(4, 22);
+            this.pgGeneral.Name = "pgGeneral";
+            this.pgGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.pgGeneral.Size = new System.Drawing.Size(583, 398);
+            this.pgGeneral.TabIndex = 0;
+            this.pgGeneral.Text = "Ogólne";
+            this.pgGeneral.UseVisualStyleBackColor = true;
+            // 
             // tplTextboxes
             // 
             this.tplTextboxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -168,7 +218,7 @@
             this.tplTextboxes.Controls.Add(this.txtAppliance, 1, 8);
             this.tplTextboxes.Controls.Add(this.txtUsedOn, 1, 9);
             this.tplTextboxes.Controls.Add(this.pbQrCode, 1, 10);
-            this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
+            this.tplTextboxes.Location = new System.Drawing.Point(-4, 0);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 11;
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -182,8 +232,8 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tplTextboxes.Size = new System.Drawing.Size(591, 401);
-            this.tplTextboxes.TabIndex = 1;
+            this.tplTextboxes.Size = new System.Drawing.Size(591, 411);
+            this.tplTextboxes.TabIndex = 2;
             // 
             // txtEAN
             // 
@@ -468,22 +518,114 @@
             this.pbQrCode.TabIndex = 25;
             this.pbQrCode.TabStop = false;
             // 
-            // lblCreated
+            // pgBoms
             // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 455);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pgBoms.Controls.Add(this.tlpBoms);
+            this.pgBoms.Location = new System.Drawing.Point(4, 22);
+            this.pgBoms.Name = "pgBoms";
+            this.pgBoms.Padding = new System.Windows.Forms.Padding(3);
+            this.pgBoms.Size = new System.Drawing.Size(583, 398);
+            this.pgBoms.TabIndex = 1;
+            this.pgBoms.Text = "W zasobach";
+            this.pgBoms.UseVisualStyleBackColor = true;
+            // 
+            // tlpBoms
+            // 
+            this.tlpBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpBoms.ColumnCount = 1;
+            this.tlpBoms.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBoms.Controls.Add(this.tlpBomsControl, 0, 0);
+            this.tlpBoms.Controls.Add(this.dgvBoms, 0, 1);
+            this.tlpBoms.Location = new System.Drawing.Point(6, 6);
+            this.tlpBoms.Name = "tlpBoms";
+            this.tlpBoms.RowCount = 2;
+            this.tlpBoms.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tlpBoms.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBoms.Size = new System.Drawing.Size(571, 386);
+            this.tlpBoms.TabIndex = 0;
+            // 
+            // tlpBomsControl
+            // 
+            this.tlpBomsControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpBomsControl.ColumnCount = 4;
+            this.tlpBomsControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpBomsControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpBomsControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpBomsControl.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBomsControl.Controls.Add(this.btnAdd, 0, 0);
+            this.tlpBomsControl.Controls.Add(this.btnRemove, 1, 0);
+            this.tlpBomsControl.Controls.Add(this.btnRefreshBoms, 2, 0);
+            this.tlpBomsControl.Location = new System.Drawing.Point(3, 3);
+            this.tlpBomsControl.Name = "tlpBomsControl";
+            this.tlpBomsControl.RowCount = 1;
+            this.tlpBomsControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBomsControl.Size = new System.Drawing.Size(565, 29);
+            this.tlpBomsControl.TabIndex = 0;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Location = new System.Drawing.Point(3, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(144, 23);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Dodaj przypisanie";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnRefreshBoms
+            // 
+            this.btnRefreshBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefreshBoms.Image = global::JDE_Scanner_Desktop.Properties.Resources.Cloud_30;
+            this.btnRefreshBoms.Location = new System.Drawing.Point(303, 3);
+            this.btnRefreshBoms.Name = "btnRefreshBoms";
+            this.btnRefreshBoms.Size = new System.Drawing.Size(24, 23);
+            this.btnRefreshBoms.TabIndex = 2;
+            this.tooltip.SetToolTip(this.btnRefreshBoms, "Odśwież..");
+            this.btnRefreshBoms.UseVisualStyleBackColor = true;
+            this.btnRefreshBoms.Click += new System.EventHandler(this.btnRefreshBoms_Click);
+            // 
+            // dgvBoms
+            // 
+            this.dgvBoms.AllowUserToAddRows = false;
+            this.dgvBoms.AllowUserToDeleteRows = false;
+            this.dgvBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvBoms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBoms.Location = new System.Drawing.Point(3, 38);
+            this.dgvBoms.Name = "dgvBoms";
+            this.dgvBoms.ReadOnly = true;
+            this.dgvBoms.Size = new System.Drawing.Size(565, 345);
+            this.dgvBoms.TabIndex = 1;
+            this.dgvBoms.DoubleClick += new System.EventHandler(this.dgvBoms_DoubleClick);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Location = new System.Drawing.Point(153, 3);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(144, 23);
+            this.btnRemove.TabIndex = 1;
+            this.btnRemove.Text = "Usuń przypisanie";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // frmPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 501);
+            this.ClientSize = new System.Drawing.Size(621, 524);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPart";
@@ -493,11 +635,17 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.tlpButtons.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.pgGeneral.ResumeLayout(false);
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
             this.tlpSupplier.ResumeLayout(false);
             this.tlpProducer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
+            this.pgBoms.ResumeLayout(false);
+            this.tlpBoms.ResumeLayout(false);
+            this.tlpBomsControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -508,14 +656,17 @@
         private System.Windows.Forms.TableLayoutPanel tlpButtons;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolTip tooltip;
-        private System.Windows.Forms.TableLayoutPanel tplTextboxes;
         private System.Windows.Forms.Label lblCreated;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage pgGeneral;
+        private System.Windows.Forms.TableLayoutPanel tplTextboxes;
+        private System.Windows.Forms.TextBox txtEAN;
+        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblUlica;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtEAN;
-        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtProducersCode;
         private System.Windows.Forms.Label label1;
@@ -524,10 +675,10 @@
         private System.Windows.Forms.TextBox txtSymbol;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tlpSupplier;
-        private System.Windows.Forms.TableLayoutPanel tlpProducer;
         private System.Windows.Forms.ComboBox cmbSupplier;
         private System.Windows.Forms.Button btnAddSupplier;
         private System.Windows.Forms.Button btnEditSupplier;
+        private System.Windows.Forms.TableLayoutPanel tlpProducer;
         private System.Windows.Forms.ComboBox cmbProducer;
         private System.Windows.Forms.Button btnAddProducer;
         private System.Windows.Forms.Button btnEditProducer;
@@ -537,6 +688,12 @@
         private System.Windows.Forms.TextBox txtAppliance;
         private System.Windows.Forms.TextBox txtUsedOn;
         private System.Windows.Forms.PictureBox pbQrCode;
-        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.TabPage pgBoms;
+        private System.Windows.Forms.TableLayoutPanel tlpBoms;
+        private System.Windows.Forms.TableLayoutPanel tlpBomsControl;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.DataGridView dgvBoms;
+        private System.Windows.Forms.Button btnRefreshBoms;
+        private System.Windows.Forms.Button btnRemove;
     }
 }

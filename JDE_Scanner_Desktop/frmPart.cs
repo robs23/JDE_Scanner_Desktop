@@ -23,6 +23,7 @@ namespace JDE_Scanner_Desktop
         frmLooper Looper;
         CompaniesKeeper producers;
         CompaniesKeeper suppliers;
+        BomKeeper boms = new BomKeeper();
 
         public frmPart(Form parent)
         {
@@ -96,7 +97,23 @@ namespace JDE_Scanner_Desktop
             producers = new CompaniesKeeper();
             suppliers = new CompaniesKeeper();
             SetComboboxes();
+            if (mode > 1)
+            {
+                GetBoms();
+            }
+            else
+            {
+                btnAdd.Enabled = false;
+                btnRemove.Enabled = false;
+            }
             Looper.Hide();
+        }
+
+        private async void GetBoms()
+        {
+            await boms.Refresh($"PartId={_this.PartId}");
+            dgvBoms.DataSource = boms.Items;
+
         }
 
         private async void Save(object sender, EventArgs e)
@@ -123,6 +140,8 @@ namespace JDE_Scanner_Desktop
                         mode = 2;
                         this.Text = "Szczegóły części";
                         GenerateQrCode(_this.Token);
+                        btnAdd.Enabled = true;
+                        btnRemove.Enabled = true;
                     }
                     
                 }
@@ -192,6 +211,44 @@ namespace JDE_Scanner_Desktop
             List<int> lInt = new List<int>();
             lInt.Add(_this.PartId);
             partKeeper.PrintQR(lInt);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmBomItem form = new frmBomItem(this,_this.PartId,null);
+            form.Show(this);
+        }
+
+        private void btnRefreshBoms_Click(object sender, EventArgs e)
+        {
+            GetBoms();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (dgvBoms.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgvBoms.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgvBoms.SelectedRows[i].Cells[0].Value);
+                }
+                boms.Remove(SelectedRows);
+                GetBoms();
+            }
+        }
+
+        private void dgvBoms_DoubleClick(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dgvBoms.Rows[dgvBoms.CurrentCell.RowIndex].Cells[0].Value);
+            Bom item = new Bom();
+            item = boms.Items.Where(i => i.BomId == id).FirstOrDefault();
+            frmBomItem form = new frmBomItem(item,this);
+            form.Show(this);
         }
     }
 }

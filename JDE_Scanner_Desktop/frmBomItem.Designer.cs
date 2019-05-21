@@ -34,11 +34,10 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
-            this.txtEAN = new System.Windows.Forms.TextBox();
+            this.txtAmount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtProducersCode = new System.Windows.Forms.TextBox();
             this.tlpPlace = new System.Windows.Forms.TableLayoutPanel();
             this.cmbPlace = new System.Windows.Forms.ComboBox();
             this.btnSearchPlace = new System.Windows.Forms.Button();
@@ -46,7 +45,12 @@
             this.btnSearchPart = new System.Windows.Forms.Button();
             this.cmbPart = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.cmbUnit = new System.Windows.Forms.ComboBox();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtDFrom = new System.Windows.Forms.DateTimePicker();
+            this.txtDTo = new System.Windows.Forms.DateTimePicker();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -70,7 +74,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(597, 255);
+            this.tlpMain.Size = new System.Drawing.Size(597, 308);
             this.tlpMain.TabIndex = 0;
             // 
             // tlpButtons
@@ -113,14 +117,18 @@
             this.tplTextboxes.ColumnCount = 2;
             this.tplTextboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tplTextboxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplTextboxes.Controls.Add(this.txtEAN, 1, 2);
+            this.tplTextboxes.Controls.Add(this.txtAmount, 1, 2);
             this.tplTextboxes.Controls.Add(this.label2, 0, 0);
             this.tplTextboxes.Controls.Add(this.label4, 0, 2);
             this.tplTextboxes.Controls.Add(this.label5, 0, 3);
-            this.tplTextboxes.Controls.Add(this.txtProducersCode, 1, 3);
             this.tplTextboxes.Controls.Add(this.tlpPlace, 1, 0);
             this.tplTextboxes.Controls.Add(this.tlpPart, 1, 1);
             this.tplTextboxes.Controls.Add(this.label10, 0, 1);
+            this.tplTextboxes.Controls.Add(this.cmbUnit, 1, 3);
+            this.tplTextboxes.Controls.Add(this.label1, 0, 4);
+            this.tplTextboxes.Controls.Add(this.label3, 0, 5);
+            this.tplTextboxes.Controls.Add(this.txtDFrom, 1, 4);
+            this.tplTextboxes.Controls.Add(this.txtDTo, 1, 5);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 11;
@@ -135,16 +143,16 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tplTextboxes.Size = new System.Drawing.Size(591, 179);
+            this.tplTextboxes.Size = new System.Drawing.Size(591, 232);
             this.tplTextboxes.TabIndex = 1;
             // 
-            // txtEAN
+            // txtAmount
             // 
-            this.txtEAN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEAN.Location = new System.Drawing.Point(123, 75);
-            this.txtEAN.Name = "txtEAN";
-            this.txtEAN.Size = new System.Drawing.Size(465, 20);
-            this.txtEAN.TabIndex = 6;
+            this.txtAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAmount.Location = new System.Drawing.Point(123, 75);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(465, 20);
+            this.txtAmount.TabIndex = 6;
             // 
             // label2
             // 
@@ -175,14 +183,6 @@
             this.label5.Size = new System.Drawing.Size(114, 13);
             this.label5.TabIndex = 3;
             this.label5.Text = "Jednostka";
-            // 
-            // txtProducersCode
-            // 
-            this.txtProducersCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtProducersCode.Location = new System.Drawing.Point(123, 105);
-            this.txtProducersCode.Name = "txtProducersCode";
-            this.txtProducersCode.Size = new System.Drawing.Size(465, 20);
-            this.txtProducersCode.TabIndex = 7;
             // 
             // tlpPlace
             // 
@@ -275,11 +275,60 @@
             this.label10.TabIndex = 28;
             this.label10.Text = "Część";
             // 
+            // cmbUnit
+            // 
+            this.cmbUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbUnit.FormattingEnabled = true;
+            this.cmbUnit.Location = new System.Drawing.Point(123, 104);
+            this.cmbUnit.Name = "cmbUnit";
+            this.cmbUnit.Size = new System.Drawing.Size(465, 21);
+            this.cmbUnit.TabIndex = 29;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 138);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(114, 13);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Ważne od";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 171);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(114, 13);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "Ważne do";
+            // 
+            // txtDFrom
+            // 
+            this.txtDFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtDFrom.Location = new System.Drawing.Point(123, 135);
+            this.txtDFrom.Name = "txtDFrom";
+            this.txtDFrom.Size = new System.Drawing.Size(465, 20);
+            this.txtDFrom.TabIndex = 32;
+            this.txtDFrom.ValueChanged += new System.EventHandler(this.txtDFrom_ValueChanged);
+            // 
+            // txtDTo
+            // 
+            this.txtDTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtDTo.Location = new System.Drawing.Point(123, 167);
+            this.txtDTo.Name = "txtDTo";
+            this.txtDTo.Size = new System.Drawing.Size(465, 20);
+            this.txtDTo.TabIndex = 33;
+            this.txtDTo.ValueChanged += new System.EventHandler(this.txtDTo_ValueChanged);
+            // 
             // frmBomItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 279);
+            this.ClientSize = new System.Drawing.Size(621, 332);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmBomItem";
@@ -303,11 +352,10 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.TableLayoutPanel tplTextboxes;
-        private System.Windows.Forms.TextBox txtEAN;
+        private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtProducersCode;
         private System.Windows.Forms.TableLayoutPanel tlpPlace;
         private System.Windows.Forms.ComboBox cmbPlace;
         private System.Windows.Forms.Button btnSearchPlace;
@@ -315,5 +363,10 @@
         private System.Windows.Forms.Button btnSearchPart;
         private System.Windows.Forms.ComboBox cmbPart;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cmbUnit;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker txtDFrom;
+        private System.Windows.Forms.DateTimePicker txtDTo;
     }
 }

@@ -117,5 +117,15 @@ namespace JDE_Scanner_Desktop
         {
             MessageBox.Show("Brak implementacji");
         }
+
+        private void View(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
+
+            Bom item = new Bom();
+            item = Keeper.Items.Where(u => u.BomId == id).FirstOrDefault();
+            frmBomItem ItemForm = new frmBomItem(item, this);
+            ItemForm.Show();
+        }
     }
 }

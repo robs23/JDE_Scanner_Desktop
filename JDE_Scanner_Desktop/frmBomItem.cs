@@ -23,14 +23,19 @@ namespace JDE_Scanner_Desktop
         frmLooper Looper;
         PlacesKeeper places;
         PartKeeper parts;
+        public int? PlaceId { get; set; }
+        public int? PartId { get; set; }
+        UnitKeeper Units;
 
-        public frmBomItem(Form parent)
+        public frmBomItem(Form parent, int? partId=null, int? placeId=null)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 1;
             this.Text = "Nowy Bom";
+            this.PlaceId = placeId;
+            this.PartId = partId;
             _this = new Bom();
         }
 
@@ -45,7 +50,7 @@ namespace JDE_Scanner_Desktop
 
         }
 
-        private async void SetComboboxes()
+        private async Task SetComboboxes()
         {
             await places.Refresh(null,'a');
             await parts.Refresh();
@@ -57,11 +62,27 @@ namespace JDE_Scanner_Desktop
             cmbPart.ValueMember = "PartId";
             cmbPlace.AutoCompleteMode = AutoCompleteMode.Suggest;
             cmbPlace.AutoCompleteSource = AutoCompleteSource.ListItems;
+            if(this.PartId != null)
+            {
+                //part reference is given
+                cmbPart.SelectedValue = this.PartId;
+            }
+            if(this.PlaceId != null)
+            {
+                //placd reference is given
+                cmbPlace.SelectedValue = this.PlaceId;
+            }
+            Units = new UnitKeeper();
+            cmbUnit.DataSource = Units.Items;
+            cmbUnit.ValueMember = "ShortName";
+            cmbUnit.DisplayMember = "FullName";
+
             if (mode != 1)
             {
                 cmbPlace.SelectedIndex = cmbPlace.FindStringExact(_this.PlaceName);
                 cmbPart.SelectedIndex = cmbPart.FindStringExact(_this.PartName);
             }
+
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -70,7 +91,22 @@ namespace JDE_Scanner_Desktop
             Looper.Show(this);
             places = new PlacesKeeper();
             parts = new PartKeeper();
-            SetComboboxes();
+            await SetComboboxes();
+            txtDFrom.CustomFormat = " ";
+            txtDTo.CustomFormat = " ";
+            if (mode == 1)
+            {
+                txtDFrom.Value = DateTime.Today;
+            }
+            txtAmount.Text = _this.Amount.ToString();
+            if(_this.ValidFrom != null)
+            {
+                txtDFrom.Value = _this.ValidFrom.Value;
+            }
+            if (_this.ValidTo != null)
+            {
+                txtDTo.Value = _this.ValidTo.Value;
+            }
             Looper.Hide();
         }
 
@@ -79,21 +115,44 @@ namespace JDE_Scanner_Desktop
             try
             {
                 Looper.Show(this);
-                if (mode == 1)
+                _this.PartId = (int)cmbPart.SelectedValue;
+                _this.PlaceId = (int)cmbPlace.SelectedValue;
+                _this.Unit = cmbUnit.SelectedValue.ToString();
+                _this.ValidFrom = txtDFrom.Value;
+                if(txtDTo.Text == " ")
                 {
-                    _this.CreatedBy = RuntimeSettings.UserId;
-                    _this.CreatedOn = DateTime.Now;
-                    if(await _this.Add())
+                    _this.ValidTo = null;
+                }
+                else
+                {
+                    _this.ValidTo = txtDTo.Value;
+                }
+                float amount;
+                bool convertable = float.TryParse(txtAmount.Text, out amount);
+                if (convertable)
+                {
+                    _this.Amount = amount;
+                    if (mode == 1)
                     {
-                        mode = 2;
-                        this.Text = "Szczegóły pozycji w Bomie";
+                        _this.CreatedBy = RuntimeSettings.UserId;
+                        _this.CreatedOn = DateTime.Now;
+                        if (await _this.Add())
+                        {
+                            mode = 2;
+                            this.Text = "Szczegóły pozycji w Bomie";
+                        }
+
                     }
-                    
+                    else if (mode == 2)
+                    {
+                        _this.Edit();
+                    }
                 }
-                else if (mode == 2)
+                else
                 {
-                    _this.Edit();
+                    MessageBox.Show("Wartość w polu Ilość musi być liczbą!");
                 }
+                
             }catch(Exception ex)
             {
 
@@ -119,6 +178,18 @@ namespace JDE_Scanner_Desktop
                 }
             }
             
+        }
+
+        private void txtDFrom_ValueChanged(object sender, EventArgs e)
+        {
+            txtDFrom.CustomFormat = "yyyy-MM-dd";
+            txtDFrom.Format = DateTimePickerFormat.Custom;
+        }
+
+        private void txtDTo_ValueChanged(object sender, EventArgs e)
+        {
+            txtDTo.CustomFormat = "yyyy-MM-dd";
+            txtDTo.Format = DateTimePickerFormat.Custom;
         }
     }
 }

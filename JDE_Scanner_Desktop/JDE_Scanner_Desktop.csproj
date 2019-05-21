@@ -276,6 +276,8 @@
     <Compile Include="Models\AreasKeeper.cs" />
     <Compile Include="Models\Set.cs" />
     <Compile Include="Models\Tenant.cs" />
+    <Compile Include="Models\Unit.cs" />
+    <Compile Include="Models\UnitKeeper.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\PlacesKeeper.cs" />
     <Compile Include="Models\UsersKeeper.cs" />
@@ -428,6 +430,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cloud_30.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

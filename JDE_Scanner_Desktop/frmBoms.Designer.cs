@@ -156,6 +156,7 @@
             this.dgItems.TabIndex = 2;
             this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
             this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.View);
             // 
             // frmBoms
             // 
