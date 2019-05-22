@@ -34,6 +34,11 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnQR = new System.Windows.Forms.Button();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.pgGeneral = new System.Windows.Forms.TabPage();
+            this.pgBoms = new System.Windows.Forms.TabPage();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtNumber2 = new System.Windows.Forms.TextBox();
@@ -50,12 +55,22 @@
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.cmbSet = new System.Windows.Forms.ComboBox();
             this.pbQrCode = new System.Windows.Forms.PictureBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.tlpBom = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpBomButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAddBom = new System.Windows.Forms.Button();
+            this.btnRemoveBom = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.pgGeneral.SuspendLayout();
+            this.pgBoms.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
+            this.tlpBom.SuspendLayout();
+            this.tlpBomButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -66,8 +81,8 @@
             this.tlpMain.ColumnCount = 1;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.Controls.Add(this.tlpButtons, 0, 0);
-            this.tlpMain.Controls.Add(this.tplTextboxes, 0, 1);
             this.tlpMain.Controls.Add(this.lblCreated, 0, 2);
+            this.tlpMain.Controls.Add(this.tabControl, 0, 1);
             this.tlpMain.Location = new System.Drawing.Point(12, 12);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
@@ -116,7 +131,7 @@
             this.btnQR.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnQR.Image = ((System.Drawing.Image)(resources.GetObject("btnQR.Image")));
+            this.btnQR.Image = global::JDE_Scanner_Desktop.Properties.Resources.print_24;
             this.btnQR.Location = new System.Drawing.Point(43, 3);
             this.btnQR.Name = "btnQR";
             this.btnQR.Size = new System.Drawing.Size(34, 28);
@@ -124,6 +139,53 @@
             this.tooltip.SetToolTip(this.btnQR, "Drukuj QR kod..");
             this.btnQR.UseCompatibleTextRendering = true;
             this.btnQR.UseVisualStyleBackColor = true;
+            this.btnQR.Click += new System.EventHandler(this.btnQR_Click);
+            // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 455);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tabControl
+            // 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Controls.Add(this.pgGeneral);
+            this.tabControl.Controls.Add(this.pgBoms);
+            this.tabControl.Location = new System.Drawing.Point(3, 43);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(591, 401);
+            this.tabControl.TabIndex = 3;
+            // 
+            // pgGeneral
+            // 
+            this.pgGeneral.Controls.Add(this.tplTextboxes);
+            this.pgGeneral.Location = new System.Drawing.Point(4, 22);
+            this.pgGeneral.Name = "pgGeneral";
+            this.pgGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.pgGeneral.Size = new System.Drawing.Size(583, 375);
+            this.pgGeneral.TabIndex = 0;
+            this.pgGeneral.Text = "Ogólne";
+            this.pgGeneral.UseVisualStyleBackColor = true;
+            // 
+            // pgBoms
+            // 
+            this.pgBoms.Controls.Add(this.tlpBom);
+            this.pgBoms.Location = new System.Drawing.Point(4, 22);
+            this.pgBoms.Name = "pgBoms";
+            this.pgBoms.Padding = new System.Windows.Forms.Padding(3);
+            this.pgBoms.Size = new System.Drawing.Size(583, 375);
+            this.pgBoms.TabIndex = 1;
+            this.pgBoms.Text = "BOM";
+            this.pgBoms.UseVisualStyleBackColor = true;
             // 
             // tplTextboxes
             // 
@@ -138,7 +200,6 @@
             this.tplTextboxes.Controls.Add(this.label2, 0, 0);
             this.tplTextboxes.Controls.Add(this.label3, 0, 1);
             this.tplTextboxes.Controls.Add(this.label4, 0, 2);
-            this.tplTextboxes.Controls.Add(this.label5, 0, 3);
             this.tplTextboxes.Controls.Add(this.txtNumber1, 1, 0);
             this.tplTextboxes.Controls.Add(this.txtDescription, 1, 3);
             this.tplTextboxes.Controls.Add(this.label1, 0, 4);
@@ -148,7 +209,8 @@
             this.tplTextboxes.Controls.Add(this.cmbArea, 1, 4);
             this.tplTextboxes.Controls.Add(this.cmbSet, 1, 5);
             this.tplTextboxes.Controls.Add(this.pbQrCode, 1, 7);
-            this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
+            this.tplTextboxes.Controls.Add(this.label5, 0, 3);
+            this.tplTextboxes.Location = new System.Drawing.Point(-4, 0);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 8;
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -159,8 +221,8 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tplTextboxes.Size = new System.Drawing.Size(591, 401);
-            this.tplTextboxes.TabIndex = 1;
+            this.tplTextboxes.Size = new System.Drawing.Size(591, 388);
+            this.tplTextboxes.TabIndex = 2;
             // 
             // txtName
             // 
@@ -294,20 +356,101 @@
             // 
             this.pbQrCode.Location = new System.Drawing.Point(153, 213);
             this.pbQrCode.Name = "pbQrCode";
-            this.pbQrCode.Size = new System.Drawing.Size(204, 185);
+            this.pbQrCode.Size = new System.Drawing.Size(204, 172);
             this.pbQrCode.TabIndex = 14;
             this.pbQrCode.TabStop = false;
             // 
-            // lblCreated
+            // tlpBom
             // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 455);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tlpBom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpBom.ColumnCount = 1;
+            this.tlpBom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBom.Controls.Add(this.tlpBomButtons, 0, 0);
+            this.tlpBom.Controls.Add(this.dgvBoms, 0, 1);
+            this.tlpBom.Location = new System.Drawing.Point(0, 3);
+            this.tlpBom.Name = "tlpBom";
+            this.tlpBom.RowCount = 2;
+            this.tlpBom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tlpBom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBom.Size = new System.Drawing.Size(580, 372);
+            this.tlpBom.TabIndex = 0;
+            // 
+            // tlpBomButtons
+            // 
+            this.tlpBomButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpBomButtons.ColumnCount = 4;
+            this.tlpBomButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpBomButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tlpBomButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpBomButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBomButtons.Controls.Add(this.btnAddBom, 0, 0);
+            this.tlpBomButtons.Controls.Add(this.btnRemoveBom, 1, 0);
+            this.tlpBomButtons.Controls.Add(this.btnRefresh, 2, 0);
+            this.tlpBomButtons.Location = new System.Drawing.Point(3, 3);
+            this.tlpBomButtons.Name = "tlpBomButtons";
+            this.tlpBomButtons.RowCount = 1;
+            this.tlpBomButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBomButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBomButtons.Size = new System.Drawing.Size(574, 29);
+            this.tlpBomButtons.TabIndex = 0;
+            // 
+            // btnAddBom
+            // 
+            this.btnAddBom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddBom.Location = new System.Drawing.Point(3, 3);
+            this.btnAddBom.Name = "btnAddBom";
+            this.btnAddBom.Size = new System.Drawing.Size(144, 23);
+            this.btnAddBom.TabIndex = 1;
+            this.btnAddBom.Text = "Przypisz część";
+            this.tooltip.SetToolTip(this.btnAddBom, "Dodaje nową pozycję do BOMu zasobu..");
+            this.btnAddBom.UseVisualStyleBackColor = true;
+            this.btnAddBom.Click += new System.EventHandler(this.btnAddBom_Click);
+            // 
+            // btnRemoveBom
+            // 
+            this.btnRemoveBom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemoveBom.Location = new System.Drawing.Point(153, 3);
+            this.btnRemoveBom.Name = "btnRemoveBom";
+            this.btnRemoveBom.Size = new System.Drawing.Size(144, 23);
+            this.btnRemoveBom.TabIndex = 2;
+            this.btnRemoveBom.Text = "Usuń przypisanie";
+            this.tooltip.SetToolTip(this.btnRemoveBom, "Usuwa zaznaczone pozycje z BOMu zasobu..");
+            this.btnRemoveBom.UseVisualStyleBackColor = true;
+            this.btnRemoveBom.Click += new System.EventHandler(this.btnRemoveBom_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefresh.Image = global::JDE_Scanner_Desktop.Properties.Resources.Cloud_30;
+            this.btnRefresh.Location = new System.Drawing.Point(303, 3);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(24, 23);
+            this.btnRefresh.TabIndex = 3;
+            this.tooltip.SetToolTip(this.btnRefresh, "Odśwież..");
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // dgvBoms
+            // 
+            this.dgvBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvBoms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBoms.Location = new System.Drawing.Point(3, 38);
+            this.dgvBoms.Name = "dgvBoms";
+            this.dgvBoms.Size = new System.Drawing.Size(574, 331);
+            this.dgvBoms.TabIndex = 1;
             // 
             // frmPlace
             // 
@@ -323,9 +466,15 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.tlpButtons.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.pgGeneral.ResumeLayout(false);
+            this.pgBoms.ResumeLayout(false);
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
+            this.tlpBom.ResumeLayout(false);
+            this.tlpBomButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -336,14 +485,16 @@
         private System.Windows.Forms.TableLayoutPanel tlpButtons;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolTip tooltip;
-        private System.Windows.Forms.TableLayoutPanel tplTextboxes;
         private System.Windows.Forms.Label lblCreated;
+        private System.Windows.Forms.Button btnQR;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage pgGeneral;
+        private System.Windows.Forms.TableLayoutPanel tplTextboxes;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtNumber2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtNumber2;
         private System.Windows.Forms.TextBox txtNumber1;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label1;
@@ -352,7 +503,14 @@
         private System.Windows.Forms.TextBox txtPriority;
         private System.Windows.Forms.ComboBox cmbArea;
         private System.Windows.Forms.ComboBox cmbSet;
-        private System.Windows.Forms.Button btnQR;
         private System.Windows.Forms.PictureBox pbQrCode;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabPage pgBoms;
+        private System.Windows.Forms.TableLayoutPanel tlpBom;
+        private System.Windows.Forms.TableLayoutPanel tlpBomButtons;
+        private System.Windows.Forms.Button btnAddBom;
+        private System.Windows.Forms.Button btnRemoveBom;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DataGridView dgvBoms;
     }
 }

@@ -21,6 +21,7 @@ namespace JDE_Scanner_Desktop
         Place _this;
         AreasKeeper Areas = new AreasKeeper();
         SetsKeeper Sets = new SetsKeeper();
+        BomKeeper boms = new BomKeeper();
         frmLooper Looper;
 
         public frmPlace(Form parent)
@@ -73,6 +74,10 @@ namespace JDE_Scanner_Desktop
             cmbSet.ValueMember = "SetId";
             cmbArea.SelectedIndex = cmbArea.FindStringExact(_this.AreaName);
             cmbSet.SelectedIndex = cmbSet.FindStringExact(_this.SetName);
+            if (mode > 1)
+            {
+                GetBoms();
+            }
         }
 
         private async void Save(object sender, EventArgs e)
@@ -121,6 +126,13 @@ namespace JDE_Scanner_Desktop
                 
         }
 
+        private async void GetBoms()
+        {
+            await boms.Refresh($"PlaceId={_this.PlaceId}");
+            dgvBoms.DataSource = boms.Items;
+
+        }
+
         private void BringCombos()
         {
 
@@ -133,6 +145,45 @@ namespace JDE_Scanner_Desktop
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrImage = qrCode.GetGraphic(5);
             pbQrCode.Image = qrImage;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            GetBoms();
+        }
+
+        private void btnAddBom_Click(object sender, EventArgs e)
+        {
+            frmBomItem form = new frmBomItem(this, null, _this.PlaceId);
+            form.Show(this);
+        }
+
+        private void btnRemoveBom_Click(object sender, EventArgs e)
+        {
+            if (dgvBoms.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgvBoms.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgvBoms.SelectedRows[i].Cells[0].Value);
+                }
+                boms.Remove(SelectedRows);
+                GetBoms();
+            }
+        }
+
+        private void btnQR_Click(object sender, EventArgs e)
+        {
+            //print
+            PlacesKeeper placeKeeper = new PlacesKeeper();
+            placeKeeper.Items.Add(_this);
+            List<int> lInt = new List<int>();
+            lInt.Add(_this.PlaceId);
+            placeKeeper.PrintQR(lInt);
         }
     }
 }
