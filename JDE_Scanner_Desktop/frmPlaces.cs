@@ -1,4 +1,6 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using DgvFilterPopup;
+using FastMember;
+using JDE_Scanner_Desktop.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,14 @@ namespace JDE_Scanner_Desktop
             await Keeper.Refresh();
             dgItems.DataSource = null;
             dgItems.DataSource = Keeper.Items;
+            //DataTable table = new DataTable();
+            //using(var reader = ObjectReader.Create(Keeper.Items))
+            //{
+            //    table.Load(reader);
+            //}
+            //dgItems.DataSource = table;
+            //DgvFilterManager filterManager = new DgvFilterManager(dgItems);
+            //filterManager["Name "] = new DgvComboBoxColumnFilter();
             looper.Hide();
             page = 1;
         }
