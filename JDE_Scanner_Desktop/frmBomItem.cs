@@ -58,15 +58,11 @@ namespace JDE_Scanner_Desktop
             cmbPlace.DataSource = places.Items;
             cmbPlace.DisplayMember = "Name";
             cmbPlace.ValueMember = "PlaceId";
-            cmbPart.DataSource = parts.Items;
-            new AutoCompleteBehavior<Part>(this.cmbPart1);
-            //cmbPart1.Items.AddRange(new object[] { "John", "Tina", "Doctor", "Alaska" });
-            foreach (Part part in parts.Items)
-            {
-                cmbPart1.Items.Add(part);
-            }
-            cmbPart1.DisplayMember = "Name";
-            cmbPart1.ValueMember = "PartId";
+           //cmbPart.DataSource = parts.Items;
+            //cmbPart1.DataSource = parts.Items;
+            new AutoCompleteBehavior<Part>(this.cmbPart, parts.Items);
+            //cmbPart1.DisplayMember = "Name";
+            //cmbPart1.ValueMember = "PartId";
             cmbPart.DisplayMember = "Name";
             cmbPart.ValueMember = "PartId";
             cmbPlace.AutoCompleteMode = AutoCompleteMode.Suggest;

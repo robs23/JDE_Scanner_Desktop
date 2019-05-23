@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq.Dynamic;
 
 namespace JDE_Scanner_Desktop.Classes
 {
@@ -13,16 +14,30 @@ namespace JDE_Scanner_Desktop.Classes
         private readonly ComboBox comboBox;
         private string previousSearchterm;
 
-        private object[] originalList;
-        
+        private T[] originalList;
+        //private List<T> originalList;
 
-        public AutoCompleteBehavior(ComboBox comboBox)
+        public AutoCompleteBehavior(ComboBox comboBox, List<T>Items = null)
         {
             this.comboBox = comboBox;
             this.comboBox.AutoCompleteMode = AutoCompleteMode.Suggest; // crucial otherwise exceptions occur when the user types in text which is not found in the autocompletion list
             this.comboBox.TextChanged += this.OnTextChanged;
             this.comboBox.KeyPress += this.OnKeyPress;
             this.comboBox.SelectionChangeCommitted += this.OnSelectionChangeCommitted;
+            if (Items == null)
+            {
+                object[] items = this.comboBox.Items.Cast<object>().ToArray();
+                this.comboBox.DataSource = null;
+                this.comboBox.Items.AddRange(items);
+            }
+            else
+            {
+                object[] items = Items.Cast<object>().ToArray();
+                this.comboBox.DataSource = null;
+                this.comboBox.Items.AddRange(items);
+            }
+            
+            
         }
 
         private void OnSelectionChangeCommitted(object sender, EventArgs e)
@@ -34,7 +49,10 @@ namespace JDE_Scanner_Desktop.Classes
 
             var sel = this.comboBox.SelectedItem;
             this.ResetCompletionList();
-            this.comboBox.SelectedItem = sel;
+            comboBox.SelectedItem = sel;
+            string valueName = comboBox.ValueMember;
+            comboBox.ValueMember = "";
+            comboBox.SelectedValue = typeof(T).GetProperty(valueName).GetValue(sel);
         }
 
         private void OnTextChanged(object sender, EventArgs e)
@@ -77,7 +95,7 @@ namespace JDE_Scanner_Desktop.Classes
 
                 if (this.originalList == null)
                 {
-                    this.originalList = this.comboBox.Items.Cast<object>().ToArray();
+                    this.originalList = this.comboBox.Items.Cast<T>().ToArray();
                 }
 
                 if (this.comboBox.Items.Count == this.originalList.Length)
@@ -90,7 +108,7 @@ namespace JDE_Scanner_Desktop.Classes
                     this.comboBox.Items.RemoveAt(0);
                 }
 
-                this.comboBox.Items.AddRange(this.originalList);
+                this.comboBox.Items.AddRange(this.originalList.Cast<object>().ToArray());
             }
             finally
             {
@@ -113,10 +131,10 @@ namespace JDE_Scanner_Desktop.Classes
 
                 if (this.originalList == null)
                 {
-                    this.originalList = this.comboBox.Items.Cast<object>().ToArray(); // backup original list
+                    this.originalList = this.comboBox.Items.Cast<T>().ToArray(); // backup original list
                 }
 
-                object[] newList;
+                T[] newList;
                 if (string.IsNullOrEmpty(currentSearchterm))
                 {
                     if (this.comboBox.Items.Count == this.originalList.Length)
@@ -128,7 +146,8 @@ namespace JDE_Scanner_Desktop.Classes
                 }
                 else
                 {
-                    newList = this.originalList.Where(x => x.ToString().ToLowerInvariant().Contains(currentSearchterm)).ToArray();
+                    newList = this.originalList.Where($"{comboBox.DisplayMember}.Contains(@0)", currentSearchterm).ToArray();
+                    //newList = this.originalList.Where(x => x.ToString().ToLowerInvariant().Contains(currentSearchterm)).ToArray();
                 }
 
                 try
@@ -151,7 +170,7 @@ namespace JDE_Scanner_Desktop.Classes
                     }
                 }
 
-                this.comboBox.Items.AddRange(newList.ToArray()); // reset list
+                this.comboBox.Items.AddRange(newList.Cast<object>().ToArray()); // reset list
             }
             finally
             {

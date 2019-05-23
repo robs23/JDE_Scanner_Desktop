@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class rrComboBox : ComboBox
+    public partial class rrComboBox<T> : ComboBox
     {
         public rrComboBox()
         {
