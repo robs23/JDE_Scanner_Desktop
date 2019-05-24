@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Linq.Dynamic;
 
 namespace JDE_Scanner_Desktop.Static
 {
@@ -11,6 +13,19 @@ namespace JDE_Scanner_Desktop.Static
         public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
+        }
+
+        public static int GetSelectedValue<T>(this ComboBox combobox)
+        {
+            return (int)typeof(T).GetProperty(combobox.ValueMember).GetValue(combobox.SelectedItem);
+        }
+
+        public static void SetSelectedValue<T>(this ComboBox combobox, int? selectedValue)
+        {
+            if(selectedValue != null)
+            {
+                combobox.SelectedItem = combobox.Items.Cast<T>().Where(combobox.ValueMember + $"={selectedValue}").FirstOrDefault();
+            }
         }
     }
 }

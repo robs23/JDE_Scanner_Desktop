@@ -50,9 +50,6 @@ namespace JDE_Scanner_Desktop.Classes
             var sel = this.comboBox.SelectedItem;
             this.ResetCompletionList();
             comboBox.SelectedItem = sel;
-            string valueName = comboBox.ValueMember;
-            comboBox.ValueMember = "";
-            comboBox.SelectedValue = typeof(T).GetProperty(valueName).GetValue(sel);
         }
 
         private void OnTextChanged(object sender, EventArgs e)
@@ -146,7 +143,7 @@ namespace JDE_Scanner_Desktop.Classes
                 }
                 else
                 {
-                    newList = this.originalList.Where($"{comboBox.DisplayMember}.Contains(@0)", currentSearchterm).ToArray();
+                    newList = this.originalList.Where($"{comboBox.DisplayMember}.ToLower().Contains(@0)", currentSearchterm.ToLower()).ToArray();
                     //newList = this.originalList.Where(x => x.ToString().ToLowerInvariant().Contains(currentSearchterm)).ToArray();
                 }
 

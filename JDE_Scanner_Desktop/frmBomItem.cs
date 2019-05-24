@@ -70,7 +70,8 @@ namespace JDE_Scanner_Desktop
             if(this.PartId != null)
             {
                 //part reference is given
-                cmbPart.SelectedValue = this.PartId;
+                //cmbPart.SelectedValue = this.PartId;
+                cmbPart.SetSelectedValue<Part>(this.PartId);
             }
             if(this.PlaceId != null)
             {
@@ -120,7 +121,7 @@ namespace JDE_Scanner_Desktop
             try
             {
                 Looper.Show(this);
-                _this.PartId = (int)cmbPart.SelectedValue;
+                _this.PartId =cmbPart.GetSelectedValue<Part>();
                 _this.PlaceId = (int)cmbPlace.SelectedValue;
                 _this.Unit = cmbUnit.SelectedValue.ToString();
                 _this.ValidFrom = txtDFrom.Value;
