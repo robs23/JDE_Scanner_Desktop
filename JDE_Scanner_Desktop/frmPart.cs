@@ -1,4 +1,5 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Models;
 using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
 using QRCoder;
@@ -77,10 +78,10 @@ namespace JDE_Scanner_Desktop
             //}
             await producers.Refresh("TypeId=2");
             await suppliers.Refresh("TypeId=1");
-            cmbProducer.DataSource = producers.Items;
+            new AutoCompleteBehavior<Company>(cmbProducer, producers.Items);
             cmbProducer.DisplayMember = "Name";
             cmbProducer.ValueMember = "CompanyId";
-            cmbSupplier.DataSource = suppliers.Items;
+            new AutoCompleteBehavior<Company>(cmbSupplier, suppliers.Items);
             cmbSupplier.DisplayMember = "Name";
             cmbSupplier.ValueMember = "CompanyId";
             if (mode != 1)
@@ -126,8 +127,8 @@ namespace JDE_Scanner_Desktop
             _this.Destination = txtDestination.Text;
             _this.Appliance = txtAppliance.Text;
             _this.UsedOn = txtUsedOn.Text;
-            _this.ProducerId = Convert.ToInt32(cmbProducer.SelectedValue.ToString());
-            _this.SupplierId = Convert.ToInt32(cmbSupplier.SelectedValue.ToString());
+            _this.ProducerId = cmbProducer.GetSelectedValue<Company>();
+            _this.SupplierId = cmbSupplier.GetSelectedValue<Company>();
             try
             {
                 Looper.Show(this);
@@ -174,7 +175,7 @@ namespace JDE_Scanner_Desktop
 
         private void EditProducer(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(cmbProducer.SelectedValue);
+            int id = Convert.ToInt32(cmbProducer.GetSelectedValue<Company>());
 
             Company item = new Company();
             item = producers.Items.Where(u => u.CompanyId == id).FirstOrDefault();
@@ -185,7 +186,7 @@ namespace JDE_Scanner_Desktop
 
         private void EditSupplier(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(cmbSupplier.SelectedValue);
+            int id = Convert.ToInt32(cmbSupplier.GetSelectedValue<Company>());
 
             Company item = new Company();
             item = suppliers.Items.Where(u => u.CompanyId == id).FirstOrDefault();

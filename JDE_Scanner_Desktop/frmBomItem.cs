@@ -55,14 +55,10 @@ namespace JDE_Scanner_Desktop
         {
             await places.Refresh(null,'a');
             await parts.Refresh();
-            cmbPlace.DataSource = places.Items;
+            new AutoCompleteBehavior<Place>(this.cmbPlace, places.Items);
             cmbPlace.DisplayMember = "Name";
             cmbPlace.ValueMember = "PlaceId";
-           //cmbPart.DataSource = parts.Items;
-            //cmbPart1.DataSource = parts.Items;
             new AutoCompleteBehavior<Part>(this.cmbPart, parts.Items);
-            //cmbPart1.DisplayMember = "Name";
-            //cmbPart1.ValueMember = "PartId";
             cmbPart.DisplayMember = "Name";
             cmbPart.ValueMember = "PartId";
             cmbPlace.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -76,7 +72,7 @@ namespace JDE_Scanner_Desktop
             if(this.PlaceId != null)
             {
                 //placd reference is given
-                cmbPlace.SelectedValue = this.PlaceId;
+                cmbPlace.SetSelectedValue<Place>(this.PlaceId);
             }
             Units = new UnitKeeper();
             cmbUnit.DataSource = Units.Items;
@@ -122,7 +118,7 @@ namespace JDE_Scanner_Desktop
             {
                 Looper.Show(this);
                 _this.PartId =cmbPart.GetSelectedValue<Part>();
-                _this.PlaceId = (int)cmbPlace.SelectedValue;
+                _this.PlaceId = cmbPlace.GetSelectedValue<Place>();
                 _this.Unit = cmbUnit.SelectedValue.ToString();
                 _this.ValidFrom = txtDFrom.Value;
                 if(txtDTo.Text == " ")
@@ -179,7 +175,7 @@ namespace JDE_Scanner_Desktop
                     int? placeId = ResourceFinder.PlaceId;
                     if (placeId != null)
                     {
-                        cmbPlace.SelectedValue = placeId;
+                        cmbPlace.SetSelectedValue<Place>(placeId);
                     }
                 }
             }

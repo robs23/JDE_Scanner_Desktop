@@ -42,7 +42,6 @@
             this.cmbPlace = new System.Windows.Forms.ComboBox();
             this.btnSearchPlace = new System.Windows.Forms.Button();
             this.tlpPart = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSearchPart = new System.Windows.Forms.Button();
             this.cmbPart = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbUnit = new System.Windows.Forms.ComboBox();
@@ -230,31 +229,16 @@
             this.tlpPart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpPart.ColumnCount = 2;
+            this.tlpPart.ColumnCount = 1;
             this.tlpPart.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPart.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpPart.Controls.Add(this.btnSearchPart, 1, 0);
+            this.tlpPart.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpPart.Controls.Add(this.cmbPart, 0, 0);
             this.tlpPart.Location = new System.Drawing.Point(123, 38);
             this.tlpPart.Name = "tlpPart";
             this.tlpPart.RowCount = 1;
             this.tlpPart.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPart.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tlpPart.Size = new System.Drawing.Size(465, 29);
             this.tlpPart.TabIndex = 27;
-            // 
-            // btnSearchPart
-            // 
-            this.btnSearchPart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearchPart.Image = global::JDE_Scanner_Desktop.Properties.Resources.search_16;
-            this.btnSearchPart.Location = new System.Drawing.Point(438, 3);
-            this.btnSearchPart.Name = "btnSearchPart";
-            this.btnSearchPart.Size = new System.Drawing.Size(24, 23);
-            this.btnSearchPart.TabIndex = 29;
-            this.tooltip.SetToolTip(this.btnSearchPart, "Wyszukaj..");
-            this.btnSearchPart.UseVisualStyleBackColor = true;
             // 
             // cmbPart
             // 
@@ -262,7 +246,7 @@
             this.cmbPart.FormattingEnabled = true;
             this.cmbPart.Location = new System.Drawing.Point(3, 4);
             this.cmbPart.Name = "cmbPart";
-            this.cmbPart.Size = new System.Drawing.Size(429, 21);
+            this.cmbPart.Size = new System.Drawing.Size(459, 21);
             this.cmbPart.TabIndex = 30;
             // 
             // label10
@@ -360,7 +344,6 @@
         private System.Windows.Forms.ComboBox cmbPlace;
         private System.Windows.Forms.Button btnSearchPlace;
         private System.Windows.Forms.TableLayoutPanel tlpPart;
-        private System.Windows.Forms.Button btnSearchPart;
         private System.Windows.Forms.ComboBox cmbPart;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cmbUnit;
