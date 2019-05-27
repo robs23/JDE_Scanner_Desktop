@@ -53,7 +53,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpMain.Size = new System.Drawing.Size(433, 370);
+            this.tlpMain.Size = new System.Drawing.Size(484, 391);
             this.tlpMain.TabIndex = 0;
             // 
             // tlpButtons
@@ -66,28 +66,29 @@
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpButtons.Controls.Add(this.btnOK, 0, 0);
             this.tlpButtons.Controls.Add(this.btnClear, 1, 0);
-            this.tlpButtons.Location = new System.Drawing.Point(3, 333);
+            this.tlpButtons.Location = new System.Drawing.Point(3, 354);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tlpButtons.Size = new System.Drawing.Size(427, 34);
+            this.tlpButtons.Size = new System.Drawing.Size(478, 34);
             this.tlpButtons.TabIndex = 1;
             // 
             // btnOK
             // 
             this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnOK.Location = new System.Drawing.Point(69, 5);
+            this.btnOK.Location = new System.Drawing.Point(82, 5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnClear
             // 
             this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnClear.Location = new System.Drawing.Point(282, 5);
+            this.btnClear.Location = new System.Drawing.Point(321, 5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 1;
@@ -102,21 +103,21 @@
             this.tlpItems.AutoScroll = true;
             this.tlpItems.ColumnCount = 4;
             this.tlpItems.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpItems.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpItems.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
             this.tlpItems.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpItems.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpItems.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 19F));
             this.tlpItems.Location = new System.Drawing.Point(3, 23);
             this.tlpItems.Name = "tlpItems";
             this.tlpItems.RowCount = 1;
             this.tlpItems.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 304F));
-            this.tlpItems.Size = new System.Drawing.Size(427, 304);
+            this.tlpItems.Size = new System.Drawing.Size(478, 325);
             this.tlpItems.TabIndex = 2;
             // 
             // frmFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 369);
+            this.ClientSize = new System.Drawing.Size(487, 390);
             this.Controls.Add(this.tlpMain);
             this.Name = "frmFilter";
             this.Text = "Konfiguracja filtra";

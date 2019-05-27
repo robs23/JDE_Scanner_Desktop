@@ -132,28 +132,28 @@ namespace JDE_Scanner_Desktop
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            Filter Filter = new Filter();
-            List<FilterRow> Rows = new List<FilterRow>();
-            for (int i = 0; i < 12; i++)
-            {
-                Rows.Clear();
-                for (int x = 0; x < 20; x++)
-                {
-                    FilterRow Row = new FilterRow
-                    {
-                        ValueMember = x,
-                        DisplayMember = "Wiersz" + x
-                    };
-                    Rows.Add(Row);
-                }
+            //Filter Filter = new Filter();
+            //List<FilterRow> Rows = new List<FilterRow>();
+            //for (int i = 0; i < 12; i++)
+            //{
+            //    Rows.Clear();
+            //    for (int x = 0; x < 20; x++)
+            //    {
+            //        FilterRow Row = new FilterRow
+            //        {
+            //            ValueMember = x,
+            //            DisplayMember = "Wiersz" + x
+            //        };
+            //        Rows.Add(Row);
+            //    }
                 
-                FilterColumn Column = new FilterColumn(Rows, Filter, "Kolumna" + i);
+            //    FilterColumn Column = new FilterColumn(Rows, Filter, FilterColumnValueType.Text, "Kolumna" + i);
                 
-            }
-            FilterColumn column = new FilterColumn("Length", Filter);
-            column = new FilterColumn("Height", Filter);
-            column = new FilterColumn("Depth", Filter);
-            frmFilter FrmFilter = new frmFilter(this, Filter);
+            //}
+            //FilterColumn column = new FilterColumn("Length", Filter, FilterColumnValueType.Number);
+            //column = new FilterColumn("Height", Filter, FilterColumnValueType.Number);
+            //column = new FilterColumn("Depth", Filter, FilterColumnValueType.Number);
+            frmFilter FrmFilter = new frmFilter(this, dgItems);
             FrmFilter.Show();
         }
     }

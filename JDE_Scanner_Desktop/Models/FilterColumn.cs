@@ -11,15 +11,18 @@ namespace JDE_Scanner_Desktop.Models
     {
         public string Name { get; set; }
         public string Text { get; set; }
+        public int Ordinal { get; set; } //place on the list of filter columns
         public FilterColumnType Type { get; set; }
+        public FilterColumnValueType ValueType { get; set; }
         public List<FilterRow> Items { get; set; }
+        public object Value { get; set; }
         public object Selected { get; set; }
-        public FilterColumnOptionType OptionType { get; set; }
         public Filter Filter { get; set; }
 
-        public FilterColumn(object val, Filter filter, string name = null)
+        public FilterColumn(object val, Filter filter, FilterColumnValueType valueType, int ordinal, string name = null)
         {
             Filter = filter;
+            Ordinal = ordinal;
             if (name == null)
             {
                 Name = (string)val;
@@ -41,6 +44,7 @@ namespace JDE_Scanner_Desktop.Models
             {
                 Items = null;
                 Type = FilterColumnType.Value;
+                ValueType = valueType;
             }
             Filter.Columns.Add(this);
         }
@@ -59,14 +63,11 @@ namespace JDE_Scanner_Desktop.Models
         Value,
         List
     }
-    public enum FilterColumnOptionType
+
+    public enum FilterColumnValueType
     {
-        Contain,
-        DoesntContain,
-        SmallerOrEqual,
-        Smaller,
-        Equal,
-        Greater,
-        GreaterOrEqual
+        Text,
+        Number,
+        Date
     }
 }

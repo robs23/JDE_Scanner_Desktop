@@ -125,7 +125,6 @@
             this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFilter.Enabled = false;
             this.btnFilter.Image = global::JDE_Scanner_Desktop.Properties.Resources.icon_filter_off;
             this.btnFilter.Location = new System.Drawing.Point(323, 3);
             this.btnFilter.Name = "btnFilter";
@@ -133,7 +132,6 @@
             this.btnFilter.TabIndex = 3;
             this.tooltip.SetToolTip(this.btnFilter, "Konfiguracja filtra..");
             this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Visible = false;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // dFrom
