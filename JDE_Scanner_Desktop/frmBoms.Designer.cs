@@ -38,6 +38,7 @@
             this.btnPrint = new System.Windows.Forms.Button();
             this.dgItems = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnFilter = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -65,21 +66,18 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 5;
+            this.tlpButtons.ColumnCount = 6;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 405F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpButtons.Controls.Add(this.btnAdd, 0, 0);
             this.tlpButtons.Controls.Add(this.btnDelete, 1, 0);
             this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
-            this.tlpButtons.Controls.Add(this.btnPrint, 3, 0);
+            this.tlpButtons.Controls.Add(this.btnPrint, 4, 0);
+            this.tlpButtons.Controls.Add(this.btnFilter, 3, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -136,7 +134,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPrint.Image = global::JDE_Scanner_Desktop.Properties.Resources.print_24;
-            this.btnPrint.Location = new System.Drawing.Point(123, 3);
+            this.btnPrint.Location = new System.Drawing.Point(163, 3);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(34, 28);
             this.btnPrint.TabIndex = 3;
@@ -157,6 +155,20 @@
             this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
             this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
             this.dgItems.DoubleClick += new System.EventHandler(this.View);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilter.Image = global::JDE_Scanner_Desktop.Properties.Resources.icon_filter_off;
+            this.btnFilter.Location = new System.Drawing.Point(123, 3);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(34, 28);
+            this.btnFilter.TabIndex = 4;
+            this.tooltip.SetToolTip(this.btnFilter, "Konfiguracja filtra..");
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // frmBoms
             // 
@@ -186,6 +198,7 @@
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.DataGridView dgItems;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
 

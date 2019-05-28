@@ -53,7 +53,7 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async Task Refresh(string query = null)
+        public async Task Refresh(string query = null, char type='p')
         {
             if (Items.Any())
             {
@@ -62,11 +62,24 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                string url = Secrets.ApiAddress + $"Get{PluralizedObjectName}?token=" + Secrets.TenantToken + "&page=1";
+                string url = Secrets.ApiAddress + $"Get{PluralizedObjectName}?token=" + Secrets.TenantToken;
+                if (type == 'p')
+                {
+                    url += "&page=1";
+                }
                 if (query != null)
                 {
                     url += "&query=" + query;
+                    if (this.FilterString != null)
+                    {
+                        url += "AND " + this.FilterString;
+                    }
                 }
+                else
+                {
+                    url += "&query=" + this.FilterString;
+                }
+
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

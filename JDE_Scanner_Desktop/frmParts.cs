@@ -18,6 +18,7 @@ namespace JDE_Scanner_Desktop
         PartKeeper Keeper = new PartKeeper();
         frmLooper looper;
         int page;
+        frmFilter FrmFilter;
 
         public frmParts(frmStarter parent)
         {
@@ -138,6 +139,32 @@ namespace JDE_Scanner_Desktop
                     SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
                 }
                 Keeper.PrintQR(SelectedRows);
+            }
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            if (FrmFilter == null)
+            {
+                FrmFilter = new frmFilter(this, dgItems, Keeper);
+            }
+
+            var res = FrmFilter.ShowDialog(this);
+            if (res == DialogResult.OK)
+            {
+                //Filter has been applied
+                if (!string.IsNullOrEmpty(FrmFilter.FilterString))
+                {
+                    btnFilter.Image = JDE_Scanner_Desktop.Properties.Resources.icon_filter_on;
+                }
+                Reload();
+            }
+            else if (res == DialogResult.Cancel)
+            {
+                btnFilter.Image = JDE_Scanner_Desktop.Properties.Resources.icon_filter_off;
+                Reload();
+                FrmFilter.Dispose();
+                FrmFilter = null;
             }
         }
     }

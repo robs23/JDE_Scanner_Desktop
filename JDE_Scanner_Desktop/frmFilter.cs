@@ -120,6 +120,13 @@ namespace JDE_Scanner_Desktop
             _this = Filter;
         }
 
+        public frmFilter(Filter Filter)
+        {
+            InitializeComponent();
+            _this = Filter;
+        }
+
+
         public frmFilter(Form parent, DataGridView dg, IKeptable keeper)
         {
             InitializeComponent();

@@ -142,7 +142,10 @@ namespace JDE_Scanner_Desktop
             if (res == DialogResult.OK)
             {
                 //Filter has been applied
-                btnFilter.Image = JDE_Scanner_Desktop.Properties.Resources.icon_filter_on;
+                if (!string.IsNullOrEmpty(FrmFilter.FilterString))
+                {
+                    btnFilter.Image = JDE_Scanner_Desktop.Properties.Resources.icon_filter_on;
+                }
                 Reload();
             }
             else if(res == DialogResult.Cancel)
