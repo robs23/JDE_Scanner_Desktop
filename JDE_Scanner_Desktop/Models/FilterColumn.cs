@@ -30,7 +30,7 @@ namespace JDE_Scanner_Desktop.Models
             }
             else
             {
-                Name = name;
+                Name = val.ToString();
                 Text = name;
             }
 

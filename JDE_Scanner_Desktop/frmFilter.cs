@@ -23,43 +23,91 @@ namespace JDE_Scanner_Desktop
 
                 foreach (FilterColumn col in _this.Columns)
                 {
-                    if (col.Ordinal > 0)
+                    ComboBox cmb = (ComboBox)this.Controls.Find($"cmbOptions{col.Ordinal}", true).FirstOrDefault();
+                    Control val = this.Controls.Find(col.Name, true).FirstOrDefault();
+
+                    if (col.Ordinal > 0 && (!string.IsNullOrEmpty(val.Text) && val.Text != " " ))
                     {
-                        res += " AND ";
+                        if(res.Length > 0) { res += " AND "; }
                     }
                     if (col.ValueType == FilterColumnValueType.Number)
                     {
-                        ComboBox cmb = (ComboBox)this.Controls.Find($"cmbOptions{col.Ordinal}",true).FirstOrDefault();
-                        TextBox val = (TextBox)this.Controls.Find(col.Name, true).FirstOrDefault();
-
-                        if (cmb.SelectedValue == "Mniejsze lub równe niż")
+                        val = (TextBox)this.Controls.Find(col.Name, true).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(val.Text))
                         {
-                            option = "<=";
-                        }else if (cmb.SelectedValue == "Mniejsze niż")
-                        {
-                            option = "<";
+                            if (cmb.SelectedIndex == 0)
+                            {
+                                option = "<=";
+                            }
+                            else if (cmb.SelectedIndex == 1)
+                            {
+                                option = "<";
+                            }
+                            else if (cmb.SelectedIndex == 2)
+                            {
+                                option = "=";
+                            }
+                            else if (cmb.SelectedIndex == 3)
+                            {
+                                option = "<>";
+                            }
+                            else if (cmb.SelectedIndex == 4)
+                            {
+                                option = ">";
+                            }
+                            else if (cmb.SelectedIndex == 5)
+                            {
+                                option = ">=";
+                            }
+                            res += $"{col.Name}{option}{val.Text}";
                         }
-                        else if (cmb.SelectedValue == "Jest równe")
+                    }
+                    else if (col.ValueType == FilterColumnValueType.Date)
+                    {
+                        val = (DateTimePicker)this.Controls.Find(col.Name, true).FirstOrDefault();
+                        if (val.Text != " ")
                         {
-                            option = "=";
+                            if (cmb.SelectedIndex == 0)
+                            {
+                                option = "=";
+                                res += $"{col.Name}.Value.Year=={((DateTimePicker)val).Value.Year} && {col.Name}.Value.Month=={((DateTimePicker)val).Value.Month} && {col.Name}.Value.Day=={((DateTimePicker)val).Value.Day}";
+                            }
+                            else if (cmb.SelectedIndex == 1)
+                            {
+                                option = "<";
+                                res += $"{col.Name}{option}DateTime({((DateTimePicker)val).Value.Year},{((DateTimePicker)val).Value.Month},{((DateTimePicker)val).Value.Day})";
+                            }
+                            else if (cmb.SelectedIndex == 2)
+                            {
+                                option = ">";
+                                res += $"{col.Name}{option}DateTime({((DateTimePicker)val).Value.Year},{((DateTimePicker)val).Value.Month},{((DateTimePicker)val).Value.Day})";
+                            }
                         }
-                        else if (cmb.SelectedValue == "Jest różne od")
+                    }
+                    else if (col.ValueType == FilterColumnValueType.Text)
+                    {
+                        val = (TextBox)this.Controls.Find(col.Name, true).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(val.Text))
                         {
-                            option = "<>";
+                            if (cmb.SelectedIndex == 0)
+                            {
+                                res += $"{col.Name}={val.Text}";
+                            }
+                            else if (cmb.SelectedIndex == 1)
+                            {
+                                res += $"{col.Name}<>{val.Text}";
+                            }
+                            else if (cmb.SelectedIndex == 2)
+                            {
+                                res += $"{col.Name}.ToLower().Consists({val.Text})";
+                            }
+                            else if (cmb.SelectedIndex == 3)
+                            {
+                                res += $"!{col.Name}.ToLower().Consists({val.Text})";
+                            }
                         }
-                        else if (cmb.SelectedValue == "Większe niż")
-                        {
-                            option = ">=";
-                        }else if (cmb.SelectedValue == "Większe lub równe niż")
-                        {
-                            option = ">=";
-                        }
-
-                        res += $"{col.Name}{option}{val.Text}";
                     }
                 }
-                
-
                 return res;
             }
         }
@@ -113,7 +161,7 @@ namespace JDE_Scanner_Desktop
                     
 
                     Label nLabel = new Label();
-                    nLabel.Text = col.Name;
+                    nLabel.Text = col.Text;
                     tlpItems.Controls.Add(nLabel, 0, rowIndex);
                     nLabel.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
                     List<string> Options = new List<string>();
