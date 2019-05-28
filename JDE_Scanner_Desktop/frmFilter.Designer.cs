@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFilter));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnOK = new System.Windows.Forms.Button();
@@ -94,6 +95,7 @@
             this.btnClear.TabIndex = 1;
             this.btnClear.Text = "Wyczyść";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // tlpItems
             // 
@@ -109,7 +111,7 @@
             this.tlpItems.Location = new System.Drawing.Point(3, 23);
             this.tlpItems.Name = "tlpItems";
             this.tlpItems.RowCount = 1;
-            this.tlpItems.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 304F));
+            this.tlpItems.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 325F));
             this.tlpItems.Size = new System.Drawing.Size(478, 325);
             this.tlpItems.TabIndex = 2;
             // 
@@ -118,7 +120,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 390);
+            this.ControlBox = false;
             this.Controls.Add(this.tlpMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmFilter";
             this.Text = "Konfiguracja filtra";
             this.Load += new System.EventHandler(this.frmFilter_Load);

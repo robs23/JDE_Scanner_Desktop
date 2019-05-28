@@ -10,9 +10,10 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class LogsKeeper
+    public class LogsKeeper : IKeptable
     {
         public List<Log> Items { get; set; }
+        public string FilterString { get; set; } = null;
 
         public LogsKeeper()
         {
@@ -55,7 +56,10 @@ namespace JDE_Scanner_Desktop.Models
             {
 
                 string url = Secrets.ApiAddress + "GetLogs?token=" + Secrets.TenantToken + "&page=" + 1;
-
+                if (!string.IsNullOrEmpty(FilterString))
+                {
+                    url += "&query=" + FilterString;
+                }
                 
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
@@ -74,6 +78,11 @@ namespace JDE_Scanner_Desktop.Models
             using (var client = new HttpClient())
             {
                 string url = Secrets.ApiAddress + "GetLogs?token=" + Secrets.TenantToken + "&page=" + page;
+                if (!string.IsNullOrEmpty(FilterString))
+                {
+                    url += "&query=" + FilterString;
+                }
+
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)

@@ -14,6 +14,8 @@ namespace JDE_Scanner_Desktop
     public partial class frmFilter : Form
     {
         Filter _this;
+        IKeptable Keeper;
+
         public string FilterString
         {
             get
@@ -70,7 +72,7 @@ namespace JDE_Scanner_Desktop
                             if (cmb.SelectedIndex == 0)
                             {
                                 option = "=";
-                                res += $"{col.Name}.Value.Year=={((DateTimePicker)val).Value.Year} && {col.Name}.Value.Month=={((DateTimePicker)val).Value.Month} && {col.Name}.Value.Day=={((DateTimePicker)val).Value.Day}";
+                                res += $"{col.Name}.Value.Year=={((DateTimePicker)val).Value.Year} AND {col.Name}.Value.Month=={((DateTimePicker)val).Value.Month} AND {col.Name}.Value.Day=={((DateTimePicker)val).Value.Day}";
                             }
                             else if (cmb.SelectedIndex == 1)
                             {
@@ -91,19 +93,19 @@ namespace JDE_Scanner_Desktop
                         {
                             if (cmb.SelectedIndex == 0)
                             {
-                                res += $"{col.Name}={val.Text}";
+                                res += $"{col.Name}=\"{val.Text}\"";
                             }
                             else if (cmb.SelectedIndex == 1)
                             {
-                                res += $"{col.Name}<>{val.Text}";
+                                res += $"{col.Name}<>\"{val.Text}\"";
                             }
                             else if (cmb.SelectedIndex == 2)
                             {
-                                res += $"{col.Name}.ToLower().Consists({val.Text})";
+                                res += $"{col.Name}.ToLower().Contains(\"{val.Text}\")";
                             }
                             else if (cmb.SelectedIndex == 3)
                             {
-                                res += $"!{col.Name}.ToLower().Consists({val.Text})";
+                                res += $"!{col.Name}.ToLower().Contains(\"{val.Text}\")";
                             }
                         }
                     }
@@ -118,11 +120,12 @@ namespace JDE_Scanner_Desktop
             _this = Filter;
         }
 
-        public frmFilter(Form parent, DataGridView dg)
+        public frmFilter(Form parent, DataGridView dg, IKeptable keeper)
         {
             InitializeComponent();
             //Let's create filter columns based on given data grid view
             _this = new Filter();
+            Keeper = keeper;
             int i = 0;
 
             foreach(DataGridViewColumn col in dg.Columns)
@@ -142,23 +145,20 @@ namespace JDE_Scanner_Desktop
                 FilterColumn nCol = new FilterColumn(col.Name, _this, cType, i, col.HeaderText);
                 i++;
             }
-        }
 
-        private void frmFilter_Load(object sender, EventArgs e)
-        {
-            if(_this != null && _this.Columns.Any())
+            if (_this != null && _this.Columns.Any())
             {
                 tlpItems.RowStyles.Clear();
                 int counter = 0;
 
-                foreach(FilterColumn col in _this.Columns)
+                foreach (FilterColumn col in _this.Columns)
                 {
                     int rowIndex = 0;
                     if (counter > 0)
                     {
                         rowIndex = AddTableRow();
                     }
-                    
+
 
                     Label nLabel = new Label();
                     nLabel.Text = col.Text;
@@ -184,7 +184,7 @@ namespace JDE_Scanner_Desktop
                     }
                     else
                     {
-                        if(col.ValueType == FilterColumnValueType.Date)
+                        if (col.ValueType == FilterColumnValueType.Date)
                         {
                             DateTimePicker nDTPicker = new DateTimePicker();
                             nDTPicker.Name = col.Name;
@@ -203,7 +203,7 @@ namespace JDE_Scanner_Desktop
                             nText.Name = col.Name;
                             tlpItems.Controls.Add(nText, 2, rowIndex);
                             nText.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
-                            if(col.ValueType== FilterColumnValueType.Text)
+                            if (col.ValueType == FilterColumnValueType.Text)
                             {
                                 Options.Add("Jest równe");
                                 Options.Add("Jest różne od");
@@ -220,8 +220,8 @@ namespace JDE_Scanner_Desktop
                                 Options.Add("Większe lub równe niż");
                             }
                         }
-                        
-                        
+
+
                     }
                     nComb.DataSource = Options;
                     nComb.Name = "cmbOptions" + col.Ordinal;
@@ -233,9 +233,14 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        private void frmFilter_Load(object sender, EventArgs e)
+        {
+            
+        }
+
         private void nDTPicker_ValueChanged(object sender, EventArgs e)
         {
-            ((DateTimePicker)sender).CustomFormat = "yyyy-MM-dd HH:mm";
+            ((DateTimePicker)sender).CustomFormat = "yyyy-MM-dd";
         }
 
         private int AddTableRow()
@@ -248,7 +253,16 @@ namespace JDE_Scanner_Desktop
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this.FilterString);
+            Keeper.FilterString = this.FilterString;
+            this.DialogResult = DialogResult.OK;
+            this.Hide();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Keeper.FilterString = null;
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

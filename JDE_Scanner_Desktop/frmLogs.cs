@@ -17,6 +17,7 @@ namespace JDE_Scanner_Desktop
     {
         LogsKeeper Keeper = new LogsKeeper();
         frmLooper looper;
+        frmFilter FrmFilter;
         int page;
 
         public frmLogs(frmStarter parent)
@@ -132,29 +133,25 @@ namespace JDE_Scanner_Desktop
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            //Filter Filter = new Filter();
-            //List<FilterRow> Rows = new List<FilterRow>();
-            //for (int i = 0; i < 12; i++)
-            //{
-            //    Rows.Clear();
-            //    for (int x = 0; x < 20; x++)
-            //    {
-            //        FilterRow Row = new FilterRow
-            //        {
-            //            ValueMember = x,
-            //            DisplayMember = "Wiersz" + x
-            //        };
-            //        Rows.Add(Row);
-            //    }
-                
-            //    FilterColumn Column = new FilterColumn(Rows, Filter, FilterColumnValueType.Text, "Kolumna" + i);
-                
-            //}
-            //FilterColumn column = new FilterColumn("Length", Filter, FilterColumnValueType.Number);
-            //column = new FilterColumn("Height", Filter, FilterColumnValueType.Number);
-            //column = new FilterColumn("Depth", Filter, FilterColumnValueType.Number);
-            frmFilter FrmFilter = new frmFilter(this, dgItems);
-            FrmFilter.Show();
+            if(FrmFilter == null)
+            {
+                FrmFilter = new frmFilter(this, dgItems, Keeper);
+            }
+         
+            var res = FrmFilter.ShowDialog(this);
+            if (res == DialogResult.OK)
+            {
+                //Filter has been applied
+                btnFilter.Image = JDE_Scanner_Desktop.Properties.Resources.icon_filter_on;
+                Reload();
+            }
+            else if(res == DialogResult.Cancel)
+            {
+                btnFilter.Image = JDE_Scanner_Desktop.Properties.Resources.icon_filter_off;
+                Reload();
+                FrmFilter.Dispose();
+                FrmFilter = null;
+            }
         }
     }
 }

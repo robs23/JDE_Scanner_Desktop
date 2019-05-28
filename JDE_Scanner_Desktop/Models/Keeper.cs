@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public abstract class Keeper<T>
+    public interface IKeptable
+    {
+        string FilterString { get; set; }
+    }
+
+    public abstract class Keeper<T> : IKeptable
     {
         public List<T> Items { get; set; } 
         protected abstract string ObjectName { get;}
         protected abstract string PluralizedObjectName { get;}
+
+        public string FilterString { get; set; } = null;
 
         public Keeper()
         {
