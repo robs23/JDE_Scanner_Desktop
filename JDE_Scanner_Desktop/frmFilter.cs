@@ -138,10 +138,11 @@ namespace JDE_Scanner_Desktop
             foreach(DataGridViewColumn col in dg.Columns)
             {
                 FilterColumnValueType cType;
-                if(col.ValueType==typeof(int) || col.ValueType == typeof(float))
+                if (col.ValueType == typeof(int) || col.ValueType == typeof(float) || col.ValueType == typeof(Nullable<int>) || col.ValueType == typeof(Nullable<float>))
                 {
                     cType = FilterColumnValueType.Number;
-                }else if (col.ValueType == typeof(DateTime))
+                }
+                else if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(Nullable<DateTime>))
                 {
                     cType = FilterColumnValueType.Date;
                 }
