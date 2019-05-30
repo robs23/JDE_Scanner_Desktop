@@ -14,7 +14,7 @@ namespace JDE_Scanner_Desktop.Models
 {
     public class Handling
     {
-        [Browsable(false)]
+        [DisplayName("ID obsługi")]
         public int HandlingId { get; set; }
         [DisplayName("ID zgłoszenia")]
         public int ProcessId { get; set; }
