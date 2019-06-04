@@ -73,6 +73,16 @@ namespace JDE_Scanner_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Attach_24 {
+            get {
+                object obj = ResourceManager.GetObject("Attach_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Cloud_30 {
             get {
                 object obj = ResourceManager.GetObject("Cloud_30", resourceCulture);

@@ -128,5 +128,9 @@ namespace JDE_Scanner_Desktop.Static
             return qrImage;
         }
 
+        public static string GetFileName(string path)
+        {
+        }
+
     }
 }

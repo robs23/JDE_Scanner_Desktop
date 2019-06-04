@@ -273,6 +273,8 @@
     <Compile Include="Models\Bom.cs" />
     <Compile Include="Models\BomKeeper.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileKeeper.cs" />
     <Compile Include="Models\Keeper.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\CompanyType.cs" />
@@ -460,6 +462,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cloud_30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Attach_24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
