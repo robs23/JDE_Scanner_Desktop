@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JDE_Scanner_Desktop.Static
@@ -130,7 +131,15 @@ namespace JDE_Scanner_Desktop.Static
 
         public static string GetFileName(string path)
         {
-        }
+            string res = path;
 
+            if (path.Contains(@"\"))
+            {
+                string[] paths = Regex.Split(path, @"\");
+                res = paths[paths.Length - 1];
+            }
+
+            return res;
+        }
     }
 }

@@ -31,7 +31,8 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     try
                     {
-                        File nFile = new File { Link = file };
+                        File nFile = new File { Link = file, Name=Static.Utilities.GetFileName(file) };
+                        Items.Add(nFile);
                     }
                     catch (Exception ex)
                     {
