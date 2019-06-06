@@ -37,23 +37,37 @@ namespace JDE_Scanner_Desktop.Models
             {
                 using (var client = new HttpClient())
                 {
-                    var fileStream = System.IO.File.Open(Link, FileMode.Open);
-                    var fileInfo = new FileInfo(Link);
-                    MultipartFormDataContent fContent = new MultipartFormDataContent();
-                    fContent.Headers.Add("filePath", Link);
-                    string url = Secrets.ApiAddress + $"CreateFile?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
                     var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PostAsync(new Uri(url), content);
-                    if (result.IsSuccessStatusCode)
+                    string url = Secrets.ApiAddress + $"CreateFile?token=" + Secrets.TenantToken + $"&fileJson={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId;
+                    MultipartFormDataContent content = new MultipartFormDataContent();
+                    //var body = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    
+                    try
                     {
-                        var rString = await result.Content.ReadAsStringAsync();
-                        AddedItem = rString;
-                        return true;
+                        using (var fileStream = System.IO.File.OpenRead(Link))
+                        {
+                            var fileInfo = new FileInfo(Link);
+                            StreamContent fcontent = new StreamContent(fileStream);
+                            fcontent.Headers.Add("Content-Type", "application/octet-stream");
+                            fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
+                            content.Add(fcontent, "file", fileInfo.Name);
+                            var result = await client.PostAsync(new Uri(url), content);
+                            if (result.IsSuccessStatusCode)
+                            {
+                                var rString = await result.Content.ReadAsStringAsync();
+                                AddedItem = rString;
+                                return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
+                                return false;
+                            }
+                        }   
                     }
-                    else
+                    catch(Exception ex)
                     {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
+                        Console.WriteLine(ex.Message);
                         return false;
                     }
                 }

@@ -18,7 +18,7 @@ namespace JDE_Scanner_Desktop.Models
 
         public OpenFileDialog OpenFileDialog;
 
-        public void LoadFromDisk()
+        public async void LoadFromDisk()
         {
             OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Title = "Wybierz plik(i)";
@@ -31,13 +31,18 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     try
                     {
-                        File nFile = new File { Link = file, Name=Static.Utilities.GetFileName(file) };
+                        string name = new FileInfo(file).Name;
+                        File nFile = new File { Link = file, Name=name };
                         Items.Add(nFile);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error: " + ex.Message);
                     }
+                }
+                foreach(File file in Items)
+                {
+                    await file.Add();
                 }
             } 
         }
