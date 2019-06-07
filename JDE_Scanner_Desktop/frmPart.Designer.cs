@@ -73,10 +73,7 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnRefreshBoms = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
-            this.pgGallery = new System.Windows.Forms.TabPage();
-            this.lvImages = new System.Windows.Forms.ListView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.iList = new System.Windows.Forms.ImageList(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -89,7 +86,6 @@
             this.tlpBoms.SuspendLayout();
             this.tlpBomsControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
-            this.pgGallery.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -170,7 +166,7 @@
             this.btnAttach.Name = "btnAttach";
             this.btnAttach.Size = new System.Drawing.Size(34, 28);
             this.btnAttach.TabIndex = 2;
-            this.tooltip.SetToolTip(this.btnAttach, "Załącz pliki..");
+            this.tooltip.SetToolTip(this.btnAttach, "Powiązane pliki..");
             this.btnAttach.UseVisualStyleBackColor = true;
             this.btnAttach.Click += new System.EventHandler(this.btnAttach_Click);
             // 
@@ -192,7 +188,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.pgGeneral);
             this.tabControl.Controls.Add(this.pgBoms);
-            this.tabControl.Controls.Add(this.pgGallery);
             this.tabControl.Location = new System.Drawing.Point(3, 43);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -642,32 +637,6 @@
             this.dgvBoms.TabIndex = 1;
             this.dgvBoms.DoubleClick += new System.EventHandler(this.dgvBoms_DoubleClick);
             // 
-            // pgGallery
-            // 
-            this.pgGallery.Controls.Add(this.lvImages);
-            this.pgGallery.Location = new System.Drawing.Point(4, 22);
-            this.pgGallery.Name = "pgGallery";
-            this.pgGallery.Padding = new System.Windows.Forms.Padding(3);
-            this.pgGallery.Size = new System.Drawing.Size(583, 398);
-            this.pgGallery.TabIndex = 2;
-            this.pgGallery.Text = "Galeria";
-            this.pgGallery.UseVisualStyleBackColor = true;
-            // 
-            // lvImages
-            // 
-            this.lvImages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvImages.Location = new System.Drawing.Point(3, 3);
-            this.lvImages.Name = "lvImages";
-            this.lvImages.Size = new System.Drawing.Size(577, 392);
-            this.lvImages.TabIndex = 0;
-            this.lvImages.UseCompatibleStateImageBehavior = false;
-            // 
-            // iList
-            // 
-            this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.iList.ImageSize = new System.Drawing.Size(50, 50);
-            this.iList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // frmPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -693,7 +662,6 @@
             this.tlpBoms.ResumeLayout(false);
             this.tlpBomsControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
-            this.pgGallery.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -743,9 +711,6 @@
         private System.Windows.Forms.DataGridView dgvBoms;
         private System.Windows.Forms.Button btnRefreshBoms;
         private System.Windows.Forms.Button btnRemove;
-        private System.Windows.Forms.TabPage pgGallery;
-        private System.Windows.Forms.ListView lvImages;
-        private System.Windows.Forms.ImageList iList;
         private System.Windows.Forms.Button btnAttach;
     }
 }

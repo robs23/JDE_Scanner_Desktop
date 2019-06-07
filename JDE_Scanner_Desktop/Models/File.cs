@@ -22,7 +22,7 @@ namespace JDE_Scanner_Desktop.Models
             set => value = FileId;
             get => FileId;
         }
-
+        
         [DisplayName("Nazwa")]
         public string Name { get; set; }
         public string Description { get; set; }

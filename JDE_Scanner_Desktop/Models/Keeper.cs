@@ -28,6 +28,8 @@ namespace JDE_Scanner_Desktop.Models
             Items = new List<T>();
         }
 
+        
+
         public void Remove(List<int> ids)
         {
             DialogResult result = MessageBox.Show("Czy jesteś pewien, że chcesz usunąć " + ids.Count.ToString() + " zaznaczone wiersze?", "Potwierdź usunięcie", MessageBoxButtons.OKCancel);

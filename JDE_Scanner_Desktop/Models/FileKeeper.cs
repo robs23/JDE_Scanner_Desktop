@@ -15,15 +15,21 @@ namespace JDE_Scanner_Desktop.Models
         protected override string ObjectName => "File";
 
         protected override string PluralizedObjectName => "Files";
-
+        public Form MainForm { get; set; }
+        public Form FileForm { get; set; }
         public OpenFileDialog OpenFileDialog;
+
+        public FileKeeper(Form mainForm) : base()
+        {
+            MainForm = mainForm;
+        }
 
         public async void LoadFromDisk()
         {
             OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Title = "Wybierz plik(i)";
             OpenFileDialog.Multiselect = true;
-            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG)|*.JPG;*.GIF;*.PNG|Wszystkie pliki (*.*)|*.*";
+            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG)|*.JPG;*.GIF;*.PNG";
 
             if (OpenFileDialog.ShowDialog()== DialogResult.OK)
             {
@@ -32,7 +38,9 @@ namespace JDE_Scanner_Desktop.Models
                     try
                     {
                         string name = new FileInfo(file).Name;
-                        File nFile = new File { Link = file, Name=name };
+                        File nFile = new File();
+                        nFile.Link = file;
+                        nFile.Name = name;
                         Items.Add(nFile);
                     }
                     catch (Exception ex)
@@ -40,11 +48,13 @@ namespace JDE_Scanner_Desktop.Models
                         MessageBox.Show("Error: " + ex.Message);
                     }
                 }
-                foreach(File file in Items)
-                {
-                    await file.Add();
-                }
             } 
+        }
+
+        public async void ShowFiles()
+        {
+            FileForm = new frmFiles(this, MainForm);
+            FileForm.Show(MainForm);
         }
     }
 }

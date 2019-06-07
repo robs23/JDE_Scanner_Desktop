@@ -26,7 +26,7 @@ namespace JDE_Scanner_Desktop
         CompaniesKeeper producers;
         CompaniesKeeper suppliers;
         BomKeeper boms = new BomKeeper();
-        FileKeeper files = new FileKeeper();
+        FileKeeper files;
 
         public frmPart(Form parent)
         {
@@ -37,6 +37,7 @@ namespace JDE_Scanner_Desktop
             lblCreated.Visible = false;
             this.Text = "Nowa część";
             _this = new Part();
+            files = new FileKeeper(this);
         }
 
         public frmPart(Part Item, Form parent)
@@ -100,7 +101,6 @@ namespace JDE_Scanner_Desktop
             producers = new CompaniesKeeper();
             suppliers = new CompaniesKeeper();
             SetComboboxes();
-            LoadImages();
             if (mode > 1)
             {
                 GetBoms();
@@ -120,19 +120,7 @@ namespace JDE_Scanner_Desktop
 
         }
 
-        private async void LoadImages()
-        {
-            int i = 0;
-            IEnumerable<string> images = Directory.EnumerateFiles(@"C:\chosen", "*.*", SearchOption.AllDirectories).Where(s=>s.EndsWith(".jpg") || s.EndsWith(".png"));
-            //string[] images = Directory.GetFiles(@"C:\chosen", "*.jpg");
-            foreach(string img in images)
-            {
-                iList.Images.Add(img, Image.FromFile(img));
-                lvImages.Items.Add(new ListViewItem { ImageKey = img });
-            }
-            lvImages.LargeImageList = iList;
-
-        }
+        
 
         private async void Save(object sender, EventArgs e)
         {
@@ -271,7 +259,7 @@ namespace JDE_Scanner_Desktop
 
         private void btnAttach_Click(object sender, EventArgs e)
         {
-            files.LoadFromDisk();
+            files.ShowFiles();
         }
     }
 }
