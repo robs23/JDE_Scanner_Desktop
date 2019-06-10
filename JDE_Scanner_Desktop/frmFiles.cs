@@ -38,8 +38,12 @@ namespace JDE_Scanner_Desktop
                     iList.Images.Add(f.Link, Image.FromFile(f.Link));
                     lvImages.Items.Add(new ListViewItem { ImageKey = f.Link });
                 }
-                
+
                 //lvImages.Refresh();
+            }
+            else
+            {
+                lvImages.Clear();
             }
         }
 
@@ -63,11 +67,11 @@ namespace JDE_Scanner_Desktop
         {
             if(lvImages.SelectedItems.Count > 0)
             {
-                for (int i = lvImages.SelectedItems.Count-1; i >= 0; i--)
+                for (int i = lvImages.SelectedItems.Count - 1; i >= 0; i--)
                 {
-                    files.Items.RemoveAt(i);
+                    files.Items.RemoveAt(lvImages.SelectedItems[i].Index);
                 }
-               
+
                 LoadImages();
             }
         }
