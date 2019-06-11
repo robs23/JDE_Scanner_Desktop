@@ -51,6 +51,17 @@ namespace JDE_Scanner_Desktop.Models
             } 
         }
 
+        public async void DownloadFromCloud(bool? min = false)
+        {
+            if (this.Items.Any())
+            {
+                foreach(File f in this.Items)
+                {
+
+                }
+            }
+        }
+
         public async void ShowFiles()
         {
             FileForm = new frmFiles(this, MainForm);

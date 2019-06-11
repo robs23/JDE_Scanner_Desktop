@@ -29,8 +29,10 @@ namespace JDE_Scanner_Desktop.Models
         public string Link { get; set; }
         [DisplayName("Token")]
         public string Token { get; set; }
+        [DisplayName("Przesłany")]
+        public bool? IsUploaded { get; set; } = false;
 
-        public override async Task<bool> Add()
+        public async Task<bool> Add(int? PartId=null, int? PlaceId=null, int? ProcessId=null)
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -38,7 +40,7 @@ namespace JDE_Scanner_Desktop.Models
                 using (var client = new HttpClient())
                 {
                     var serializedProduct = JsonConvert.SerializeObject(this);
-                    string url = Secrets.ApiAddress + $"CreateFile?token=" + Secrets.TenantToken + $"&fileJson={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId;
+                    string url = Secrets.ApiAddress + $"CreateFile?token=" + Secrets.TenantToken + $"&fileJson={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId + $"&PartId={PartId}&PlaceId={PlaceId}&ProcessId={ProcessId}";
                     MultipartFormDataContent content = new MultipartFormDataContent();
                     //var body = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     
@@ -75,6 +77,24 @@ namespace JDE_Scanner_Desktop.Models
             else
             {
                 return false;
+            }
+        }
+
+        public async Task Download(bool? min = false)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"GetFile?token=" + Secrets.TenantToken + "&id=" + this.FileId;
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userJsonString = await response.Content.ReadAsStringAsync();
+                        var vItems = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
+                        Items.AddRange(vItems);
+                        return true;
+                    }
+                }
             }
         }
     }
