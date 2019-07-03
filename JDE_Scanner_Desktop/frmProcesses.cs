@@ -76,7 +76,7 @@ namespace JDE_Scanner_Desktop
             Reload();
         }
 
-        private void Delete(object sender, EventArgs e)
+        private async void Delete(object sender, EventArgs e)
         {
             if (dgItems.SelectedRows.Count == 0)
             {
@@ -84,12 +84,14 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
+                looper.Show(this);
                 List<int> SelectedRows = new List<int>();
                 for (int i = 0; i < dgItems.SelectedRows.Count; i++)
                 {
                     SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
                 }
-                Keeper.Remove(SelectedRows);
+                await Keeper.Remove(SelectedRows);
+                looper.Hide();
                 Reload();
             }
         }

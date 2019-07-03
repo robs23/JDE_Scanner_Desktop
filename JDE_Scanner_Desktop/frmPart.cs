@@ -79,8 +79,8 @@ namespace JDE_Scanner_Desktop
             //{
             //    sId = (int)cmbSupplier.SelectedValue;
             //}
-            await producers.Refresh("TypeId=2");
-            await suppliers.Refresh("TypeId=1");
+            await producers.Refresh("TypeId=1");
+            await suppliers.Refresh("TypeId=2");
             new AutoCompleteBehavior<Company>(cmbProducer, producers.Items);
             cmbProducer.DisplayMember = "Name";
             cmbProducer.ValueMember = "CompanyId";
@@ -132,6 +132,7 @@ namespace JDE_Scanner_Desktop
             _this.Destination = txtDestination.Text;
             _this.Appliance = txtAppliance.Text;
             _this.UsedOn = txtUsedOn.Text;
+            
             _this.ProducerId = cmbProducer.GetSelectedValue<Company>();
             _this.SupplierId = cmbSupplier.GetSelectedValue<Company>();
             try
@@ -241,7 +242,7 @@ namespace JDE_Scanner_Desktop
             GetBoms();
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private async void btnRemove_Click(object sender, EventArgs e)
         {
             if (dgvBoms.SelectedRows.Count == 0)
             {
@@ -249,12 +250,14 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
+                Looper.Show(this);
                 List<int> SelectedRows = new List<int>();
                 for (int i = 0; i < dgvBoms.SelectedRows.Count; i++)
                 {
                     SelectedRows.Add((int)dgvBoms.SelectedRows[i].Cells[0].Value);
                 }
-                boms.Remove(SelectedRows);
+                await boms.Remove(SelectedRows);
+                Looper.Hide();
                 GetBoms();
             }
         }
@@ -270,7 +273,7 @@ namespace JDE_Scanner_Desktop
 
         private void btnAttach_Click(object sender, EventArgs e)
         {
-            files.ShowFiles();
+            //files.ShowFiles();
         }
     }
 }

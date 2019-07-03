@@ -30,19 +30,38 @@ namespace JDE_Scanner_Desktop.Models
 
         
 
-        public void Remove(List<int> ids)
+        public async Task Remove(List<int> ids)
         {
             DialogResult result = MessageBox.Show("Czy jesteś pewien, że chcesz usunąć " + ids.Count.ToString() + " zaznaczone wiersze?", "Potwierdź usunięcie", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK)
             {
+                List<Task<string>> ListsOfTasks = new List<Task<string>>();
+
                 foreach (int id in ids)
                 {
-                    _Remomve(id);
+                    ListsOfTasks.Add(_Remomve(id)); 
+                }
+
+                string response = "";
+                IEnumerable<string> res = await Task.WhenAll<string>(ListsOfTasks);
+                if (res.Any())
+                {
+                    foreach(string r in res)
+                    {
+                        if (!string.IsNullOrEmpty(r))
+                        {
+                            response += r + "\r";
+                        }
+                    }
+                    if(response.Length > 0)
+                    {
+                        MessageBox.Show(response);
+                    }
                 }
             }
         }
 
-        private async void _Remomve(int id)
+        private async Task<string> _Remomve(int id)
         {
             using (var client = new HttpClient())
             {
@@ -50,8 +69,9 @@ namespace JDE_Scanner_Desktop.Models
                 var result = await client.DeleteAsync(String.Format(url, id, RuntimeSettings.UserId));
                 if (!result.IsSuccessStatusCode)
                 {
-                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia pozycji {0}. Wiadomość: " + result.ReasonPhrase, id));
+                    return String.Format("Serwer zwrócił błąd przy próbie usunięcia pozycji {0}. Wiadomość: " + result.ReasonPhrase, id);
                 }
+                return null;
             }
         }
 

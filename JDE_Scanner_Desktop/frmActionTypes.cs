@@ -66,7 +66,7 @@ namespace JDE_Scanner_Desktop
             Reload();
         }
 
-        private void Delete(object sender, EventArgs e)
+        private async void Delete(object sender, EventArgs e)
         {
             if (dgItems.SelectedRows.Count == 0)
             {

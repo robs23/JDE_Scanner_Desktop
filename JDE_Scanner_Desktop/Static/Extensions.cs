@@ -15,9 +15,17 @@ namespace JDE_Scanner_Desktop.Static
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
 
-        public static int GetSelectedValue<T>(this ComboBox combobox)
+        public static int? GetSelectedValue<T>(this ComboBox combobox)
         {
-            return (int)typeof(T).GetProperty(combobox.ValueMember).GetValue(combobox.SelectedItem);
+            if(combobox.SelectedItem == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (int)typeof(T).GetProperty(combobox.ValueMember).GetValue(combobox.SelectedItem);
+            }
+            
         }
 
         public static void SetSelectedValue<T>(this ComboBox combobox, int? selectedValue)

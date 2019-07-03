@@ -80,22 +80,22 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async Task Download(bool? min = false)
-        {
-            using (var client = new HttpClient())
-            {
-                string url = Secrets.ApiAddress + $"GetFile?token=" + Secrets.TenantToken + "&id=" + this.FileId;
-                using (var response = await client.GetAsync(new Uri(url)))
-                {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var userJsonString = await response.Content.ReadAsStringAsync();
-                        var vItems = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
-                        Items.AddRange(vItems);
-                        return true;
-                    }
-                }
-            }
-        }
+        //public async Task Download(bool? min = false)
+        //{
+        //    using (var client = new HttpClient())
+        //    {
+        //        string url = Secrets.ApiAddress + $"GetFile?token=" + Secrets.TenantToken + "&id=" + this.FileId;
+        //        using (var response = await client.GetAsync(new Uri(url)))
+        //        {
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var userJsonString = await response.Content.ReadAsStringAsync();
+        //                var vItems = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
+        //                Items.AddRange(vItems);
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
