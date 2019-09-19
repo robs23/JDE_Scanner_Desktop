@@ -24,11 +24,11 @@ namespace JDE_Scanner_Desktop.Models
             MainForm = mainForm;
         }
 
-        public async void LoadFromDisk()
+        public async void LoadFromDisk(bool multiselect = true)
         {
             OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Title = "Wybierz plik(i)";
-            OpenFileDialog.Multiselect = true;
+            OpenFileDialog.Multiselect = multiselect;
             OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG)|*.JPG;*.GIF;*.PNG";
 
             if (OpenFileDialog.ShowDialog()== DialogResult.OK)
@@ -41,6 +41,8 @@ namespace JDE_Scanner_Desktop.Models
                         File nFile = new File();
                         nFile.Link = file;
                         nFile.Name = name;
+                        if (!multiselect)
+                            Items.Clear();
                         Items.Add(nFile);
                     }
                     catch (Exception ex)
@@ -66,6 +68,11 @@ namespace JDE_Scanner_Desktop.Models
         {
             FileForm = new frmFiles(this, MainForm);
             FileForm.Show(MainForm);
+        }
+
+        public void OpenFile(int id)
+        {
+            System.Diagnostics.Process.Start(Items[id].Link);
         }
     }
 }

@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.Menu;
 
 namespace JDE_Scanner_Desktop
 {
@@ -27,6 +28,8 @@ namespace JDE_Scanner_Desktop
         CompaniesKeeper suppliers;
         BomKeeper boms = new BomKeeper();
         FileKeeper files;
+        FileKeeper img;
+        ContextMenu buttonContextMenu;
 
         public frmPart(Form parent)
         {
@@ -38,6 +41,7 @@ namespace JDE_Scanner_Desktop
             this.Text = "Nowa część";
             _this = new Part();
             files = new FileKeeper(this);
+            img = new FileKeeper(this);
         }
 
         public frmPart(Part Item, Form parent)
@@ -101,6 +105,7 @@ namespace JDE_Scanner_Desktop
             producers = new CompaniesKeeper();
             suppliers = new CompaniesKeeper();
             SetComboboxes();
+            InitiailizeButtonContextMenu();
             if (mode > 1)
             {
                 GetBoms();
@@ -273,7 +278,69 @@ namespace JDE_Scanner_Desktop
 
         private void btnAttach_Click(object sender, EventArgs e)
         {
-            //files.ShowFiles();
+            files.ShowFiles();
+        }
+
+        private void pbImage_DoubleClick(object sender, EventArgs e)
+        {
+            LoadImg();
+        }
+
+        private void LoadImg()
+        {
+            //Let's add  new image
+            
+            img.LoadFromDisk(false);
+            if (img.Items.Any())
+            {
+                pbImage.Image = Image.FromFile(img.Items[0].Link);
+                pbImage.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        public void InitiailizeButtonContextMenu()
+        {
+            buttonContextMenu = new ContextMenu();
+            MenuItem miChange = new MenuItem("Zmień zdjęcie");
+            miChange.Click += ChangeImage;
+            MenuItem miDelete = new MenuItem("Usuń zdjęcie");
+            miDelete.Click += DeleteImage;
+
+            MenuItemCollection collection = new MenuItemCollection(buttonContextMenu);
+            collection.Add(miChange);
+            collection.Add(miDelete);
+        }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+            if(((MouseEventArgs)e).Button == MouseButtons.Left)
+            {
+                if (img.Items.Any())
+                {
+                    img.OpenFile(0);
+                }
+                else
+                {
+                    LoadImg();
+                }
+            }
+            else
+            {
+                Control cont = (Control)sender;
+                buttonContextMenu.Show(cont, new Point(cont.Location.X+30, cont.Location.Y+30));
+            }
+            
+        }
+
+        public void ChangeImage(object sender, EventArgs e)
+        {
+            LoadImg();
+        }
+
+        public void DeleteImage(object sender, EventArgs e)
+        {
+            img.Items.Clear();
+            pbImage.Image = pbImage.InitialImage;
         }
     }
 }

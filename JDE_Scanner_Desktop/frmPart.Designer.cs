@@ -65,7 +65,9 @@
             this.txtDestination = new System.Windows.Forms.TextBox();
             this.txtAppliance = new System.Windows.Forms.TextBox();
             this.txtUsedOn = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pbQrCode = new System.Windows.Forms.PictureBox();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.pgBoms = new System.Windows.Forms.TabPage();
             this.tlpBoms = new System.Windows.Forms.TableLayoutPanel();
             this.tlpBomsControl = new System.Windows.Forms.TableLayoutPanel();
@@ -81,7 +83,9 @@
             this.tplTextboxes.SuspendLayout();
             this.tlpSupplier.SuspendLayout();
             this.tlpProducer.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.pgBoms.SuspendLayout();
             this.tlpBoms.SuspendLayout();
             this.tlpBomsControl.SuspendLayout();
@@ -233,7 +237,7 @@
             this.tplTextboxes.Controls.Add(this.txtDestination, 1, 7);
             this.tplTextboxes.Controls.Add(this.txtAppliance, 1, 8);
             this.tplTextboxes.Controls.Add(this.txtUsedOn, 1, 9);
-            this.tplTextboxes.Controls.Add(this.pbQrCode, 1, 10);
+            this.tplTextboxes.Controls.Add(this.tableLayoutPanel1, 1, 10);
             this.tplTextboxes.Location = new System.Drawing.Point(-4, 0);
             this.tplTextboxes.Name = "tplTextboxes";
             this.tplTextboxes.RowCount = 11;
@@ -526,13 +530,41 @@
             this.txtUsedOn.Size = new System.Drawing.Size(465, 20);
             this.txtUsedOn.TabIndex = 24;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.pbQrCode, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pbImage, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(123, 313);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(464, 82);
+            this.tableLayoutPanel1.TabIndex = 25;
+            // 
             // pbQrCode
             // 
-            this.pbQrCode.Location = new System.Drawing.Point(123, 313);
+            this.pbQrCode.Location = new System.Drawing.Point(235, 3);
             this.pbQrCode.Name = "pbQrCode";
-            this.pbQrCode.Size = new System.Drawing.Size(100, 85);
-            this.pbQrCode.TabIndex = 25;
+            this.pbQrCode.Size = new System.Drawing.Size(100, 76);
+            this.pbQrCode.TabIndex = 28;
             this.pbQrCode.TabStop = false;
+            // 
+            // pbImage
+            // 
+            this.pbImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pbImage.Image = global::JDE_Scanner_Desktop.Properties.Resources.Image_icon_64;
+            this.pbImage.InitialImage = global::JDE_Scanner_Desktop.Properties.Resources.Image_icon_64;
+            this.pbImage.Location = new System.Drawing.Point(3, 3);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(105, 76);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbImage.TabIndex = 29;
+            this.pbImage.TabStop = false;
+            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             // 
             // pgBoms
             // 
@@ -657,7 +689,9 @@
             this.tplTextboxes.PerformLayout();
             this.tlpSupplier.ResumeLayout(false);
             this.tlpProducer.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.pgBoms.ResumeLayout(false);
             this.tlpBoms.ResumeLayout(false);
             this.tlpBomsControl.ResumeLayout(false);
@@ -703,7 +737,6 @@
         private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.TextBox txtAppliance;
         private System.Windows.Forms.TextBox txtUsedOn;
-        private System.Windows.Forms.PictureBox pbQrCode;
         private System.Windows.Forms.TabPage pgBoms;
         private System.Windows.Forms.TableLayoutPanel tlpBoms;
         private System.Windows.Forms.TableLayoutPanel tlpBomsControl;
@@ -712,5 +745,8 @@
         private System.Windows.Forms.Button btnRefreshBoms;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAttach;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.PictureBox pbQrCode;
+        private System.Windows.Forms.PictureBox pbImage;
     }
 }

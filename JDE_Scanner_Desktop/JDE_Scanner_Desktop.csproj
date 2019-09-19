@@ -475,6 +475,14 @@
   <ItemGroup>
     <None Include="Resources\Attach_24.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image_icon_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image_icon_64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
