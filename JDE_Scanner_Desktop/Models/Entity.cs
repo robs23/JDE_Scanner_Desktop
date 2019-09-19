@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -55,6 +56,54 @@ namespace JDE_Scanner_Desktop.Models
                     else
                     {
                         MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual async Task<bool> Add(string attachmentPath)
+        {
+            ModelValidator validator = new ModelValidator();
+            if (validator.Validate(this))
+            {
+                using (var client = new HttpClient())
+                {
+                    var serializedProduct = JsonConvert.SerializeObject(this);
+                    string url = Secrets.ApiAddress + $"Create{typeof(T).Name}?token=" + Secrets.TenantToken + $"&{typeof(T).Name}Json={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId;
+                    MultipartFormDataContent content = new MultipartFormDataContent();
+                    //var body = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+
+                    try
+                    {
+                        using (var fileStream = System.IO.File.OpenRead(attachmentPath))
+                        {
+                            var fileInfo = new FileInfo(attachmentPath);
+                            StreamContent fcontent = new StreamContent(fileStream);
+                            fcontent.Headers.Add("Content-Type", "application/octet-stream");
+                            fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
+                            content.Add(fcontent, "file", fileInfo.Name);
+                            var result = await client.PostAsync(new Uri(url), content);
+                            if (result.IsSuccessStatusCode)
+                            {
+                                var rString = await result.Content.ReadAsStringAsync();
+                                AddedItem = rString;
+                                return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
+                                return false;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
                         return false;
                     }
                 }

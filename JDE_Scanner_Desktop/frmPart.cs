@@ -47,6 +47,7 @@ namespace JDE_Scanner_Desktop
         public frmPart(Part Item, Form parent)
         {
             InitializeComponent();
+            img = new FileKeeper(this);
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 2;
