@@ -40,6 +40,8 @@ namespace JDE_Scanner_Desktop.Models
         public string SupplierName { get; set; }
         [DisplayName("Symbol")]
         public string Symbol { get; set; }
+        [DisplayName("Zdjęcie")]
+        public string Image { get; set; }
         [DisplayName("Przeznaczenie")]
         public string Destination { get; set; }
         [DisplayName("Zastosowanie")]
@@ -67,9 +69,19 @@ namespace JDE_Scanner_Desktop.Models
                 }
             } }
 
-        public async override Task<bool> Add()
+
+        public async override Task<bool> Add(string attachmentPath = null)
         {
-            bool x = await base.Add();
+            bool x;
+            if (attachmentPath == null)
+            {
+                x = await base.Add();
+            }
+            else
+            {
+                x = await base.Add(attachmentPath);
+            }
+            
             if (x)
             {
                 try

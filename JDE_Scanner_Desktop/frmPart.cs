@@ -148,7 +148,12 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
-                    if(await _this.Add())
+                    string photoPath = null;
+                    if (img.Items.Any())
+                    {
+                        photoPath = img.Items[0].Link;
+                    }
+                    if(await _this.Add(photoPath))
                     {
                         if (files.Items.Where(i => i.IsUploaded == false).Any())
                         {
