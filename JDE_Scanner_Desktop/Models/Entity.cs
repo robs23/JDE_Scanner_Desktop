@@ -72,8 +72,8 @@ namespace JDE_Scanner_Desktop.Models
             if (validator.Validate(this))
             {
                 using (var client = new HttpClient())
-                {
-                    var serializedProduct = JsonConvert.SerializeObject(this);
+                { 
+                    var serializedProduct = JsonConvert.SerializeObject(this, new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fff" });
                     string url = Secrets.ApiAddress + $"Create{typeof(T).Name}?token=" + Secrets.TenantToken + $"&{typeof(T).Name}Json={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId;
                     MultipartFormDataContent content = new MultipartFormDataContent();
                     //var body = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
