@@ -2,6 +2,7 @@
 using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -35,6 +36,23 @@ namespace JDE_Scanner_Desktop
                     }
                 }
             }
+        }
+
+        public static string LocalFilesPath {
+            get {
+                CreateLocalFilesFolders();
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files") ;
+            }
+        }
+
+        public static void CreateLocalFilesFolders()
+        {
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan")))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files")))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files", "Thumbnails")))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files", "Thumbnails"));
         }
     }
 }

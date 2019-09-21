@@ -1,8 +1,10 @@
-﻿using System;
+﻿using JDE_Scanner_Desktop.Static;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,6 +75,47 @@ namespace JDE_Scanner_Desktop.Models
         public void OpenFile(int id)
         {
             System.Diagnostics.Process.Start(Items[id].Link);
+        }
+
+        public async Task<bool> GetAttachment(string name, bool min)
+        {
+            bool success = false;
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"GetAttachment?token=" + Secrets.TenantToken + "&name=" + name + "&min=" + min;
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        System.Net.Http.HttpContent content = response.Content;
+
+                        FileStream fileStream = null;
+                        try
+                        {
+                            string path = RuntimeSettings.LocalFilesPath;
+                            fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+                            await content.CopyToAsync(fileStream).ContinueWith(
+                                (copyTask) =>
+                                {
+                                    fileStream.Close();
+                                });
+                            success = true;
+                        }
+                        catch
+                        {
+
+                            if (fileStream != null)
+                            {
+                                fileStream.Close();
+                            }
+
+                            throw;
+                        }
+
+                    }
+                    return success;
+                }
+            }
         }
     }
 }
