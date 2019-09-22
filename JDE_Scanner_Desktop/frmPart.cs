@@ -110,6 +110,7 @@ namespace JDE_Scanner_Desktop
             if (mode > 1)
             {
                 GetBoms();
+                GetImage();
             }
             else
             {
@@ -126,6 +127,15 @@ namespace JDE_Scanner_Desktop
 
         }
 
+        private async void GetImage()
+        {
+            if (!string.IsNullOrEmpty(_this.Image))
+            {
+                pbImage.Image = await img.GetAttachment(_this.Image, false);
+                pbImage.SizeMode = PictureBoxSizeMode.Zoom;
+                //pbImage.Image = Image.FromFile(RuntimeSettings.LocalFilesPath);
+            }
+        }
         
 
         private async void Save(object sender, EventArgs e)

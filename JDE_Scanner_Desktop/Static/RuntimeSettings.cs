@@ -41,18 +41,27 @@ namespace JDE_Scanner_Desktop
         public static string LocalFilesPath {
             get {
                 CreateLocalFilesFolders();
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files") ;
+                return Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files") ;
+            }
+        }
+
+        public static string LocalFilesPathRoot
+        {
+            get
+            {
+                //return System.Windows.Forms.Application.StartupPath;
+                return Path.GetTempPath();
             }
         }
 
         public static void CreateLocalFilesFolders()
         {
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan"));
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files"));
-            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files", "Thumbnails")))
-                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "JDE_Scan", "Files", "Thumbnails"));
+            if (!Directory.Exists(Path.Combine(LocalFilesPathRoot, "JDE_Scan")))
+                Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan"));
+            if (!Directory.Exists(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files")))
+                Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files"));
+            if (!Directory.Exists(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files", "Thumbnails")))
+                Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files", "Thumbnails"));
         }
     }
 }

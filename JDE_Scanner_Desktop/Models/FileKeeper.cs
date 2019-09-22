@@ -77,7 +77,7 @@ namespace JDE_Scanner_Desktop.Models
             System.Diagnostics.Process.Start(Items[id].Link);
         }
 
-        public async Task<bool> GetAttachment(string name, bool min)
+        public async Task<Image> GetAttachment(string name, bool min)
         {
             bool success = false;
             using (var client = new HttpClient())
@@ -87,33 +87,35 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     if (response.IsSuccessStatusCode)
                     {
+                        
                         System.Net.Http.HttpContent content = response.Content;
+                        var stream = Bitmap.FromStream(await response.Content.ReadAsStreamAsync());
+                        return stream;
+                        //FileStream fileStream = null;
+                        //try
+                        //{
+                        //    string path = RuntimeSettings.LocalFilesPath;
+                        //    fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                        //    await content.CopyToAsync(fileStream).ContinueWith(
+                        //        (copyTask) =>
+                        //        {
+                        //            fileStream.Close();
+                        //        });
+                        //    success = true;
+                        //}
+                        //catch
+                        //{
 
-                        FileStream fileStream = null;
-                        try
-                        {
-                            string path = RuntimeSettings.LocalFilesPath;
-                            fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
-                            await content.CopyToAsync(fileStream).ContinueWith(
-                                (copyTask) =>
-                                {
-                                    fileStream.Close();
-                                });
-                            success = true;
-                        }
-                        catch
-                        {
+                        //    if (fileStream != null)
+                        //    {
+                        //        fileStream.Close();
+                        //    }
 
-                            if (fileStream != null)
-                            {
-                                fileStream.Close();
-                            }
-
-                            throw;
-                        }
+                        //    throw;
+                        //}
 
                     }
-                    return success;
+                    return null;
                 }
             }
         }
