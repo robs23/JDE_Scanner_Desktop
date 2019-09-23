@@ -19,12 +19,17 @@ namespace JDE_Scanner_Desktop
         frmLooper looper;
         int page;
         frmFilter FrmFilter;
+        frmImagePreview imagePreview;
+        int previousRow = -1;
+        int currentRow = -1;
+
 
         public frmParts(frmStarter parent)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
+            imagePreview = new frmImagePreview();
         }
 
         private async void Reload()
@@ -104,7 +109,6 @@ namespace JDE_Scanner_Desktop
                     int x = dgItems.FirstDisplayedScrollingRowIndex;
                     looper.Show(this);
                     page++;
-                    //int nextPage = (int)Math.Ceiling((double)((double)dgItems.Rows.Count / (double)RuntimeSettings.PageSize)) + 1;
                     bool _IsMore = await Keeper.GetMore(page);
                     if (_IsMore)
                     {
@@ -167,5 +171,51 @@ namespace JDE_Scanner_Desktop
                 FrmFilter = null;
             }
         }
+
+        private void dgItems_MouseLeave(object sender, EventArgs e)
+        {
+            previousRow = -1;
+            imagePreview.Visible = false;
+        }
+
+        private void dgItems_MouseMove(object sender, MouseEventArgs e)
+        {
+            var p = dgItems.PointToClient(Cursor.Position);
+            var pointer = dgItems.HitTest(p.X, p.Y);
+
+            currentRow = pointer.RowIndex;
+            if (pointer.RowIndex >= 0 && pointer.ColumnIndex >= 0)
+            {
+                if (pointer.RowIndex != previousRow)
+                {
+                    if (dgItems.Rows[pointer.RowIndex].Cells[8].Value != null)
+                    {
+                        string img = dgItems.Rows[pointer.RowIndex].Cells[8].Value.ToString();
+                        if (!string.IsNullOrEmpty(img) && cboxShowPreview.CheckState == CheckState.Checked)
+                        {
+                            imagePreview.Load(img, true);
+                            imagePreview.Visible = true;
+                        }
+                        else
+                        {
+                            imagePreview.Visible = false;
+                        }
+                    }
+                    else
+                    {
+                        imagePreview.Visible = false;
+                    }
+
+                    previousRow = pointer.RowIndex;
+                }
+
+            }
+            else
+            {
+                previousRow = -1;
+                imagePreview.Visible = false;
+            }
+        }
+
     }
 }

@@ -36,9 +36,10 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.cboxShowPreview = new System.Windows.Forms.CheckBox();
             this.dgItems = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnFilter = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -78,6 +79,7 @@
             this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
             this.tlpButtons.Controls.Add(this.btnPrint, 4, 0);
             this.tlpButtons.Controls.Add(this.btnFilter, 3, 0);
+            this.tlpButtons.Controls.Add(this.cboxShowPreview, 5, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -142,20 +144,6 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // dgItems
-            // 
-            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgItems.Location = new System.Drawing.Point(3, 43);
-            this.dgItems.Name = "dgItems";
-            this.dgItems.Size = new System.Drawing.Size(565, 330);
-            this.dgItems.TabIndex = 2;
-            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
-            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
-            this.dgItems.DoubleClick += new System.EventHandler(this.View);
-            // 
             // btnFilter
             // 
             this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -170,6 +158,36 @@
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
+            // cboxShowPreview
+            // 
+            this.cboxShowPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.cboxShowPreview.AutoSize = true;
+            this.cboxShowPreview.Checked = true;
+            this.cboxShowPreview.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxShowPreview.Location = new System.Drawing.Point(203, 3);
+            this.cboxShowPreview.Name = "cboxShowPreview";
+            this.cboxShowPreview.Size = new System.Drawing.Size(105, 28);
+            this.cboxShowPreview.TabIndex = 5;
+            this.cboxShowPreview.Text = "Pokazuj podgląd";
+            this.cboxShowPreview.UseVisualStyleBackColor = true;
+            // 
+            // dgItems
+            // 
+            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.Location = new System.Drawing.Point(3, 43);
+            this.dgItems.Name = "dgItems";
+            this.dgItems.Size = new System.Drawing.Size(565, 330);
+            this.dgItems.TabIndex = 2;
+            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.View);
+            this.dgItems.MouseLeave += new System.EventHandler(this.dgItems_MouseLeave);
+            this.dgItems.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgItems_MouseMove);
+            // 
             // frmParts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,6 +201,7 @@
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);
+            this.tlpButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).EndInit();
             this.ResumeLayout(false);
 
@@ -199,6 +218,7 @@
         private System.Windows.Forms.DataGridView dgItems;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.CheckBox cboxShowPreview;
     }
 }
 
