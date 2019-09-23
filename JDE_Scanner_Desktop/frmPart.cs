@@ -53,6 +53,7 @@ namespace JDE_Scanner_Desktop
             mode = 2;
             this.Text = "Szczegóły części";
             _this = Item;
+            files = new FileKeeper(this);
             txtName.Text = _this.Name;
             txtDescription.Text = _this.Description;
             txtEAN.Text = _this.EAN;
@@ -74,16 +75,6 @@ namespace JDE_Scanner_Desktop
 
         private async void SetComboboxes()
         {
-            //int sId;
-            //int pId;
-            //if (cmbProducer.SelectedItem != null)
-            //{
-            //    pId = (int)cmbProducer.SelectedValue;
-            //}
-            //if(cmbSupplier.SelectedItem != null)
-            //{
-            //    sId = (int)cmbSupplier.SelectedValue;
-            //}
             await producers.Refresh("TypeId=1");
             await suppliers.Refresh("TypeId=2");
             new AutoCompleteBehavior<Company>(cmbProducer, producers.Items);
@@ -131,9 +122,9 @@ namespace JDE_Scanner_Desktop
         {
             if (!string.IsNullOrEmpty(_this.Image))
             {
-                pbImage.Image = await img.GetAttachment(_this.Image, false);
+                pbImage.Image = await img.GetImage(_this.Image, false,true);
                 pbImage.SizeMode = PictureBoxSizeMode.Zoom;
-                //pbImage.Image = Image.FromFile(RuntimeSettings.LocalFilesPath);
+                img.Items.Add(new Models.File { Name = _this.Image, IsUploaded = true, Link = Path.Combine(RuntimeSettings.LocalFilesPath, _this.Image) });
             }
         }
         

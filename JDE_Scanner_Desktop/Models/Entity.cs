@@ -137,5 +137,43 @@ namespace JDE_Scanner_Desktop.Models
             }
 
         }
+
+        public async void Edit(string attachmentPath)
+        {
+            ModelValidator validator = new ModelValidator();
+            if (validator.Validate(this))
+            {
+                using (var client = new HttpClient())
+                {
+                    var serializedProduct = JsonConvert.SerializeObject(this, new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fff" });
+                    string url = Secrets.ApiAddress + $"Edit{typeof(T).Name}?token=" + Secrets.TenantToken + "&id={0}&UserId={1}" + $"&{typeof(T).Name}Json={serializedProduct}";
+                    MultipartFormDataContent content = new MultipartFormDataContent();
+                    try
+                    {
+                        using (var fileStream = System.IO.File.OpenRead(attachmentPath))
+                        {
+                            var fileInfo = new FileInfo(attachmentPath);
+                            StreamContent fcontent = new StreamContent(fileStream);
+                            fcontent.Headers.Add("Content-Type", "application/octet-stream");
+                            fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
+                            content.Add(fcontent, "file", fileInfo.Name);
+                            var result = await client.PutAsync(String.Format(url, this.Id, RuntimeSettings.UserId), content);
+                            if (result.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Edycja zakończona powodzeniem!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase);
+                            }
+                        }
+                    }catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+        }
     }
 }

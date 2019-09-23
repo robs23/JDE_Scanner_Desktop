@@ -23,11 +23,10 @@ namespace JDE_Scanner_Desktop
 
         public async void Load(string name, bool min)
         {
-            pbPic.Image = await files.GetAttachment(name, min);
+            pbPic.Image = await files.GetImage(name, min);
             pbPic.SizeMode = PictureBoxSizeMode.Zoom;
             this.Left = Cursor.Position.X + 30;
             this.Top = Cursor.Position.Y + 30;
-            this.Show();
         }
     }
 }

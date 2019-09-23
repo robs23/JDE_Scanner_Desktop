@@ -33,7 +33,7 @@ namespace JDE_Scanner_Desktop.Models
             OpenFileDialog.Multiselect = multiselect;
             OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG)|*.JPG;*.GIF;*.PNG";
 
-            if (OpenFileDialog.ShowDialog()== DialogResult.OK)
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 foreach (String file in OpenFileDialog.FileNames)
                 {
@@ -52,14 +52,14 @@ namespace JDE_Scanner_Desktop.Models
                         MessageBox.Show("Error: " + ex.Message);
                     }
                 }
-            } 
+            }
         }
 
         public async void DownloadFromCloud(bool? min = false)
         {
             if (this.Items.Any())
             {
-                foreach(File f in this.Items)
+                foreach (File f in this.Items)
                 {
 
                 }
@@ -77,7 +77,7 @@ namespace JDE_Scanner_Desktop.Models
             System.Diagnostics.Process.Start(Items[id].Link);
         }
 
-        public async Task<Image> GetAttachment(string name, bool min)
+        public async Task<Image> GetImage(string name, bool min, bool save = false)
         {
             bool success = false;
             using (var client = new HttpClient())
@@ -87,37 +87,85 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        
+
                         System.Net.Http.HttpContent content = response.Content;
                         var stream = Bitmap.FromStream(await response.Content.ReadAsStreamAsync());
+
+                        if (save)
+                        {
+                            FileStream fileStream = null;
+                            try
+                            {
+                                string path = Path.Combine(RuntimeSettings.LocalFilesPath, name);
+                                fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                                await content.CopyToAsync(fileStream).ContinueWith(
+                                    (copyTask) =>
+                                    {
+                                        fileStream.Close();
+                                    });
+                                success = true;
+                            }
+                            catch
+                            {
+
+                                if (fileStream != null)
+                                {
+                                    fileStream.Close();
+                                }
+
+                                throw;
+                            }
+                        }
+
                         return stream;
-                        //FileStream fileStream = null;
-                        //try
-                        //{
-                        //    string path = RuntimeSettings.LocalFilesPath;
-                        //    fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
-                        //    await content.CopyToAsync(fileStream).ContinueWith(
-                        //        (copyTask) =>
-                        //        {
-                        //            fileStream.Close();
-                        //        });
-                        //    success = true;
-                        //}
-                        //catch
-                        //{
-
-                        //    if (fileStream != null)
-                        //    {
-                        //        fileStream.Close();
-                        //    }
-
-                        //    throw;
-                        //}
 
                     }
                     return null;
                 }
             }
+        }
+
+        public async Task<bool> GetAttachment(string name, bool min)
+        {
+            bool success = false;
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"GetAttachment?token=" + Secrets.TenantToken + "&name=" + name + "&min=" + min;
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+
+                        System.Net.Http.HttpContent content = response.Content;
+
+                        FileStream fileStream = null;
+                        try
+                        {
+                            string path = Path.Combine(RuntimeSettings.LocalFilesPath, name);
+                            fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                            await content.CopyToAsync(fileStream).ContinueWith(
+                                (copyTask) =>
+                                {
+                                    fileStream.Close();
+                                });
+                            success = true;
+                        }
+                        catch
+                        {
+
+                            if (fileStream != null)
+                            {
+                                fileStream.Close();
+                            }
+
+                            throw;
+                        }
+
+                    }
+                    return success;
+                }
+            }
+
         }
     }
 }
