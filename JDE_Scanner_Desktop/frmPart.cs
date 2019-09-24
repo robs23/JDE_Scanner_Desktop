@@ -142,6 +142,11 @@ namespace JDE_Scanner_Desktop
             
             _this.ProducerId = cmbProducer.GetSelectedValue<Company>();
             _this.SupplierId = cmbSupplier.GetSelectedValue<Company>();
+            string photoPath = null;
+            if (img.Items.Any())
+            {
+                photoPath = img.Items[0].Link;
+            }
             try
             {
                 Looper.Show(this);
@@ -149,11 +154,7 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
-                    string photoPath = null;
-                    if (img.Items.Any())
-                    {
-                        photoPath = img.Items[0].Link;
-                    }
+                    
                     if(await _this.Add(photoPath))
                     {
                         if (files.Items.Where(i => i.IsUploaded == false).Any())
@@ -177,7 +178,7 @@ namespace JDE_Scanner_Desktop
                 }
                 else if (mode == 2)
                 {
-                    _this.Edit();
+                    _this.Edit(photoPath);
                 }
             }catch(Exception ex)
             {
