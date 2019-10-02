@@ -51,13 +51,14 @@ namespace JDE_Scanner_Desktop
 
         private void Add(object sender, EventArgs e)
         {
+            imagePreview.Visible = false;
             frmPart FrmPart = new frmPart(this);
             FrmPart.Show();
         }
 
         private void View(object sender, EventArgs e)
         {
-
+            imagePreview.Visible = false;
             int id = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
 
             Part item = new Part();
