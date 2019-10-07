@@ -19,6 +19,7 @@ namespace JDE_Scanner_Desktop
         frmLooper looper;
         frmFilter FrmFilter;
         int page;
+        BindingSource source = new BindingSource();
 
         public frmHandlings(frmStarter parent)
         {
@@ -31,8 +32,9 @@ namespace JDE_Scanner_Desktop
         {
             looper.Show(this);
             await Keeper.Refresh();
-            dgItems.DataSource = null;
-            dgItems.DataSource = Keeper.Items;
+            source.DataSource = Keeper.Items;
+            dgItems.DataSource = source;
+            source.ResetBindings(false);
             looper.Hide();
             page = 1;
             adjustColumnWidths();
@@ -102,7 +104,7 @@ namespace JDE_Scanner_Desktop
                 var visibleRowsCount = dgItems.DisplayedRowCount(true);
                 var firstDisplayedRowIndex = dgItems.FirstDisplayedScrollingRowIndex;
                 var lastvisibleRowIndex = (firstDisplayedRowIndex + visibleRowsCount);
-                if (lastvisibleRowIndex == RuntimeSettings.PageSize * page)
+                if (lastvisibleRowIndex >= RuntimeSettings.PageSize * page)
                 {
                     int x = dgItems.FirstDisplayedScrollingRowIndex;
                     looper.Show(this);
@@ -111,9 +113,7 @@ namespace JDE_Scanner_Desktop
                     bool _IsMore = await Keeper.GetMore(page);
                     if (_IsMore)
                     {
-                        dgItems.DataSource = null;
-                        dgItems.DataSource = Keeper.Items;
-                        dgItems.Refresh();
+                        source.ResetBindings(false);
                         dgItems.FirstDisplayedScrollingRowIndex = x;
                         looper.Hide();
                     }
@@ -123,8 +123,8 @@ namespace JDE_Scanner_Desktop
                         frmToast FrmToast = new frmToast(this, "Osiągnięto koniec rekordów");
                         FrmToast.Show(this);
                     }
-                    adjustColumnWidths();
-                    dgItems.Select();
+                    //adjustColumnWidths();
+                    //dgItems.Select();
                 }
             }
         }

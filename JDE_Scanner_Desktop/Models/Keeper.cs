@@ -13,6 +13,7 @@ namespace JDE_Scanner_Desktop.Models
     public interface IKeptable
     {
         string FilterString { get; set; }
+        string QueryString { get; set; }
     }
 
     public abstract class Keeper<T> : IKeptable
@@ -22,6 +23,7 @@ namespace JDE_Scanner_Desktop.Models
         protected abstract string PluralizedObjectName { get;}
 
         public string FilterString { get; set; } = null;
+        public string QueryString { get; set; } = null;
 
         public Keeper()
         {
@@ -91,6 +93,7 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 if (query != null)
                 {
+                    QueryString = query;
                     url += "&query=" + query;
                     if (this.FilterString != null)
                     {
@@ -119,6 +122,18 @@ namespace JDE_Scanner_Desktop.Models
             using (var client = new HttpClient())
             {
                 string url = Secrets.ApiAddress + $"Get{PluralizedObjectName}?token=" + Secrets.TenantToken + "&page=" + page;
+                if (QueryString != null)
+                {
+                    url += "&query=" + QueryString;
+                    if (this.FilterString != null)
+                    {
+                        url += "AND " + this.FilterString;
+                    }
+                }
+                else
+                {
+                    url += "&query=" + this.FilterString;
+                }
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
                     if (response.IsSuccessStatusCode)
@@ -135,7 +150,5 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
-
-        
     }
 }

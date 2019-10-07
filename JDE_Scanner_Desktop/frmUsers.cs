@@ -18,7 +18,8 @@ namespace JDE_Scanner_Desktop
         UsersKeeper Keeper = new UsersKeeper();
         frmLooper looper;
         int page;
-
+        BindingSource source = new BindingSource();
+        
         public frmUsers(frmStarter parent)
         {
             InitializeComponent();
@@ -30,8 +31,9 @@ namespace JDE_Scanner_Desktop
         {
             looper.Show(this);
             await Keeper.Refresh();
-            dgUsers.DataSource = null;
-            dgUsers.DataSource = Keeper.Items;
+            source.DataSource = Keeper.Items;
+            dgUsers.DataSource = source;
+            source.ResetBindings(false);
             looper.Hide();
             page = 1;
         }
@@ -98,7 +100,7 @@ namespace JDE_Scanner_Desktop
                 var visibleRowsCount = dgUsers.DisplayedRowCount(true);
                 var firstDisplayedRowIndex = dgUsers.FirstDisplayedScrollingRowIndex;
                 var lastvisibleRowIndex = (firstDisplayedRowIndex + visibleRowsCount);
-                if (lastvisibleRowIndex == RuntimeSettings.PageSize * page)
+                if (lastvisibleRowIndex >= RuntimeSettings.PageSize * page)
                 {
                     int x = dgUsers.FirstDisplayedScrollingRowIndex;
                     looper.Show(this);
@@ -107,9 +109,7 @@ namespace JDE_Scanner_Desktop
                     bool _IsMore = await Keeper.GetMore(page);
                     if (_IsMore)
                     {
-                        dgUsers.DataSource = null;
-                        dgUsers.DataSource = Keeper.Items;
-                        dgUsers.Refresh();
+                        source.ResetBindings(false);
                         dgUsers.FirstDisplayedScrollingRowIndex = x;
                         looper.Hide();
                     }

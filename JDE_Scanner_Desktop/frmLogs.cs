@@ -18,6 +18,7 @@ namespace JDE_Scanner_Desktop
         LogsKeeper Keeper = new LogsKeeper();
         frmLooper looper;
         frmFilter FrmFilter;
+        BindingSource source = new BindingSource();
         int page;
 
         public frmLogs(frmStarter parent)
@@ -31,8 +32,9 @@ namespace JDE_Scanner_Desktop
         {
             looper.Show(this);
             await Keeper.Refresh();
-            dgItems.DataSource = null;
-            dgItems.DataSource = Keeper.Items;
+            source.DataSource = Keeper.Items;
+            dgItems.DataSource = source;
+            source.ResetBindings(false);
             looper.Hide();
             page = 1;
             adjustColumnWidths();
@@ -94,18 +96,15 @@ namespace JDE_Scanner_Desktop
                 var visibleRowsCount = dgItems.DisplayedRowCount(true);
                 var firstDisplayedRowIndex = dgItems.FirstDisplayedScrollingRowIndex;
                 var lastvisibleRowIndex = (firstDisplayedRowIndex + visibleRowsCount);
-                if (lastvisibleRowIndex == RuntimeSettings.PageSize*page)
+                if (lastvisibleRowIndex >= RuntimeSettings.PageSize*page)
                 {
                     int x = dgItems.FirstDisplayedScrollingRowIndex;
                     looper.Show(this);
                     page++;
                     //int nextPage = (int)Math.Ceiling((double)((double)dgItems.Rows.Count / (double)RuntimeSettings.PageSize)) + 1;
                     bool _IsMore = await Keeper.GetMore(page);
-                    if (_IsMore)
-                    {
-                        dgItems.DataSource = null;
-                        dgItems.DataSource = Keeper.Items;
-                        dgItems.Refresh();
+                    if (_IsMore) {
+                        source.ResetBindings(false);
                         dgItems.FirstDisplayedScrollingRowIndex = x;
                         looper.Hide();
                     }
