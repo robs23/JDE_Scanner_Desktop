@@ -195,12 +195,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_84E3D8BBE262D29C42C5AE5BF6AF51C6"
-        "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_8601EC56608B8890C78A92A96B2B7FB6"
         "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
         "MsmSig" = "8:_UNDEFINED"
@@ -244,6 +238,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9924B5A2FC4194EBE65016FBC3451767"
+        "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9BCD711A858A987387C12E3262C6A670"
         "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -443,12 +443,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A9A88224D9DA4C52A2E150AF8964DADF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_84E3D8BBE262D29C42C5AE5BF6AF51C6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -821,6 +815,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9BD37459559644002325C786A1DC31C0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9BCD711A858A987387C12E3262C6A670"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1806,37 +1806,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_84E3D8BBE262D29C42C5AE5BF6AF51C6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DgvFilterPopup, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_84E3D8BBE262D29C42C5AE5BF6AF51C6"
-                    {
-                    "Name" = "8:DgvFilterPopup.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:DgvFilterPopup.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8601EC56608B8890C78A92A96B2B7FB6"
             {
             "AssemblyRegister" = "3:1"
@@ -2037,6 +2006,37 @@
                     }
                 }
             "SourcePath" = "8:System.Reflection.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9BCD711A858A987387C12E3262C6A670"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DgvFilterPopup, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_9BCD711A858A987387C12E3262C6A670"
+                    {
+                    "Name" = "8:DgvFilterPopup.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DgvFilterPopup.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"
@@ -2989,15 +2989,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:JDE Scanner"
-        "ProductCode" = "8:{CDFA49A1-1484-4D40-96C9-1149AC6894EF}"
-        "PackageCode" = "8:{CF581FB8-6636-4C36-ABA6-AE55B6618309}"
+        "ProductCode" = "8:{740BC1EC-ED2C-474D-886F-7CC7BD95B313}"
+        "PackageCode" = "8:{CCFF0DE7-20BE-45F2-AAA3-BC859496FB4D}"
         "UpgradeCode" = "8:{C2E5CE09-E7CB-4892-AD98-66DA0089C5CA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:JDE"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -3539,7 +3539,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A9A88224D9DA4C52A2E150AF8964DADF"
             {
-            "SourcePath" = "8:..\\JDE_Scanner_Desktop\\obj\\Release\\JDE_Scanner_Desktop.exe"
+            "SourcePath" = "8:..\\JDE_Scanner_Desktop\\obj\\Debug\\JDE_Scanner_Desktop.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2B259E1B016D46B8B196BAA06F27CE5A"

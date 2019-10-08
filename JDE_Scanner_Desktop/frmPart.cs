@@ -286,7 +286,7 @@ namespace JDE_Scanner_Desktop
 
         private void btnAttach_Click(object sender, EventArgs e)
         {
-            files.ShowFiles();
+            //files.ShowFiles();
         }
 
         private void pbImage_DoubleClick(object sender, EventArgs e)
