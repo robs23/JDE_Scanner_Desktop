@@ -13,14 +13,16 @@ using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class User
+    public class User :Entity<User>
     {
         [DisplayName("ID")]
         public int UserId { get; set; }
-        [Browsable(false)]
-        public int TenantId { get; set; }
-        [Browsable(false)]
-        public string TenantName { get; set; }
+        public override int Id
+        {
+            set => value = UserId;
+            get => UserId;
+        }
+
         [Required(AllowEmptyStrings =false, ErrorMessage ="Pole imię nie może być puste!")]
         [DisplayName("Imię")]
         [Browsable(false)]
@@ -46,41 +48,28 @@ namespace JDE_Scanner_Desktop.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pole Login MES nie może być puste!")]
         [DisplayName("Login MES")]
         public string MesLogin { get; set; }
-        [DisplayName("Data utworzenia")]
-        public DateTime? CreatedOn { get; set; }
-        [Browsable(false)]
-        public int CreatedBy { get; set; }
-        [DisplayName("Utworzył")]
-        public string CreatedByName { get; set; }
         [DisplayName("Ostatnie logowanie")]
         public DateTime? LastLoggedOn { get; set; }
-        
 
-        public async Task<bool> Add()
+        public async override Task<bool> Add()
         {
-            ModelValidator validator = new ModelValidator();
-            if (validator.Validate(this))
+            bool x;
+            x = await base.Add();
+
+            if (x)
             {
-                using (var client = new HttpClient())
+                try
                 {
-                    string url = Secrets.ApiAddress + "CreateUser?token=" + Secrets.TenantToken + "&UserId="+RuntimeSettings.UserId;
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PostAsync(new Uri(url), content);
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var rString = await result.Content.ReadAsStringAsync();
-                        User _this = JsonConvert.DeserializeObject<User>(rString);
-                        this.UserId = _this.UserId;
-                        MessageBox.Show("Tworzenie użytkownika zakończone powodzeniem!");
-                        return true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia użytkownika. Wiadomość: " + result.ReasonPhrase);
-                        return false;
-                    }
+                    User _this = JsonConvert.DeserializeObject<User>(AddedItem);
+                    this.UserId = _this.UserId;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
+                return true;
             }
             else
             {
@@ -88,38 +77,16 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void Edit()
+
+        public async void Login()
         {
-            ModelValidator validator = new ModelValidator();
-            if (validator.Validate(this))
+            using (var client = new HttpClient())
             {
-                using (var client = new HttpClient())
-                {
-                    string url = Secrets.ApiAddress + "EditUser?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format(url, this.UserId, RuntimeSettings.UserId), content);
-                    if (result.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("Edycja użytkownika zakończona powodzeniem!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie edycji użytkownika. Wiadomość: " + result.ReasonPhrase);
-                    }
-                }
+                string url = Secrets.ApiAddress + "LogIn?token=" + Secrets.TenantToken + "&id=";
+                var serializedProduct = JsonConvert.SerializeObject(this);
+                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), this.UserId), content);
             }
         }
-
-            public async void Login()
-            {
-                using (var client = new HttpClient())
-                {
-                    string url = Secrets.ApiAddress + "LogIn?token=" + Secrets.TenantToken + "&id=";
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format("{0}{1}", new Uri(url), this.UserId), content);
-                }
-            }
     }
 }
