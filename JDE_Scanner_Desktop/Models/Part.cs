@@ -34,7 +34,7 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Kod producenta")]
         public string ProducentsCode { get; set; }
         [Browsable(false)]
-        [Required(ErrorMessage = "Wybierz dostawcę z rozwijanej listy! Jeśli lista jest pusta, dodaj korzystając z przycisku + obok listy")]
+        //[Required(ErrorMessage = "Wybierz dostawcę z rozwijanej listy! Jeśli lista jest pusta, dodaj korzystając z przycisku + obok listy")]
         public Nullable<int> SupplierId { get; set; }
         [DisplayName("Dostawca")]
         public string SupplierName { get; set; }
