@@ -279,6 +279,8 @@
     <Compile Include="frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Action.cs" />
+    <Compile Include="Models\ActionKeeper.cs" />
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\ActionTypesKeeper.cs" />
     <Compile Include="Models\Area.cs" />
@@ -301,6 +303,8 @@
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\PartKeeper.cs" />
     <Compile Include="Models\Process.cs" />
+    <Compile Include="Models\ProcessAction.cs" />
+    <Compile Include="Models\ProcessActionsKeeper.cs" />
     <Compile Include="Models\ProcessesKeeper.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\SetsKeeper.cs" />

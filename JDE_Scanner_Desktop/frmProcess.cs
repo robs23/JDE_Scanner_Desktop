@@ -225,6 +225,7 @@ namespace JDE_Scanner_Desktop
             cmbStatus.SelectedIndex = cmbStatus.FindStringExact(_this.Status);
             _this.Handlings = new HandlingsKeeper();
             _this.Logs = new LogsKeeper();
+            _this.ProcessActions = new ProcessActionsKeeper();
             if (_this.StartedOn != null)
             {
                 LoadHandlings();
@@ -235,6 +236,7 @@ namespace JDE_Scanner_Desktop
             {
                 txtFinishedOn.Value = (DateTime)_this.FinishedOn;
             }
+            LoadActions();
             ChangeLook();
             Looper.Hide();
         }
@@ -278,6 +280,21 @@ namespace JDE_Scanner_Desktop
             {
                 lvHandlings.View = View.List;
                 lvHandlings.Items.Add(new ListViewItem("Brak danych"));
+                return false;
+            }
+        }
+
+        private async Task<bool> LoadActions()
+        {
+            await _this.ProcessActions.GetByProcessId(_this.ProcessId);
+            if (_this.ProcessActions.Items.Any())
+            {
+                dgvActions.DataSource = _this.ProcessActions.Items;
+                dgvActions.Columns["ProcessId"].Visible = false;
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }

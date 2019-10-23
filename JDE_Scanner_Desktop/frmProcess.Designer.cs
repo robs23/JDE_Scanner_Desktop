@@ -74,6 +74,8 @@
             this.lvHandlings = new System.Windows.Forms.ListView();
             this.pgHistory = new System.Windows.Forms.TabPage();
             this.lvHistory = new System.Windows.Forms.ListView();
+            this.pgActions = new System.Windows.Forms.TabPage();
+            this.dgvActions = new System.Windows.Forms.DataGridView();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -83,6 +85,8 @@
             this.tlpFinishedOn.SuspendLayout();
             this.pgHandling.SuspendLayout();
             this.pgHistory.SuspendLayout();
+            this.pgActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvActions)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -182,6 +186,7 @@
             this.tab.Controls.Add(this.pgProcess);
             this.tab.Controls.Add(this.pgHandling);
             this.tab.Controls.Add(this.pgHistory);
+            this.tab.Controls.Add(this.pgActions);
             this.tab.Location = new System.Drawing.Point(3, 43);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
@@ -619,6 +624,28 @@
             this.lvHistory.UseCompatibleStateImageBehavior = false;
             this.lvHistory.View = System.Windows.Forms.View.Details;
             // 
+            // pgActions
+            // 
+            this.pgActions.Controls.Add(this.dgvActions);
+            this.pgActions.Location = new System.Drawing.Point(4, 22);
+            this.pgActions.Name = "pgActions";
+            this.pgActions.Padding = new System.Windows.Forms.Padding(3);
+            this.pgActions.Size = new System.Drawing.Size(588, 424);
+            this.pgActions.TabIndex = 3;
+            this.pgActions.Text = "Czynności";
+            this.pgActions.UseVisualStyleBackColor = true;
+            // 
+            // dgvActions
+            // 
+            this.dgvActions.AllowUserToAddRows = false;
+            this.dgvActions.AllowUserToDeleteRows = false;
+            this.dgvActions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvActions.Location = new System.Drawing.Point(3, 3);
+            this.dgvActions.Name = "dgvActions";
+            this.dgvActions.ReadOnly = true;
+            this.dgvActions.Size = new System.Drawing.Size(582, 418);
+            this.dgvActions.TabIndex = 0;
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,6 +670,8 @@
             this.tlpFinishedOn.PerformLayout();
             this.pgHandling.ResumeLayout(false);
             this.pgHistory.ResumeLayout(false);
+            this.pgActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvActions)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -692,5 +721,7 @@
         private System.Windows.Forms.DateTimePicker txtPlannedFinish;
         private System.Windows.Forms.TabPage pgHistory;
         private System.Windows.Forms.ListView lvHistory;
+        private System.Windows.Forms.TabPage pgActions;
+        private System.Windows.Forms.DataGridView dgvActions;
     }
 }
