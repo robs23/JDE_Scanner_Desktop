@@ -639,6 +639,9 @@
             // 
             this.dgvActions.AllowUserToAddRows = false;
             this.dgvActions.AllowUserToDeleteRows = false;
+            this.dgvActions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvActions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvActions.Location = new System.Drawing.Point(3, 3);
             this.dgvActions.Name = "dgvActions";

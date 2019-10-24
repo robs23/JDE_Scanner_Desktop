@@ -194,5 +194,11 @@ namespace JDE_Scanner_Desktop
             frmPart FrmPart = new frmPart(this);
             FrmPart.Show(this);
         }
+
+        private void konserwacjeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProcessActions FrmProcessActions = new frmProcessActions(this);
+            FrmProcessActions.Show(this);
+        }
     }
 }

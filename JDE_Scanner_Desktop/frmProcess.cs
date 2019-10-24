@@ -291,6 +291,9 @@ namespace JDE_Scanner_Desktop
             {
                 dgvActions.DataSource = _this.ProcessActions.Items;
                 dgvActions.Columns["ProcessId"].Visible = false;
+                dgvActions.Columns["PlannedStart"].Visible = false;
+                dgvActions.Columns["PlannedFinish"].Visible = false;
+                dgvActions.Columns["PlaceName"].Visible = false;
                 return true;
             }
             else
