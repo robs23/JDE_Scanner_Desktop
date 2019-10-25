@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JDE_Scanner_Desktop.Classes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ namespace JDE_Scanner_Desktop.Models
         [Browsable(false)]
         public Nullable<int> ProcessId { get; set; }
         [DisplayName("Planowany start")]
+        [Mergable(true)]
         public Nullable<DateTime> PlannedStart { get; set; }
         [DisplayName("Planowany koniec")]
         public Nullable<DateTime> PlannedFinish { get; set; }
@@ -122,6 +124,56 @@ namespace JDE_Scanner_Desktop.Models
             {
                 return false;
             }
+        }
+
+        //public bool Evaluate(string propertyName, object attributeType)
+        //{
+
+        //    try
+        //    {
+        //        //AttributeCollection attributes = TypeDescriptor.GetAttributes(PlannedStart);
+        //        AttributeCollection attributes = TypeDescriptor.GetProperties(this)["PlannedStart"].Attributes;
+        //        foreach(var a in attributes)
+        //        {
+        //            if (a.GetType() == typeof(MergableAttribute))
+        //            {
+        //                return ((MergableAttribute)a).Mergable;
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    return false; //((MergableAttribute)attributes[typeof(MergableAttribute)]).Mergable;
+
+        //}
+
+        public bool Evaluate(string propertyName, Type attributeType)
+        {
+
+            try
+            {
+                //AttributeCollection attributes = TypeDescriptor.GetAttributes(PlannedStart);
+                AttributeCollection attributes = TypeDescriptor.GetProperties(this)["PlannedStart"].Attributes;
+                foreach (var a in attributes)
+                {
+                    if (a.GetType() == attributeType)
+                    {
+                        return a.Equals(true);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            return false; //((MergableAttribute)attributes[typeof(MergableAttribute)]).Mergable;
+
         }
     }
 }

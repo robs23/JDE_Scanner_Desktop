@@ -84,7 +84,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AttributeEvaluator.cs" />
     <Compile Include="Classes\AutoCompleteBehavior.cs" />
+    <Compile Include="Classes\MergableAttribute.cs" />
     <Compile Include="Classes\ModelValidator.cs" />
     <Compile Include="ClientSettings.cs" />
     <Compile Include="frmActionType.cs">

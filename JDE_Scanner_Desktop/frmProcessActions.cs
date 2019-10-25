@@ -1,4 +1,5 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -49,8 +50,17 @@ namespace JDE_Scanner_Desktop
 
         private void Add(object sender, EventArgs e)
         {
-            frmProcess FrmProcess = new frmProcess(this);
-            FrmProcess.Show();
+            AttributeEvaluator evaluator = new AttributeEvaluator();
+            if (evaluator.Evaluate(Keeper.Items.FirstOrDefault(), "Mergable"))
+            {
+                MessageBox.Show("Wartość TRUE");
+            }
+            else
+            {
+                MessageBox.Show("Wartość FALSE");
+            }
+            //frmProcess FrmProcess = new frmProcess(this);
+            //FrmProcess.Show();
         }
 
         private void View(object sender, EventArgs e)
@@ -200,5 +210,20 @@ namespace JDE_Scanner_Desktop
             }
             
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+            bool x = new AttributeEvaluator().Evaluate(new ProcessAction(), "PlannedStart");
+            if (x)
+            {
+                MessageBox.Show("Wartość TRUE");
+            }
+            else
+            {
+                MessageBox.Show("Wartość FALSE");
+            }
+        }
+        
     }
 }

@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfiBBILIhrOTXlG
-        AAAAiklEQVRIS+2PQQqFQAxDZ+XZvJkg/HMKXkLbD4EuKkRSFKEPQjJMSelomuZtjkTlZEtYSWSFrL7L
-        nQtKr41ljCPLxDLGkWViGePIMrGMcWSZWMY4skwsYxxZJpYxjiwTyxhHltlNXjb/X9f4v8/5fAmLCZcw
-        Wk0lTKafaTNliyD/9zmfb5rmCcY4Ae6pgO9QbOyrAAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnRefresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -138,6 +129,18 @@
         4fvhK9K8x5HjnGVZ1l+1wh5nHJFhlnY4QZbJ0gveAwWiJifqL6gG3x8tUkRpjRe0RZotoiT/TlswJsfP
         HaANn9Jgg+Ce0Ab7uCO4B7ShPuReBFdCG+rjiuAS3KAN/qbGbA+KZVnWEjnXAQdydROusqEhAAAAAElF
         TkSuQmCC
+</value>
+  </data>
+  <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACwwAAAsMAT9AIsgAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfiBBILIhrOTXlG
+        AAAAiklEQVRIS+2PQQqFQAxDZ+XZvJkg/HMKXkLbD4EuKkRSFKEPQjJMSelomuZtjkTlZEtYSWSFrL7L
+        nQtKr41ljCPLxDLGkWViGePIMrGMcWSZWMY4skwsYxxZJpYxjiwTyxhHltlNXjb/X9f4v8/5fAmLCZcw
+        Wk0lTKafaTNliyD/9zmfb5rmCcY4Ae6pgO9QbOyrAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
