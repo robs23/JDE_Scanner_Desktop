@@ -26,8 +26,10 @@ namespace JDE_Scanner_Desktop.Models
         [Mergable(true)]
         public Nullable<DateTime> PlannedStart { get; set; }
         [DisplayName("Planowany koniec")]
+        [Mergable(true)]
         public Nullable<DateTime> PlannedFinish { get; set; }
         [DisplayName("Zasób")]
+        [Mergable(true)]
         public string PlaceName { get; set; }
         [Browsable(false)]
         public Nullable<int> ActionId { get; set; }
@@ -44,6 +46,7 @@ namespace JDE_Scanner_Desktop.Models
         [Browsable(false)]
         public List<Handling> Handlings { get; set; }
         [DisplayName("Długość [min]")]
+        [Mergable(true)]
         public int? Length
         {
             get
@@ -69,6 +72,7 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
         [DisplayName("Rozpoczęcie")]
+        [Mergable(true)]
         public DateTime? StartedOn { get
             {
                 if (Handlings.Any())
@@ -79,6 +83,7 @@ namespace JDE_Scanner_Desktop.Models
             }        
         }
         [DisplayName("Zakończenie")]
+        [Mergable(true)]
         public DateTime? FinishedOn
         {
             get
@@ -100,6 +105,7 @@ namespace JDE_Scanner_Desktop.Models
         }
         
         [DisplayName("Obsługujący")]
+        [Mergable(true)]
         public string HandlingUsers { get { return string.Join(", ", Handlings.GroupBy(h=>h.UserName).Select(h=>h.Key)); } }
 
         public async override Task<bool> Add()
@@ -126,54 +132,5 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        //public bool Evaluate(string propertyName, object attributeType)
-        //{
-
-        //    try
-        //    {
-        //        //AttributeCollection attributes = TypeDescriptor.GetAttributes(PlannedStart);
-        //        AttributeCollection attributes = TypeDescriptor.GetProperties(this)["PlannedStart"].Attributes;
-        //        foreach(var a in attributes)
-        //        {
-        //            if (a.GetType() == typeof(MergableAttribute))
-        //            {
-        //                return ((MergableAttribute)a).Mergable;
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    return false; //((MergableAttribute)attributes[typeof(MergableAttribute)]).Mergable;
-
-        //}
-
-        public bool Evaluate(string propertyName, Type attributeType)
-        {
-
-            try
-            {
-                //AttributeCollection attributes = TypeDescriptor.GetAttributes(PlannedStart);
-                AttributeCollection attributes = TypeDescriptor.GetProperties(this)["PlannedStart"].Attributes;
-                foreach (var a in attributes)
-                {
-                    if (a.GetType() == attributeType)
-                    {
-                        return a.Equals(true);
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message);
-            }
-            return false; //((MergableAttribute)attributes[typeof(MergableAttribute)]).Mergable;
-
-        }
     }
 }

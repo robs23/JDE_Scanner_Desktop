@@ -1,4 +1,5 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Models;
 using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
 using QRCoder;
@@ -165,7 +166,7 @@ namespace JDE_Scanner_Desktop
         {
             Looper = new frmLooper(this);
             Looper.Show(this);
-            await Places.Refresh();
+            await Places.Refresh(null,'a');
             await StartingUsers.Refresh();
             FinishingUsers.Items = new List<User>(StartingUsers.Items); 
             await ActionTypes.Refresh();
@@ -290,10 +291,13 @@ namespace JDE_Scanner_Desktop
             if (_this.ProcessActions.Items.Any())
             {
                 dgvActions.DataSource = _this.ProcessActions.Items;
-                dgvActions.Columns["ProcessId"].Visible = false;
+                //dgvActions.Columns["ProcessId"].Visible = false;
                 dgvActions.Columns["PlannedStart"].Visible = false;
                 dgvActions.Columns["PlannedFinish"].Visible = false;
                 dgvActions.Columns["PlaceName"].Visible = false;
+                AttributeEvaluator evaluator = new AttributeEvaluator(new ProcessAction());
+                List<string> cols = evaluator.PropertiesByValueBool(true, typeof(MergableAttribute), "Mergable");
+                DgvMerger merger = new DgvMerger(dgvActions, cols);
                 return true;
             }
             else

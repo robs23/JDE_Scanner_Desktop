@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace JDE_Scanner_Desktop
 {
     public partial class frmProcessActions : Form
@@ -46,21 +47,17 @@ namespace JDE_Scanner_Desktop
             looper = new frmLooper(this);
             looper.TopMost = true;
             Reload();
+
+            AttributeEvaluator evaluator = new AttributeEvaluator(new ProcessAction());
+            List<string> cols = evaluator.PropertiesByValueBool(true, typeof(MergableAttribute), "Mergable");
+            DgvMerger merger = new DgvMerger(dgItems, cols);
         }
 
         private void Add(object sender, EventArgs e)
         {
-            AttributeEvaluator evaluator = new AttributeEvaluator();
-            if (evaluator.Evaluate(Keeper.Items.FirstOrDefault(), "Mergable"))
-            {
-                MessageBox.Show("Wartość TRUE");
-            }
-            else
-            {
-                MessageBox.Show("Wartość FALSE");
-            }
-            //frmProcess FrmProcess = new frmProcess(this);
-            //FrmProcess.Show();
+            
+            frmProcess FrmProcess = new frmProcess(this);
+            FrmProcess.Show();
         }
 
         private void View(object sender, EventArgs e)
@@ -166,55 +163,9 @@ namespace JDE_Scanner_Desktop
             }
         }
 
-        private void dgItems_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
-        {
-            if(e.ColumnIndex == 1 || e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-                e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.None;
-                if (e.RowIndex < 1 || e.ColumnIndex < 0)
-                    return;
-                if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
-                {
-                    e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
-                }
-                else
-                {
-                    e.AdvancedBorderStyle.Top = dgItems.AdvancedCellBorderStyle.Top;
-                }
-            }
-            
-        }
-
-        bool IsTheSameCellValue(int column, int row)
-        {
-            DataGridViewCell cell1 = dgItems[column, row];
-            DataGridViewCell cell2 = dgItems[column, row - 1];
-            if (cell1.Value == null || cell2.Value == null)
-            {
-                return false;
-            }
-            return cell1.Value.ToString() == cell2.Value.ToString();
-        }
-
-        private void dgItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == 1 || e.ColumnIndex == 2 || e.ColumnIndex == 3)
-            {
-                if (e.RowIndex == 0)
-                    return;
-                if (IsTheSameCellValue(e.ColumnIndex, e.RowIndex))
-                {
-                    e.Value = "";
-                    e.FormattingApplied = true;
-                }
-            }
-            
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
-            bool x = new AttributeEvaluator().Evaluate(new ProcessAction(), "PlannedStart");
+            bool x = new AttributeEvaluator(new ProcessAction()).Evaluate("PlannedFinish", typeof(MergableAttribute), "Mergable");
             if (x)
             {
                 MessageBox.Show("Wartość TRUE");
@@ -224,6 +175,21 @@ namespace JDE_Scanner_Desktop
                 MessageBox.Show("Wartość FALSE");
             }
         }
-        
+
+
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+
+        //    bool x = new AttributeEvaluator().Evaluate(new ProcessAction(), "PlannedFinish", typeof(MergableAttribute));
+        //    if (x)
+        //    {
+        //        MessageBox.Show("Wartość TRUE");
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Wartość FALSE");
+        //    }
+        //}
+
     }
 }
