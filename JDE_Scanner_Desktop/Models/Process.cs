@@ -166,6 +166,8 @@ namespace JDE_Scanner_Desktop.Models
         public HandlingsKeeper Handlings { get; set; }
         [Browsable(false)]
         public LogsKeeper Logs { get; set; }
+        [DisplayName("Przypisani obsługujący")]
+        public string AssignedUserNames { get; set; }
         [Browsable(false)]
         public ProcessActionsKeeper ProcessActions { get; set; }
 

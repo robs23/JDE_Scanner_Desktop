@@ -73,36 +73,11 @@ namespace JDE_Scanner_Desktop.Models
         }
         [DisplayName("Rozpoczęcie")]
         [Mergable(true)]
-        public DateTime? StartedOn { get
-            {
-                if (Handlings.Any())
-                {
-                    return Handlings.OrderBy(h => h.StartedOn).FirstOrDefault().StartedOn;
-                }
-                return null;
-            }        
-        }
+        public DateTime? StartedOn { get; set; }
         [DisplayName("Zakończenie")]
         [Mergable(true)]
-        public DateTime? FinishedOn
-        {
-            get
-            {
-                if (Handlings.Any())
-                {
-                    if (Handlings.Where(h => h.FinishedOn != null).Any())
-                    {
-                        return Handlings.Where(h => h.FinishedOn != null).OrderByDescending(h => h.FinishedOn).FirstOrDefault().FinishedOn;
-                    }
-                    else
-                    {
-                        return DateTime.Now;
-                    }
-                }
-                
-                return null;
-            }
-        }
+        public DateTime? FinishedOn { get; set; }
+        
         
         [DisplayName("Obsługujący")]
         [Mergable(true)]
