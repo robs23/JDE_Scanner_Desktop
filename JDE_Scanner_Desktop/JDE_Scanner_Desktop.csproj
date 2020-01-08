@@ -105,6 +105,9 @@
     <Compile Include="Classes\MergableAttribute.cs" />
     <Compile Include="Classes\ModelValidator.cs" />
     <Compile Include="ClientSettings.cs" />
+    <Compile Include="CustomControls\DBDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="frmActionType.cs">
       <SubType>Form</SubType>
     </Compile>

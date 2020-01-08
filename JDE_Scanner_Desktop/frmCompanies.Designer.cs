@@ -1,4 +1,6 @@
-﻿namespace JDE_Scanner_Desktop
+﻿using JDE_Scanner_Desktop.CustomControls;
+
+namespace JDE_Scanner_Desktop
 {
     partial class frmCompanies
     {
@@ -35,7 +37,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgItems = new System.Windows.Forms.DataGridView();
+            this.dgItems = new DBDataGridView();
+            this.dgItems.DoubleBuffered = true;
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.btnFilter = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
@@ -184,7 +187,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ToolTip tooltip;
-        private System.Windows.Forms.DataGridView dgItems;
+        private DBDataGridView dgItems;
         private System.Windows.Forms.Button btnFilter;
     }
 }
