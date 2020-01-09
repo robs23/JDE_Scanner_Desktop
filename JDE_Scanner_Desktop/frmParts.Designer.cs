@@ -40,8 +40,8 @@ namespace JDE_Scanner_Desktop
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.cboxShowPreview = new System.Windows.Forms.CheckBox();
-            this.dgItems = new DBDataGridView();
-            this.dgItems.DoubleBuffered = true;
+            this.btnArchive = new System.Windows.Forms.Button();
+            this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
@@ -70,7 +70,8 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 6;
+            this.tlpButtons.ColumnCount = 7;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -82,7 +83,8 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
             this.tlpButtons.Controls.Add(this.btnPrint, 4, 0);
             this.tlpButtons.Controls.Add(this.btnFilter, 3, 0);
-            this.tlpButtons.Controls.Add(this.cboxShowPreview, 5, 0);
+            this.tlpButtons.Controls.Add(this.cboxShowPreview, 6, 0);
+            this.tlpButtons.Controls.Add(this.btnArchive, 5, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -168,12 +170,26 @@ namespace JDE_Scanner_Desktop
             this.cboxShowPreview.AutoSize = true;
             this.cboxShowPreview.Checked = true;
             this.cboxShowPreview.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxShowPreview.Location = new System.Drawing.Point(203, 3);
+            this.cboxShowPreview.Location = new System.Drawing.Point(243, 3);
             this.cboxShowPreview.Name = "cboxShowPreview";
             this.cboxShowPreview.Size = new System.Drawing.Size(105, 28);
             this.cboxShowPreview.TabIndex = 5;
             this.cboxShowPreview.Text = "Pokazuj podgląd";
             this.cboxShowPreview.UseVisualStyleBackColor = true;
+            // 
+            // btnArchive
+            // 
+            this.btnArchive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnArchive.Image = global::JDE_Scanner_Desktop.Properties.Resources.archive_24;
+            this.btnArchive.Location = new System.Drawing.Point(203, 3);
+            this.btnArchive.Name = "btnArchive";
+            this.btnArchive.Size = new System.Drawing.Size(34, 28);
+            this.btnArchive.TabIndex = 6;
+            this.tooltip.SetToolTip(this.btnArchive, "Przenieś zaznaczone wiersze do archiwum");
+            this.btnArchive.UseVisualStyleBackColor = true;
+            this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
             // dgItems
             // 
@@ -181,6 +197,7 @@ namespace JDE_Scanner_Desktop
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.DoubleBuffered = true;
             this.dgItems.Location = new System.Drawing.Point(3, 43);
             this.dgItems.Name = "dgItems";
             this.dgItems.Size = new System.Drawing.Size(565, 330);
@@ -215,13 +232,14 @@ namespace JDE_Scanner_Desktop
         private System.Windows.Forms.TableLayoutPanel tlpMain;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TableLayoutPanel tlpButtons;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ToolTip tooltip;
         private DBDataGridView dgItems;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.CheckBox cboxShowPreview;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnArchive;
     }
 }
 

@@ -33,6 +33,8 @@ namespace JDE_Scanner_Desktop.Models
         public int TenantId { get; set; }
         [Browsable(false)]
         public string TenantName { get; set; }
+        [DisplayName("Archiwalny")]
+        public bool? IsArchived { get; set; }
         [Browsable(false)]
         public string AddedItem { get; set; }
 

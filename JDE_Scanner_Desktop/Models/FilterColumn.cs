@@ -68,6 +68,7 @@ namespace JDE_Scanner_Desktop.Models
     {
         Text,
         Number,
-        Date
+        Date,
+        Boolean
     }
 }

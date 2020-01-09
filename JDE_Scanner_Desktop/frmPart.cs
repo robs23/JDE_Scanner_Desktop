@@ -38,6 +38,7 @@ namespace JDE_Scanner_Desktop
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 1;
             lblCreated.Visible = false;
+            cboxArchived.CheckState = CheckState.Indeterminate;
             this.Text = "Nowa część";
             _this = new Part();
             files = new FileKeeper(this);
@@ -62,6 +63,7 @@ namespace JDE_Scanner_Desktop
             txtAppliance.Text = _this.Appliance;
             txtDestination.Text = _this.Destination;
             txtUsedOn.Text = _this.UsedOn;
+            cboxArchived.CheckState  = _this.IsArchived.ToCheckboxState();
             if(_this.CreatedOn != null && _this.CreatedBy != 0)
             {
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
@@ -139,7 +141,7 @@ namespace JDE_Scanner_Desktop
             _this.Destination = txtDestination.Text;
             _this.Appliance = txtAppliance.Text;
             _this.UsedOn = txtUsedOn.Text;
-            
+            _this.IsArchived = cboxArchived.CheckState.CheckboxStateToNullableBool();
             _this.ProducerId = cmbProducer.GetSelectedValue<Company>();
             _this.SupplierId = cmbSupplier.GetSelectedValue<Company>();
             string photoPath = null;

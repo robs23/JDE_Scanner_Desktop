@@ -109,10 +109,32 @@ namespace JDE_Scanner_Desktop
                             }
                         }
                     }
+                    else if(col.ValueType == FilterColumnValueType.Boolean)
+                    {
+                        val = (TextBox)this.Controls.Find(col.Name, true).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(val.Text))
+                        {
+                            bool bVal;
+
+                            if(bool.TryParse(val.Text, out bVal))
+                            {
+                                if (cmb.SelectedIndex == 0)
+                                {
+                                    res += $"{col.Name}={bVal}";
+                                }
+                                else
+                                {
+                                    res += $"{col.Name}<>{bVal}";
+                                }
+                            }
+  
+                        }
+                    }
                 }
                 return res;
             }
         }
+
 
         public frmFilter(Form parent, Filter Filter)
         {
@@ -145,8 +167,10 @@ namespace JDE_Scanner_Desktop
                 else if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(Nullable<DateTime>))
                 {
                     cType = FilterColumnValueType.Date;
-                }
-                else
+                }else if (col.ValueType == typeof(Boolean) || col.ValueType == typeof(Nullable<Boolean>))
+                {
+                    cType = FilterColumnValueType.Boolean;
+                }else
                 {
                     cType = FilterColumnValueType.Text;
                 }
@@ -218,8 +242,12 @@ namespace JDE_Scanner_Desktop
                                 Options.Add("Zawiera");
                                 Options.Add("Nie zawiera");
                             }
-                            else
+                            else if (col.ValueType == FilterColumnValueType.Boolean)
                             {
+                                Options.Add("Jest równe");
+                                Options.Add("Jest różne od");
+                            }
+                            else{
                                 Options.Add("Mniejsze lub równe niż");
                                 Options.Add("Mniejsze niż");
                                 Options.Add("Jest równe");

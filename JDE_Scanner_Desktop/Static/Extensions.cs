@@ -35,5 +35,42 @@ namespace JDE_Scanner_Desktop.Static
                 combobox.SelectedItem = combobox.Items.Cast<T>().Where(combobox.ValueMember + $"={selectedValue}").FirstOrDefault();
             }
         }
+
+        public static CheckState ToCheckboxState(this bool booleanValue)
+        {
+            return booleanValue.ToCheckboxState();
+        }
+
+        public static CheckState ToCheckboxState(this bool? booleanValue)
+        {
+            return booleanValue.HasValue ?
+                   (booleanValue == true ? CheckState.Checked : CheckState.Unchecked) :
+                   CheckState.Indeterminate;
+        }
+
+        public static bool? CheckboxStateToNullableBool(this CheckState checkState)
+        {
+            if(checkState == CheckState.Checked)
+            {
+                return true;
+            }else if(checkState == CheckState.Unchecked)
+            {
+                return false;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static bool ContainsNullSafe(this string str, string search)
+        {
+            bool res = false;
+            if (str != null)
+            {
+                return str.Contains(search);
+            }
+            return res;
+        }
     }
 }

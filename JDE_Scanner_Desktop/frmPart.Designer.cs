@@ -35,6 +35,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnAttach = new System.Windows.Forms.Button();
+            this.cboxArchived = new System.Windows.Forms.CheckBox();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pgGeneral = new System.Windows.Forms.TabPage();
@@ -117,14 +118,16 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 4;
+            this.tlpButtons.ColumnCount = 5;
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 511F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
             this.tlpButtons.Controls.Add(this.btnPrint, 1, 0);
             this.tlpButtons.Controls.Add(this.btnAttach, 2, 0);
+            this.tlpButtons.Controls.Add(this.cboxArchived, 4, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -173,6 +176,18 @@
             this.tooltip.SetToolTip(this.btnAttach, "Powiązane pliki..");
             this.btnAttach.UseVisualStyleBackColor = true;
             this.btnAttach.Click += new System.EventHandler(this.btnAttach_Click);
+            // 
+            // cboxArchived
+            // 
+            this.cboxArchived.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cboxArchived.AutoSize = true;
+            this.cboxArchived.Location = new System.Drawing.Point(511, 8);
+            this.cboxArchived.Name = "cboxArchived";
+            this.cboxArchived.Size = new System.Drawing.Size(77, 17);
+            this.cboxArchived.TabIndex = 3;
+            this.cboxArchived.Text = "Archiwalny";
+            this.cboxArchived.ThreeState = true;
+            this.cboxArchived.UseVisualStyleBackColor = true;
             // 
             // lblCreated
             // 
@@ -683,6 +698,7 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.tlpButtons.ResumeLayout(false);
+            this.tlpButtons.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.pgGeneral.ResumeLayout(false);
             this.tplTextboxes.ResumeLayout(false);
@@ -748,5 +764,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pbQrCode;
         private System.Windows.Forms.PictureBox pbImage;
+        private System.Windows.Forms.CheckBox cboxArchived;
     }
 }

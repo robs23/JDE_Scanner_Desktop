@@ -69,6 +69,7 @@ namespace JDE_Scanner_Desktop.Models
                 }
             } }
 
+        
 
         public async override Task<bool> Add(string attachmentPath = null)
         {

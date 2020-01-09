@@ -16,11 +16,18 @@ namespace JDE_Scanner_Desktop.Models
         string QueryString { get; set; }
     }
 
+    public interface IArchivable
+    {
+        string ArchiveString { get; set; }
+    }
+
     public abstract class Keeper<T> : IKeptable
     {
         public List<T> Items { get; set; } 
         protected abstract string ObjectName { get;}
         protected abstract string PluralizedObjectName { get;}
+
+        protected virtual string ArchiveString { get; set; } = null;
 
         public string FilterString { get; set; } = null;
         public string QueryString { get; set; } = null;
@@ -63,6 +70,52 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public async Task Archive(List<int> ids)
+        {
+            DialogResult result = MessageBox.Show("Czy jesteś pewien, że chcesz zarchiwizować " + ids.Count.ToString() + " zaznaczone wiersze?", "Potwierdź archiwizacje", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                List<Task<string>> ListsOfTasks = new List<Task<string>>();
+
+                foreach (int id in ids)
+                {
+                    ListsOfTasks.Add(_Archive(id));
+                }
+
+                string response = "";
+                IEnumerable<string> res = await Task.WhenAll<string>(ListsOfTasks);
+                if (res.Any())
+                {
+                    foreach (string r in res)
+                    {
+                        if (!string.IsNullOrEmpty(r))
+                        {
+                            response += r + "\r";
+                        }
+                    }
+                    if (response.Length > 0)
+                    {
+                        MessageBox.Show(response);
+                    }
+                }
+            }
+        }
+
+        private async Task<string> _Archive(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"Archive{ObjectName}?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
+                var result = await client.GetAsync(String.Format(url, id, RuntimeSettings.UserId));
+                if (!result.IsSuccessStatusCode)
+                {
+                    return String.Format("Serwer zwrócił błąd przy próbie usunięcia pozycji {0}. Wiadomość: " + result.ReasonPhrase, id);
+                }
+                return null;
+            }
+        }
+
+
         private async Task<string> _Remomve(int id)
         {
             using (var client = new HttpClient())
@@ -79,6 +132,21 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task Refresh(string query = null, char type='p')
         {
+            if (this.ArchiveString!=null)
+            {
+                if (!this.QueryString.ContainsNullSafe("IsArchived") && !this.FilterString.ContainsNullSafe("IsArchived") && !query.ContainsNullSafe("IsArchived"))
+                {
+                    if (!string.IsNullOrEmpty(this.FilterString))
+                    {
+                        FilterString += " AND " + ArchiveString;
+                    }
+                    else
+                    {
+                        FilterString = ArchiveString;
+                    }
+                } 
+            }
+            
             if (Items.Any())
             {
                 Items.Clear();
@@ -102,6 +170,7 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 else
                 {
+
                     url += "&query=" + this.FilterString;
                 }
 
