@@ -48,7 +48,8 @@ namespace JDE_Scanner_Desktop
             txtZipCode.Text = _this.ZipCode;
             txtCity.Text = _this.City;
             txtCountry.Text = _this.Country;
-            if(_this.CreatedOn != null && _this.CreatedBy != 0)
+            cboxArchived.CheckState = _this.IsArchived.ToCheckboxState();
+            if (_this.CreatedOn != null && _this.CreatedBy != 0)
             {
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
@@ -81,6 +82,7 @@ namespace JDE_Scanner_Desktop
             _this.City = txtCity.Text;
             _this.Country = txtCountry.Text;
             _this.TypeId = Convert.ToInt32(cmbType.SelectedValue.ToString());
+            _this.IsArchived = cboxArchived.CheckState.CheckboxStateToNullableBool();
             try
             {
                 Looper.Show(this);

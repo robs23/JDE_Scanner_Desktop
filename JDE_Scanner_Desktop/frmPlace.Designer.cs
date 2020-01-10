@@ -34,18 +34,16 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnQR = new System.Windows.Forms.Button();
+            this.cboxArchived = new System.Windows.Forms.CheckBox();
             this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pgGeneral = new System.Windows.Forms.TabPage();
-            this.pgBoms = new System.Windows.Forms.TabPage();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtNumber2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.txtNumber1 = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,19 +53,22 @@
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.cmbSet = new System.Windows.Forms.ComboBox();
             this.pbQrCode = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pgBoms = new System.Windows.Forms.TabPage();
             this.tlpBom = new System.Windows.Forms.TableLayoutPanel();
             this.tlpBomButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddBom = new System.Windows.Forms.Button();
             this.btnRemoveBom = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.pgGeneral.SuspendLayout();
-            this.pgBoms.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
+            this.pgBoms.SuspendLayout();
             this.tlpBom.SuspendLayout();
             this.tlpBomButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
@@ -98,17 +99,18 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 3;
+            this.tlpButtons.ColumnCount = 4;
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 511F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
             this.tlpButtons.Controls.Add(this.btnQR, 1, 0);
+            this.tlpButtons.Controls.Add(this.cboxArchived, 3, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tlpButtons.Size = new System.Drawing.Size(591, 34);
             this.tlpButtons.TabIndex = 0;
             // 
@@ -140,6 +142,18 @@
             this.btnQR.UseCompatibleTextRendering = true;
             this.btnQR.UseVisualStyleBackColor = true;
             this.btnQR.Click += new System.EventHandler(this.btnQR_Click);
+            // 
+            // cboxArchived
+            // 
+            this.cboxArchived.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cboxArchived.AutoSize = true;
+            this.cboxArchived.Location = new System.Drawing.Point(511, 8);
+            this.cboxArchived.Name = "cboxArchived";
+            this.cboxArchived.Size = new System.Drawing.Size(77, 17);
+            this.cboxArchived.TabIndex = 2;
+            this.cboxArchived.Text = "Archiwalny";
+            this.cboxArchived.ThreeState = true;
+            this.cboxArchived.UseVisualStyleBackColor = true;
             // 
             // lblCreated
             // 
@@ -175,17 +189,6 @@
             this.pgGeneral.TabIndex = 0;
             this.pgGeneral.Text = "Ogólne";
             this.pgGeneral.UseVisualStyleBackColor = true;
-            // 
-            // pgBoms
-            // 
-            this.pgBoms.Controls.Add(this.tlpBom);
-            this.pgBoms.Location = new System.Drawing.Point(4, 22);
-            this.pgBoms.Name = "pgBoms";
-            this.pgBoms.Padding = new System.Windows.Forms.Padding(3);
-            this.pgBoms.Size = new System.Drawing.Size(583, 375);
-            this.pgBoms.TabIndex = 1;
-            this.pgBoms.Text = "BOM";
-            this.pgBoms.UseVisualStyleBackColor = true;
             // 
             // tplTextboxes
             // 
@@ -270,16 +273,6 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "Nazwa";
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 98);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Opis";
-            // 
             // txtNumber1
             // 
             this.txtNumber1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -360,6 +353,27 @@
             this.pbQrCode.TabIndex = 14;
             this.pbQrCode.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 98);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Opis";
+            // 
+            // pgBoms
+            // 
+            this.pgBoms.Controls.Add(this.tlpBom);
+            this.pgBoms.Location = new System.Drawing.Point(4, 22);
+            this.pgBoms.Name = "pgBoms";
+            this.pgBoms.Padding = new System.Windows.Forms.Padding(3);
+            this.pgBoms.Size = new System.Drawing.Size(583, 375);
+            this.pgBoms.TabIndex = 1;
+            this.pgBoms.Text = "BOM";
+            this.pgBoms.UseVisualStyleBackColor = true;
+            // 
             // tlpBom
             // 
             this.tlpBom.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -395,7 +409,7 @@
             this.tlpBomButtons.Name = "tlpBomButtons";
             this.tlpBomButtons.RowCount = 1;
             this.tlpBomButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpBomButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBomButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tlpBomButtons.Size = new System.Drawing.Size(574, 29);
             this.tlpBomButtons.TabIndex = 0;
             // 
@@ -466,12 +480,13 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.tlpButtons.ResumeLayout(false);
+            this.tlpButtons.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.pgGeneral.ResumeLayout(false);
-            this.pgBoms.ResumeLayout(false);
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
+            this.pgBoms.ResumeLayout(false);
             this.tlpBom.ResumeLayout(false);
             this.tlpBomButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
@@ -512,5 +527,6 @@
         private System.Windows.Forms.Button btnRemoveBom;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.DataGridView dgvBoms;
+        private System.Windows.Forms.CheckBox cboxArchived;
     }
 }

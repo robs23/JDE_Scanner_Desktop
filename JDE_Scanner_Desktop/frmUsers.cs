@@ -32,7 +32,7 @@ namespace JDE_Scanner_Desktop
             looper.Show(this);
             await Keeper.Refresh();
             source.DataSource = Keeper.Items;
-            dgUsers.DataSource = source;
+            dgItems.DataSource = source;
             source.ResetBindings(false);
             looper.Hide();
             page = 1;
@@ -54,7 +54,7 @@ namespace JDE_Scanner_Desktop
         private void ViewUser(object sender, EventArgs e)
         {
 
-            int UserId = Convert.ToInt32(dgUsers.Rows[dgUsers.CurrentCell.RowIndex].Cells[0].Value);
+            int UserId = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
 
             User User = new User();
             User = Keeper.Items.Where(u => u.UserId == UserId).FirstOrDefault();
@@ -70,39 +70,39 @@ namespace JDE_Scanner_Desktop
 
         private void DeleteUser(object sender, EventArgs e)
         {
-            if (dgUsers.SelectedRows.Count == 0)
+            if (dgItems.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
             }
             else
             {
                 List<int> SelectedRows = new List<int>();
-                for (int i = 0; i < dgUsers.SelectedRows.Count; i++)
+                for (int i = 0; i < dgItems.SelectedRows.Count; i++)
                 {
-                    SelectedRows.Add((int)dgUsers.SelectedRows[i].Cells[0].Value);
+                    SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
                 }
                 Keeper.Remove(SelectedRows);
                 Reload();
             }
         }
 
-        private void dgUsers_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void dgItems_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             MessageBox.Show(this, "Wystąpił problem z dostępem do danych. Szczegóły: " + e.Exception.Message, "Error");
             e.ThrowException = false;
             e.Cancel = false;
         }
 
-        private async void dgUsers_Scroll(object sender, ScrollEventArgs e)
+        private async void dgItems_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.OldValue < e.NewValue)
             {
-                var visibleRowsCount = dgUsers.DisplayedRowCount(true);
-                var firstDisplayedRowIndex = dgUsers.FirstDisplayedScrollingRowIndex;
+                var visibleRowsCount = dgItems.DisplayedRowCount(true);
+                var firstDisplayedRowIndex = dgItems.FirstDisplayedScrollingRowIndex;
                 var lastvisibleRowIndex = (firstDisplayedRowIndex + visibleRowsCount);
                 if (lastvisibleRowIndex >= RuntimeSettings.PageSize * page)
                 {
-                    int x = dgUsers.FirstDisplayedScrollingRowIndex;
+                    int x = dgItems.FirstDisplayedScrollingRowIndex;
                     looper.Show(this);
                     page++;
                     //int nextPage = (int)Math.Ceiling((double)((double)dgItems.Rows.Count / (double)RuntimeSettings.PageSize)) + 1;
@@ -110,7 +110,7 @@ namespace JDE_Scanner_Desktop
                     if (_IsMore)
                     {
                         source.ResetBindings(false);
-                        dgUsers.FirstDisplayedScrollingRowIndex = x;
+                        dgItems.FirstDisplayedScrollingRowIndex = x;
                         looper.Hide();
                     }
                     else
@@ -119,8 +119,26 @@ namespace JDE_Scanner_Desktop
                         frmToast FrmToast = new frmToast(this, "Osiągnięto koniec rekordów");
                         FrmToast.Show(this);
                     }
-                    dgUsers.Select();
+                    dgItems.Select();
                 }
+            }
+        }
+
+        private async void btnArchive_Click(object sender, EventArgs e)
+        {
+            if (dgItems.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby zarchiwizować wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgItems.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
+                }
+                await Keeper.Archive(SelectedRows);
+                Reload();
             }
         }
     }

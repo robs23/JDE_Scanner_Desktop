@@ -48,7 +48,8 @@ namespace JDE_Scanner_Desktop
             txtDescription.Text = _this.Description;
             txtName.Text = _this.Name;
             txtPriority.Text = _this.Priority;
-            if(_this.CreatedOn != null && _this.CreatedBy != 0)
+            cboxArchived.CheckState = _this.IsArchived.ToCheckboxState();
+            if (_this.CreatedOn != null && _this.CreatedBy != 0)
             {
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
@@ -87,6 +88,7 @@ namespace JDE_Scanner_Desktop
             _this.Number2 = txtNumber2.Text;
             _this.Description = txtDescription.Text;
             _this.Priority = txtPriority.Text;
+            _this.IsArchived = cboxArchived.CheckState.CheckboxStateToNullableBool();
             if (cmbArea.SelectedItem != null)
             {
                 _this.AreaId = Convert.ToInt32(cmbArea.SelectedValue.ToString());

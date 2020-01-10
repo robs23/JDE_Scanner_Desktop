@@ -21,6 +21,8 @@ namespace JDE_Scanner_Desktop.Models
 
         protected override string PluralizedObjectName => "Places";
 
+        protected override string ArchiveString { get; set; } = "IsArchived<>True";
+
         public void PrintQR(List<int> ids)
         {
             int[] aId = ids.ToArray();

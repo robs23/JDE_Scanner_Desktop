@@ -48,10 +48,11 @@
             this.txtCountry = new System.Windows.Forms.TextBox();
             this.txtZipCode = new System.Windows.Forms.TextBox();
             this.txtCity = new System.Windows.Forms.TextBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.cmbType = new System.Windows.Forms.ComboBox();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.cboxArchived = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -82,16 +83,17 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 3;
+            this.tlpButtons.ColumnCount = 4;
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 511F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
+            this.tlpButtons.Controls.Add(this.cboxArchived, 3, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tlpButtons.Size = new System.Drawing.Size(591, 34);
             this.tlpButtons.TabIndex = 0;
             // 
@@ -273,17 +275,6 @@
             this.txtCity.Size = new System.Drawing.Size(435, 20);
             this.txtCity.TabIndex = 16;
             // 
-            // lblCreated
-            // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 455);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -303,6 +294,29 @@
             this.cmbType.Size = new System.Drawing.Size(435, 21);
             this.cmbType.TabIndex = 18;
             // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 455);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cboxArchived
+            // 
+            this.cboxArchived.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cboxArchived.AutoSize = true;
+            this.cboxArchived.Location = new System.Drawing.Point(511, 8);
+            this.cboxArchived.Name = "cboxArchived";
+            this.cboxArchived.Size = new System.Drawing.Size(77, 17);
+            this.cboxArchived.TabIndex = 1;
+            this.cboxArchived.Text = "Archiwalny";
+            this.cboxArchived.ThreeState = true;
+            this.cboxArchived.UseVisualStyleBackColor = true;
+            // 
             // frmCompany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,6 +331,7 @@
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
             this.tlpButtons.ResumeLayout(false);
+            this.tlpButtons.PerformLayout();
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
             this.ResumeLayout(false);
@@ -347,5 +362,6 @@
         private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbType;
+        private System.Windows.Forms.CheckBox cboxArchived;
     }
 }

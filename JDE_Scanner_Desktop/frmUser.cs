@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace JDE_Scanner_Desktop
             txtPassword.Text = ThisUser.Password;
             txtMesLogin.Text = ThisUser.MesLogin;
             txtToken.Text = $"[UID={User.UserId};PASS={User.Password}]";
+            cboxArchived.CheckState = ThisUser.IsArchived.ToCheckboxState();
             if (ThisUser.IsMechanic)
             {
                 cmbMechanic.SelectedIndex = cmbMechanic.FindStringExact("Tak");
@@ -76,6 +78,7 @@ namespace JDE_Scanner_Desktop
                     ThisUser.Surname = txtSurname.Text;
                     ThisUser.Password = txtPassword.Text;
                     ThisUser.MesLogin = txtMesLogin.Text;
+                    ThisUser.IsArchived = cboxArchived.CheckState.CheckboxStateToNullableBool();
                     if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
                     {
                         ThisUser.IsMechanic = true;
@@ -97,6 +100,7 @@ namespace JDE_Scanner_Desktop
                     ThisUser.Surname = txtSurname.Text;
                     ThisUser.Password = txtPassword.Text;
                     ThisUser.MesLogin = txtMesLogin.Text;
+                    ThisUser.IsArchived = cboxArchived.CheckState.CheckboxStateToNullableBool();
                     if (cmbMechanic.GetItemText(cmbMechanic.SelectedItem) == "Tak")
                     {
                         ThisUser.IsMechanic = true;

@@ -50,6 +50,8 @@ namespace JDE_Scanner_Desktop.Models
         public string TenantName { get; set; }
         [DisplayName("Token")]
         public string PlaceToken { get; set; }
+        [DisplayName("Archiwalny")]
+        public bool? IsArchived { get; set; }
 
 
         public async Task<bool> Add()

@@ -37,12 +37,12 @@ namespace JDE_Scanner_Desktop
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgUsers = new DBDataGridView();
-            this.dgUsers.DoubleBuffered = true;
+            this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnArchive = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -53,7 +53,7 @@ namespace JDE_Scanner_Desktop
             this.tlpMain.ColumnCount = 1;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.Controls.Add(this.tlpButtons, 0, 0);
-            this.tlpMain.Controls.Add(this.dgUsers, 0, 1);
+            this.tlpMain.Controls.Add(this.dgItems, 0, 1);
             this.tlpMain.Location = new System.Drawing.Point(12, 12);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 2;
@@ -81,6 +81,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Controls.Add(this.btnAdd, 0, 0);
             this.tlpButtons.Controls.Add(this.btnDelete, 1, 0);
             this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
+            this.tlpButtons.Controls.Add(this.btnArchive, 3, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -107,6 +108,7 @@ namespace JDE_Scanner_Desktop
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Enabled = false;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.Location = new System.Drawing.Point(43, 3);
             this.btnDelete.Name = "btnDelete";
@@ -131,19 +133,34 @@ namespace JDE_Scanner_Desktop
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.Refresh);
             // 
-            // dgUsers
+            // dgItems
             // 
-            this.dgUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgUsers.Location = new System.Drawing.Point(3, 43);
-            this.dgUsers.Name = "dgUsers";
-            this.dgUsers.Size = new System.Drawing.Size(565, 330);
-            this.dgUsers.TabIndex = 2;
-            this.dgUsers.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgUsers_DataError);
-            this.dgUsers.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgUsers_Scroll);
-            this.dgUsers.DoubleClick += new System.EventHandler(this.ViewUser);
+            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.DoubleBuffered = true;
+            this.dgItems.Location = new System.Drawing.Point(3, 43);
+            this.dgItems.Name = "dgItems";
+            this.dgItems.Size = new System.Drawing.Size(565, 330);
+            this.dgItems.TabIndex = 2;
+            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.ViewUser);
+            // 
+            // btnArchive
+            // 
+            this.btnArchive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnArchive.Image = global::JDE_Scanner_Desktop.Properties.Resources.archive_24;
+            this.btnArchive.Location = new System.Drawing.Point(123, 3);
+            this.btnArchive.Name = "btnArchive";
+            this.btnArchive.Size = new System.Drawing.Size(34, 28);
+            this.btnArchive.TabIndex = 3;
+            this.tooltip.SetToolTip(this.btnArchive, "Przenieś do archiwum");
+            this.btnArchive.UseVisualStyleBackColor = true;
+            this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
             // frmUsers
             // 
@@ -158,7 +175,7 @@ namespace JDE_Scanner_Desktop
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgItems)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,7 +188,8 @@ namespace JDE_Scanner_Desktop
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ToolTip tooltip;
-        private DBDataGridView dgUsers;
+        private DBDataGridView dgItems;
+        private System.Windows.Forms.Button btnArchive;
     }
 }
 
