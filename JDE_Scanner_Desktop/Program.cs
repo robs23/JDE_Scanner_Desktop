@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using Squirrel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,12 @@ namespace JDE_Scanner_Desktop
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static async Task Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmStarter());
+            
         }
     }
 }

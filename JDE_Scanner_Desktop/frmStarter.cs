@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using Squirrel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -66,11 +67,18 @@ namespace JDE_Scanner_Desktop
             FrmLogin.ShowDialog(this);
         }
 
-        private void frmStarter_Shown(object sender, EventArgs e)
+        private async void frmStarter_Shown(object sender, EventArgs e)
         {
             if (RuntimeSettings.UserId == 0)
             {
                 this.Close();
+            }
+            else
+            {
+                using (var mgr = new UpdateManager(Static.Secrets.Check4ReleasePath))
+                {
+                    await mgr.UpdateApp();
+                }
             }
         }
 
