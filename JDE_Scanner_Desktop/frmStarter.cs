@@ -75,9 +75,17 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
+                this.Text = "JDE Scan v." + System.Windows.Forms.Application.ProductVersion;
+                ReleaseEntry release = null;
                 using (var mgr = new UpdateManager(Static.Secrets.Check4ReleasePath))
                 {
-                    await mgr.UpdateApp();
+                    release = await mgr.UpdateApp();
+                }
+                if (release != null)
+                {
+                    MessageBox.Show("Aplikacja została zaktualizowana do nowszej wersji. Naciśnij OK aby zrestartować aplikację", "Aktualizacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //force app restart
+                    UpdateManager.RestartApp();
                 }
             }
         }
