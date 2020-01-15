@@ -170,6 +170,8 @@ namespace JDE_Scanner_Desktop.Models
         public string AssignedUserNames { get; set; }
         [Browsable(false)]
         public ProcessActionsKeeper ProcessActions { get; set; }
+        [DisplayName("Procent wykonania")]
+        public float FinishRate { get; set; }
 
         public async Task<bool> Add()
         {

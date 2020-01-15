@@ -76,6 +76,7 @@ namespace JDE_Scanner_Desktop
             else
             {
                 this.Text = "JDE Scan v." + System.Windows.Forms.Application.ProductVersion;
+#if (DEBUG == false)
                 ReleaseEntry release = null;
                 using (var mgr = new UpdateManager(Static.Secrets.Check4ReleasePath))
                 {
@@ -87,6 +88,7 @@ namespace JDE_Scanner_Desktop
                     //force app restart
                     UpdateManager.RestartApp();
                 }
+#endif
             }
         }
 
