@@ -36,6 +36,9 @@
             this.btnFinishedOnClear = new System.Windows.Forms.Button();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.lblAssignedCaption = new System.Windows.Forms.Label();
+            this.lblAssignedUsers = new System.Windows.Forms.Label();
+            this.btnEditAssignedList = new System.Windows.Forms.Button();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tab = new System.Windows.Forms.TabControl();
             this.pgProcess = new System.Windows.Forms.TabPage();
@@ -76,9 +79,6 @@
             this.lvHistory = new System.Windows.Forms.ListView();
             this.pgActions = new System.Windows.Forms.TabPage();
             this.dgvActions = new System.Windows.Forms.DataGridView();
-            this.lblAssignedCaption = new System.Windows.Forms.Label();
-            this.lblAssignedUsers = new System.Windows.Forms.Label();
-            this.btnEditAssignedList = new System.Windows.Forms.Button();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -154,7 +154,7 @@
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
             this.tlpButtons.Controls.Add(this.lblAssignedCaption, 3, 0);
             this.tlpButtons.Controls.Add(this.lblAssignedUsers, 4, 0);
@@ -165,6 +165,43 @@
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.Size = new System.Drawing.Size(596, 34);
             this.tlpButtons.TabIndex = 0;
+            // 
+            // lblAssignedCaption
+            // 
+            this.lblAssignedCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAssignedCaption.AutoSize = true;
+            this.lblAssignedCaption.Location = new System.Drawing.Point(353, 4);
+            this.lblAssignedCaption.Name = "lblAssignedCaption";
+            this.lblAssignedCaption.Size = new System.Drawing.Size(74, 26);
+            this.lblAssignedCaption.TabIndex = 3;
+            this.lblAssignedCaption.Text = "Przypisani użytkownicy";
+            this.lblAssignedCaption.Visible = false;
+            // 
+            // lblAssignedUsers
+            // 
+            this.lblAssignedUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAssignedUsers.AutoSize = true;
+            this.lblAssignedUsers.Location = new System.Drawing.Point(433, 10);
+            this.lblAssignedUsers.Name = "lblAssignedUsers";
+            this.lblAssignedUsers.Size = new System.Drawing.Size(129, 13);
+            this.lblAssignedUsers.TabIndex = 4;
+            this.lblAssignedUsers.Text = "AssignedUsers";
+            this.lblAssignedUsers.Visible = false;
+            // 
+            // btnEditAssignedList
+            // 
+            this.btnEditAssignedList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditAssignedList.Image = global::JDE_Scanner_Desktop.Properties.Resources.Edit_16;
+            this.btnEditAssignedList.Location = new System.Drawing.Point(568, 3);
+            this.btnEditAssignedList.Name = "btnEditAssignedList";
+            this.btnEditAssignedList.Size = new System.Drawing.Size(25, 28);
+            this.btnEditAssignedList.TabIndex = 5;
+            this.tooltip.SetToolTip(this.btnEditAssignedList, "Edytuj przypisanych użytkowników..");
+            this.btnEditAssignedList.UseVisualStyleBackColor = true;
+            this.btnEditAssignedList.Visible = false;
+            this.btnEditAssignedList.Click += new System.EventHandler(this.btnEditAssignedList_Click);
             // 
             // tlpMain
             // 
@@ -656,38 +693,6 @@
             this.dgvActions.ReadOnly = true;
             this.dgvActions.Size = new System.Drawing.Size(582, 418);
             this.dgvActions.TabIndex = 0;
-            // 
-            // lblAssignedCaption
-            // 
-            this.lblAssignedCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAssignedCaption.AutoSize = true;
-            this.lblAssignedCaption.Location = new System.Drawing.Point(353, 4);
-            this.lblAssignedCaption.Name = "lblAssignedCaption";
-            this.lblAssignedCaption.Size = new System.Drawing.Size(74, 26);
-            this.lblAssignedCaption.TabIndex = 3;
-            this.lblAssignedCaption.Text = "Przypisani użytkownicy";
-            // 
-            // lblAssignedUsers
-            // 
-            this.lblAssignedUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAssignedUsers.AutoSize = true;
-            this.lblAssignedUsers.Location = new System.Drawing.Point(433, 10);
-            this.lblAssignedUsers.Name = "lblAssignedUsers";
-            this.lblAssignedUsers.Size = new System.Drawing.Size(129, 13);
-            this.lblAssignedUsers.TabIndex = 4;
-            this.lblAssignedUsers.Text = "AssignedUsers";
-            // 
-            // btnEditAssignedList
-            // 
-            this.btnEditAssignedList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditAssignedList.Image = global::JDE_Scanner_Desktop.Properties.Resources.Edit_16;
-            this.btnEditAssignedList.Location = new System.Drawing.Point(568, 3);
-            this.btnEditAssignedList.Name = "btnEditAssignedList";
-            this.btnEditAssignedList.Size = new System.Drawing.Size(25, 28);
-            this.btnEditAssignedList.TabIndex = 5;
-            this.btnEditAssignedList.UseVisualStyleBackColor = true;
             // 
             // frmProcess
             // 

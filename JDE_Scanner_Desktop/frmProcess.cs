@@ -23,6 +23,8 @@ namespace JDE_Scanner_Desktop
         PlacesKeeper Places = new PlacesKeeper();
         UsersKeeper StartingUsers = new UsersKeeper();
         UsersKeeper FinishingUsers = new UsersKeeper();
+        UsersKeeper AssignableUsers = new UsersKeeper();
+        List<User> AssignedUsers = null;
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
         frmLooper Looper;
         public bool ForceRefresh = false;
@@ -95,6 +97,31 @@ namespace JDE_Scanner_Desktop
             return val;
         }
 
+        private bool IsShowInPlanningSelected()
+        {
+            int sel = 0;
+            bool val = false;
+
+            if (cmbActionType.ValueMember != "")
+            {
+                if (cmbActionType.SelectedItem != null)
+                {
+                    sel = (int)cmbActionType.SelectedValue;
+
+                    if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).Any())
+                    {
+                        if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).FirstOrDefault().ShowInPlanning == true)
+                        {
+                            val = true;
+                        }
+                    }
+                }
+
+            }
+
+            return val;
+        }
+
         private bool IsInitialDiagnosisRequiredSelected()
         {
             int sel = 0;
@@ -160,6 +187,18 @@ namespace JDE_Scanner_Desktop
                 lblDescription.Text = "Opis";
                 txtDescription.Text = _this.Description;
             }
+            if (IsShowInPlanningSelected())
+            {
+                lblAssignedCaption.Visible = true;
+                lblAssignedUsers.Visible = true;
+                btnEditAssignedList.Visible = true;
+            }
+            else
+            {
+                lblAssignedCaption.Visible = false;
+                lblAssignedUsers.Visible = false;
+                btnEditAssignedList.Visible = false;
+            }
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -168,7 +207,8 @@ namespace JDE_Scanner_Desktop
             Looper.Show(this);
             await Places.Refresh(null,'a');
             await StartingUsers.Refresh();
-            FinishingUsers.Items = new List<User>(StartingUsers.Items); 
+            FinishingUsers.Items = new List<User>(StartingUsers.Items);
+            AssignableUsers.Items = new List<User>(StartingUsers.Items);
             await ActionTypes.Refresh();
             if (mode == 1)
             {
@@ -231,6 +271,7 @@ namespace JDE_Scanner_Desktop
             {
                 LoadHandlings();
                 LoadHistory();
+                AssignedUsers = _this.
                 txtStartedOn.Value = (DateTime)_this.StartedOn;
             }
             if (_this.FinishedOn != null)
@@ -501,6 +542,13 @@ namespace JDE_Scanner_Desktop
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void btnEditAssignedList_Click(object sender, EventArgs e)
+        {
+            List<Tuple<int, string, bool>> Users = new List<Tuple<int, string, bool>>();
+
+            frmOptionPicker frmOptionPicker = new frmOptionPicker();
         }
     }
 }

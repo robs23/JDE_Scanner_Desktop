@@ -42,5 +42,25 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public void RessignUsers(List<int> ids, List<User> Users)
+        {
+            //it reassignes users to multiple process
+
+            DialogResult result = MessageBox.Show("Czy jesteś pewien, że chcesz zmienić przypisanie obsługujących w " + ids.Count.ToString() + " zaznaczonych zgłoszeniach?", "Potwierdź zmianę przypisanych obsługujących", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK)
+            {
+                foreach (int id in ids)
+                {
+                    _Finish(id);
+                }
+            }
+        }
+
+        public void ReassignUsersInProcess(int processId, List<User> Users)
+        {
+            //it reassignes users to single process
+
+        }
     }
 }

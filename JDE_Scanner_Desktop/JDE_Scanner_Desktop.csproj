@@ -168,6 +168,12 @@
     <Compile Include="frmFiles.Designer.cs">
       <DependentUpon>frmFiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOptionPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOptionPicker.Designer.cs">
+      <DependentUpon>frmOptionPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProcessActions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -403,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFiles.resx">
       <DependentUpon>frmFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOptionPicker.resx">
+      <DependentUpon>frmOptionPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProcessActions.resx">
       <DependentUpon>frmProcessActions.cs</DependentUpon>
