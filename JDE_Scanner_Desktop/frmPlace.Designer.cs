@@ -352,6 +352,7 @@
             this.pbQrCode.Size = new System.Drawing.Size(204, 172);
             this.pbQrCode.TabIndex = 14;
             this.pbQrCode.TabStop = false;
+            this.pbQrCode.Visible = false;
             // 
             // label5
             // 

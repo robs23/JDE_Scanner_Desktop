@@ -31,6 +31,8 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Nazwisko")]
         [Browsable(false)]
         public string Surname { get; set; }
+
+
         [DisplayName("Imię i nazwisko")]
         public string FullName
         {

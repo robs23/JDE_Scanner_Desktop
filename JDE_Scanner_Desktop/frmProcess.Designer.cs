@@ -34,11 +34,11 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnStartedOnClear = new System.Windows.Forms.Button();
             this.btnFinishedOnClear = new System.Windows.Forms.Button();
+            this.btnEditAssignedList = new System.Windows.Forms.Button();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.lblAssignedCaption = new System.Windows.Forms.Label();
             this.lblAssignedUsers = new System.Windows.Forms.Label();
-            this.btnEditAssignedList = new System.Windows.Forms.Button();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tab = new System.Windows.Forms.TabControl();
             this.pgProcess = new System.Windows.Forms.TabPage();
@@ -132,6 +132,21 @@
             this.tooltip.SetToolTip(this.btnFinishedOnClear, "Wyczyść datę..");
             this.btnFinishedOnClear.UseVisualStyleBackColor = true;
             // 
+            // btnEditAssignedList
+            // 
+            this.btnEditAssignedList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditAssignedList.Image = global::JDE_Scanner_Desktop.Properties.Resources.Edit_16;
+            this.btnEditAssignedList.Location = new System.Drawing.Point(568, 3);
+            this.btnEditAssignedList.Name = "btnEditAssignedList";
+            this.btnEditAssignedList.Size = new System.Drawing.Size(25, 28);
+            this.btnEditAssignedList.TabIndex = 5;
+            this.tooltip.SetToolTip(this.btnEditAssignedList, "Edytuj przypisanych użytkowników..");
+            this.btnEditAssignedList.UseVisualStyleBackColor = true;
+            this.btnEditAssignedList.Visible = false;
+            this.btnEditAssignedList.Click += new System.EventHandler(this.btnEditAssignedList_Click);
+            // 
             // lblCreated
             // 
             this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -187,21 +202,6 @@
             this.lblAssignedUsers.TabIndex = 4;
             this.lblAssignedUsers.Text = "AssignedUsers";
             this.lblAssignedUsers.Visible = false;
-            // 
-            // btnEditAssignedList
-            // 
-            this.btnEditAssignedList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditAssignedList.Image = global::JDE_Scanner_Desktop.Properties.Resources.Edit_16;
-            this.btnEditAssignedList.Location = new System.Drawing.Point(568, 3);
-            this.btnEditAssignedList.Name = "btnEditAssignedList";
-            this.btnEditAssignedList.Size = new System.Drawing.Size(25, 28);
-            this.btnEditAssignedList.TabIndex = 5;
-            this.tooltip.SetToolTip(this.btnEditAssignedList, "Edytuj przypisanych użytkowników..");
-            this.btnEditAssignedList.UseVisualStyleBackColor = true;
-            this.btnEditAssignedList.Visible = false;
-            this.btnEditAssignedList.Click += new System.EventHandler(this.btnEditAssignedList_Click);
             // 
             // tlpMain
             // 

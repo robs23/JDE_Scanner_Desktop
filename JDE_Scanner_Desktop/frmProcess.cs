@@ -26,6 +26,7 @@ namespace JDE_Scanner_Desktop
         UsersKeeper AssignableUsers = new UsersKeeper();
         List<User> AssignedUsers = null;
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
+        ProcessAssignKeeper ProcessAssigns = new ProcessAssignKeeper();
         frmLooper Looper;
         public bool ForceRefresh = false;
 
@@ -271,7 +272,8 @@ namespace JDE_Scanner_Desktop
             {
                 LoadHandlings();
                 LoadHistory();
-                AssignedUsers = _this.
+                LoadProcessAssigns();
+                //AssignedUsers = _this.
                 txtStartedOn.Value = (DateTime)_this.StartedOn;
             }
             if (_this.FinishedOn != null)
@@ -281,6 +283,22 @@ namespace JDE_Scanner_Desktop
             LoadActions();
             ChangeLook();
             Looper.Hide();
+        }
+
+        private async void LoadProcessAssigns()
+        {
+            if(_this.ProcessId > 0)
+            {
+                await ProcessAssigns.Refresh($"ProcessId={_this.ProcessId}");
+                if (ProcessAssigns.Items.Any())
+                {
+                    foreach(ProcessAssign pa in ProcessAssigns.Items)
+                    {
+                        AssignedUsers.Add(new User { UserId=pa.UserId, Name=pa.UserName})
+                    }
+                }
+            }
+            
         }
 
         private async Task<bool> LoadHandlings()
