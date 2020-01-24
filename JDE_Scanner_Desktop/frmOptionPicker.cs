@@ -13,11 +13,13 @@ namespace JDE_Scanner_Desktop
     public partial class frmOptionPicker : Form
     {
         List<Tuple<int, string, bool>> Items;
-        List<Tuple<int, string, bool>> ReturnItems { get; set; }
+        public List<Tuple<int, string, bool>> ReturnItems { get; set; } = new List<Tuple<int, string, bool>>();
 
         public frmOptionPicker(Form parent, List<Tuple<int, string, bool>> items )
         {
             InitializeComponent();
+            this.Owner = parent;
+            this.Location = new Point(Cursor.Position.X-this.Width, Cursor.Position.Y);
             Items = new List<Tuple<int, string, bool>>();
             Items = items;
         }
@@ -35,14 +37,13 @@ namespace JDE_Scanner_Desktop
             foreach(var i in Items)
             {
                 //set initiallly response to no checked items
-                ReturnItems.Add(new Tuple<int, string, bool>(i.Item1, i.Item2, false));
+                ReturnItems.Add(new Tuple<int, string, bool>(i.Item1, i.Item2, true));
             }
 
             foreach(var i in clbItems.CheckedItems)
             {
                 var tuple = ReturnItems.Find(t => t.Item2 == (string)i);
                 tuple = new Tuple<int, string, bool>(tuple.Item1, tuple.Item2, true);
-
             }
             this.DialogResult = DialogResult.OK;
         }

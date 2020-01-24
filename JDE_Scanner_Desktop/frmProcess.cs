@@ -24,7 +24,7 @@ namespace JDE_Scanner_Desktop
         UsersKeeper StartingUsers = new UsersKeeper();
         UsersKeeper FinishingUsers = new UsersKeeper();
         UsersKeeper AssignableUsers = new UsersKeeper();
-        List<User> AssignedUsers = null;
+        List<User> AssignedUsers = new List<User>();
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
         ProcessAssignKeeper ProcessAssigns = new ProcessAssignKeeper();
         frmLooper Looper;
@@ -190,13 +190,11 @@ namespace JDE_Scanner_Desktop
             }
             if (IsShowInPlanningSelected())
             {
-                lblAssignedCaption.Visible = true;
                 lblAssignedUsers.Visible = true;
                 btnEditAssignedList.Visible = true;
             }
             else
             {
-                lblAssignedCaption.Visible = false;
                 lblAssignedUsers.Visible = false;
                 btnEditAssignedList.Visible = false;
             }
@@ -247,7 +245,9 @@ namespace JDE_Scanner_Desktop
                     txtPlannedStart.Enabled = false;
                     txtPlannedFinish.Enabled = false;
                 }
-                
+                LoadHistory();
+                LoadActions();
+                LoadProcessAssigns();
             }
             cmbStartedBy.DataSource = StartingUsers.Items;
             cmbFinishedBy.DataSource = FinishingUsers.Items;
@@ -271,16 +271,14 @@ namespace JDE_Scanner_Desktop
             if (_this.StartedOn != null)
             {
                 LoadHandlings();
-                LoadHistory();
-                LoadProcessAssigns();
-                //AssignedUsers = _this.
+
                 txtStartedOn.Value = (DateTime)_this.StartedOn;
             }
             if (_this.FinishedOn != null)
             {
                 txtFinishedOn.Value = (DateTime)_this.FinishedOn;
             }
-            LoadActions();
+            
             ChangeLook();
             Looper.Hide();
         }
@@ -294,8 +292,10 @@ namespace JDE_Scanner_Desktop
                 {
                     foreach(ProcessAssign pa in ProcessAssigns.Items)
                     {
-                        AssignedUsers.Add(new User { UserId=pa.UserId, Name=pa.UserName})
+                        AssignedUsers.Add(new User { UserId = pa.UserId, Name = pa.UserName });
+                        lblAssignedUsers.Text += pa.UserName + ", ";
                     }
+                    lblAssignedUsers.Text = lblAssignedUsers.Text.Substring(0, lblAssignedUsers.Text.Length - 2);
                 }
             }
             
@@ -565,8 +565,32 @@ namespace JDE_Scanner_Desktop
         private void btnEditAssignedList_Click(object sender, EventArgs e)
         {
             List<Tuple<int, string, bool>> Users = new List<Tuple<int, string, bool>>();
-
-            frmOptionPicker frmOptionPicker = new frmOptionPicker();
+            if (AssignableUsers.Items.Any())
+            {
+                foreach(User u in AssignableUsers.Items)
+                {
+                    Users.Add(new Tuple<int, string, bool>(u.UserId, u.FullName, AssignedUsers.Where(us => us.UserId == u.UserId).Any()));
+                }
+                frmOptionPicker FrmOptionPicker = new frmOptionPicker(this, Users);
+                DialogResult result = FrmOptionPicker.ShowDialog(this);
+                if(result== DialogResult.OK)
+                {
+                    var PickedItems = FrmOptionPicker.ReturnItems;
+                    if (PickedItems.Any())
+                    {
+                        lblAssignedUsers.Text = "Przypisani: " + string.Join(", ", PickedItems.Where(t=>t.Item3).Select(t=>t.Item2).ToList());
+                    }
+                    else
+                    {
+                        lblAssignedUsers.Text = "Przypisani: ";
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Brak użytkowników możliwych do przypisania", "Aktuanie nie ma żadnych użytkowników, których mógłbyś przypisać do tego zgłoszenia..", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            //frmOptionPicker frmOptionPicker = new frmOptionPicker(this, );
         }
     }
 }

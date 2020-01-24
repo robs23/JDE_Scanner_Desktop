@@ -37,7 +37,6 @@
             this.btnEditAssignedList = new System.Windows.Forms.Button();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.lblAssignedCaption = new System.Windows.Forms.Label();
             this.lblAssignedUsers = new System.Windows.Forms.Label();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tab = new System.Windows.Forms.TabControl();
@@ -163,17 +162,15 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 6;
+            this.tlpButtons.ColumnCount = 4;
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
-            this.tlpButtons.Controls.Add(this.lblAssignedCaption, 3, 0);
-            this.tlpButtons.Controls.Add(this.lblAssignedUsers, 4, 0);
-            this.tlpButtons.Controls.Add(this.btnEditAssignedList, 5, 0);
+            this.tlpButtons.Controls.Add(this.lblAssignedUsers, 2, 0);
+            this.tlpButtons.Controls.Add(this.btnEditAssignedList, 3, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -181,26 +178,16 @@
             this.tlpButtons.Size = new System.Drawing.Size(596, 34);
             this.tlpButtons.TabIndex = 0;
             // 
-            // lblAssignedCaption
-            // 
-            this.lblAssignedCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAssignedCaption.AutoSize = true;
-            this.lblAssignedCaption.Location = new System.Drawing.Point(353, 4);
-            this.lblAssignedCaption.Name = "lblAssignedCaption";
-            this.lblAssignedCaption.Size = new System.Drawing.Size(74, 26);
-            this.lblAssignedCaption.TabIndex = 3;
-            this.lblAssignedCaption.Text = "Przypisani użytkownicy";
-            this.lblAssignedCaption.Visible = false;
-            // 
             // lblAssignedUsers
             // 
-            this.lblAssignedUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAssignedUsers.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblAssignedUsers.AutoSize = true;
-            this.lblAssignedUsers.Location = new System.Drawing.Point(433, 10);
+            this.lblAssignedUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblAssignedUsers.Location = new System.Drawing.Point(502, 10);
             this.lblAssignedUsers.Name = "lblAssignedUsers";
-            this.lblAssignedUsers.Size = new System.Drawing.Size(129, 13);
+            this.lblAssignedUsers.Size = new System.Drawing.Size(60, 13);
             this.lblAssignedUsers.TabIndex = 4;
-            this.lblAssignedUsers.Text = "AssignedUsers";
+            this.lblAssignedUsers.Text = "Przypisani: ";
             this.lblAssignedUsers.Visible = false;
             // 
             // tlpMain
@@ -772,7 +759,6 @@
         private System.Windows.Forms.ListView lvHistory;
         private System.Windows.Forms.TabPage pgActions;
         private System.Windows.Forms.DataGridView dgvActions;
-        private System.Windows.Forms.Label lblAssignedCaption;
         private System.Windows.Forms.Label lblAssignedUsers;
         private System.Windows.Forms.Button btnEditAssignedList;
     }

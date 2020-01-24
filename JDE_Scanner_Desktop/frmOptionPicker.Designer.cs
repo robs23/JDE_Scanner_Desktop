@@ -54,6 +54,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmOptionPicker";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Wybierz opcje..";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmOptionPicker_FormClosing);
             this.Load += new System.EventHandler(this.frmOptionPicker_Load);
