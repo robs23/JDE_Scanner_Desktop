@@ -61,6 +61,15 @@ namespace JDE_Scanner_Desktop.Models
         {
             //it reassignes users to single process
 
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + "AssignUsers?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
+                var result = await client.PutAsync(String.Format(url, id, RuntimeSettings.UserId), Users);
+                if (!result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, id));
+                }
+            }
         }
     }
 }

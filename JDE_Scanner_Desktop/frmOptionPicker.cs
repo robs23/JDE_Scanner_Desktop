@@ -26,6 +26,11 @@ namespace JDE_Scanner_Desktop
 
         private void frmOptionPicker_Load(object sender, EventArgs e)
         {
+            if (clbItems.Items.Count > 0)
+            {
+                clbItems.Items.Clear();
+            }
+
             foreach(var i in Items)
             {
                 clbItems.Items.Add(i.Item2, i.Item3);
@@ -37,13 +42,15 @@ namespace JDE_Scanner_Desktop
             foreach(var i in Items)
             {
                 //set initiallly response to no checked items
-                ReturnItems.Add(new Tuple<int, string, bool>(i.Item1, i.Item2, true));
+                ReturnItems.Add(new Tuple<int, string, bool>(i.Item1, i.Item2, false));
             }
 
             foreach(var i in clbItems.CheckedItems)
             {
-                var tuple = ReturnItems.Find(t => t.Item2 == (string)i);
-                tuple = new Tuple<int, string, bool>(tuple.Item1, tuple.Item2, true);
+                var OldTuple = ReturnItems.Find(t => t.Item2 == (string)i);
+                var tuple = new Tuple<int, string, bool>(OldTuple.Item1, OldTuple.Item2, true);
+                ReturnItems.Remove(OldTuple);
+                ReturnItems.Add(tuple);
             }
             this.DialogResult = DialogResult.OK;
         }
