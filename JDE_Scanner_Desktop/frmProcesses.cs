@@ -181,5 +181,28 @@ namespace JDE_Scanner_Desktop
                 FrmFilter = null;
             }
         }
+
+        private async void btnReassign_Click(object sender, EventArgs e)
+        {
+            if (dgItems.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                looper.Show(this);
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgItems.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
+                }
+                AssignedUsersHandler assignedUsersHandler = new AssignedUsersHandler(this);
+                await assignedUsersHandler.LoadUsers();
+                assignedUsersHandler.ShowDialog();
+                await Keeper.ReassignUsers(SelectedRows,assignedUsersHandler.AssignedUsers);
+                looper.Hide();
+            }
+            
+        }
     }
 }

@@ -43,33 +43,46 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public void RessignUsers(List<int> ids, List<User> Users)
+        public async Task ReassignUsers(List<int> ids, List<User> Users)
         {
             //it reassignes users to multiple process
 
             DialogResult result = MessageBox.Show("Czy jesteś pewien, że chcesz zmienić przypisanie obsługujących w " + ids.Count.ToString() + " zaznaczonych zgłoszeniach?", "Potwierdź zmianę przypisanych obsługujących", MessageBoxButtons.OKCancel);
+
             if (result == DialogResult.OK)
             {
-                foreach (int id in ids)
+                List<Process> Processes = new List<Process>();
+                foreach(int id in ids)
                 {
-                    _Finish(id);
+                    Processes.Add(new Process() { ProcessId = id });
+                }
+
+                List<Task<string>> ListsOfTasks = new List<Task<string>>();
+
+                foreach (Process p in Processes)
+                {
+                    ListsOfTasks.Add(p.AssignUsers(Users));
+                }
+
+                string response = "";
+                IEnumerable<string> res = await Task.WhenAll<string>(ListsOfTasks);
+                if (res.Any())
+                {
+                    foreach (string r in res)
+                    {
+                        if (!string.IsNullOrEmpty(r))
+                        {
+                            response += r + "\r";
+                        }
+                    }
+                    if (response.Length > 0)
+                    {
+                        MessageBox.Show(response);
+                    }
                 }
             }
         }
 
-        public void ReassignUsersInProcess(int processId, List<User> Users)
-        {
-            //it reassignes users to single process
-
-            using (var client = new HttpClient())
-            {
-                string url = Secrets.ApiAddress + "AssignUsers?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
-                var result = await client.PutAsync(String.Format(url, id, RuntimeSettings.UserId), Users);
-                if (!result.IsSuccessStatusCode)
-                {
-                    MessageBox.Show(String.Format("Serwer zwrócił błąd przy próbie usunięcia zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, id));
-                }
-            }
-        }
+        
     }
 }

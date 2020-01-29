@@ -353,6 +353,7 @@
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\ActionTypesKeeper.cs" />
     <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\AssignedUsersHandler.cs" />
     <Compile Include="Models\Bom.cs" />
     <Compile Include="Models\BomKeeper.cs" />
     <Compile Include="Models\Entity.cs" />
@@ -588,6 +589,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\archive_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people_24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

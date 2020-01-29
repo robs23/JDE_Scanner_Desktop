@@ -173,6 +173,7 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Procent wykonania")]
         public float FinishRate { get; set; }
 
+
         public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
@@ -239,6 +240,31 @@ namespace JDE_Scanner_Desktop.Models
             else
             {
                 return false;
+            }
+        }
+
+        public async Task<string> AssignUsers(List<User> Users)
+        {
+            //it reassignes users to single process
+
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + "AssignUsers?token=" + Secrets.TenantToken + "&ProcessId={0}&UserId={1}";
+                var serializedProduct = JsonConvert.SerializeObject(Users);
+                var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                var result = await client.PutAsync(String.Format(url, this.ProcessId, RuntimeSettings.UserId), content);
+                if (!result.IsSuccessStatusCode)
+                {
+                    if(result.StatusCode== System.Net.HttpStatusCode.BadRequest)
+                    {
+                        return String.Format("Przypisanie użytkowników nie ma zastosowania do zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, this.ProcessId);
+                    }
+                    return String.Format("Serwer zwrócił błąd przy próbie zmiany przypisanych użytkowników do zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, this.ProcessId);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 

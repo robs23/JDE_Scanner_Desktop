@@ -35,13 +35,13 @@ namespace JDE_Scanner_Desktop
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
-            this.dgItems = new DBDataGridView();
-            this.dgItems.DoubleBuffered = true;
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.btnReassign = new System.Windows.Forms.Button();
+            this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -69,7 +69,8 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 6;
+            this.tlpButtons.ColumnCount = 7;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -81,6 +82,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Controls.Add(this.btnFinish, 4, 0);
             this.tlpButtons.Controls.Add(this.btnDelete, 1, 0);
             this.tlpButtons.Controls.Add(this.btnFilter, 2, 0);
+            this.tlpButtons.Controls.Add(this.btnReassign, 5, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -101,20 +103,6 @@ namespace JDE_Scanner_Desktop
             this.tooltip.SetToolTip(this.btnAdd, "Dodaj nowy zasób..");
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.Add);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(43, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(34, 28);
-            this.btnDelete.TabIndex = 1;
-            this.tooltip.SetToolTip(this.btnDelete, "Usuń zaznaczony zasób/zasoby");
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.Delete);
             // 
             // btnRefresh
             // 
@@ -145,19 +133,19 @@ namespace JDE_Scanner_Desktop
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.btnFinish_Click);
             // 
-            // dgItems
+            // btnDelete
             // 
-            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgItems.Location = new System.Drawing.Point(3, 43);
-            this.dgItems.Name = "dgItems";
-            this.dgItems.Size = new System.Drawing.Size(565, 330);
-            this.dgItems.TabIndex = 2;
-            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
-            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
-            this.dgItems.DoubleClick += new System.EventHandler(this.View);
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(43, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(34, 28);
+            this.btnDelete.TabIndex = 1;
+            this.tooltip.SetToolTip(this.btnDelete, "Usuń zaznaczony zasób/zasoby");
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.Delete);
             // 
             // btnFilter
             // 
@@ -172,6 +160,35 @@ namespace JDE_Scanner_Desktop
             this.tooltip.SetToolTip(this.btnFilter, "Konfiguracja filtra..");
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnReassign
+            // 
+            this.btnReassign.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReassign.Image = global::JDE_Scanner_Desktop.Properties.Resources.people_24;
+            this.btnReassign.Location = new System.Drawing.Point(203, 3);
+            this.btnReassign.Name = "btnReassign";
+            this.btnReassign.Size = new System.Drawing.Size(34, 28);
+            this.btnReassign.TabIndex = 5;
+            this.tooltip.SetToolTip(this.btnReassign, "Zmień przypisanych użytkowników..");
+            this.btnReassign.UseVisualStyleBackColor = true;
+            this.btnReassign.Click += new System.EventHandler(this.btnReassign_Click);
+            // 
+            // dgItems
+            // 
+            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.DoubleBuffered = true;
+            this.dgItems.Location = new System.Drawing.Point(3, 43);
+            this.dgItems.Name = "dgItems";
+            this.dgItems.Size = new System.Drawing.Size(565, 330);
+            this.dgItems.TabIndex = 2;
+            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.View);
             // 
             // frmProcesses
             // 
@@ -202,6 +219,7 @@ namespace JDE_Scanner_Desktop
         private DBDataGridView dgItems;
         private System.Windows.Forms.Button btnFinish;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnReassign;
     }
 }
 

@@ -28,6 +28,7 @@ namespace JDE_Scanner_Desktop
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
         ProcessAssignKeeper ProcessAssigns = new ProcessAssignKeeper();
         frmLooper Looper;
+        AssignedUsersHandler assignedUsersHandler;
         public bool ForceRefresh = false;
 
         public frmProcess(Form parent)
@@ -53,6 +54,7 @@ namespace JDE_Scanner_Desktop
             txtInitialDiagnosis.Visible = false;
             lblRepairActions.Visible = false;
             lblInitialDiagnosis.Visible = false;
+            assignedUsersHandler = new AssignedUsersHandler(this);
         }
 
         public frmProcess(Process Process, Form parent)
@@ -71,6 +73,8 @@ namespace JDE_Scanner_Desktop
                 lblCreated.Visible = true;
             }
             txtOutput.Text = _this.Output;
+            assignedUsersHandler = new AssignedUsersHandler(this);
+            assignedUsersHandler.ProcessId = Process.ProcessId;
         }
 
         private bool IsMesSyncSelected()
@@ -247,7 +251,10 @@ namespace JDE_Scanner_Desktop
                 }
                 LoadHistory();
                 LoadActions();
-                LoadProcessAssigns();
+                await assignedUsersHandler.LoadProcessAssigns();
+                lblAssignedUsers.Text = assignedUsersHandler.AssignedUserNames;
+
+                
             }
             cmbStartedBy.DataSource = StartingUsers.Items;
             cmbFinishedBy.DataSource = FinishingUsers.Items;
@@ -283,23 +290,6 @@ namespace JDE_Scanner_Desktop
             Looper.Hide();
         }
 
-        private async void LoadProcessAssigns()
-        {
-            if(_this.ProcessId > 0)
-            {
-                await ProcessAssigns.Refresh($"ProcessId={_this.ProcessId}");
-                if (ProcessAssigns.Items.Any())
-                {
-                    foreach(ProcessAssign pa in ProcessAssigns.Items)
-                    {
-                        AssignedUsers.Add(new User { UserId = pa.UserId, Name = pa.UserName });
-                        lblAssignedUsers.Text += pa.UserName + ", ";
-                    }
-                    lblAssignedUsers.Text = lblAssignedUsers.Text.Substring(0, lblAssignedUsers.Text.Length - 2);
-                }
-            }
-            
-        }
 
         private async Task<bool> LoadHandlings()
         {
@@ -480,13 +470,35 @@ namespace JDE_Scanner_Desktop
                     _this.CreatedOn = DateTime.Now;
                     if (await _this.Add())
                     {
+                        if (AssignedUsers.Any())
+                        {
+                            string res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
+                            if (res != null)
+                            {
+                                MessageBox.Show(res, "Błąd", MessageBoxButtons.OK);
+                            }
+                        }
+                        
                         mode = 2;
                         this.Text = "Szczegóły zgłoszenia";
                     }
                 }
                 else if (mode == 2)
                 {
-                    await _this.Edit();
+                    if (assignedUsersHandler.AssignedUsers.Any())
+                    {
+                        var edit = Task.Run(()=>_this.Edit());
+                        string res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
+                        if (res != null)
+                        {
+                            MessageBox.Show(res, "Błąd", MessageBoxButtons.OK);
+                        }
+                    }
+                    else
+                    {
+                        await _this.Edit();
+                    }
+                    
                 }
             }catch(Exception ex)
             {
@@ -564,40 +576,9 @@ namespace JDE_Scanner_Desktop
 
         private void btnEditAssignedList_Click(object sender, EventArgs e)
         {
-            List<Tuple<int, string, bool>> Users = new List<Tuple<int, string, bool>>();
-            if (AssignableUsers.Items.Any())
-            {
-                Users.Clear();
-                foreach(User u in AssignableUsers.Items)
-                {
-                    Users.Add(new Tuple<int, string, bool>(u.UserId, u.FullName, AssignedUsers.Where(us => us.UserId == u.UserId).Any()));
-                }
-                frmOptionPicker FrmOptionPicker = new frmOptionPicker(this, Users);
-                DialogResult result = FrmOptionPicker.ShowDialog(this);
-                if(result== DialogResult.OK)
-                {
-                    var PickedItems = FrmOptionPicker.ReturnItems;
-                    AssignedUsers.Clear();
-
-                    if (PickedItems.Any(i=>i.Item3==true))
-                    {
-                        foreach(var item in PickedItems.Where(i=>i.Item3==true))
-                        {
-                            AssignedUsers.Add(new User { UserId = item.Item1, Name = item.Item2 });
-                        }
-                        lblAssignedUsers.Text = "Przypisani: " + string.Join(", ", PickedItems.Where(t=>t.Item3).Select(t=>t.Item2).ToList());
-                    }
-                    else
-                    {
-                        lblAssignedUsers.Text = "Przypisani: ";
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Brak użytkowników możliwych do przypisania", "Aktuanie nie ma żadnych użytkowników, których mógłbyś przypisać do tego zgłoszenia..", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            //frmOptionPicker frmOptionPicker = new frmOptionPicker(this, );
+            assignedUsersHandler.AssignableUsers = new List<User>(StartingUsers.Items);
+            assignedUsersHandler.ShowDialog();
+            lblAssignedUsers.Text = assignedUsersHandler.AssignedUserNames;
         }
     }
 }
