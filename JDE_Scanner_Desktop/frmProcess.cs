@@ -212,6 +212,9 @@ namespace JDE_Scanner_Desktop
             await StartingUsers.Refresh();
             FinishingUsers.Items = new List<User>(StartingUsers.Items);
             AssignableUsers.Items = new List<User>(StartingUsers.Items);
+            _this.Handlings = new HandlingsKeeper();
+            _this.Logs = new LogsKeeper();
+            _this.ProcessActions = new ProcessActionsKeeper();
             await ActionTypes.Refresh();
             if (mode == 1)
             {
@@ -249,12 +252,13 @@ namespace JDE_Scanner_Desktop
                     txtPlannedStart.Enabled = false;
                     txtPlannedFinish.Enabled = false;
                 }
-                LoadHistory();
-                LoadActions();
-                await assignedUsersHandler.LoadProcessAssigns();
+                var loadHistoryTask = Task.Run(() => LoadHistory());
+                var loadActionsTask = Task.Run(() => LoadActions());
+                var loadProcessAssingsTask = Task.Run(() => assignedUsersHandler.LoadProcessAssigns());
+
+                await Task.WhenAll(loadHistoryTask, loadActionsTask, loadProcessAssingsTask);
                 lblAssignedUsers.Text = assignedUsersHandler.AssignedUserNames;
 
-                
             }
             cmbStartedBy.DataSource = StartingUsers.Items;
             cmbFinishedBy.DataSource = FinishingUsers.Items;
@@ -272,9 +276,6 @@ namespace JDE_Scanner_Desktop
             cmbStartedBy.SelectedIndex = cmbStartedBy.FindStringExact(_this.StartedByName);
             cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(_this.FinishedByName);
             cmbStatus.SelectedIndex = cmbStatus.FindStringExact(_this.Status);
-            _this.Handlings = new HandlingsKeeper();
-            _this.Logs = new LogsKeeper();
-            _this.ProcessActions = new ProcessActionsKeeper();
             if (_this.StartedOn != null)
             {
                 LoadHandlings();
@@ -357,39 +358,40 @@ namespace JDE_Scanner_Desktop
 
         private async Task<bool> LoadHistory()
         {
-            await _this.Logs.GetProcessHistory(_this.ProcessId);
-            if (_this.Logs.Items.Any())
+            if (_this.Logs != null)
             {
-                lvHistory.Columns.Add("ID logu");
-                lvHistory.Columns.Add("Czas");
-                lvHistory.Columns.Add("Użytkownik");
-                lvHistory.Columns.Add("Opis");
-                foreach (Log l in _this.Logs.Items)
+                await _this.Logs.GetProcessHistory(_this.ProcessId);
+                if (_this.Logs.Items.Any())
                 {
-                    string[] row =
+                    lvHistory.Columns.Add("ID logu");
+                    lvHistory.Columns.Add("Czas");
+                    lvHistory.Columns.Add("Użytkownik");
+                    lvHistory.Columns.Add("Opis");
+                    foreach (Log l in _this.Logs.Items)
                     {
+                        string[] row =
+                        {
                         l.LogId.ToString(),
                         l.TimeStamp.ToString(),
                         l.UserName,
                         l.Description
                     };
-                    ListViewItem item = new ListViewItem(row);
-                    lvHistory.Items.Add(item);
+                        ListViewItem item = new ListViewItem(row);
+                        lvHistory.Items.Add(item);
+                    }
+                    for (int i = 0; i < lvHistory.Columns.Count; i++)
+                    {
+                        //adjust column's widht to the content
+                        lvHistory.Columns[i].Width = -2;
+                    }
+                    lvHistory.GridLines = true;
+                    return true;
                 }
-                for (int i = 0; i < lvHistory.Columns.Count; i++)
-                {
-                    //adjust column's widht to the content
-                    lvHistory.Columns[i].Width = -2;
-                }
-                lvHistory.GridLines = true;
-                return true;
             }
-            else
-            {
-                lvHandlings.View = View.List;
-                lvHandlings.Items.Add(new ListViewItem("Brak danych"));
-                return false;
-            }
+            lvHandlings.View = View.List;
+            lvHandlings.Items.Add(new ListViewItem("Brak danych"));
+            return false;
+
         }
 
         private async void Save(object sender, EventArgs e)

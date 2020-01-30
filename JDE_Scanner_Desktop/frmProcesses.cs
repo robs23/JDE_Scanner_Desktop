@@ -20,21 +20,45 @@ namespace JDE_Scanner_Desktop
         frmFilter FrmFilter;
         int page;
         BindingSource source = new BindingSource();
+        bool MaintenanceOnly;
 
-        public frmProcesses(frmStarter parent)
+        public frmProcesses(frmStarter parent, bool maintenanceOnly = false)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
+            MaintenanceOnly = maintenanceOnly;
+            if (MaintenanceOnly)
+            {
+                this.Text = "Konserwacje";
+            }
         }
 
         private async void Reload()
         {
             looper.Show(this);
-            await Keeper.Refresh();
+            if (MaintenanceOnly)
+            {
+                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ");
+            }
+            else
+            {
+                await Keeper.Refresh();
+            }
+            
             source.DataSource = Keeper.Items;
             dgItems.DataSource = source;
             source.ResetBindings(false);
+            if (MaintenanceOnly)
+            {
+                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length",  };
+                AdjustColumnVisibility(Columns);
+            }
+            else
+            {
+                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish"};
+                AdjustColumnVisibility(null,Columns);
+            }
             looper.Hide();
             page = 1;
             adjustColumnWidths();
@@ -103,6 +127,32 @@ namespace JDE_Scanner_Desktop
             MessageBox.Show(this, "Wystąpił problem z dostępem do danych. Szczegóły: " + e.Exception.Message, "Error");
             e.ThrowException = false;
             e.Cancel = false;
+        }
+
+        private void AdjustColumnVisibility(List<string> ToShow = null, List<string> ToHide = null)
+        {
+
+                foreach(DataGridViewColumn c in dgItems.Columns)
+                {
+                    if (ToShow != null)
+                    {
+                        if (!ToShow.Contains(c.Name))
+                        {
+                            c.Visible = false;
+                        }
+                        else
+                        {
+                            c.Visible = true;
+                        }
+                    }
+                if (ToHide != null)
+                {
+                    if (ToHide.Contains(c.Name))
+                    {
+                        c.Visible = false;
+                    }
+                }
+            }
         }
 
         private async void dgItems_Scroll(object sender, ScrollEventArgs e)

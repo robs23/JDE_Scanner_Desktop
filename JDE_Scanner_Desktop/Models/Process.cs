@@ -19,10 +19,8 @@ namespace JDE_Scanner_Desktop.Models
         public int ProcessId { get; set; }
         [Browsable(false)]
         public string Description { get; set; }
-        [Browsable(false)]
         [DisplayName("Planowane rozpoczęcie")]
         public DateTime? PlannedStart { get; set; }
-        [Browsable(false)]
         [DisplayName("Planowane zakończenie")]
         public DateTime? PlannedFinish { get; set; }
         [DisplayName("Data rozpoczęcia")]

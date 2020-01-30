@@ -53,6 +53,9 @@
             this.typyZgłoszeniaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.konserwacjeCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CzynnosciKonserwacyjneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.KonserwacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.częściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,7 +84,6 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.konserwacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -235,7 +237,7 @@
             this.noweToolStripMenuItem1,
             this.obsługaZgłoszeńToolStripMenuItem,
             this.typyZgłoszeniaToolStripMenuItem2,
-            this.konserwacjeToolStripMenuItem});
+            this.konserwacjeCategoryToolStripMenuItem});
             this.zgłoszeniaToolStripMenuItem.Name = "zgłoszeniaToolStripMenuItem";
             this.zgłoszeniaToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.zgłoszeniaToolStripMenuItem.Text = "Zgłoszenia";
@@ -284,6 +286,29 @@
             this.wszystkieToolStripMenuItem.Text = "Wszystkie";
             this.wszystkieToolStripMenuItem.Click += new System.EventHandler(this.wszystkieToolStripMenuItem_Click);
             // 
+            // konserwacjeCategoryToolStripMenuItem
+            // 
+            this.konserwacjeCategoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CzynnosciKonserwacyjneToolStripMenuItem1,
+            this.KonserwacjeToolStripMenuItem});
+            this.konserwacjeCategoryToolStripMenuItem.Name = "konserwacjeCategoryToolStripMenuItem";
+            this.konserwacjeCategoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.konserwacjeCategoryToolStripMenuItem.Text = "Konserwacje";
+            // 
+            // CzynnosciKonserwacyjneToolStripMenuItem1
+            // 
+            this.CzynnosciKonserwacyjneToolStripMenuItem1.Name = "CzynnosciKonserwacyjneToolStripMenuItem1";
+            this.CzynnosciKonserwacyjneToolStripMenuItem1.Size = new System.Drawing.Size(209, 22);
+            this.CzynnosciKonserwacyjneToolStripMenuItem1.Text = "Czynności konserwacyjne";
+            this.CzynnosciKonserwacyjneToolStripMenuItem1.Click += new System.EventHandler(this.CzynnosciKonserwacyjneToolStripMenuItem1_Click);
+            // 
+            // KonserwacjeToolStripMenuItem
+            // 
+            this.KonserwacjeToolStripMenuItem.Name = "KonserwacjeToolStripMenuItem";
+            this.KonserwacjeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.KonserwacjeToolStripMenuItem.Text = "Konserwacje";
+            this.KonserwacjeToolStripMenuItem.Click += new System.EventHandler(this.KonserwacjeToolStripMenuItem_Click);
+            // 
             // historiaToolStripMenuItem
             // 
             this.historiaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -295,7 +320,7 @@
             // historiaToolStripMenuItem1
             // 
             this.historiaToolStripMenuItem1.Name = "historiaToolStripMenuItem1";
-            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.historiaToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.historiaToolStripMenuItem1.Text = "Historia";
             this.historiaToolStripMenuItem1.Click += new System.EventHandler(this.historiaToolStripMenuItem1_Click);
             // 
@@ -390,7 +415,7 @@
             this.nowyToolStripMenuItem1,
             this.wszystkieToolStripMenuItem8});
             this.typyFirmToolStripMenuItem.Name = "typyFirmToolStripMenuItem";
-            this.typyFirmToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.typyFirmToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.typyFirmToolStripMenuItem.Text = "Typy firm";
             // 
             // nowyToolStripMenuItem1
@@ -413,7 +438,7 @@
             this.nowaToolStripMenuItem2,
             this.wszystkieToolStripMenuItem5});
             this.firmyToolStripMenuItem1.Name = "firmyToolStripMenuItem1";
-            this.firmyToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
+            this.firmyToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.firmyToolStripMenuItem1.Text = "Firmy";
             // 
             // nowaToolStripMenuItem2
@@ -495,13 +520,6 @@
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
             // 
-            // konserwacjeToolStripMenuItem
-            // 
-            this.konserwacjeToolStripMenuItem.Name = "konserwacjeToolStripMenuItem";
-            this.konserwacjeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.konserwacjeToolStripMenuItem.Text = "Konserwacje";
-            this.konserwacjeToolStripMenuItem.Click += new System.EventHandler(this.konserwacjeToolStripMenuItem_Click);
-            // 
             // frmStarter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -575,6 +593,8 @@
         private System.Windows.Forms.ToolStripMenuItem nowaToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem konserwacjeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem konserwacjeCategoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CzynnosciKonserwacyjneToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem KonserwacjeToolStripMenuItem;
     }
 }

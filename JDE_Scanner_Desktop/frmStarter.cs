@@ -213,7 +213,13 @@ namespace JDE_Scanner_Desktop
             FrmPart.Show(this);
         }
 
-        private void konserwacjeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void KonserwacjeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProcesses FrmProcesses = new frmProcesses(this,true);
+            FrmProcesses.Show(this);
+        }
+
+        private void CzynnosciKonserwacyjneToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             frmProcessActions FrmProcessActions = new frmProcessActions(this);
             FrmProcessActions.Show(this);
