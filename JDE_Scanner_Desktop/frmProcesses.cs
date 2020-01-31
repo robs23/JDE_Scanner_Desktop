@@ -240,7 +240,7 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
-                looper.Show(this);
+                
                 List<int> SelectedRows = new List<int>();
                 for (int i = 0; i < dgItems.SelectedRows.Count; i++)
                 {
@@ -249,6 +249,7 @@ namespace JDE_Scanner_Desktop
                 AssignedUsersHandler assignedUsersHandler = new AssignedUsersHandler(this);
                 await assignedUsersHandler.LoadUsers();
                 assignedUsersHandler.ShowDialog();
+                looper.Show(this);
                 await Keeper.ReassignUsers(SelectedRows,assignedUsersHandler.AssignedUsers);
                 looper.Hide();
             }

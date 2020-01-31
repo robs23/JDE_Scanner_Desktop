@@ -61,8 +61,6 @@ namespace JDE_Scanner_Desktop
             new AutoCompleteBehavior<Part>(this.cmbPart, parts.Items);
             cmbPart.DisplayMember = "Name";
             cmbPart.ValueMember = "PartId";
-            cmbPlace.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cmbPlace.AutoCompleteSource = AutoCompleteSource.ListItems;
             if(this.PartId != null)
             {
                 //part reference is given

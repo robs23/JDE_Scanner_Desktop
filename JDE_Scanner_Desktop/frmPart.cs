@@ -75,10 +75,11 @@ namespace JDE_Scanner_Desktop
             }
         }
 
-        private async void SetComboboxes()
+        private async Task SetComboboxes()
         {
-            await producers.Refresh("TypeId=1");
-            await suppliers.Refresh("TypeId=2");
+            await producers.Refresh("TypeId=1",'a');
+            await suppliers.Refresh("TypeId=2",'a');
+
             new AutoCompleteBehavior<Company>(cmbProducer, producers.Items);
             cmbProducer.DisplayMember = "Name";
             cmbProducer.ValueMember = "CompanyId";
@@ -200,7 +201,7 @@ namespace JDE_Scanner_Desktop
             Item.Show(this);
         }
 
-        private void Company_FormClosed(object sender, FormClosedEventArgs e)
+        private async void Company_FormClosed(object sender, FormClosedEventArgs e)
         {
             SetComboboxes();
         }

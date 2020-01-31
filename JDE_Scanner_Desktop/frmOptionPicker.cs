@@ -14,6 +14,7 @@ namespace JDE_Scanner_Desktop
     {
         List<Tuple<int, string, bool>> Items;
         public List<Tuple<int, string, bool>> ReturnItems { get; set; } = new List<Tuple<int, string, bool>>();
+        public int MinCount { get; set; } = 1;
 
         public frmOptionPicker(Form parent, List<Tuple<int, string, bool>> items )
         {
@@ -39,20 +40,29 @@ namespace JDE_Scanner_Desktop
 
         private void frmOptionPicker_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach(var i in Items)
+            if (clbItems.CheckedItems.Count >= MinCount)
             {
-                //set initiallly response to no checked items
-                ReturnItems.Add(new Tuple<int, string, bool>(i.Item1, i.Item2, false));
-            }
+                foreach (var i in Items)
+                {
+                    //set initiallly response to no checked items
+                    ReturnItems.Add(new Tuple<int, string, bool>(i.Item1, i.Item2, false));
+                }
 
-            foreach(var i in clbItems.CheckedItems)
-            {
-                var OldTuple = ReturnItems.Find(t => t.Item2 == (string)i);
-                var tuple = new Tuple<int, string, bool>(OldTuple.Item1, OldTuple.Item2, true);
-                ReturnItems.Remove(OldTuple);
-                ReturnItems.Add(tuple);
+                foreach (var i in clbItems.CheckedItems)
+                {
+                    var OldTuple = ReturnItems.Find(t => t.Item2 == (string)i);
+                    var tuple = new Tuple<int, string, bool>(OldTuple.Item1, OldTuple.Item2, true);
+                    ReturnItems.Remove(OldTuple);
+                    ReturnItems.Add(tuple);
+                }
+                this.DialogResult = DialogResult.OK;
             }
-            this.DialogResult = DialogResult.OK;
+            else
+            {
+                e.Cancel = true;
+                MessageBox.Show($"Przynajmniej {MinCount} pozycji musi być zaznaczonych..","Błąd", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
         }
     }
 }

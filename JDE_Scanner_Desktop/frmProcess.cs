@@ -208,8 +208,9 @@ namespace JDE_Scanner_Desktop
         {
             Looper = new frmLooper(this);
             Looper.Show(this);
-            await Places.Refresh(null,'a');
-            await StartingUsers.Refresh();
+            var PlaceRefreshTask = Task.Run(() => Places.Refresh(null, 'a'));
+            var StartingUsersRefreshTask = Task.Run(() => StartingUsers.Refresh(null, 'a'));
+            await Task.WhenAll(PlaceRefreshTask, StartingUsersRefreshTask);
             FinishingUsers.Items = new List<User>(StartingUsers.Items);
             AssignableUsers.Items = new List<User>(StartingUsers.Items);
             _this.Handlings = new HandlingsKeeper();
@@ -262,7 +263,7 @@ namespace JDE_Scanner_Desktop
             }
             cmbStartedBy.DataSource = StartingUsers.Items;
             cmbFinishedBy.DataSource = FinishingUsers.Items;
-            cmbPlace.DataSource = Places.Items;
+            new AutoCompleteBehavior<Place>(this.cmbPlace, Places.Items);
             cmbStartedBy.DisplayMember = "FullName";
             cmbStartedBy.ValueMember = "UserId";
             cmbFinishedBy.DisplayMember = "FullName";

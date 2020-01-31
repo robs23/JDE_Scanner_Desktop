@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq.Dynamic;
+using System.Threading;
 
 namespace JDE_Scanner_Desktop.Classes
 {
@@ -19,8 +20,9 @@ namespace JDE_Scanner_Desktop.Classes
 
         public AutoCompleteBehavior(ComboBox comboBox, List<T>Items = null)
         {
+
             this.comboBox = comboBox;
-            this.comboBox.AutoCompleteMode = AutoCompleteMode.Suggest; // crucial otherwise exceptions occur when the user types in text which is not found in the autocompletion list
+            Thread t = new Thread(() => { this.comboBox.Invoke((Action)(() => { this.comboBox.AutoCompleteMode = AutoCompleteMode.Suggest; })); });// crucial otherwise exceptions occur when the user types in text which is not found in the autocompletion list
             this.comboBox.TextChanged += this.OnTextChanged;
             this.comboBox.KeyPress += this.OnKeyPress;
             this.comboBox.SelectionChangeCommitted += this.OnSelectionChangeCommitted;
