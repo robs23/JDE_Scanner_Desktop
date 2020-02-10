@@ -29,6 +29,8 @@ namespace JDE_Scanner_Desktop
         ProcessAssignKeeper ProcessAssigns = new ProcessAssignKeeper();
         frmLooper Looper;
         AssignedUsersHandler assignedUsersHandler;
+        BackgroundWorker BW = new BackgroundWorker();
+            
         public bool ForceRefresh = false;
 
         public frmProcess(Form parent)
@@ -253,11 +255,11 @@ namespace JDE_Scanner_Desktop
                     txtPlannedStart.Enabled = false;
                     txtPlannedFinish.Enabled = false;
                 }
-                var loadHistoryTask = Task.Run(() => LoadHistory());
+                LoadHistory();
                 var loadActionsTask = Task.Run(() => LoadActions());
                 var loadProcessAssingsTask = Task.Run(() => assignedUsersHandler.LoadProcessAssigns());
 
-                await Task.WhenAll(loadHistoryTask, loadActionsTask, loadProcessAssingsTask);
+                await Task.WhenAll(loadActionsTask, loadProcessAssingsTask);
                 lblAssignedUsers.Text = assignedUsersHandler.AssignedUserNames;
 
             }
@@ -359,11 +361,15 @@ namespace JDE_Scanner_Desktop
 
         private async Task<bool> LoadHistory()
         {
+            lvHistory.View = View.List;
+            lvHistory.Items.Add(new ListViewItem("Wczytywanie.."));
             if (_this.Logs != null)
             {
                 await _this.Logs.GetProcessHistory(_this.ProcessId);
+                lvHistory.Items[0].Remove();
                 if (_this.Logs.Items.Any())
                 {
+                    lvHistory.View = View.Details;
                     lvHistory.Columns.Add("ID logu");
                     lvHistory.Columns.Add("Czas");
                     lvHistory.Columns.Add("Użytkownik");
@@ -389,8 +395,8 @@ namespace JDE_Scanner_Desktop
                     return true;
                 }
             }
-            lvHandlings.View = View.List;
-            lvHandlings.Items.Add(new ListViewItem("Brak danych"));
+            lvHistory.View = View.List;
+            lvHistory.Items.Add(new ListViewItem("Brak danych"));
             return false;
 
         }
