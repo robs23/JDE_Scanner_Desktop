@@ -451,7 +451,7 @@ namespace JDE_Scanner_Desktop
             }
             if (cmbPlace.SelectedItem != null)
             {
-                _this.PlaceId = Convert.ToInt32(cmbPlace.SelectedValue.ToString());
+                _this.PlaceId = (int)cmbPlace.GetSelectedValue<Place>();
             }
             if(cmbActionType.SelectedItem != null)
             {
