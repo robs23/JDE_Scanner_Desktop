@@ -28,10 +28,6 @@ namespace JDE_Scanner_Desktop
             lblCreated.Visible = false;
             this.Text = "Nowy typ zgłoszenia";
             _this = new ActionType();
-            cmbMesSync.DataSource = new List<bool> { false, true };
-            cmbShowInPlanning.DataSource = new List<bool> { false,true };
-            cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
-            cmbAllowDuplicates.DataSource = new List<bool> {  true, false };
         }
 
         public frmActionType(ActionType Item, Form parent)
@@ -49,47 +45,72 @@ namespace JDE_Scanner_Desktop
                 lblCreated.Text = "Utworzone w dniu " + _this.CreatedOn + " przez " + _this.CreatedByName;
                 lblCreated.Visible = true;
             }
-            cmbMesSync.DataSource = new List<bool> { false, true };
-            cmbShowInPlanning.DataSource = new List<bool> { false, true };
-            cmbAllowDuplicates.DataSource = new List<bool> { true, false };
-            cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
-            cmbMesSync.SelectedIndex = cmbMesSync.FindStringExact(_this.MesSync.ToString());
-            cmbShowInPlanning.SelectedIndex = cmbShowInPlanning.FindStringExact(_this.ShowInPlanning.ToString());
-            cmbRequireInitialDiagnosis.SelectedIndex = cmbRequireInitialDiagnosis.FindStringExact(_this.RequireInitialDiagnosis.ToString());
-            cmbAllowDuplicates.SelectedIndex = cmbAllowDuplicates.FindStringExact(_this.AllowDuplicates.ToString());
+            
         }
 
         private void FormLoaded(object sender, EventArgs e)
         {
             Looper = new frmLooper(this);
+            cmbMesSync.DataSource = new List<bool> { false, true };
+            cmbShowInPlanning.DataSource = new List<bool> { false, true };
+            cmbAllowDuplicates.DataSource = new List<bool> { true, false };
+            cmbRequireInitialDiagnosis.DataSource = new List<bool> { false, true };
+            cmbQrToStart.DataSource = new List<bool> { false, true };
+            cmbQrToFinish.DataSource = new List<bool> { false,true };
+            cmbClosePrevious.DataSource = new List<bool> { false, true };
+
+            if (mode == 2)
+            {
+                cmbMesSync.SelectedIndex = cmbMesSync.FindStringExact(_this.MesSync.ToString());
+                cmbShowInPlanning.SelectedIndex = cmbShowInPlanning.FindStringExact(_this.ShowInPlanning.ToString());
+                cmbRequireInitialDiagnosis.SelectedIndex = cmbRequireInitialDiagnosis.FindStringExact(_this.RequireInitialDiagnosis.ToString());
+                cmbAllowDuplicates.SelectedIndex = cmbAllowDuplicates.FindStringExact(_this.AllowDuplicates.ToString());
+                cmbQrToStart.SelectedIndex = cmbQrToStart.FindStringExact(_this.RequireQrToStart.ToString());
+                cmbQrToFinish.SelectedIndex = cmbQrToFinish.FindStringExact(_this.RequireQrToFinish.ToString());
+                cmbClosePrevious.SelectedIndex = cmbClosePrevious.FindStringExact(_this.ClosePreviousInSamePlace.ToString());
+            }
+            
         }
 
         private async void Save(object sender, EventArgs e)
         {
             try
             {
+                _this.Name = txtName.Text;
+                _this.Description = txtDescription.Text;
+                if (cmbShowInPlanning.SelectedItem != null)
+                {
+                    _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
+                }
+                if (cmbMesSync.SelectedItem != null)
+                {
+                    _this.MesSync = bool.Parse(cmbMesSync.Text);
+                }
+                if (cmbRequireInitialDiagnosis.SelectedItem != null)
+                {
+                    _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
+                }
+                if (cmbAllowDuplicates.SelectedItem != null)
+                {
+                    _this.AllowDuplicates = bool.Parse(cmbAllowDuplicates.Text);
+                }
+                if (cmbQrToStart.SelectedItem != null)
+                {
+                    _this.RequireQrToStart = bool.Parse(cmbQrToStart.Text);
+                }
+                if (cmbQrToFinish.SelectedItem != null)
+                {
+                    _this.RequireQrToFinish = bool.Parse(cmbQrToFinish.Text);
+                }
+                if (cmbClosePrevious.SelectedItem != null)
+                {
+                    _this.ClosePreviousInSamePlace = bool.Parse(cmbClosePrevious.Text);
+                }
                 if (mode == 1)
                 {
-                    _this.CreatedBy = 1;
+                    _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
-                    _this.Name = txtName.Text;
-                    _this.Description = txtDescription.Text;
-                    if (cmbShowInPlanning.SelectedItem != null)
-                    {
-                        _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
-                    }
-                    if (cmbMesSync.SelectedItem != null)
-                    {
-                        _this.MesSync = bool.Parse(cmbMesSync.Text);
-                    }
-                    if (cmbRequireInitialDiagnosis.SelectedItem != null)
-                    {
-                        _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
-                    }
-                    if (cmbAllowDuplicates.SelectedItem != null)
-                    {
-                        _this.AllowDuplicates = bool.Parse(cmbAllowDuplicates.Text);
-                    }
+                    
                     if (await _this.Add())
                     {
                         mode = 2;
@@ -98,24 +119,6 @@ namespace JDE_Scanner_Desktop
                 }
                 else if (mode == 2)
                 {
-                    _this.Name = txtName.Text;
-                    _this.Description = txtDescription.Text;
-                    if (cmbShowInPlanning.SelectedItem != null)
-                    {
-                        _this.ShowInPlanning = bool.Parse(cmbShowInPlanning.Text);
-                    }
-                    if (cmbMesSync.SelectedItem != null)
-                    {
-                        _this.MesSync = bool.Parse(cmbMesSync.Text);
-                    }
-                    if (cmbRequireInitialDiagnosis.SelectedItem != null)
-                    {
-                        _this.RequireInitialDiagnosis = bool.Parse(cmbRequireInitialDiagnosis.Text);
-                    }
-                    if (cmbAllowDuplicates.SelectedItem != null)
-                    {
-                        _this.AllowDuplicates = bool.Parse(cmbAllowDuplicates.Text);
-                    }
                     _this.Edit();
                 }
             }catch(Exception ex)

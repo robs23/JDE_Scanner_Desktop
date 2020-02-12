@@ -40,6 +40,12 @@ namespace JDE_Scanner_Desktop.Models
         public bool? MesSync { get; set; }
         [DisplayName("Zezwalaj na duplikaty")]
         public bool? AllowDuplicates { get; set; }
+        [DisplayName("Wymagaj skanowania QR by rozpocząć")]
+        public bool? RequireQrToStart { get; set; }
+        [DisplayName("Wymagaj skanowania QR by zakończyć")]
+        public bool? RequireQrToFinish { get; set; }
+        [DisplayName("Zamknij poprzednie zgłoszenia")]
+        public bool? ClosePreviousInSamePlace { get; set; }
 
         public async Task<bool> Add()
         {
