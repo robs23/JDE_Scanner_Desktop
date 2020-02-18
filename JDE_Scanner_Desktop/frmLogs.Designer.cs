@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.CustomControls;
+using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
