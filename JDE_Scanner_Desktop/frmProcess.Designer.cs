@@ -467,7 +467,7 @@
             // txtStartedOn
             // 
             this.txtStartedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStartedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
+            this.txtStartedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.txtStartedOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtStartedOn.Location = new System.Drawing.Point(3, 3);
             this.txtStartedOn.Name = "txtStartedOn";
@@ -586,7 +586,7 @@
             // txtFinishedOn
             // 
             this.txtFinishedOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFinishedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
+            this.txtFinishedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.txtFinishedOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtFinishedOn.Location = new System.Drawing.Point(3, 3);
             this.txtFinishedOn.Name = "txtFinishedOn";
@@ -597,7 +597,7 @@
             // txtPlannedStart
             // 
             this.txtPlannedStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPlannedStart.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
+            this.txtPlannedStart.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.txtPlannedStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtPlannedStart.Location = new System.Drawing.Point(137, 65);
             this.txtPlannedStart.Name = "txtPlannedStart";

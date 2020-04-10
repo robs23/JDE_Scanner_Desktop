@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace JDE_Scanner_Desktop
 {
@@ -78,15 +79,38 @@ namespace JDE_Scanner_Desktop
                 this.Text = "JDE Scan v." + System.Windows.Forms.Application.ProductVersion;
 #if (DEBUG == false)
                 ReleaseEntry release = null;
-                using (var mgr = new UpdateManager(Static.Secrets.Check4ReleasePath))
+                string path = string.Empty;
+                if (Directory.Exists(Static.Secrets.SquirrelAbsoluteUpdatePath))
                 {
-                    release = await mgr.UpdateApp();
+                    path = Static.Secrets.SquirrelAbsoluteUpdatePath;
                 }
-                if (release != null)
+                else if (Directory.Exists(Static.Secrets.SquirrelUpdatePath))
                 {
-                    MessageBox.Show("Aplikacja została zaktualizowana do nowszej wersji. Naciśnij OK aby zrestartować aplikację", "Aktualizacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //force app restart
-                    UpdateManager.RestartApp();
+                    path = Static.Secrets.SquirrelUpdatePath;
+                }
+                if (!string.IsNullOrWhiteSpace(path))
+                {
+                    using (var mgr = new UpdateManager(path))
+                    {
+                        //SquirrelAwareApp.HandleEvents(
+                        //onInitialInstall: v =>
+                        //{
+                        //    mgr.CreateShortcutForThisExe();
+                        //    mgr.CreateRunAtWindowsStartupRegistry();
+                        //},
+                        //onAppUninstall: v =>
+                        //{
+                        //    mgr.RemoveShortcutForThisExe();
+                        //    mgr.RemoveRunAtWindowsStartupRegistry();
+                        //});
+                        release = await mgr.UpdateApp();
+                    }
+                    if (release != null)
+                    {
+                        MessageBox.Show("Aplikacja została zaktualizowana do nowszej wersji. Naciśnij OK aby zrestartować aplikację", "Aktualizacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //force app restart
+                        UpdateManager.RestartApp();
+                    }
                 }
 #endif
             }

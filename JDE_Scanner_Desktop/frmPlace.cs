@@ -79,6 +79,10 @@ namespace JDE_Scanner_Desktop
             {
                 GetBoms();
             }
+#if (DEBUG == true)
+            pbQrCode.Visible = true;
+#endif
+
         }
 
         private async void Save(object sender, EventArgs e)
