@@ -13,10 +13,15 @@ using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    public class Place
+    public class Place : Entity<Place>
     {
         [DisplayName("ID")]
         public int PlaceId { get; set; }
+        public override int Id
+        {
+            set => value = PlaceId;
+            get => PlaceId;
+        }
         [DisplayName("Numer")]
         public string Number1 { get; set; }
         [Browsable(false)]
@@ -38,48 +43,39 @@ namespace JDE_Scanner_Desktop.Models
         public string SetName { get; set; }
         [DisplayName("Priorytet")]
         public string Priority { get; set; }
-        [DisplayName("Data utworzenia")]
-        public DateTime? CreatedOn { get; set; }
-        [Browsable(false)]
-        public int CreatedBy { get; set; }
-        [DisplayName("Utworzył")]
-        public string CreatedByName { get; set; }
-        [Browsable(false)]
-        public int TenantId { get; set; }
-        [Browsable(false)]
-        public string TenantName { get; set; }
+        
         [DisplayName("Token")]
         public string PlaceToken { get; set; }
-        [DisplayName("Archiwalny")]
-        public bool? IsArchived { get; set; }
+        [DisplayName("Zdjęcie")]
+        public string Image { get; set; }
 
-
-        public async Task<bool> Add()
+        public async override Task<bool> Add(string attachmentPath = null)
         {
-            ModelValidator validator = new ModelValidator();
-            if (validator.Validate(this))
+            bool x;
+            if (attachmentPath == null)
             {
-                using (var client = new HttpClient())
+                x = await base.Add();
+            }
+            else
+            {
+                x = await base.Add(attachmentPath);
+            }
+
+            if (x)
+            {
+                try
                 {
-                    string url = Secrets.ApiAddress + "CreatePlace?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PostAsync(new Uri(url), content);
-                    if (result.IsSuccessStatusCode)
-                    {
-                        var rString = await result.Content.ReadAsStringAsync();
-                        Place _this = JsonConvert.DeserializeObject<Place>(rString);
-                        this.PlaceId = _this.PlaceId;
-                        this.PlaceToken = _this.PlaceToken;
-                        MessageBox.Show("Tworzenie zasobu zakończone powodzeniem!");
-                        return true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia zasobu. Wiadomość: " + result.ReasonPhrase);
-                        return false;
-                    }
+                    Place _this = JsonConvert.DeserializeObject<Place>(AddedItem);
+                    this.PlaceId = _this.PlaceId;
+                    this.PlaceToken = _this.PlaceToken;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
+                return true;
             }
             else
             {
@@ -87,29 +83,6 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void Edit()
-        {
-            ModelValidator validator = new ModelValidator();
-            if (validator.Validate(this))
-            {
-                using (var client = new HttpClient())
-                {
-                    string url = Secrets.ApiAddress + "EditPlace?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    var result = await client.PutAsync(String.Format(url, this.PlaceId, RuntimeSettings.UserId), content);
-                    if (result.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("Edycja zasobu zakończona powodzeniem!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie edycji użytkownika. Wiadomość: " + result.ReasonPhrase);
-                    }
-                }
-            }
-
-        }
     }
 }
 

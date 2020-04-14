@@ -579,6 +579,7 @@
             this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbImage.TabIndex = 29;
             this.pbImage.TabStop = false;
+            this.tooltip.SetToolTip(this.pbImage, "Wybierz zdjęcie..");
             this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             // 
             // pgBoms

@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.Menu;
 
 namespace JDE_Scanner_Desktop
 {
@@ -23,7 +25,8 @@ namespace JDE_Scanner_Desktop
         SetsKeeper Sets = new SetsKeeper();
         BomKeeper boms = new BomKeeper();
         frmLooper Looper;
-
+        FileKeeper img;
+        ContextMenu buttonContextMenu;
         public frmPlace(Form parent)
         {
             InitializeComponent();
@@ -33,6 +36,7 @@ namespace JDE_Scanner_Desktop
             lblCreated.Visible = false;
             this.Text = "Nowy zasób";
             _this = new Place();
+            img = new FileKeeper(this);
         }
 
         public frmPlace(Place Place, Form parent)
@@ -58,6 +62,7 @@ namespace JDE_Scanner_Desktop
             {
                 GenerateQrCode(_this.PlaceToken);
             }
+            img = new FileKeeper(this);
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -75,8 +80,10 @@ namespace JDE_Scanner_Desktop
             cmbSet.ValueMember = "SetId";
             cmbArea.SelectedIndex = cmbArea.FindStringExact(_this.AreaName);
             cmbSet.SelectedIndex = cmbSet.FindStringExact(_this.SetName);
+            InitiailizeButtonContextMenu();
             if (mode > 1)
             {
+                GetImage();
                 GetBoms();
             }
 #if (DEBUG == true)
@@ -191,5 +198,71 @@ namespace JDE_Scanner_Desktop
             lInt.Add(_this.PlaceId);
             placeKeeper.PrintQR(lInt);
         }
+
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+            if (((MouseEventArgs)e).Button == MouseButtons.Left)
+            {
+                if (img.Items.Any())
+                {
+                    img.OpenFile(0);
+                }
+                else
+                {
+                    LoadImg();
+                }
+            }
+            else
+            {
+                Control cont = (Control)sender;
+                buttonContextMenu.Show(cont, new Point(cont.Location.X + 30, cont.Location.Y + 30));
+            }
+        }
+
+        private void LoadImg()
+        {
+            //Let's add  new image
+
+            img.LoadFromDisk(false);
+            if (img.Items.Any())
+            {
+                pbImage.Image = Image.FromFile(img.Items[0].Link);
+                pbImage.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+        }
+
+        public void InitiailizeButtonContextMenu()
+        {
+            buttonContextMenu = new ContextMenu();
+            MenuItem miChange = new MenuItem("Zmień zdjęcie");
+            miChange.Click += ChangeImage;
+            MenuItem miDelete = new MenuItem("Usuń zdjęcie");
+            miDelete.Click += DeleteImage;
+
+            MenuItemCollection collection = new MenuItemCollection(buttonContextMenu);
+            collection.Add(miChange);
+            collection.Add(miDelete);
+        }
+        public void ChangeImage(object sender, EventArgs e)
+        {
+            LoadImg();
+        }
+
+        public void DeleteImage(object sender, EventArgs e)
+        {
+            img.Items.Clear();
+            pbImage.Image = pbImage.InitialImage;
+        }
+
+        private async void GetImage()
+        {
+            if (!string.IsNullOrEmpty(_this.Image))
+            {
+                pbImage.Image = await img.GetImage(_this.Image, false, true);
+                pbImage.SizeMode = PictureBoxSizeMode.Zoom;
+                img.Items.Add(new Models.File { Name = _this.Image, IsUploaded = true, Link = Path.Combine(RuntimeSettings.LocalFilesPath, _this.Image) });
+            }
+        }
+
     }
 }
