@@ -108,7 +108,11 @@ namespace JDE_Scanner_Desktop
             {
                 _this.SetId = Convert.ToInt32(cmbSet.SelectedValue.ToString());
             }
-
+            string photoPath = null;
+            if (img.Items.Any())
+            {
+                photoPath = img.Items[0].Link;
+            }
             try
             {
                 Looper.Show(this);
@@ -116,7 +120,7 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.CreatedBy = RuntimeSettings.UserId;
                     _this.CreatedOn = DateTime.Now;
-                    if(await _this.Add())
+                    if(await _this.Add(photoPath))
                     {
                         mode = 2;
                         this.Text = "Szczegóły zasobu";
@@ -126,7 +130,7 @@ namespace JDE_Scanner_Desktop
                 }
                 else if (mode == 2)
                 {
-                    _this.Edit();
+                    _this.Edit(photoPath);
                 }
             }catch(Exception ex)
             {

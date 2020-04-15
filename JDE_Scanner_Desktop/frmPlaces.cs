@@ -22,12 +22,16 @@ namespace JDE_Scanner_Desktop
         frmFilter FrmFilter;
         int page;
         BindingSource source = new BindingSource();
+        frmImagePreview imagePreview;
+        int previousRow = -1;
+        int currentRow = -1;
 
         public frmPlaces(frmStarter parent)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
+            imagePreview = new frmImagePreview();
         }
 
         private async void Reload()
@@ -50,13 +54,14 @@ namespace JDE_Scanner_Desktop
 
         private void Add(object sender, EventArgs e)
         {
+            imagePreview.Visible = false;
             frmPlace FrmPlace = new frmPlace(this);
             FrmPlace.Show();
         }
 
         private void View(object sender, EventArgs e)
         {
-
+            imagePreview.Visible = false;
             int id = Convert.ToInt32(dgItems.Rows[dgItems.CurrentCell.RowIndex].Cells[0].Value);
 
             Place Place = new Place();
@@ -186,6 +191,51 @@ namespace JDE_Scanner_Desktop
                 }
                 await Keeper.Archive(SelectedRows);
                 Reload();
+            }
+        }
+
+        private void dgItems_MouseLeave(object sender, EventArgs e)
+        {
+            previousRow = -1;
+            imagePreview.Visible = false;
+        }
+
+        private void dgItems_MouseMove(object sender, MouseEventArgs e)
+        {
+            var p = dgItems.PointToClient(Cursor.Position);
+            var pointer = dgItems.HitTest(p.X, p.Y);
+
+            currentRow = pointer.RowIndex;
+            if (pointer.RowIndex >= 0 && pointer.ColumnIndex >= 0)
+            {
+                if (pointer.RowIndex != previousRow)
+                {
+                    if (dgItems.Rows[pointer.RowIndex].Cells[7].Value != null)
+                    {
+                        string img = dgItems.Rows[pointer.RowIndex].Cells[7].Value.ToString();
+                        if (!string.IsNullOrEmpty(img) && cboxShowPreview.CheckState == CheckState.Checked)
+                        {
+                            imagePreview.Load(img, true);
+                            imagePreview.Visible = true;
+                        }
+                        else
+                        {
+                            imagePreview.Visible = false;
+                        }
+                    }
+                    else
+                    {
+                        imagePreview.Visible = false;
+                    }
+
+                    previousRow = pointer.RowIndex;
+                }
+
+            }
+            else
+            {
+                previousRow = -1;
+                imagePreview.Visible = false;
             }
         }
     }

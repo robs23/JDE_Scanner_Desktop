@@ -39,9 +39,10 @@ namespace JDE_Scanner_Desktop
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnPrintQr = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.btnArchive = new System.Windows.Forms.Button();
             this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnArchive = new System.Windows.Forms.Button();
+            this.cboxShowPreview = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -83,6 +84,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Controls.Add(this.btnPrintQr, 4, 0);
             this.tlpButtons.Controls.Add(this.btnFilter, 3, 0);
             this.tlpButtons.Controls.Add(this.btnArchive, 5, 0);
+            this.tlpButtons.Controls.Add(this.cboxShowPreview, 6, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -162,21 +164,6 @@ namespace JDE_Scanner_Desktop
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
-            // dgItems
-            // 
-            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgItems.DoubleBuffered = true;
-            this.dgItems.Location = new System.Drawing.Point(3, 43);
-            this.dgItems.Name = "dgItems";
-            this.dgItems.Size = new System.Drawing.Size(565, 330);
-            this.dgItems.TabIndex = 2;
-            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
-            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
-            this.dgItems.DoubleClick += new System.EventHandler(this.View);
-            // 
             // btnArchive
             // 
             this.btnArchive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -191,6 +178,37 @@ namespace JDE_Scanner_Desktop
             this.btnArchive.UseVisualStyleBackColor = true;
             this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
+            // dgItems
+            // 
+            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.DoubleBuffered = true;
+            this.dgItems.Location = new System.Drawing.Point(3, 43);
+            this.dgItems.Name = "dgItems";
+            this.dgItems.Size = new System.Drawing.Size(565, 330);
+            this.dgItems.TabIndex = 2;
+            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.View);
+            this.dgItems.MouseLeave += new System.EventHandler(this.dgItems_MouseLeave);
+            this.dgItems.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgItems_MouseMove);
+            // 
+            // cboxShowPreview
+            // 
+            this.cboxShowPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.cboxShowPreview.AutoSize = true;
+            this.cboxShowPreview.Checked = true;
+            this.cboxShowPreview.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxShowPreview.Location = new System.Drawing.Point(243, 3);
+            this.cboxShowPreview.Name = "cboxShowPreview";
+            this.cboxShowPreview.Size = new System.Drawing.Size(105, 28);
+            this.cboxShowPreview.TabIndex = 6;
+            this.cboxShowPreview.Text = "Pokazuj podgląd";
+            this.cboxShowPreview.UseVisualStyleBackColor = true;
+            // 
             // frmPlaces
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,6 +222,7 @@ namespace JDE_Scanner_Desktop
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);
+            this.tlpButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).EndInit();
             this.ResumeLayout(false);
 
@@ -221,6 +240,7 @@ namespace JDE_Scanner_Desktop
         private System.Windows.Forms.Button btnPrintQr;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnArchive;
+        private System.Windows.Forms.CheckBox cboxShowPreview;
     }
 }
 

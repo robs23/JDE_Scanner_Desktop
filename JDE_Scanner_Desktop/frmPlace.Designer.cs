@@ -53,6 +53,9 @@
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.cmbSet = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.tlpImages = new System.Windows.Forms.TableLayoutPanel();
+            this.pbQrCode = new System.Windows.Forms.PictureBox();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.pgBoms = new System.Windows.Forms.TabPage();
             this.tlpBom = new System.Windows.Forms.TableLayoutPanel();
             this.tlpBomButtons = new System.Windows.Forms.TableLayoutPanel();
@@ -61,21 +64,18 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.tlpImages = new System.Windows.Forms.TableLayoutPanel();
-            this.pbQrCode = new System.Windows.Forms.PictureBox();
-            this.pbImage = new System.Windows.Forms.PictureBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.pgGeneral.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
+            this.tlpImages.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.pgBoms.SuspendLayout();
             this.tlpBom.SuspendLayout();
             this.tlpBomButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
-            this.tlpImages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -359,6 +359,43 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "Opis";
             // 
+            // tlpImages
+            // 
+            this.tlpImages.ColumnCount = 2;
+            this.tlpImages.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpImages.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpImages.Controls.Add(this.pbQrCode, 1, 0);
+            this.tlpImages.Controls.Add(this.pbImage, 0, 0);
+            this.tlpImages.Location = new System.Drawing.Point(153, 213);
+            this.tlpImages.Name = "tlpImages";
+            this.tlpImages.RowCount = 1;
+            this.tlpImages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpImages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 162F));
+            this.tlpImages.Size = new System.Drawing.Size(434, 162);
+            this.tlpImages.TabIndex = 14;
+            // 
+            // pbQrCode
+            // 
+            this.pbQrCode.Location = new System.Drawing.Point(220, 3);
+            this.pbQrCode.Name = "pbQrCode";
+            this.pbQrCode.Size = new System.Drawing.Size(192, 139);
+            this.pbQrCode.TabIndex = 15;
+            this.pbQrCode.TabStop = false;
+            this.pbQrCode.Visible = false;
+            // 
+            // pbImage
+            // 
+            this.pbImage.Image = global::JDE_Scanner_Desktop.Properties.Resources.Image_icon_64;
+            this.pbImage.InitialImage = global::JDE_Scanner_Desktop.Properties.Resources.Image_icon_64;
+            this.pbImage.Location = new System.Drawing.Point(3, 3);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(211, 153);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbImage.TabIndex = 16;
+            this.pbImage.TabStop = false;
+            this.tooltip.SetToolTip(this.pbImage, "Wybierz zdjęcie..");
+            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
+            // 
             // pgBoms
             // 
             this.pgBoms.Controls.Add(this.tlpBom);
@@ -462,43 +499,6 @@
             this.dgvBoms.Size = new System.Drawing.Size(574, 331);
             this.dgvBoms.TabIndex = 1;
             // 
-            // tlpImages
-            // 
-            this.tlpImages.ColumnCount = 2;
-            this.tlpImages.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpImages.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpImages.Controls.Add(this.pbQrCode, 1, 0);
-            this.tlpImages.Controls.Add(this.pbImage, 0, 0);
-            this.tlpImages.Location = new System.Drawing.Point(153, 213);
-            this.tlpImages.Name = "tlpImages";
-            this.tlpImages.RowCount = 1;
-            this.tlpImages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpImages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpImages.Size = new System.Drawing.Size(434, 162);
-            this.tlpImages.TabIndex = 14;
-            // 
-            // pbQrCode
-            // 
-            this.pbQrCode.Location = new System.Drawing.Point(220, 3);
-            this.pbQrCode.Name = "pbQrCode";
-            this.pbQrCode.Size = new System.Drawing.Size(204, 153);
-            this.pbQrCode.TabIndex = 15;
-            this.pbQrCode.TabStop = false;
-            this.pbQrCode.Visible = false;
-            // 
-            // pbImage
-            // 
-            this.pbImage.Image = global::JDE_Scanner_Desktop.Properties.Resources.Image_icon_64;
-            this.pbImage.InitialImage = global::JDE_Scanner_Desktop.Properties.Resources.Image_icon_64;
-            this.pbImage.Location = new System.Drawing.Point(3, 3);
-            this.pbImage.Name = "pbImage";
-            this.pbImage.Size = new System.Drawing.Size(211, 153);
-            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbImage.TabIndex = 16;
-            this.pbImage.TabStop = false;
-            this.tooltip.SetToolTip(this.pbImage, "Wybierz zdjęcie..");
-            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
-            // 
             // frmPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,13 +518,13 @@
             this.pgGeneral.ResumeLayout(false);
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
+            this.tlpImages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.pgBoms.ResumeLayout(false);
             this.tlpBom.ResumeLayout(false);
             this.tlpBomButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
-            this.tlpImages.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
 
         }
