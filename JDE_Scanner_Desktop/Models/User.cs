@@ -64,6 +64,7 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     User _this = JsonConvert.DeserializeObject<User>(AddedItem);
                     this.UserId = _this.UserId;
+                    this.TenantId = _this.TenantId;
                 }
                 catch (Exception ex)
                 {

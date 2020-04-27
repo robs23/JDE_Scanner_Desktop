@@ -92,6 +92,7 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     ProcessAction _this = JsonConvert.DeserializeObject<ProcessAction>(AddedItem);
                     this.ProcessActionId = _this.ProcessActionId;
+                    this.TenantId = _this.TenantId;
                 }
                 catch (Exception ex)
                 {

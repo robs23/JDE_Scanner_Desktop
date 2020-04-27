@@ -68,6 +68,7 @@ namespace JDE_Scanner_Desktop.Models
                     Place _this = JsonConvert.DeserializeObject<Place>(AddedItem);
                     this.PlaceId = _this.PlaceId;
                     this.PlaceToken = _this.PlaceToken;
+                    this.TenantId = _this.TenantId;
                 }
                 catch (Exception ex)
                 {

@@ -45,6 +45,7 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     Bom _this = JsonConvert.DeserializeObject<Bom>(AddedItem);
                     this.BomId = _this.BomId;
+                    this.TenantId = _this.TenantId;
                 }
                 catch (Exception ex)
                 {

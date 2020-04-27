@@ -90,6 +90,7 @@ namespace JDE_Scanner_Desktop.Models
                     Part _this = JsonConvert.DeserializeObject<Part>(AddedItem);
                     this.PartId = _this.PartId;
                     this.Token = _this.Token;
+                    this.TenantId = _this.TenantId;
                 }
                 catch (Exception ex)
                 {
