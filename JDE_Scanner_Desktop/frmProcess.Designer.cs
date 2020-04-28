@@ -78,6 +78,8 @@
             this.lvHistory = new System.Windows.Forms.ListView();
             this.pgActions = new System.Windows.Forms.TabPage();
             this.dgvActions = new System.Windows.Forms.DataGridView();
+            this.pbParts = new System.Windows.Forms.TabPage();
+            this.dgvUsedParts = new System.Windows.Forms.DataGridView();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -89,6 +91,8 @@
             this.pgHistory.SuspendLayout();
             this.pgActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActions)).BeginInit();
+            this.pbParts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsedParts)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -219,6 +223,7 @@
             this.tab.Controls.Add(this.pgHandling);
             this.tab.Controls.Add(this.pgHistory);
             this.tab.Controls.Add(this.pgActions);
+            this.tab.Controls.Add(this.pbParts);
             this.tab.Location = new System.Drawing.Point(3, 43);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
@@ -681,6 +686,26 @@
             this.dgvActions.Size = new System.Drawing.Size(582, 418);
             this.dgvActions.TabIndex = 0;
             // 
+            // pbParts
+            // 
+            this.pbParts.Controls.Add(this.dgvUsedParts);
+            this.pbParts.Location = new System.Drawing.Point(4, 22);
+            this.pbParts.Name = "pbParts";
+            this.pbParts.Padding = new System.Windows.Forms.Padding(3);
+            this.pbParts.Size = new System.Drawing.Size(588, 424);
+            this.pbParts.TabIndex = 4;
+            this.pbParts.Text = "Użyte części";
+            this.pbParts.UseVisualStyleBackColor = true;
+            // 
+            // dgvUsedParts
+            // 
+            this.dgvUsedParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsedParts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUsedParts.Location = new System.Drawing.Point(3, 3);
+            this.dgvUsedParts.Name = "dgvUsedParts";
+            this.dgvUsedParts.Size = new System.Drawing.Size(582, 418);
+            this.dgvUsedParts.TabIndex = 0;
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -708,6 +733,8 @@
             this.pgHistory.ResumeLayout(false);
             this.pgActions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvActions)).EndInit();
+            this.pbParts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsedParts)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -761,5 +788,7 @@
         private System.Windows.Forms.DataGridView dgvActions;
         private System.Windows.Forms.Label lblAssignedUsers;
         private System.Windows.Forms.Button btnEditAssignedList;
+        private System.Windows.Forms.TabPage pbParts;
+        private System.Windows.Forms.DataGridView dgvUsedParts;
     }
 }

@@ -58,6 +58,7 @@ namespace JDE_Scanner_Desktop
             cmbQrToStart.DataSource = new List<bool> { false, true };
             cmbQrToFinish.DataSource = new List<bool> { false,true };
             cmbClosePrevious.DataSource = new List<bool> { false, true };
+            cmbPartsApplicable.DataSource = new List<bool> { false, true };
 
             if (mode == 2)
             {
@@ -68,6 +69,7 @@ namespace JDE_Scanner_Desktop
                 cmbQrToStart.SelectedIndex = cmbQrToStart.FindStringExact(_this.RequireQrToStart.ToString());
                 cmbQrToFinish.SelectedIndex = cmbQrToFinish.FindStringExact(_this.RequireQrToFinish.ToString());
                 cmbClosePrevious.SelectedIndex = cmbClosePrevious.FindStringExact(_this.ClosePreviousInSamePlace.ToString());
+                cmbPartsApplicable.SelectedIndex = cmbPartsApplicable.FindStringExact(_this.PartsApplicable.ToString());
             }
             
         }
@@ -105,6 +107,10 @@ namespace JDE_Scanner_Desktop
                 if (cmbClosePrevious.SelectedItem != null)
                 {
                     _this.ClosePreviousInSamePlace = bool.Parse(cmbClosePrevious.Text);
+                }
+                if(cmbPartsApplicable.SelectedItem != null)
+                {
+                    _this.PartsApplicable = bool.Parse(cmbPartsApplicable.Text);
                 }
                 if (mode == 1)
                 {

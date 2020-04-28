@@ -46,6 +46,8 @@ namespace JDE_Scanner_Desktop.Models
         public bool? RequireQrToFinish { get; set; }
         [DisplayName("Zamknij poprzednie zgłoszenia")]
         public bool? ClosePreviousInSamePlace { get; set; }
+        [DisplayName("Konsumpcja części")]
+        public bool? PartsApplicable { get; set; }
 
         public async Task<bool> Add()
         {

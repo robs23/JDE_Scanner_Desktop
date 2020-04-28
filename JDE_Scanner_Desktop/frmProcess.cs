@@ -217,6 +217,7 @@ namespace JDE_Scanner_Desktop
             AssignableUsers.Items = new List<User>(StartingUsers.Items);
             _this.Handlings = new HandlingsKeeper();
             _this.Logs = new LogsKeeper();
+            _this.PartUsages = new PartUsageKeeper();
             _this.ProcessActions = new ProcessActionsKeeper();
             await ActionTypes.Refresh();
             if (mode == 1)
@@ -258,8 +259,9 @@ namespace JDE_Scanner_Desktop
                 LoadHistory();
                 var loadActionsTask = Task.Run(() => LoadActions());
                 var loadProcessAssingsTask = Task.Run(() => assignedUsersHandler.LoadProcessAssigns());
+                var loadUsedPartsTask = Task.Run(() => LoadParts());
 
-                await Task.WhenAll(loadActionsTask, loadProcessAssingsTask);
+                await Task.WhenAll(loadActionsTask, loadProcessAssingsTask, loadUsedPartsTask);
                 lblAssignedUsers.Text = assignedUsersHandler.AssignedUserNames;
 
             }
@@ -357,6 +359,22 @@ namespace JDE_Scanner_Desktop
             {
                 return false;
             }
+        }
+
+        private async Task<bool> LoadParts()
+        {
+            await _this.PartUsages.GetByProcessId(_this.ProcessId);
+            if (_this.PartUsages.Items.Any())
+            {
+                dgvUsedParts.DataSource = _this.PartUsages.Items;
+                //dgvActions.Columns["ProcessId"].Visible = false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
         private async Task<bool> LoadHistory()
