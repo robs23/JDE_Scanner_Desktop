@@ -18,6 +18,28 @@ namespace JDE_Scanner_Desktop.Models
             set => value = PartUsageId;
             get => PartUsageId;
         }
+        [DisplayName("ID zgłoszenia")]
+        public int? ProcessId { get; set; }
+        [Browsable(false)]
+        public int? PlaceId { get; set; }
+        [DisplayName("Zasób")]
+        public string PlaceName { get; set; }
+        [DisplayName("Ilość")]
+        public float Amount { get; set; } = 0;
+        [Browsable(false)]
+        public int PartId { get; set; }
+        [DisplayName("Część")]
+        public string Name { get; set; }
+        [Browsable(false)]
+        public int? ProducerId { get; set; }
+        [DisplayName("Producent")]
+        public string ProducerName { get; set; }
+        [DisplayName("Symbol")]
+        public string Symbol { get; set; }
+        [DisplayName("Opis")]
+        public string Description { get; set; }
+        [DisplayName("Zdjęcie")]
+        public string Image { get; set; }
 
         public async override Task<bool> Add(string attachmentPath = null)
         {

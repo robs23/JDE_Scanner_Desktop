@@ -371,6 +371,7 @@
             this.cmbActionType.Name = "cmbActionType";
             this.cmbActionType.Size = new System.Drawing.Size(452, 21);
             this.cmbActionType.TabIndex = 13;
+            this.cmbActionType.SelectedIndexChanged += new System.EventHandler(this.cmbActionType_SelectedIndexChanged);
             // 
             // txtDescription
             // 

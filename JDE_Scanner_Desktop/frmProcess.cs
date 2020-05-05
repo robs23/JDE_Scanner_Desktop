@@ -178,6 +178,8 @@ namespace JDE_Scanner_Desktop
             if (IsInitialDiagnosisRequiredSelected())
             {
                 txtInitialDiagnosis.Visible = true;
+                lblInitialDiagnosis.Visible = true;
+                lblRepairActions.Visible = true;
                 txtRepairActions.Visible = true;
                 lblDescription.Text = "Powód";
                 txtDescription.Text = _this.Reason;
@@ -188,6 +190,8 @@ namespace JDE_Scanner_Desktop
             else
             {
                 txtRepairActions.Visible = false;
+                lblInitialDiagnosis.Visible = false;
+                lblRepairActions.Visible = false;
                 txtInitialDiagnosis.Visible = false;
                 lblRepairActions.Visible = false;
                 lblInitialDiagnosis.Visible = false;
@@ -497,7 +501,7 @@ namespace JDE_Scanner_Desktop
                     _this.CreatedOn = DateTime.Now;
                     if (await _this.Add())
                     {
-                        if (AssignedUsers.Any())
+                        if (assignedUsersHandler.AssignedUsers.Any())
                         {
                             string res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
                             if (res != null)
@@ -586,10 +590,6 @@ namespace JDE_Scanner_Desktop
             }
         }
 
-        private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ChangeLook();
-        }
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -606,6 +606,11 @@ namespace JDE_Scanner_Desktop
             assignedUsersHandler.AssignableUsers = new List<User>(StartingUsers.Items);
             assignedUsersHandler.ShowDialog();
             lblAssignedUsers.Text = assignedUsersHandler.AssignedUserNames;
+        }
+
+        private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ChangeLook();
         }
     }
 }
