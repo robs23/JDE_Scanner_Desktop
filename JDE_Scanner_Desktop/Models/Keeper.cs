@@ -130,7 +130,7 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async Task Refresh(string query = null, char type='p')
+        public async Task Refresh(string query = null, char type='p', string parameters=null)
         {
             if (this.ArchiveString!=null)
             {
@@ -172,6 +172,10 @@ namespace JDE_Scanner_Desktop.Models
                 {
 
                     url += "&query=" + this.FilterString;
+                }
+                if (parameters != null)
+                {
+                    url += "&" + parameters;
                 }
 
                 using (var response = await client.GetAsync(new Uri(url)))

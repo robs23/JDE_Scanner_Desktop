@@ -39,7 +39,7 @@ namespace JDE_Scanner_Desktop
             looper.Show(this);
             if (MaintenanceOnly)
             {
-                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ");
+                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true");
             }
             else
             {
@@ -51,7 +51,7 @@ namespace JDE_Scanner_Desktop
             source.ResetBindings(false);
             if (MaintenanceOnly)
             {
-                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length",  };
+                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime" };
                 AdjustColumnVisibility(Columns);
             }
             else

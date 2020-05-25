@@ -174,6 +174,10 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Procent wykonania")]
         public float FinishRate { get; set; }
 
+        [DisplayName("Założony czas")]
+        public int? GivenTime { get; set; }
+
+
 
         public async Task<bool> Add()
         {
