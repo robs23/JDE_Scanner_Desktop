@@ -31,6 +31,9 @@ namespace JDE_Scanner_Desktop.Models
 
         public string FilterString { get; set; } = null;
         public string QueryString { get; set; } = null;
+        public string Parameters { get; set; }
+
+        public int? PageSize { get; set; }
 
         public Keeper()
         {
@@ -177,6 +180,12 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     url += "&" + parameters;
                 }
+                this.Parameters = parameters;
+
+                if (this.PageSize != null)
+                {
+                    url += $"&pageSize={this.PageSize}";
+                }
 
                 using (var response = await client.GetAsync(new Uri(url)))
                 {
@@ -206,6 +215,14 @@ namespace JDE_Scanner_Desktop.Models
                 else
                 {
                     url += "&query=" + this.FilterString;
+                }
+                if (this.Parameters != null)
+                {
+                    url += "&" + this.Parameters;
+                }
+                if (this.PageSize != null)
+                {
+                    url += $"&pageSize={this.PageSize}";
                 }
                 using (var response = await client.GetAsync(new Uri(url)))
                 {

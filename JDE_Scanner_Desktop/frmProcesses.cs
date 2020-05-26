@@ -30,6 +30,7 @@ namespace JDE_Scanner_Desktop
             MaintenanceOnly = maintenanceOnly;
             if (MaintenanceOnly)
             {
+                Keeper.PageSize = 100;
                 this.Text = "Konserwacje";
             }
         }
@@ -39,7 +40,7 @@ namespace JDE_Scanner_Desktop
             looper.Show(this);
             if (MaintenanceOnly)
             {
-                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true");
+                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true&FinishRate=true");
             }
             else
             {
@@ -51,12 +52,12 @@ namespace JDE_Scanner_Desktop
             source.ResetBindings(false);
             if (MaintenanceOnly)
             {
-                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus" };
+                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate" };
                 AdjustColumnVisibility(Columns);
             }
             else
             {
-                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "GivenTime", "TimingStatus"};
+                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "GivenTime", "TimingStatus", "FinishRate"};
                 AdjustColumnVisibility(null,Columns);
             }
             looper.Hide();
@@ -159,10 +160,15 @@ namespace JDE_Scanner_Desktop
         {
             if (e.OldValue < e.NewValue)
             {
+                int PageSize = RuntimeSettings.PageSize;
+                if (Keeper.PageSize != null)
+                {
+                    PageSize = (int)Keeper.PageSize;
+                }
                 var visibleRowsCount = dgItems.DisplayedRowCount(true);
                 var firstDisplayedRowIndex = dgItems.FirstDisplayedScrollingRowIndex;
                 var lastvisibleRowIndex = (firstDisplayedRowIndex + visibleRowsCount);
-                if (lastvisibleRowIndex >= RuntimeSettings.PageSize * page)
+                if (lastvisibleRowIndex >= PageSize * page)
                 {
                     int x = dgItems.FirstDisplayedScrollingRowIndex;
                     looper.Show(this);

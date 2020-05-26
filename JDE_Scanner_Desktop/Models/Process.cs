@@ -172,7 +172,7 @@ namespace JDE_Scanner_Desktop.Models
         public PartUsageKeeper PartUsages { get; set; }
 
         [DisplayName("Procent wykonania")]
-        public float FinishRate { get; set; }
+        public float? FinishRate { get; set; }
 
         [DisplayName("Założony czas [min]")]
         public int? GivenTime { get; set; }
