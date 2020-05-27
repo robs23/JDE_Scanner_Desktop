@@ -248,5 +248,11 @@ namespace JDE_Scanner_Desktop
             frmProcessActions FrmProcessActions = new frmProcessActions(this);
             FrmProcessActions.Show(this);
         }
+
+        private void wszystkieToolStripMenuItem10_Click(object sender, EventArgs e)
+        {
+            frmPartUsages FrmPartUsages = new frmPartUsages(this);
+            FrmPartUsages.Show(this);   
+        }
     }
 }

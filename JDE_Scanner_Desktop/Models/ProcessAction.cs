@@ -56,7 +56,7 @@ namespace JDE_Scanner_Desktop.Models
                     if (Handlings.Where(h => h.FinishedOn == null).Any())
                     {
                         //there's at least 1 unfinished handling
-                        int finished = Convert.ToInt32(Handlings.Select(h => (h.FinishedOn.Value - h.StartedOn.Value).TotalMinutes).Sum());
+                        int finished = Convert.ToInt32(Handlings.Where(h=>h.FinishedOn!=null).Select(h => (h.FinishedOn.Value - h.StartedOn.Value).TotalMinutes).Sum());
                         int unfinished = Convert.ToInt32(Handlings.Select(h => (DateTime.Now - h.StartedOn.Value).TotalMinutes).Sum());
                         return finished + unfinished;
                     }
