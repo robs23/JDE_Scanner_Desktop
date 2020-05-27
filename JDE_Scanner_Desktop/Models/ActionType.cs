@@ -48,6 +48,9 @@ namespace JDE_Scanner_Desktop.Models
         public bool? ClosePreviousInSamePlace { get; set; }
         [DisplayName("Konsumpcja części")]
         public bool? PartsApplicable { get; set; }
+        [DisplayName("Zawiera czynności")]
+        public bool? ActionsApplicable { get; set; }
+
 
         public async Task<bool> Add()
         {

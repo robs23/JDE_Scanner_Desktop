@@ -52,10 +52,12 @@
             this.cmbQrToStart = new System.Windows.Forms.ComboBox();
             this.cmbQrToFinish = new System.Windows.Forms.ComboBox();
             this.cmbClosePrevious = new System.Windows.Forms.ComboBox();
-            this.lblCreated = new System.Windows.Forms.Label();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.label10 = new System.Windows.Forms.Label();
             this.cmbPartsApplicable = new System.Windows.Forms.ComboBox();
+            this.lblCreated = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbActionsApplicable = new System.Windows.Forms.ComboBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -141,9 +143,12 @@
             this.tplTextboxes.Controls.Add(this.cmbClosePrevious, 1, 8);
             this.tplTextboxes.Controls.Add(this.label10, 0, 9);
             this.tplTextboxes.Controls.Add(this.cmbPartsApplicable, 1, 9);
+            this.tplTextboxes.Controls.Add(this.label11, 0, 10);
+            this.tplTextboxes.Controls.Add(this.cmbActionsApplicable, 1, 10);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
-            this.tplTextboxes.RowCount = 11;
+            this.tplTextboxes.RowCount = 12;
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -339,17 +344,6 @@
             this.cmbClosePrevious.Size = new System.Drawing.Size(435, 21);
             this.cmbClosePrevious.TabIndex = 19;
             // 
-            // lblCreated
-            // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 404);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -368,6 +362,36 @@
             this.cmbPartsApplicable.Name = "cmbPartsApplicable";
             this.cmbPartsApplicable.Size = new System.Drawing.Size(435, 21);
             this.cmbPartsApplicable.TabIndex = 21;
+            // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 404);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 308);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(144, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Zawiera czynności";
+            // 
+            // cmbActionsApplicable
+            // 
+            this.cmbActionsApplicable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbActionsApplicable.FormattingEnabled = true;
+            this.cmbActionsApplicable.Location = new System.Drawing.Point(153, 304);
+            this.cmbActionsApplicable.Name = "cmbActionsApplicable";
+            this.cmbActionsApplicable.Size = new System.Drawing.Size(435, 21);
+            this.cmbActionsApplicable.TabIndex = 23;
             // 
             // frmActionType
             // 
@@ -417,5 +441,7 @@
         private System.Windows.Forms.ComboBox cmbClosePrevious;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox cmbPartsApplicable;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbActionsApplicable;
     }
 }
