@@ -52,12 +52,12 @@ namespace JDE_Scanner_Desktop
             source.ResetBindings(false);
             if (MaintenanceOnly)
             {
-                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate" };
+                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
                 AdjustColumnVisibility(Columns);
             }
             else
             {
-                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "GivenTime", "TimingStatus", "FinishRate"};
+                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan"};
                 AdjustColumnVisibility(null,Columns);
             }
             looper.Hide();

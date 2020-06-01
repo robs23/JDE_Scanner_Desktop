@@ -180,6 +180,9 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Długość vs Założony czas")]
         public string TimingStatus { get; set; }
 
+        [DisplayName("Terminowość")]
+        public string TimingVsPlan { get; set; }
+
         public async Task<bool> Add()
         {
             ModelValidator validator = new ModelValidator();
