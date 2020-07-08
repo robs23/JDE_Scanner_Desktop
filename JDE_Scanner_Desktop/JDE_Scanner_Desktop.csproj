@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="Classes\AttributeEvaluator.cs" />
     <Compile Include="Classes\AutoCompleteBehavior.cs" />
+    <Compile Include="Classes\AutoSum.cs" />
     <Compile Include="Classes\DgvMerger.cs" />
     <Compile Include="Classes\MergableAttribute.cs" />
     <Compile Include="Classes\ModelValidator.cs" />

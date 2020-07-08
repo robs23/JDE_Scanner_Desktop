@@ -160,7 +160,7 @@ namespace JDE_Scanner_Desktop
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrStr, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrImage = qrCode.GetGraphic(5);
+            Bitmap qrImage = qrCode.GetGraphic(4);
             pbQrCode.Image = qrImage;
         }
 

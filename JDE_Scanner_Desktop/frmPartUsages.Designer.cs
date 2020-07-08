@@ -35,11 +35,12 @@ namespace JDE_Scanner_Desktop
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.cboxShowPreview = new System.Windows.Forms.CheckBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
-            this.cboxShowPreview = new System.Windows.Forms.CheckBox();
             this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.sumStatusStrip = new System.Windows.Forms.StatusStrip();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -100,6 +101,20 @@ namespace JDE_Scanner_Desktop
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.Add);
             // 
+            // cboxShowPreview
+            // 
+            this.cboxShowPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.cboxShowPreview.AutoSize = true;
+            this.cboxShowPreview.Checked = true;
+            this.cboxShowPreview.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxShowPreview.Location = new System.Drawing.Point(163, 3);
+            this.cboxShowPreview.Name = "cboxShowPreview";
+            this.cboxShowPreview.Size = new System.Drawing.Size(105, 28);
+            this.cboxShowPreview.TabIndex = 5;
+            this.cboxShowPreview.Text = "Pokazuj podgląd";
+            this.cboxShowPreview.UseVisualStyleBackColor = true;
+            // 
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -129,20 +144,6 @@ namespace JDE_Scanner_Desktop
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
-            // cboxShowPreview
-            // 
-            this.cboxShowPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.cboxShowPreview.AutoSize = true;
-            this.cboxShowPreview.Checked = true;
-            this.cboxShowPreview.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxShowPreview.Location = new System.Drawing.Point(163, 3);
-            this.cboxShowPreview.Name = "cboxShowPreview";
-            this.cboxShowPreview.Size = new System.Drawing.Size(105, 28);
-            this.cboxShowPreview.TabIndex = 5;
-            this.cboxShowPreview.Text = "Pokazuj podgląd";
-            this.cboxShowPreview.UseVisualStyleBackColor = true;
-            // 
             // dgItems
             // 
             this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -160,11 +161,20 @@ namespace JDE_Scanner_Desktop
             this.dgItems.MouseLeave += new System.EventHandler(this.dgItems_MouseLeave);
             this.dgItems.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgItems_MouseMove);
             // 
+            // sumStatusStrip
+            // 
+            this.sumStatusStrip.Location = new System.Drawing.Point(0, 378);
+            this.sumStatusStrip.Name = "sumStatusStrip";
+            this.sumStatusStrip.Size = new System.Drawing.Size(595, 22);
+            this.sumStatusStrip.TabIndex = 1;
+            this.sumStatusStrip.Text = "statusStrip1";
+            // 
             // frmPartUsages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 400);
+            this.Controls.Add(this.sumStatusStrip);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPartUsages";
@@ -176,6 +186,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -189,6 +200,7 @@ namespace JDE_Scanner_Desktop
         private DBDataGridView dgItems;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.CheckBox cboxShowPreview;
+        private System.Windows.Forms.StatusStrip sumStatusStrip;
     }
 }
 

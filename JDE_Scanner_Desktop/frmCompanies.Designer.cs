@@ -41,6 +41,7 @@ namespace JDE_Scanner_Desktop
             this.btnArchive = new System.Windows.Forms.Button();
             this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.sumStatusStrip = new System.Windows.Forms.StatusStrip();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -174,11 +175,20 @@ namespace JDE_Scanner_Desktop
             this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
             this.dgItems.DoubleClick += new System.EventHandler(this.View);
             // 
+            // sumStatusStrip
+            // 
+            this.sumStatusStrip.Location = new System.Drawing.Point(0, 378);
+            this.sumStatusStrip.Name = "sumStatusStrip";
+            this.sumStatusStrip.Size = new System.Drawing.Size(595, 22);
+            this.sumStatusStrip.TabIndex = 1;
+            this.sumStatusStrip.Text = "statusStrip1";
+            // 
             // frmCompanies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 400);
+            this.Controls.Add(this.sumStatusStrip);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmCompanies";
@@ -189,6 +199,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -203,6 +214,7 @@ namespace JDE_Scanner_Desktop
         private DBDataGridView dgItems;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnArchive;
+        private System.Windows.Forms.StatusStrip sumStatusStrip;
     }
 }
 

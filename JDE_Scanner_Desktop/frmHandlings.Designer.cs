@@ -36,10 +36,10 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgItems = new DBDataGridView();
-            this.dgItems.DoubleBuffered = true;
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.btnFilter = new System.Windows.Forms.Button();
+            this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.sumStatusStrip = new System.Windows.Forms.StatusStrip();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -59,7 +59,7 @@ namespace JDE_Scanner_Desktop
             this.tlpMain.RowCount = 2;
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Size = new System.Drawing.Size(571, 376);
+            this.tlpMain.Size = new System.Drawing.Size(577, 392);
             this.tlpMain.TabIndex = 0;
             // 
             // tlpButtons
@@ -85,7 +85,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpButtons.Size = new System.Drawing.Size(565, 34);
+            this.tlpButtons.Size = new System.Drawing.Size(571, 34);
             this.tlpButtons.TabIndex = 1;
             // 
             // btnDelete
@@ -117,20 +117,6 @@ namespace JDE_Scanner_Desktop
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.Refresh);
             // 
-            // dgItems
-            // 
-            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgItems.Location = new System.Drawing.Point(3, 43);
-            this.dgItems.Name = "dgItems";
-            this.dgItems.Size = new System.Drawing.Size(565, 330);
-            this.dgItems.TabIndex = 2;
-            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
-            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
-            this.dgItems.DoubleClick += new System.EventHandler(this.View);
-            // 
             // btnFilter
             // 
             this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -145,11 +131,35 @@ namespace JDE_Scanner_Desktop
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
+            // dgItems
+            // 
+            this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgItems.DoubleBuffered = true;
+            this.dgItems.Location = new System.Drawing.Point(3, 43);
+            this.dgItems.Name = "dgItems";
+            this.dgItems.Size = new System.Drawing.Size(571, 346);
+            this.dgItems.TabIndex = 2;
+            this.dgItems.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgItems_DataError);
+            this.dgItems.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgItems_Scroll);
+            this.dgItems.DoubleClick += new System.EventHandler(this.View);
+            // 
+            // sumStatusStrip
+            // 
+            this.sumStatusStrip.Location = new System.Drawing.Point(0, 394);
+            this.sumStatusStrip.Name = "sumStatusStrip";
+            this.sumStatusStrip.Size = new System.Drawing.Size(601, 22);
+            this.sumStatusStrip.TabIndex = 1;
+            this.sumStatusStrip.Text = "statusStrip1";
+            // 
             // frmHandlings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 400);
+            this.ClientSize = new System.Drawing.Size(601, 416);
+            this.Controls.Add(this.sumStatusStrip);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHandlings";
@@ -160,6 +170,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -172,6 +183,7 @@ namespace JDE_Scanner_Desktop
         private System.Windows.Forms.ToolTip tooltip;
         private DBDataGridView dgItems;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.StatusStrip sumStatusStrip;
     }
 }
 

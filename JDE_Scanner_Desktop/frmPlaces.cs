@@ -1,5 +1,6 @@
 ﻿//using DgvFilterPopup;
 using FastMember;
+using JDE_Scanner_Desktop.Classes;
 using JDE_Scanner_Desktop.Models;
 using Newtonsoft.Json;
 using System;
@@ -50,6 +51,9 @@ namespace JDE_Scanner_Desktop
             looper = new frmLooper(this);
             looper.TopMost = true;
             Reload();
+            //Initialize auto sum in status here
+            AutoSum autoSum = new AutoSum(this.sumStatusStrip, this.dgItems);
+            autoSum.Initilize();
         }
 
         private void Add(object sender, EventArgs e)

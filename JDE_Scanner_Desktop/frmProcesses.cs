@@ -1,4 +1,5 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace JDE_Scanner_Desktop
             source.ResetBindings(false);
             if (MaintenanceOnly)
             {
-                List<string> Columns = new List<string>() { "Status", "PlannedStart", "PlannedFinish", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
+                List<string> Columns = new List<string>() {"ProcessId", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
                 AdjustColumnVisibility(Columns);
             }
             else
@@ -70,6 +71,9 @@ namespace JDE_Scanner_Desktop
             looper = new frmLooper(this);
             looper.TopMost = true;
             Reload();
+            //Initialize auto sum in status here
+            AutoSum autoSum = new AutoSum(this.sumStatusStrip, this.dgItems);
+            autoSum.Initilize();
         }
 
         private void Add(object sender, EventArgs e)

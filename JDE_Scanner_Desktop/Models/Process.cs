@@ -113,7 +113,7 @@ namespace JDE_Scanner_Desktop.Models
         public bool IsCompleted { get; set; }
         [Browsable(false)]
         public bool IsSuccessfull { get; set; }
-        [Browsable(false)]
+        [DisplayName("ID zasobu")]
         [Range(1,int.MaxValue, ErrorMessage = "Wybierz zasób z rozwijanej listy!")]
         public int PlaceId { get; set; }
         [DisplayName("Zasób")]
