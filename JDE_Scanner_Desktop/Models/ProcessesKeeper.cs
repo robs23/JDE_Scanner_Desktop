@@ -83,6 +83,23 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public async Task AddComment(List<int> ids, string comment)
+        {
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"AddComment?token={Secrets.TenantToken}&ids={ids}&Comment={comment}&UserId={RuntimeSettings.UserId}";
+                var result = await client.PutAsync(String.Format(url, this.Id, RuntimeSettings.UserId), content);
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Edycja zakończona powodzeniem!");
+                }
+                else
+                {
+                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase);
+                }
+            }
+        }
+
         
     }
 }

@@ -260,6 +260,7 @@ namespace JDE_Scanner_Desktop
                     txtPlannedStart.Enabled = false;
                     txtPlannedFinish.Enabled = false;
                 }
+                txtComment.Text = _this.Comment;
                 LoadHistory();
                 var loadActionsTask = Task.Run(() => LoadActions());
                 var loadProcessAssingsTask = Task.Run(() => assignedUsersHandler.LoadProcessAssigns());
@@ -429,6 +430,7 @@ namespace JDE_Scanner_Desktop
             _this.Output = txtOutput.Text;
             _this.InitialDiagnosis = txtInitialDiagnosis.Text;
             _this.RepairActions = txtRepairActions.Text;
+            _this.Comment = txtComment.Text;
             if(IsMesSyncSelected())
             {
                 _this.MesId = txtMesId.Text;

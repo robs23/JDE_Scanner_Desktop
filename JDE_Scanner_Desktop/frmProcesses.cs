@@ -1,5 +1,6 @@
 ﻿using JDE_Scanner_Desktop.Classes;
 using JDE_Scanner_Desktop.Models;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -53,12 +54,12 @@ namespace JDE_Scanner_Desktop
             source.ResetBindings(false);
             if (MaintenanceOnly)
             {
-                List<string> Columns = new List<string>() {"ProcessId", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
+                List<string> Columns = new List<string>() {"ProcessId","Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
                 AdjustColumnVisibility(Columns);
             }
             else
             {
-                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan"};
+                List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish","Comment", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan"};
                 AdjustColumnVisibility(null,Columns);
             }
             looper.Hide();
@@ -246,7 +247,7 @@ namespace JDE_Scanner_Desktop
         {
             if (dgItems.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby zmienić przpisanych obsługujących do wybranych wierszy, najpierw zaznacz je kliknięciem po ich lewej stronie.");
             }
             else
             {
@@ -264,6 +265,27 @@ namespace JDE_Scanner_Desktop
                 looper.Hide();
             }
             
+        }
+
+        private async void btnComment_Click(object sender, EventArgs e)
+        {
+            if (dgItems.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby dodać komentarz do wybranych wierszy, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgItems.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
+                }
+                string comment = Interaction.InputBox("Wpisz treść komentarza poniżej", "Komentarz", "");
+                looper.Show(this);
+                await Keeper.AddComment(SelectedRows, comment);
+                looper.Hide();
+            }
         }
     }
 }

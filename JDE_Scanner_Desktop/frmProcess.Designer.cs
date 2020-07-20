@@ -80,6 +80,8 @@
             this.dgvActions = new System.Windows.Forms.DataGridView();
             this.pbParts = new System.Windows.Forms.TabPage();
             this.dgvUsedParts = new System.Windows.Forms.DataGridView();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtComment = new System.Windows.Forms.TextBox();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -115,7 +117,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStartedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnStartedOnClear.Image")));
-            this.btnStartedOnClear.Location = new System.Drawing.Point(189, 3);
+            this.btnStartedOnClear.Location = new System.Drawing.Point(187, 3);
             this.btnStartedOnClear.Name = "btnStartedOnClear";
             this.btnStartedOnClear.Size = new System.Drawing.Size(24, 18);
             this.btnStartedOnClear.TabIndex = 16;
@@ -128,7 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinishedOnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnFinishedOnClear.Image")));
-            this.btnFinishedOnClear.Location = new System.Drawing.Point(189, 3);
+            this.btnFinishedOnClear.Location = new System.Drawing.Point(187, 3);
             this.btnFinishedOnClear.Name = "btnFinishedOnClear";
             this.btnFinishedOnClear.Size = new System.Drawing.Size(24, 18);
             this.btnFinishedOnClear.TabIndex = 18;
@@ -141,7 +143,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditAssignedList.Image = global::JDE_Scanner_Desktop.Properties.Resources.Edit_16;
-            this.btnEditAssignedList.Location = new System.Drawing.Point(568, 3);
+            this.btnEditAssignedList.Location = new System.Drawing.Point(565, 3);
             this.btnEditAssignedList.Name = "btnEditAssignedList";
             this.btnEditAssignedList.Size = new System.Drawing.Size(25, 28);
             this.btnEditAssignedList.TabIndex = 5;
@@ -154,9 +156,9 @@
             // 
             this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 504);
+            this.lblCreated.Location = new System.Drawing.Point(3, 574);
             this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(596, 13);
+            this.lblCreated.Size = new System.Drawing.Size(593, 13);
             this.lblCreated.TabIndex = 2;
             this.lblCreated.Text = "lblCreated";
             this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,7 +181,7 @@
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpButtons.Size = new System.Drawing.Size(596, 34);
+            this.tlpButtons.Size = new System.Drawing.Size(593, 34);
             this.tlpButtons.TabIndex = 0;
             // 
             // lblAssignedUsers
@@ -187,7 +189,7 @@
             this.lblAssignedUsers.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblAssignedUsers.AutoSize = true;
             this.lblAssignedUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAssignedUsers.Location = new System.Drawing.Point(502, 10);
+            this.lblAssignedUsers.Location = new System.Drawing.Point(499, 10);
             this.lblAssignedUsers.Name = "lblAssignedUsers";
             this.lblAssignedUsers.Size = new System.Drawing.Size(60, 13);
             this.lblAssignedUsers.TabIndex = 4;
@@ -211,7 +213,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(602, 526);
+            this.tlpMain.Size = new System.Drawing.Size(599, 596);
             this.tlpMain.TabIndex = 0;
             // 
             // tab
@@ -227,7 +229,7 @@
             this.tab.Location = new System.Drawing.Point(3, 43);
             this.tab.Name = "tab";
             this.tab.SelectedIndex = 0;
-            this.tab.Size = new System.Drawing.Size(596, 450);
+            this.tab.Size = new System.Drawing.Size(593, 520);
             this.tab.TabIndex = 3;
             // 
             // pgProcess
@@ -236,7 +238,7 @@
             this.pgProcess.Location = new System.Drawing.Point(4, 22);
             this.pgProcess.Name = "pgProcess";
             this.pgProcess.Padding = new System.Windows.Forms.Padding(3);
-            this.pgProcess.Size = new System.Drawing.Size(588, 424);
+            this.pgProcess.Size = new System.Drawing.Size(585, 494);
             this.pgProcess.TabIndex = 0;
             this.pgProcess.Text = "Zgłoszenie";
             this.pgProcess.UseVisualStyleBackColor = true;
@@ -273,9 +275,11 @@
             this.tplTextboxes.Controls.Add(this.tlpFinishedOn, 1, 5);
             this.tplTextboxes.Controls.Add(this.txtPlannedStart, 1, 2);
             this.tplTextboxes.Controls.Add(this.txtPlannedFinish, 1, 3);
+            this.tplTextboxes.Controls.Add(this.label11, 0, 12);
+            this.tplTextboxes.Controls.Add(this.txtComment, 1, 12);
             this.tplTextboxes.Location = new System.Drawing.Point(-4, 3);
             this.tplTextboxes.Name = "tplTextboxes";
-            this.tplTextboxes.RowCount = 13;
+            this.tplTextboxes.RowCount = 14;
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -285,11 +289,12 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplTextboxes.Size = new System.Drawing.Size(592, 434);
+            this.tplTextboxes.Size = new System.Drawing.Size(589, 504);
             this.tplTextboxes.TabIndex = 2;
             // 
             // lblDescription
@@ -369,7 +374,7 @@
             this.cmbActionType.FormattingEnabled = true;
             this.cmbActionType.Location = new System.Drawing.Point(137, 184);
             this.cmbActionType.Name = "cmbActionType";
-            this.cmbActionType.Size = new System.Drawing.Size(452, 21);
+            this.cmbActionType.Size = new System.Drawing.Size(449, 21);
             this.cmbActionType.TabIndex = 13;
             this.cmbActionType.SelectedIndexChanged += new System.EventHandler(this.cmbActionType_SelectedIndexChanged);
             // 
@@ -378,7 +383,7 @@
             this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescription.Location = new System.Drawing.Point(137, 35);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(452, 20);
+            this.txtDescription.Size = new System.Drawing.Size(449, 20);
             this.txtDescription.TabIndex = 7;
             // 
             // cmbPlace
@@ -387,7 +392,7 @@
             this.cmbPlace.FormattingEnabled = true;
             this.cmbPlace.Location = new System.Drawing.Point(137, 214);
             this.cmbPlace.Name = "cmbPlace";
-            this.cmbPlace.Size = new System.Drawing.Size(452, 21);
+            this.cmbPlace.Size = new System.Drawing.Size(449, 21);
             this.cmbPlace.TabIndex = 18;
             // 
             // label8
@@ -412,7 +417,7 @@
             "Zrealizowany"});
             this.cmbStatus.Location = new System.Drawing.Point(137, 244);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(452, 21);
+            this.cmbStatus.Size = new System.Drawing.Size(449, 21);
             this.cmbStatus.TabIndex = 20;
             this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
@@ -424,7 +429,7 @@
             this.txtOutput.Location = new System.Drawing.Point(137, 273);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(452, 44);
+            this.txtOutput.Size = new System.Drawing.Size(449, 44);
             this.txtOutput.TabIndex = 21;
             // 
             // label9
@@ -457,14 +462,14 @@
             this.tlpStartedOn.Name = "tlpStartedOn";
             this.tlpStartedOn.RowCount = 1;
             this.tlpStartedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpStartedOn.Size = new System.Drawing.Size(452, 24);
+            this.tlpStartedOn.Size = new System.Drawing.Size(449, 24);
             this.tlpStartedOn.TabIndex = 24;
             // 
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(219, 5);
+            this.label10.Location = new System.Drawing.Point(217, 5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 13);
             this.label10.TabIndex = 20;
@@ -477,7 +482,7 @@
             this.txtStartedOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtStartedOn.Location = new System.Drawing.Point(3, 3);
             this.txtStartedOn.Name = "txtStartedOn";
-            this.txtStartedOn.Size = new System.Drawing.Size(180, 20);
+            this.txtStartedOn.Size = new System.Drawing.Size(178, 20);
             this.txtStartedOn.TabIndex = 15;
             this.txtStartedOn.ValueChanged += new System.EventHandler(this.txtStartedOn_ValueChanged);
             // 
@@ -485,9 +490,9 @@
             // 
             this.cmbStartedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbStartedBy.FormattingEnabled = true;
-            this.cmbStartedBy.Location = new System.Drawing.Point(269, 3);
+            this.cmbStartedBy.Location = new System.Drawing.Point(267, 3);
             this.cmbStartedBy.Name = "cmbStartedBy";
-            this.cmbStartedBy.Size = new System.Drawing.Size(180, 21);
+            this.cmbStartedBy.Size = new System.Drawing.Size(179, 21);
             this.cmbStartedBy.TabIndex = 16;
             // 
             // lblInitialDiagnosis
@@ -518,7 +523,7 @@
             this.txtInitialDiagnosis.Location = new System.Drawing.Point(137, 323);
             this.txtInitialDiagnosis.Multiline = true;
             this.txtInitialDiagnosis.Name = "txtInitialDiagnosis";
-            this.txtInitialDiagnosis.Size = new System.Drawing.Size(452, 44);
+            this.txtInitialDiagnosis.Size = new System.Drawing.Size(449, 44);
             this.txtInitialDiagnosis.TabIndex = 27;
             // 
             // txtRepairActions
@@ -529,7 +534,7 @@
             this.txtRepairActions.Location = new System.Drawing.Point(137, 373);
             this.txtRepairActions.Multiline = true;
             this.txtRepairActions.Name = "txtRepairActions";
-            this.txtRepairActions.Size = new System.Drawing.Size(452, 44);
+            this.txtRepairActions.Size = new System.Drawing.Size(449, 44);
             this.txtRepairActions.TabIndex = 28;
             // 
             // lblMesId
@@ -547,7 +552,7 @@
             this.txtMesId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMesId.Location = new System.Drawing.Point(137, 5);
             this.txtMesId.Name = "txtMesId";
-            this.txtMesId.Size = new System.Drawing.Size(452, 20);
+            this.txtMesId.Size = new System.Drawing.Size(449, 20);
             this.txtMesId.TabIndex = 30;
             // 
             // tlpFinishedOn
@@ -567,23 +572,23 @@
             this.tlpFinishedOn.RowCount = 1;
             this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpFinishedOn.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tlpFinishedOn.Size = new System.Drawing.Size(452, 24);
+            this.tlpFinishedOn.Size = new System.Drawing.Size(449, 24);
             this.tlpFinishedOn.TabIndex = 31;
             // 
             // cmbFinishedBy
             // 
             this.cmbFinishedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbFinishedBy.FormattingEnabled = true;
-            this.cmbFinishedBy.Location = new System.Drawing.Point(269, 3);
+            this.cmbFinishedBy.Location = new System.Drawing.Point(267, 3);
             this.cmbFinishedBy.Name = "cmbFinishedBy";
-            this.cmbFinishedBy.Size = new System.Drawing.Size(180, 21);
+            this.cmbFinishedBy.Size = new System.Drawing.Size(179, 21);
             this.cmbFinishedBy.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(219, 5);
+            this.label2.Location = new System.Drawing.Point(217, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 19;
@@ -596,7 +601,7 @@
             this.txtFinishedOn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtFinishedOn.Location = new System.Drawing.Point(3, 3);
             this.txtFinishedOn.Name = "txtFinishedOn";
-            this.txtFinishedOn.Size = new System.Drawing.Size(180, 20);
+            this.txtFinishedOn.Size = new System.Drawing.Size(178, 20);
             this.txtFinishedOn.TabIndex = 17;
             this.txtFinishedOn.ValueChanged += new System.EventHandler(this.txtFinishedOn_ValueChanged);
             // 
@@ -607,7 +612,7 @@
             this.txtPlannedStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtPlannedStart.Location = new System.Drawing.Point(137, 65);
             this.txtPlannedStart.Name = "txtPlannedStart";
-            this.txtPlannedStart.Size = new System.Drawing.Size(452, 20);
+            this.txtPlannedStart.Size = new System.Drawing.Size(449, 20);
             this.txtPlannedStart.TabIndex = 32;
             // 
             // txtPlannedFinish
@@ -617,7 +622,7 @@
             this.txtPlannedFinish.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.txtPlannedFinish.Location = new System.Drawing.Point(137, 95);
             this.txtPlannedFinish.Name = "txtPlannedFinish";
-            this.txtPlannedFinish.Size = new System.Drawing.Size(452, 20);
+            this.txtPlannedFinish.Size = new System.Drawing.Size(449, 20);
             this.txtPlannedFinish.TabIndex = 33;
             // 
             // pgHandling
@@ -707,11 +712,32 @@
             this.dgvUsedParts.Size = new System.Drawing.Size(582, 418);
             this.dgvUsedParts.TabIndex = 0;
             // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 438);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(128, 13);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Komentarz";
+            // 
+            // txtComment
+            // 
+            this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtComment.Location = new System.Drawing.Point(137, 423);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(449, 44);
+            this.txtComment.TabIndex = 35;
+            // 
             // frmProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 550);
+            this.ClientSize = new System.Drawing.Size(623, 620);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmProcess";
@@ -791,5 +817,7 @@
         private System.Windows.Forms.Button btnEditAssignedList;
         private System.Windows.Forms.TabPage pbParts;
         private System.Windows.Forms.DataGridView dgvUsedParts;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtComment;
     }
 }

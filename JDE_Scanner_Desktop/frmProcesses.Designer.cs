@@ -40,6 +40,7 @@ namespace JDE_Scanner_Desktop
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnReassign = new System.Windows.Forms.Button();
+            this.btnComment = new System.Windows.Forms.Button();
             this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.sumStatusStrip = new System.Windows.Forms.StatusStrip();
@@ -70,7 +71,8 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 7;
+            this.tlpButtons.ColumnCount = 8;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -84,6 +86,7 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Controls.Add(this.btnDelete, 1, 0);
             this.tlpButtons.Controls.Add(this.btnFilter, 2, 0);
             this.tlpButtons.Controls.Add(this.btnReassign, 5, 0);
+            this.tlpButtons.Controls.Add(this.btnComment, 6, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -176,6 +179,20 @@ namespace JDE_Scanner_Desktop
             this.btnReassign.UseVisualStyleBackColor = true;
             this.btnReassign.Click += new System.EventHandler(this.btnReassign_Click);
             // 
+            // btnComment
+            // 
+            this.btnComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnComment.Image = global::JDE_Scanner_Desktop.Properties.Resources.Comment_20;
+            this.btnComment.Location = new System.Drawing.Point(243, 3);
+            this.btnComment.Name = "btnComment";
+            this.btnComment.Size = new System.Drawing.Size(34, 28);
+            this.btnComment.TabIndex = 6;
+            this.tooltip.SetToolTip(this.btnComment, "Dodaj komentarz..");
+            this.btnComment.UseVisualStyleBackColor = true;
+            this.btnComment.Click += new System.EventHandler(this.btnComment_Click);
+            // 
             // dgItems
             // 
             this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -232,6 +249,7 @@ namespace JDE_Scanner_Desktop
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Button btnReassign;
         private System.Windows.Forms.StatusStrip sumStatusStrip;
+        private System.Windows.Forms.Button btnComment;
     }
 }
 
