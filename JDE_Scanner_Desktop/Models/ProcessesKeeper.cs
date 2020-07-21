@@ -85,17 +85,35 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task AddComment(List<int> ids, string comment)
         {
-            using (var client = new HttpClient())
+            //it adds comment to multiple process
+
+            List<Process> Processes = new List<Process>();
+            foreach (int id in ids)
             {
-                string url = Secrets.ApiAddress + $"AddComment?token={Secrets.TenantToken}&ids={ids}&Comment={comment}&UserId={RuntimeSettings.UserId}";
-                var result = await client.PutAsync(String.Format(url, this.Id, RuntimeSettings.UserId), content);
-                if (result.IsSuccessStatusCode)
+                Processes.Add(new Process() { ProcessId = id });
+            }
+
+            List<Task<string>> ListsOfTasks = new List<Task<string>>();
+
+            foreach (Process p in Processes)
+            {
+                ListsOfTasks.Add(p.AddComment(comment));
+            }
+
+            string response = "";
+            IEnumerable<string> res = await Task.WhenAll<string>(ListsOfTasks);
+            if (res.Any())
+            {
+                foreach (string r in res)
                 {
-                    MessageBox.Show("Edycja zakończona powodzeniem!");
+                    if (!string.IsNullOrEmpty(r))
+                    {
+                        response += r + "\r";
+                    }
                 }
-                else
+                if (response.Length > 0)
                 {
-                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase);
+                    MessageBox.Show(response);
                 }
             }
         }

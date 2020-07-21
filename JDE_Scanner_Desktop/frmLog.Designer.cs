@@ -45,6 +45,8 @@
             this.txtOldValue = new System.Windows.Forms.TextBox();
             this.txtNewValue = new System.Windows.Forms.TextBox();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.lblDiff = new System.Windows.Forms.Label();
+            this.txtDiff = new System.Windows.Forms.TextBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -66,7 +68,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(597, 426);
+            this.tlpMain.Size = new System.Drawing.Size(600, 474);
             this.tlpMain.TabIndex = 0;
             // 
             // tlpButtons
@@ -84,7 +86,7 @@
             this.tlpButtons.RowCount = 1;
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tlpButtons.Size = new System.Drawing.Size(591, 34);
+            this.tlpButtons.Size = new System.Drawing.Size(594, 34);
             this.tlpButtons.TabIndex = 0;
             // 
             // btnSave
@@ -119,16 +121,19 @@
             this.tplTextboxes.Controls.Add(this.label5, 0, 4);
             this.tplTextboxes.Controls.Add(this.txtOldValue, 1, 3);
             this.tplTextboxes.Controls.Add(this.txtNewValue, 1, 4);
+            this.tplTextboxes.Controls.Add(this.lblDiff, 0, 5);
+            this.tplTextboxes.Controls.Add(this.txtDiff, 1, 5);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
-            this.tplTextboxes.RowCount = 6;
+            this.tplTextboxes.RowCount = 7;
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tplTextboxes.Size = new System.Drawing.Size(591, 350);
+            this.tplTextboxes.Size = new System.Drawing.Size(594, 398);
             this.tplTextboxes.TabIndex = 1;
             // 
             // label3
@@ -147,7 +152,7 @@
             this.txtDescription.Location = new System.Drawing.Point(153, 65);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ReadOnly = true;
-            this.txtDescription.Size = new System.Drawing.Size(435, 20);
+            this.txtDescription.Size = new System.Drawing.Size(438, 20);
             this.txtDescription.TabIndex = 5;
             // 
             // label2
@@ -166,7 +171,7 @@
             this.txtUserName.Location = new System.Drawing.Point(153, 35);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.ReadOnly = true;
-            this.txtUserName.Size = new System.Drawing.Size(435, 20);
+            this.txtUserName.Size = new System.Drawing.Size(438, 20);
             this.txtUserName.TabIndex = 4;
             // 
             // label1
@@ -185,14 +190,14 @@
             this.txtTimeStamp.Location = new System.Drawing.Point(153, 5);
             this.txtTimeStamp.Name = "txtTimeStamp";
             this.txtTimeStamp.ReadOnly = true;
-            this.txtTimeStamp.Size = new System.Drawing.Size(435, 20);
+            this.txtTimeStamp.Size = new System.Drawing.Size(438, 20);
             this.txtTimeStamp.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 113);
+            this.label4.Location = new System.Drawing.Point(3, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(144, 13);
             this.label4.TabIndex = 8;
@@ -202,7 +207,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 173);
+            this.label5.Location = new System.Drawing.Point(3, 233);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(144, 13);
             this.label5.TabIndex = 9;
@@ -217,7 +222,7 @@
             this.txtOldValue.Multiline = true;
             this.txtOldValue.Name = "txtOldValue";
             this.txtOldValue.ReadOnly = true;
-            this.txtOldValue.Size = new System.Drawing.Size(435, 54);
+            this.txtOldValue.Size = new System.Drawing.Size(438, 94);
             this.txtOldValue.TabIndex = 10;
             // 
             // txtNewValue
@@ -225,18 +230,40 @@
             this.txtNewValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNewValue.Location = new System.Drawing.Point(153, 153);
+            this.txtNewValue.Location = new System.Drawing.Point(153, 193);
             this.txtNewValue.Multiline = true;
             this.txtNewValue.Name = "txtNewValue";
             this.txtNewValue.ReadOnly = true;
-            this.txtNewValue.Size = new System.Drawing.Size(435, 54);
+            this.txtNewValue.Size = new System.Drawing.Size(438, 94);
             this.txtNewValue.TabIndex = 11;
+            // 
+            // lblDiff
+            // 
+            this.lblDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDiff.AutoSize = true;
+            this.lblDiff.Location = new System.Drawing.Point(3, 333);
+            this.lblDiff.Name = "lblDiff";
+            this.lblDiff.Size = new System.Drawing.Size(144, 13);
+            this.lblDiff.TabIndex = 12;
+            this.lblDiff.Text = "Zmiana";
+            // 
+            // txtDiff
+            // 
+            this.txtDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDiff.Location = new System.Drawing.Point(153, 293);
+            this.txtDiff.Multiline = true;
+            this.txtDiff.Name = "txtDiff";
+            this.txtDiff.ReadOnly = true;
+            this.txtDiff.Size = new System.Drawing.Size(438, 94);
+            this.txtDiff.TabIndex = 13;
             // 
             // frmLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 450);
+            this.ClientSize = new System.Drawing.Size(624, 498);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLog";
@@ -268,5 +295,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtOldValue;
         private System.Windows.Forms.TextBox txtNewValue;
+        private System.Windows.Forms.Label lblDiff;
+        private System.Windows.Forms.TextBox txtDiff;
     }
 }

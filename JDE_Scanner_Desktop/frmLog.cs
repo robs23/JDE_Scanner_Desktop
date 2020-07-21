@@ -1,5 +1,9 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using DiffMatchPatch;
+using JDE_Scanner_Desktop.Models;
+using JsonDiffPatchDotNet;
+using JsonDiffPatchDotNet.Formatters.JsonPatch;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +41,12 @@ namespace JDE_Scanner_Desktop
         private void FormLoaded(object sender, EventArgs e)
         {
             Looper = new frmLooper(this);
+            if(!string.IsNullOrEmpty(_this.NewValue) && !string.IsNullOrEmpty(_this.OldValue))
+            {
+                var jdp = new JsonDiffPatch();
+                JToken diffResult = jdp.Diff(_this.OldValue, _this.NewValue);
+                txtDiff.Text = diffResult.ToString(Formatting.Indented);
+            }
         }
     }
 }

@@ -279,6 +279,29 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public async Task<string> AddComment(string comment)
+        {
+            //it adds comment to single process
+
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"AddComment?token={Secrets.TenantToken}&ProcessId={this.ProcessId}&comment={comment}&UserId={RuntimeSettings.UserId}";
+                var result = await client.PutAsync(url, null);
+                if (!result.IsSuccessStatusCode)
+                {
+                    if (result.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    {
+                        return String.Format("Dodawanie komentarzy nie ma zastosowania do zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, this.ProcessId);
+                    }
+                    return String.Format("Serwer zwrócił błąd przy próbie dodania komentarza do zgłoszenia {0}. Wiadomość: " + result.ReasonPhrase, this.ProcessId);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         private bool AdditionalValidation()
         {
             bool _isOk = true;
