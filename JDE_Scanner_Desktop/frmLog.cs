@@ -45,7 +45,7 @@ namespace JDE_Scanner_Desktop
             {
                 var jdp = new JsonDiffPatch();
                 JToken diffResult = jdp.Diff(_this.OldValue, _this.NewValue);
-                txtDiff.Text = diffResult.ToString(Formatting.Indented);
+                txtDiff.Text = diffResult.ToString(Formatting.Indented).Replace("\\r\\n", "");
             }
         }
     }

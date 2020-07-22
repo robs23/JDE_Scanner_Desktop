@@ -1,6 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Classes;
 using JDE_Scanner_Desktop.Models;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -281,10 +280,19 @@ namespace JDE_Scanner_Desktop
                 {
                     SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
                 }
-                string comment = Interaction.InputBox("Wpisz treść komentarza poniżej", "Komentarz", "");
-                looper.Show(this);
-                await Keeper.AddComment(SelectedRows, comment);
-                looper.Hide();
+                using(frmInputBox InputBox = new frmInputBox(this, "Wpisz treść komentarza poniżej", "Komentarz", ""))
+                {
+                    DialogResult res = InputBox.ShowDialog(this);
+                    if (res == DialogResult.OK)
+                    {
+                        looper.Show(this);
+                        await Keeper.AddComment(SelectedRows, InputBox.Response);
+                        looper.Hide();
+                        Reload();
+                        
+                    }
+                }
+                
             }
         }
     }
