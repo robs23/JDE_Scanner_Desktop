@@ -184,6 +184,18 @@
     <Compile Include="frmOptionPicker.Designer.cs">
       <DependentUpon>frmOptionPicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComponent.Designer.cs">
+      <DependentUpon>frmComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmComponents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComponents.Designer.cs">
+      <DependentUpon>frmComponents.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPartUsages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +384,8 @@
     <Compile Include="Models\AssignedUsersHandler.cs" />
     <Compile Include="Models\Bom.cs" />
     <Compile Include="Models\BomKeeper.cs" />
+    <Compile Include="Models\Component.cs" />
+    <Compile Include="Models\ComponentKeeper.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\FileKeeper.cs" />
@@ -436,6 +450,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOptionPicker.resx">
       <DependentUpon>frmOptionPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComponent.resx">
+      <DependentUpon>frmComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComponents.resx">
+      <DependentUpon>frmComponents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPartUsages.resx">
       <DependentUpon>frmPartUsages.cs</DependentUpon>
