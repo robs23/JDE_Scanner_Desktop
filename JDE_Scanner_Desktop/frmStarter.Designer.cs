@@ -46,6 +46,9 @@
             this.obszaryToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.komponentyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nowyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.wszystkieToolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.noweToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,9 +85,7 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.komponentyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nowyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.wszystkieToolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.masoweDodawanieKomponentówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -231,6 +232,30 @@
             this.wszystkieToolStripMenuItem3.Size = new System.Drawing.Size(125, 22);
             this.wszystkieToolStripMenuItem3.Text = "Wszystkie";
             this.wszystkieToolStripMenuItem3.Click += new System.EventHandler(this.wszystkieToolStripMenuItem3_Click);
+            // 
+            // komponentyToolStripMenuItem
+            // 
+            this.komponentyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nowyToolStripMenuItem2,
+            this.wszystkieToolStripMenuItem11,
+            this.masoweDodawanieKomponentówToolStripMenuItem});
+            this.komponentyToolStripMenuItem.Name = "komponentyToolStripMenuItem";
+            this.komponentyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.komponentyToolStripMenuItem.Text = "Komponenty";
+            // 
+            // nowyToolStripMenuItem2
+            // 
+            this.nowyToolStripMenuItem2.Name = "nowyToolStripMenuItem2";
+            this.nowyToolStripMenuItem2.Size = new System.Drawing.Size(260, 22);
+            this.nowyToolStripMenuItem2.Text = "Nowy";
+            this.nowyToolStripMenuItem2.Click += new System.EventHandler(this.nowyToolStripMenuItem2_Click);
+            // 
+            // wszystkieToolStripMenuItem11
+            // 
+            this.wszystkieToolStripMenuItem11.Name = "wszystkieToolStripMenuItem11";
+            this.wszystkieToolStripMenuItem11.Size = new System.Drawing.Size(260, 22);
+            this.wszystkieToolStripMenuItem11.Text = "Wszystkie";
+            this.wszystkieToolStripMenuItem11.Click += new System.EventHandler(this.wszystkieToolStripMenuItem11_Click);
             // 
             // zgłoszeniaToolStripMenuItem
             // 
@@ -509,28 +534,12 @@
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
             // 
-            // komponentyToolStripMenuItem
+            // masoweDodawanieKomponentówToolStripMenuItem
             // 
-            this.komponentyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nowyToolStripMenuItem2,
-            this.wszystkieToolStripMenuItem11});
-            this.komponentyToolStripMenuItem.Name = "komponentyToolStripMenuItem";
-            this.komponentyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.komponentyToolStripMenuItem.Text = "Komponenty";
-            // 
-            // nowyToolStripMenuItem2
-            // 
-            this.nowyToolStripMenuItem2.Name = "nowyToolStripMenuItem2";
-            this.nowyToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.nowyToolStripMenuItem2.Text = "Nowy";
-            this.nowyToolStripMenuItem2.Click += new System.EventHandler(this.nowyToolStripMenuItem2_Click);
-            // 
-            // wszystkieToolStripMenuItem11
-            // 
-            this.wszystkieToolStripMenuItem11.Name = "wszystkieToolStripMenuItem11";
-            this.wszystkieToolStripMenuItem11.Size = new System.Drawing.Size(180, 22);
-            this.wszystkieToolStripMenuItem11.Text = "Wszystkie";
-            this.wszystkieToolStripMenuItem11.Click += new System.EventHandler(this.wszystkieToolStripMenuItem11_Click);
+            this.masoweDodawanieKomponentówToolStripMenuItem.Name = "masoweDodawanieKomponentówToolStripMenuItem";
+            this.masoweDodawanieKomponentówToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.masoweDodawanieKomponentówToolStripMenuItem.Text = "Masowe dodawanie komponentów";
+            this.masoweDodawanieKomponentówToolStripMenuItem.Click += new System.EventHandler(this.masoweDodawanieKomponentówToolStripMenuItem_Click);
             // 
             // frmStarter
             // 
@@ -609,5 +618,6 @@
         private System.Windows.Forms.ToolStripMenuItem komponentyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem11;
+        private System.Windows.Forms.ToolStripMenuItem masoweDodawanieKomponentówToolStripMenuItem;
     }
 }

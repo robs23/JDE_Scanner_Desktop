@@ -24,6 +24,8 @@ namespace JDE_Scanner_Desktop
         AreasKeeper Areas = new AreasKeeper();
         SetsKeeper Sets = new SetsKeeper();
         BomKeeper boms = new BomKeeper();
+        PartUsageKeeper parts = new PartUsageKeeper();
+        ComponentKeeper Components = new ComponentKeeper();
         frmLooper Looper;
         FileKeeper img;
         ContextMenu buttonContextMenu;
@@ -85,6 +87,8 @@ namespace JDE_Scanner_Desktop
             {
                 GetImage();
                 GetBoms();
+                GetParts();
+                GetComponents();
             }
 #if (DEBUG == true)
             pbQrCode.Visible = true;
@@ -148,6 +152,18 @@ namespace JDE_Scanner_Desktop
             await boms.Refresh($"PlaceId={_this.PlaceId}");
             dgvBoms.DataSource = boms.Items;
 
+        }
+
+        private async void GetParts()
+        {
+            await parts.Refresh($"PlaceId={_this.PlaceId}");
+            dgvParts.DataSource = parts.Items;
+        }
+
+        private async void GetComponents()
+        {
+            await Components.Refresh($"PlaceId={_this.PlaceId}");
+            dgvComponents.DataSource = Components.Items;
         }
 
         private void BringCombos()
@@ -268,5 +284,33 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        private void btnAddComponents_Click(object sender, EventArgs e)
+        {
+            frmAddComponents FrmAddComponents = new frmAddComponents(this, _this.PlaceId);
+            FrmAddComponents.ShowDialog(this);
+        }
+
+        private void btnRefreshComponents_Click(object sender, EventArgs e)
+        {
+            GetComponents();
+        }
+
+        private async void btnDeleteComponents_Click(object sender, EventArgs e)
+        {
+            if (dgvComponents.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgvComponents.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgvComponents.SelectedRows[i].Cells[0].Value);
+                }
+                await Components.Remove(SelectedRows);
+                GetComponents();
+            }
+        }
     }
 }

@@ -37,23 +37,23 @@
             this.lblCreated = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pgGeneral = new System.Windows.Forms.TabPage();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.tlpProducer = new System.Windows.Forms.TableLayoutPanel();
-            this.btnEditPlace = new System.Windows.Forms.Button();
-            this.btnAddPlace = new System.Windows.Forms.Button();
-            this.cmbPlace = new System.Windows.Forms.ComboBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.lblUlica = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDescription = new System.Windows.Forms.TextBox();
             this.tplTextboxes = new System.Windows.Forms.TableLayoutPanel();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblUlica = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.tlpProducer = new System.Windows.Forms.TableLayoutPanel();
+            this.cmbPlace = new System.Windows.Forms.ComboBox();
+            this.btnAddPlace = new System.Windows.Forms.Button();
+            this.btnEditPlace = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.pgGeneral.SuspendLayout();
-            this.tlpProducer.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
+            this.tlpProducer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -156,107 +156,6 @@
             this.pgGeneral.Text = "Ogólne";
             this.pgGeneral.UseVisualStyleBackColor = true;
             // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 71);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(114, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Zasób";
-            // 
-            // tlpProducer
-            // 
-            this.tlpProducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpProducer.ColumnCount = 3;
-            this.tlpProducer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpProducer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpProducer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpProducer.Controls.Add(this.cmbPlace, 0, 0);
-            this.tlpProducer.Controls.Add(this.btnAddPlace, 1, 0);
-            this.tlpProducer.Controls.Add(this.btnEditPlace, 2, 0);
-            this.tlpProducer.Location = new System.Drawing.Point(123, 63);
-            this.tlpProducer.Name = "tlpProducer";
-            this.tlpProducer.RowCount = 1;
-            this.tlpProducer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpProducer.Size = new System.Drawing.Size(459, 29);
-            this.tlpProducer.TabIndex = 18;
-            // 
-            // btnEditPlace
-            // 
-            this.btnEditPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditPlace.Image = ((System.Drawing.Image)(resources.GetObject("btnEditPlace.Image")));
-            this.btnEditPlace.Location = new System.Drawing.Point(432, 3);
-            this.btnEditPlace.Name = "btnEditPlace";
-            this.btnEditPlace.Size = new System.Drawing.Size(24, 23);
-            this.btnEditPlace.TabIndex = 2;
-            this.btnEditPlace.UseVisualStyleBackColor = true;
-            this.btnEditPlace.Click += new System.EventHandler(this.EditPlace);
-            // 
-            // btnAddPlace
-            // 
-            this.btnAddPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddPlace.Image = global::JDE_Scanner_Desktop.Properties.Resources.Add_16;
-            this.btnAddPlace.Location = new System.Drawing.Point(402, 3);
-            this.btnAddPlace.Name = "btnAddPlace";
-            this.btnAddPlace.Size = new System.Drawing.Size(24, 23);
-            this.btnAddPlace.TabIndex = 1;
-            this.tooltip.SetToolTip(this.btnAddPlace, "Dodaj nowego..");
-            this.btnAddPlace.UseVisualStyleBackColor = true;
-            this.btnAddPlace.Click += new System.EventHandler(this.AddPlace);
-            // 
-            // cmbPlace
-            // 
-            this.cmbPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbPlace.FormattingEnabled = true;
-            this.cmbPlace.Location = new System.Drawing.Point(3, 4);
-            this.cmbPlace.Name = "cmbPlace";
-            this.cmbPlace.Size = new System.Drawing.Size(393, 21);
-            this.cmbPlace.TabIndex = 0;
-            // 
-            // txtName
-            // 
-            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(123, 5);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(459, 20);
-            this.txtName.TabIndex = 4;
-            // 
-            // lblUlica
-            // 
-            this.lblUlica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUlica.AutoSize = true;
-            this.lblUlica.Location = new System.Drawing.Point(3, 38);
-            this.lblUlica.Name = "lblUlica";
-            this.lblUlica.Size = new System.Drawing.Size(114, 13);
-            this.lblUlica.TabIndex = 1;
-            this.lblUlica.Text = "Opis";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Nazwa";
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescription.Location = new System.Drawing.Point(123, 35);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(459, 20);
-            this.txtDescription.TabIndex = 5;
-            // 
             // tplTextboxes
             // 
             this.tplTextboxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -285,6 +184,107 @@
             this.tplTextboxes.Size = new System.Drawing.Size(585, 190);
             this.tplTextboxes.TabIndex = 2;
             // 
+            // txtDescription
+            // 
+            this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescription.Location = new System.Drawing.Point(123, 35);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(459, 20);
+            this.txtDescription.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(114, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Nazwa";
+            // 
+            // lblUlica
+            // 
+            this.lblUlica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUlica.AutoSize = true;
+            this.lblUlica.Location = new System.Drawing.Point(3, 38);
+            this.lblUlica.Name = "lblUlica";
+            this.lblUlica.Size = new System.Drawing.Size(114, 13);
+            this.lblUlica.TabIndex = 1;
+            this.lblUlica.Text = "Opis";
+            // 
+            // txtName
+            // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.Location = new System.Drawing.Point(123, 5);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(459, 20);
+            this.txtName.TabIndex = 4;
+            // 
+            // tlpProducer
+            // 
+            this.tlpProducer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpProducer.ColumnCount = 3;
+            this.tlpProducer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpProducer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpProducer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpProducer.Controls.Add(this.cmbPlace, 0, 0);
+            this.tlpProducer.Controls.Add(this.btnAddPlace, 1, 0);
+            this.tlpProducer.Controls.Add(this.btnEditPlace, 2, 0);
+            this.tlpProducer.Location = new System.Drawing.Point(123, 63);
+            this.tlpProducer.Name = "tlpProducer";
+            this.tlpProducer.RowCount = 1;
+            this.tlpProducer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpProducer.Size = new System.Drawing.Size(459, 29);
+            this.tlpProducer.TabIndex = 18;
+            // 
+            // cmbPlace
+            // 
+            this.cmbPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbPlace.FormattingEnabled = true;
+            this.cmbPlace.Location = new System.Drawing.Point(3, 4);
+            this.cmbPlace.Name = "cmbPlace";
+            this.cmbPlace.Size = new System.Drawing.Size(393, 21);
+            this.cmbPlace.TabIndex = 0;
+            // 
+            // btnAddPlace
+            // 
+            this.btnAddPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddPlace.Image = global::JDE_Scanner_Desktop.Properties.Resources.Add_16;
+            this.btnAddPlace.Location = new System.Drawing.Point(402, 3);
+            this.btnAddPlace.Name = "btnAddPlace";
+            this.btnAddPlace.Size = new System.Drawing.Size(24, 23);
+            this.btnAddPlace.TabIndex = 1;
+            this.tooltip.SetToolTip(this.btnAddPlace, "Dodaj nowego..");
+            this.btnAddPlace.UseVisualStyleBackColor = true;
+            this.btnAddPlace.Click += new System.EventHandler(this.AddPlace);
+            // 
+            // btnEditPlace
+            // 
+            this.btnEditPlace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditPlace.Image = ((System.Drawing.Image)(resources.GetObject("btnEditPlace.Image")));
+            this.btnEditPlace.Location = new System.Drawing.Point(432, 3);
+            this.btnEditPlace.Name = "btnEditPlace";
+            this.btnEditPlace.Size = new System.Drawing.Size(24, 23);
+            this.btnEditPlace.TabIndex = 2;
+            this.btnEditPlace.UseVisualStyleBackColor = true;
+            this.btnEditPlace.Click += new System.EventHandler(this.EditPlace);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 71);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(114, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Zasób";
+            // 
             // frmComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,7 +294,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmComponent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Szczegóły części";
+            this.Text = "Szczegóły komponentu";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
@@ -302,9 +302,9 @@
             this.tlpButtons.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.pgGeneral.ResumeLayout(false);
-            this.tlpProducer.ResumeLayout(false);
             this.tplTextboxes.ResumeLayout(false);
             this.tplTextboxes.PerformLayout();
+            this.tlpProducer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

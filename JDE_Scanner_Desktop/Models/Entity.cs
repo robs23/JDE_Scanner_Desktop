@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -165,6 +166,7 @@ namespace JDE_Scanner_Desktop.Models
                                 fcontent.Headers.Add("Content-Type", "application/octet-stream");
                                 fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
                                 content.Add(fcontent, "file", fileInfo.Name);
+                                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
                                 var result = await client.PutAsync(url, content);
                                 if (result.IsSuccessStatusCode)
                                 {
@@ -178,7 +180,7 @@ namespace JDE_Scanner_Desktop.Models
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);
+                            MessageBox.Show("Problem z wysyłką żądania do serwera. Wiadomość: " + ex.Message + ". " + ex.InnerException.Message, "Błąd żądania", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }

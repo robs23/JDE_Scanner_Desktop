@@ -63,7 +63,16 @@
             this.btnRemoveBom = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
+            this.pgParts = new System.Windows.Forms.TabPage();
+            this.pgComponents = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAddComponents = new System.Windows.Forms.Button();
+            this.btnDeleteComponents = new System.Windows.Forms.Button();
+            this.btnRefreshComponents = new System.Windows.Forms.Button();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvParts = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
+            this.dgvComponents = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -76,6 +85,12 @@
             this.tlpBom.SuspendLayout();
             this.tlpBomButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
+            this.pgParts.SuspendLayout();
+            this.pgComponents.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComponents)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -177,6 +192,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.pgGeneral);
             this.tabControl.Controls.Add(this.pgBoms);
+            this.tabControl.Controls.Add(this.pgParts);
+            this.tabControl.Controls.Add(this.pgComponents);
             this.tabControl.Location = new System.Drawing.Point(3, 43);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -499,6 +516,135 @@
             this.dgvBoms.Size = new System.Drawing.Size(574, 331);
             this.dgvBoms.TabIndex = 1;
             // 
+            // pgParts
+            // 
+            this.pgParts.Controls.Add(this.dgvParts);
+            this.pgParts.Location = new System.Drawing.Point(4, 22);
+            this.pgParts.Name = "pgParts";
+            this.pgParts.Padding = new System.Windows.Forms.Padding(3);
+            this.pgParts.Size = new System.Drawing.Size(583, 375);
+            this.pgParts.TabIndex = 2;
+            this.pgParts.Text = "Części";
+            this.pgParts.UseVisualStyleBackColor = true;
+            // 
+            // pgComponents
+            // 
+            this.pgComponents.Controls.Add(this.tableLayoutPanel1);
+            this.pgComponents.Location = new System.Drawing.Point(4, 22);
+            this.pgComponents.Name = "pgComponents";
+            this.pgComponents.Padding = new System.Windows.Forms.Padding(3);
+            this.pgComponents.Size = new System.Drawing.Size(583, 375);
+            this.pgComponents.TabIndex = 3;
+            this.pgComponents.Text = "Komponenty";
+            this.pgComponents.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dgvComponents, 0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(574, 372);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.btnAddComponents, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnDeleteComponents, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnRefreshComponents, 2, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(568, 29);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // btnAddComponents
+            // 
+            this.btnAddComponents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddComponents.Location = new System.Drawing.Point(3, 3);
+            this.btnAddComponents.Name = "btnAddComponents";
+            this.btnAddComponents.Size = new System.Drawing.Size(144, 23);
+            this.btnAddComponents.TabIndex = 1;
+            this.btnAddComponents.Text = "Dodaj komponenty";
+            this.tooltip.SetToolTip(this.btnAddComponents, "Dodaje nowe komponenty..");
+            this.btnAddComponents.UseVisualStyleBackColor = true;
+            this.btnAddComponents.Click += new System.EventHandler(this.btnAddComponents_Click);
+            // 
+            // btnDeleteComponents
+            // 
+            this.btnDeleteComponents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteComponents.Location = new System.Drawing.Point(153, 3);
+            this.btnDeleteComponents.Name = "btnDeleteComponents";
+            this.btnDeleteComponents.Size = new System.Drawing.Size(144, 23);
+            this.btnDeleteComponents.TabIndex = 2;
+            this.btnDeleteComponents.Text = "Usuń komponenty";
+            this.tooltip.SetToolTip(this.btnDeleteComponents, "Usuwa zaznaczone komponenty..");
+            this.btnDeleteComponents.UseVisualStyleBackColor = true;
+            this.btnDeleteComponents.Click += new System.EventHandler(this.btnDeleteComponents_Click);
+            // 
+            // btnRefreshComponents
+            // 
+            this.btnRefreshComponents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefreshComponents.Image = global::JDE_Scanner_Desktop.Properties.Resources.Cloud_30;
+            this.btnRefreshComponents.Location = new System.Drawing.Point(303, 3);
+            this.btnRefreshComponents.Name = "btnRefreshComponents";
+            this.btnRefreshComponents.Size = new System.Drawing.Size(24, 23);
+            this.btnRefreshComponents.TabIndex = 3;
+            this.tooltip.SetToolTip(this.btnRefreshComponents, "Odśwież komponenty..");
+            this.btnRefreshComponents.UseVisualStyleBackColor = true;
+            this.btnRefreshComponents.Click += new System.EventHandler(this.btnRefreshComponents_Click);
+            // 
+            // dgvParts
+            // 
+            this.dgvParts.AllowUserToAddRows = false;
+            this.dgvParts.AllowUserToDeleteRows = false;
+            this.dgvParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvParts.DoubleBuffered = true;
+            this.dgvParts.Location = new System.Drawing.Point(0, 0);
+            this.dgvParts.Name = "dgvParts";
+            this.dgvParts.ReadOnly = true;
+            this.dgvParts.Size = new System.Drawing.Size(580, 372);
+            this.dgvParts.TabIndex = 0;
+            // 
+            // dgvComponents
+            // 
+            this.dgvComponents.AllowUserToAddRows = false;
+            this.dgvComponents.AllowUserToDeleteRows = false;
+            this.dgvComponents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvComponents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComponents.DoubleBuffered = true;
+            this.dgvComponents.Location = new System.Drawing.Point(3, 38);
+            this.dgvComponents.Name = "dgvComponents";
+            this.dgvComponents.ReadOnly = true;
+            this.dgvComponents.Size = new System.Drawing.Size(568, 331);
+            this.dgvComponents.TabIndex = 2;
+            // 
             // frmPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,6 +671,12 @@
             this.tlpBom.ResumeLayout(false);
             this.tlpBomButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
+            this.pgParts.ResumeLayout(false);
+            this.pgComponents.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComponents)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -565,5 +717,14 @@
         private System.Windows.Forms.TableLayoutPanel tlpImages;
         private System.Windows.Forms.PictureBox pbQrCode;
         private System.Windows.Forms.PictureBox pbImage;
+        private System.Windows.Forms.TabPage pgParts;
+        private CustomControls.DBDataGridView dgvParts;
+        private System.Windows.Forms.TabPage pgComponents;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button btnAddComponents;
+        private System.Windows.Forms.Button btnDeleteComponents;
+        private System.Windows.Forms.Button btnRefreshComponents;
+        private CustomControls.DBDataGridView dgvComponents;
     }
 }

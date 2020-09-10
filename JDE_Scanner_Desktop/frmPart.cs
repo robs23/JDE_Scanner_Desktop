@@ -1,6 +1,7 @@
 ﻿using JDE_Scanner_Desktop.Classes;
 using JDE_Scanner_Desktop.Models;
 using JDE_Scanner_Desktop.Static;
+using MoreLinq.Experimental;
 using Newtonsoft.Json;
 using QRCoder;
 using System;
@@ -27,6 +28,7 @@ namespace JDE_Scanner_Desktop
         CompaniesKeeper producers;
         CompaniesKeeper suppliers;
         BomKeeper boms = new BomKeeper();
+        PartUsageKeeper usedParts = new PartUsageKeeper();
         FileKeeper files;
         FileKeeper img;
         ContextMenu buttonContextMenu;
@@ -105,6 +107,7 @@ namespace JDE_Scanner_Desktop
             {
                 GetBoms();
                 GetImage();
+                GetUsedParts();
             }
             else
             {
@@ -120,6 +123,13 @@ namespace JDE_Scanner_Desktop
             dgvBoms.DataSource = boms.Items;
 
         }
+
+        private async void GetUsedParts()
+        {
+            await usedParts.Refresh($"PartId={_this.PartId}");
+            dgvPlaces.DataSource = usedParts.Items;
+        }
+       
 
         private async void GetImage()
         {
@@ -185,7 +195,7 @@ namespace JDE_Scanner_Desktop
                 }
             }catch(Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Błąd podczas zapisywania", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

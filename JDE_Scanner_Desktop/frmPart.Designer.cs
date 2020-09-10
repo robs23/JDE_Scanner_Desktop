@@ -77,6 +77,8 @@
             this.btnRefreshBoms = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.pgPlaces = new System.Windows.Forms.TabPage();
+            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -91,6 +93,8 @@
             this.tlpBoms.SuspendLayout();
             this.tlpBomsControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
+            this.pgPlaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -207,6 +211,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.pgGeneral);
             this.tabControl.Controls.Add(this.pgBoms);
+            this.tabControl.Controls.Add(this.pgPlaces);
             this.tabControl.Location = new System.Drawing.Point(3, 43);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -590,7 +595,7 @@
             this.pgBoms.Padding = new System.Windows.Forms.Padding(3);
             this.pgBoms.Size = new System.Drawing.Size(583, 398);
             this.pgBoms.TabIndex = 1;
-            this.pgBoms.Text = "W zasobach";
+            this.pgBoms.Text = "W BOMach";
             this.pgBoms.UseVisualStyleBackColor = true;
             // 
             // tlpBoms
@@ -685,6 +690,29 @@
             this.dgvBoms.TabIndex = 1;
             this.dgvBoms.DoubleClick += new System.EventHandler(this.dgvBoms_DoubleClick);
             // 
+            // pgPlaces
+            // 
+            this.pgPlaces.Controls.Add(this.dgvPlaces);
+            this.pgPlaces.Location = new System.Drawing.Point(4, 22);
+            this.pgPlaces.Name = "pgPlaces";
+            this.pgPlaces.Padding = new System.Windows.Forms.Padding(3);
+            this.pgPlaces.Size = new System.Drawing.Size(583, 398);
+            this.pgPlaces.TabIndex = 2;
+            this.pgPlaces.Text = "W zasobach";
+            this.pgPlaces.UseVisualStyleBackColor = true;
+            // 
+            // dgvPlaces
+            // 
+            this.dgvPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlaces.DoubleBuffered = true;
+            this.dgvPlaces.Location = new System.Drawing.Point(3, 3);
+            this.dgvPlaces.Name = "dgvPlaces";
+            this.dgvPlaces.Size = new System.Drawing.Size(577, 392);
+            this.dgvPlaces.TabIndex = 0;
+            // 
             // frmPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -713,6 +741,8 @@
             this.tlpBoms.ResumeLayout(false);
             this.tlpBomsControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
+            this.pgPlaces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -766,5 +796,7 @@
         private System.Windows.Forms.PictureBox pbQrCode;
         private System.Windows.Forms.PictureBox pbImage;
         private System.Windows.Forms.CheckBox cboxArchived;
+        private System.Windows.Forms.TabPage pgPlaces;
+        private CustomControls.DBDataGridView dgvPlaces;
     }
 }

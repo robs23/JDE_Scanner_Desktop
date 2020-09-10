@@ -266,5 +266,11 @@ namespace JDE_Scanner_Desktop
             frmComponents FrmComponents = new frmComponents(this);
             FrmComponents.Show(this);
         }
+
+        private void masoweDodawanieKomponentówToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddComponents FrmAddComponents = new frmAddComponents(this);
+            FrmAddComponents.Show(this);
+        }
     }
 }
