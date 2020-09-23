@@ -99,14 +99,14 @@ namespace JDE_Scanner_Desktop.Models
                             }
                             else
                             {
-                                MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
+                                MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase, "Nieudane żądanie", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return false;
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        MessageBox.Show($"Błąd. Stack trace={ex.ToString()}","Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
                 }
@@ -149,13 +149,14 @@ namespace JDE_Scanner_Desktop.Models
             }
             else
             {
+                HttpResponseMessage result;
                 ModelValidator validator = new ModelValidator();
                 if (validator.Validate(this))
                 {
                     using (var client = new HttpClient())
                     {
                         var serializedProduct = JsonConvert.SerializeObject(this, new JsonSerializerSettings { DateFormatString = "yyyy-MM-ddTHH:mm:ss.fff" });
-                        string url = Secrets.ApiAddress + $"Edit{typeof(T).Name}?token=" + Secrets.TenantToken + $"&id={this.Id}&UserId={RuntimeSettings.UserId}" + $"&{typeof(T).Name}Json={serializedProduct}";
+                        string url = Secrets.ApiAddress + $"Edit{typeof(T).Name}?token=" + Secrets.TenantToken + $"&id={this.Id}&UserId={RuntimeSettings.UserId}" + $"&{typeof(T).Name}Json={Uri.EscapeDataString(serializedProduct)}";
                         MultipartFormDataContent content = new MultipartFormDataContent();
                         try
                         {
@@ -167,20 +168,20 @@ namespace JDE_Scanner_Desktop.Models
                                 fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
                                 content.Add(fcontent, "file", fileInfo.Name);
                                 System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
-                                var result = await client.PutAsync(url, content);
+                                result = await client.PutAsync(url, content);
                                 if (result.IsSuccessStatusCode)
                                 {
                                     MessageBox.Show("Edycja zakończona powodzeniem!");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase);
+                                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase, "Nieudane żądanie", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Problem z wysyłką żądania do serwera. Wiadomość: " + ex.Message + ". " + ex.InnerException.Message, "Błąd żądania", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Problem z wysyłką żądania do serwera. Wiadomość: " + ex.ToString(), "Błąd żądania", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }

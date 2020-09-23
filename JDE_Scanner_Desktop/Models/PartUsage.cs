@@ -38,6 +38,10 @@ namespace JDE_Scanner_Desktop.Models
         public string Symbol { get; set; }
         [DisplayName("Opis")]
         public string Description { get; set; }
+
+        [DisplayName("Pozostało [szt]")]
+        public string Comment { get; set; }
+
         [DisplayName("Zdjęcie")]
         public string Image { get; set; }
 
