@@ -184,6 +184,8 @@ namespace JDE_Scanner_Desktop.Models
 
         [DisplayName("Terminowość")]
         public string TimingVsPlan { get; set; }
+        [DisplayName("Reaktywowany")]
+        public bool? IsResurrected { get; set; }
 
         public async Task<bool> Add()
         {
