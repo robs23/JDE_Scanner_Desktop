@@ -45,6 +45,15 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        public static string LocalDbPath
+        {
+            get 
+            {
+                CreateLocalFilesFolders();
+                return Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Upload"); 
+            }
+        }
+
         public static string LocalFilesPathRoot
         {
             get
@@ -62,6 +71,8 @@ namespace JDE_Scanner_Desktop
                 Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files"));
             if (!Directory.Exists(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files", "Thumbnails")))
                 Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Files", "Thumbnails"));
+            if (!Directory.Exists(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Upload")))
+                Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Upload"));
         }
     }
 }

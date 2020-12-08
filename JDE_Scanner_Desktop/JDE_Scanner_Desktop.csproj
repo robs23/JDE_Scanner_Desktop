@@ -435,6 +435,8 @@
     <Compile Include="rrComboBox.Designer.cs">
       <DependentUpon>rrComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <Compile Include="Static\Extensions.cs" />
     <Compile Include="Static\RuntimeSettings.cs" />
     <Compile Include="Static\Secrets.cs" />

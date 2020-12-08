@@ -64,15 +64,15 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.pgParts = new System.Windows.Forms.TabPage();
+            this.dgvParts = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.pgComponents = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddComponents = new System.Windows.Forms.Button();
             this.btnDeleteComponents = new System.Windows.Forms.Button();
             this.btnRefreshComponents = new System.Windows.Forms.Button();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.dgvParts = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.dgvComponents = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -86,10 +86,10 @@
             this.tlpBomButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
             this.pgParts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).BeginInit();
             this.pgComponents.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -527,6 +527,21 @@
             this.pgParts.Text = "Części";
             this.pgParts.UseVisualStyleBackColor = true;
             // 
+            // dgvParts
+            // 
+            this.dgvParts.AllowUserToAddRows = false;
+            this.dgvParts.AllowUserToDeleteRows = false;
+            this.dgvParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvParts.DoubleBuffered = true;
+            this.dgvParts.Location = new System.Drawing.Point(0, 0);
+            this.dgvParts.Name = "dgvParts";
+            this.dgvParts.ReadOnly = true;
+            this.dgvParts.Size = new System.Drawing.Size(580, 372);
+            this.dgvParts.TabIndex = 0;
+            // 
             // pgComponents
             // 
             this.pgComponents.Controls.Add(this.tableLayoutPanel1);
@@ -540,6 +555,9 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
@@ -615,21 +633,6 @@
             this.btnRefreshComponents.UseVisualStyleBackColor = true;
             this.btnRefreshComponents.Click += new System.EventHandler(this.btnRefreshComponents_Click);
             // 
-            // dgvParts
-            // 
-            this.dgvParts.AllowUserToAddRows = false;
-            this.dgvParts.AllowUserToDeleteRows = false;
-            this.dgvParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvParts.DoubleBuffered = true;
-            this.dgvParts.Location = new System.Drawing.Point(0, 0);
-            this.dgvParts.Name = "dgvParts";
-            this.dgvParts.ReadOnly = true;
-            this.dgvParts.Size = new System.Drawing.Size(580, 372);
-            this.dgvParts.TabIndex = 0;
-            // 
             // dgvComponents
             // 
             this.dgvComponents.AllowUserToAddRows = false;
@@ -672,10 +675,10 @@
             this.tlpBomButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
             this.pgParts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).EndInit();
             this.pgComponents.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvParts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponents)).EndInit();
             this.ResumeLayout(false);
 

@@ -30,7 +30,8 @@ namespace JDE_Scanner_Desktop
         frmLooper Looper;
         AssignedUsersHandler assignedUsersHandler;
         BackgroundWorker BW = new BackgroundWorker();
-            
+        FileKeeper files;
+
         public bool ForceRefresh = false;
 
         public frmProcess(Form parent)
@@ -57,6 +58,7 @@ namespace JDE_Scanner_Desktop
             lblRepairActions.Visible = false;
             lblInitialDiagnosis.Visible = false;
             assignedUsersHandler = new AssignedUsersHandler(this);
+            files = new FileKeeper(this);
         }
 
         public frmProcess(Process Process, Form parent)
@@ -77,6 +79,7 @@ namespace JDE_Scanner_Desktop
             txtOutput.Text = _this.Output;
             assignedUsersHandler = new AssignedUsersHandler(this);
             assignedUsersHandler.ProcessId = Process.ProcessId;
+            files = new FileKeeper(this);
         }
 
         private bool IsMesSyncSelected()
@@ -613,6 +616,11 @@ namespace JDE_Scanner_Desktop
         private void cmbActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             ChangeLook();
+        }
+
+        private void btnAttachments_Click(object sender, EventArgs e)
+        {
+            files.ShowFiles();
         }
     }
 }

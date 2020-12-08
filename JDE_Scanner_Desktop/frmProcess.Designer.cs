@@ -72,6 +72,8 @@
             this.txtFinishedOn = new System.Windows.Forms.DateTimePicker();
             this.txtPlannedStart = new System.Windows.Forms.DateTimePicker();
             this.txtPlannedFinish = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtComment = new System.Windows.Forms.TextBox();
             this.pgHandling = new System.Windows.Forms.TabPage();
             this.lvHandlings = new System.Windows.Forms.ListView();
             this.pgHistory = new System.Windows.Forms.TabPage();
@@ -80,8 +82,7 @@
             this.dgvActions = new System.Windows.Forms.DataGridView();
             this.pbParts = new System.Windows.Forms.TabPage();
             this.dgvUsedParts = new System.Windows.Forms.DataGridView();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtComment = new System.Windows.Forms.TextBox();
+            this.btnAttachments = new System.Windows.Forms.Button();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -177,6 +178,7 @@
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
             this.tlpButtons.Controls.Add(this.lblAssignedUsers, 2, 0);
             this.tlpButtons.Controls.Add(this.btnEditAssignedList, 3, 0);
+            this.tlpButtons.Controls.Add(this.btnAttachments, 1, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -625,13 +627,34 @@
             this.txtPlannedFinish.Size = new System.Drawing.Size(449, 20);
             this.txtPlannedFinish.TabIndex = 33;
             // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 438);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(128, 13);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Komentarz";
+            // 
+            // txtComment
+            // 
+            this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtComment.Location = new System.Drawing.Point(137, 423);
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(449, 44);
+            this.txtComment.TabIndex = 35;
+            // 
             // pgHandling
             // 
             this.pgHandling.Controls.Add(this.lvHandlings);
             this.pgHandling.Location = new System.Drawing.Point(4, 22);
             this.pgHandling.Name = "pgHandling";
             this.pgHandling.Padding = new System.Windows.Forms.Padding(3);
-            this.pgHandling.Size = new System.Drawing.Size(588, 424);
+            this.pgHandling.Size = new System.Drawing.Size(585, 494);
             this.pgHandling.TabIndex = 1;
             this.pgHandling.Text = "Obsługa";
             this.pgHandling.UseVisualStyleBackColor = true;
@@ -639,9 +662,10 @@
             // lvHandlings
             // 
             this.lvHandlings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvHandlings.HideSelection = false;
             this.lvHandlings.Location = new System.Drawing.Point(3, 3);
             this.lvHandlings.Name = "lvHandlings";
-            this.lvHandlings.Size = new System.Drawing.Size(582, 418);
+            this.lvHandlings.Size = new System.Drawing.Size(579, 488);
             this.lvHandlings.TabIndex = 0;
             this.lvHandlings.UseCompatibleStateImageBehavior = false;
             this.lvHandlings.View = System.Windows.Forms.View.Details;
@@ -652,7 +676,7 @@
             this.pgHistory.Location = new System.Drawing.Point(4, 22);
             this.pgHistory.Name = "pgHistory";
             this.pgHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.pgHistory.Size = new System.Drawing.Size(588, 424);
+            this.pgHistory.Size = new System.Drawing.Size(585, 494);
             this.pgHistory.TabIndex = 2;
             this.pgHistory.Text = "Historia";
             this.pgHistory.UseVisualStyleBackColor = true;
@@ -660,9 +684,10 @@
             // lvHistory
             // 
             this.lvHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvHistory.HideSelection = false;
             this.lvHistory.Location = new System.Drawing.Point(3, 3);
             this.lvHistory.Name = "lvHistory";
-            this.lvHistory.Size = new System.Drawing.Size(582, 418);
+            this.lvHistory.Size = new System.Drawing.Size(579, 488);
             this.lvHistory.TabIndex = 0;
             this.lvHistory.UseCompatibleStateImageBehavior = false;
             this.lvHistory.View = System.Windows.Forms.View.Details;
@@ -673,7 +698,7 @@
             this.pgActions.Location = new System.Drawing.Point(4, 22);
             this.pgActions.Name = "pgActions";
             this.pgActions.Padding = new System.Windows.Forms.Padding(3);
-            this.pgActions.Size = new System.Drawing.Size(588, 424);
+            this.pgActions.Size = new System.Drawing.Size(585, 494);
             this.pgActions.TabIndex = 3;
             this.pgActions.Text = "Czynności";
             this.pgActions.UseVisualStyleBackColor = true;
@@ -698,7 +723,7 @@
             this.pbParts.Location = new System.Drawing.Point(4, 22);
             this.pbParts.Name = "pbParts";
             this.pbParts.Padding = new System.Windows.Forms.Padding(3);
-            this.pbParts.Size = new System.Drawing.Size(588, 424);
+            this.pbParts.Size = new System.Drawing.Size(585, 494);
             this.pbParts.TabIndex = 4;
             this.pbParts.Text = "Użyte części";
             this.pbParts.UseVisualStyleBackColor = true;
@@ -709,29 +734,22 @@
             this.dgvUsedParts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsedParts.Location = new System.Drawing.Point(3, 3);
             this.dgvUsedParts.Name = "dgvUsedParts";
-            this.dgvUsedParts.Size = new System.Drawing.Size(582, 418);
+            this.dgvUsedParts.Size = new System.Drawing.Size(579, 488);
             this.dgvUsedParts.TabIndex = 0;
             // 
-            // label11
+            // btnAttachments
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 438);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(128, 13);
-            this.label11.TabIndex = 34;
-            this.label11.Text = "Komentarz";
-            // 
-            // txtComment
-            // 
-            this.txtComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComment.Location = new System.Drawing.Point(137, 423);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(449, 44);
-            this.txtComment.TabIndex = 35;
+            this.btnAttachments.Image = global::JDE_Scanner_Desktop.Properties.Resources.Attach_24;
+            this.btnAttachments.Location = new System.Drawing.Point(43, 3);
+            this.btnAttachments.Name = "btnAttachments";
+            this.btnAttachments.Size = new System.Drawing.Size(34, 28);
+            this.btnAttachments.TabIndex = 6;
+            this.tooltip.SetToolTip(this.btnAttachments, "Zobacz załączone pliki..");
+            this.btnAttachments.UseVisualStyleBackColor = true;
+            this.btnAttachments.Click += new System.EventHandler(this.btnAttachments_Click);
             // 
             // frmProcess
             // 
@@ -819,5 +837,6 @@
         private System.Windows.Forms.DataGridView dgvUsedParts;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Button btnAttachments;
     }
 }
