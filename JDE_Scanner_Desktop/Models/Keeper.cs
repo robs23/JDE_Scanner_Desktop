@@ -271,12 +271,6 @@ namespace JDE_Scanner_Desktop.Models
 
         }
 
-        public async Task AddToUploadQueue()
-        {
-            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
-            db.CreateTable<T>();
-            await this.Refresh();
-
-        }
+        
     }
 }

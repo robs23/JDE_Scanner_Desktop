@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Static;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -164,6 +165,17 @@ namespace JDE_Scanner_Desktop.Models
                     }
                     return success;
                 }
+            }
+
+        }
+
+        public async Task AddToUploadQueue()
+        {
+            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
+            db.CreateTable<File>();
+            if (Items.Any())
+            {
+                db.InsertAll(Items);
             }
 
         }
