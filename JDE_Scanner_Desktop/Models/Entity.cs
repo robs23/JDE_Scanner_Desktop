@@ -38,6 +38,8 @@ namespace JDE_Scanner_Desktop.Models
         public bool? IsArchived { get; set; }
         [Browsable(false)]
         public string AddedItem { get; set; }
+        [Browsable(false)]
+        public bool IsSaved { get; set; } = false;
 
         public virtual async Task<bool> Add()
         {
@@ -69,7 +71,39 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public virtual async Task<bool> Add(string attachmentPath)
+        public virtual async Task<bool> Add(string args)
+        {
+            ModelValidator validator = new ModelValidator();
+            if (validator.Validate(this))
+            {
+                using (var client = new HttpClient())
+                {
+                    string url = Secrets.ApiAddress + $"Create{typeof(T).Name}?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
+                    var serializedProduct = JsonConvert.SerializeObject(this);
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync(new Uri(url), content);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var rString = await result.Content.ReadAsStringAsync();
+                        IsSaved = true;
+                        AddedItem = rString;
+                        return true;
+                    }
+                    else
+                    {
+                        IsSaved = false;
+                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public virtual async Task<bool> Add(string attachmentPath, string args)
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))

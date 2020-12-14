@@ -179,5 +179,43 @@ namespace JDE_Scanner_Desktop.Models
             }
 
         }
+
+        public async Task RestoreUploadQueue()
+        {
+            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
+            Items = new List<File>(db.Table<File>());
+        }
+
+        public async Task Upload()
+        {
+            if (Items.Any())
+            {
+                foreach (File f in Items)
+                {
+                    var res = await f.Upload();
+                    if (res == "OK")
+                    {
+                        f.IsUploaded = true;
+                    }
+                    else
+                    {
+                        f.IsUploaded = false;
+                    }
+                }
+                await DeleteUploaded();
+            }
+        }
+
+        public async Task DeleteUploaded()
+        {
+            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
+
+            foreach (File f in Items.Where(i => i.IsUploaded == true))
+            {
+                db.Delete<File>(f.FileId);
+                Items.Remove(f);
+            }
+            db.Close();
+        }
     }
 }

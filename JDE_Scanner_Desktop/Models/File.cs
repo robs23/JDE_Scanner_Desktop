@@ -20,11 +20,12 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("ID")]
         public int FileId { get; set; }
 
-        public override int Id {
+        public override int Id
+        {
             set => value = FileId;
             get => FileId;
         }
-        
+
         [DisplayName("Nazwa")]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -33,8 +34,9 @@ namespace JDE_Scanner_Desktop.Models
         public string Token { get; set; }
         [DisplayName("Przesłany")]
         public bool? IsUploaded { get; set; } = false;
+        public bool? IsSaved { get; set; } = false;
 
-        public async Task<bool> Add(int? PartId=null, int? PlaceId=null, int? ProcessId=null)
+        public async Task<bool> Add(int? PartId = null, int? PlaceId = null, int? ProcessId = null)
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
@@ -45,7 +47,7 @@ namespace JDE_Scanner_Desktop.Models
                     string url = Secrets.ApiAddress + $"CreateFile?token=" + Secrets.TenantToken + $"&fileJson={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId + $"&PartId={PartId}&PlaceId={PlaceId}&ProcessId={ProcessId}";
                     MultipartFormDataContent content = new MultipartFormDataContent();
                     //var body = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
-                    
+
                     try
                     {
                         using (var fileStream = System.IO.File.OpenRead(Link))
@@ -67,9 +69,9 @@ namespace JDE_Scanner_Desktop.Models
                                 MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
                                 return false;
                             }
-                        }   
+                        }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                         return false;
@@ -99,5 +101,44 @@ namespace JDE_Scanner_Desktop.Models
         //        }
         //    }
         //}
+
+        public async Task<string> Upload()
+        {
+            string _Result = "OK";
+            MultipartFormDataContent content = new MultipartFormDataContent();
+
+            using (var client = new HttpClient())
+            {
+                var serializedProduct = JsonConvert.SerializeObject(this);
+                string url = Secrets.ApiAddress + $"UploadFile?token=" + Secrets.TenantToken + $"&fileToken={this.Token}";
+
+                try
+                {
+                    using (var fileStream = System.IO.File.OpenRead(Link))
+                    {
+                        var fileInfo = new FileInfo(Link);
+                        StreamContent fcontent = new StreamContent(fileStream);
+                        fcontent.Headers.Add("Content-Type", "application/octet-stream");
+                        fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
+                        content.Add(fcontent, "file", fileInfo.Name);
+                        var result = await client.PostAsync(new Uri(url), content);
+                        if (result.IsSuccessStatusCode)
+                        {
+                            this.IsUploaded = true;
+                        }
+                        else
+                        {
+                            _Result = "Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase;
+                            this.IsUploaded = false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _Result = ex.ToString();
+                }
+                return _Result;
+            }
+        }
     }
 }

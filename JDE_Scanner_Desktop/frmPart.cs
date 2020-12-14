@@ -173,13 +173,8 @@ namespace JDE_Scanner_Desktop
                         if (files.Items.Where(i => i.IsUploaded == false).Any())
                         {
                             //there are some files not uploaded to cloud
-                            foreach (Models.File f in files.Items.Where(i => i.IsUploaded == false))
-                            {
-                                if (await f.Add(_this.PartId))
-                                {
-                                    f.IsUploaded = true;
-                                }
-                            }
+                            List<Entity<Models.File>> fls = files.Items.Where(i => i.IsSaved == false).ToList();
+                            await files.AddAll(fls, $"PartId={_this.PartId}");
                         }
                         mode = 2;
                         this.Text = "Szczegóły części";

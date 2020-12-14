@@ -271,6 +271,23 @@ namespace JDE_Scanner_Desktop.Models
 
         }
 
-        
+        public async Task<string> AddAll(List<Entity<T>> items, string args)
+        {
+            string res = "OK";
+
+            List<Task<bool>> tasks = new List<Task<bool>>();
+
+            foreach(var i in items)
+            {
+                tasks.Add(i.Add(args));
+            }
+
+            IEnumerable<bool> results = await Task.WhenAll<bool>(tasks);
+            if (results.Any(r => r == false))
+            {
+                res = "Wystąpił błąd podczas zapisywania niektórych plików";
+            }
+            return res;
+        }
     }
 }
