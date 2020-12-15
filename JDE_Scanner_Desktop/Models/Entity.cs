@@ -79,6 +79,10 @@ namespace JDE_Scanner_Desktop.Models
                 using (var client = new HttpClient())
                 {
                     string url = Secrets.ApiAddress + $"Create{typeof(T).Name}?token=" + Secrets.TenantToken + "&UserId=" + RuntimeSettings.UserId;
+                    if (!string.IsNullOrEmpty(args))
+                    {
+                        url += $"&{args}";
+                    }
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync(new Uri(url), content);

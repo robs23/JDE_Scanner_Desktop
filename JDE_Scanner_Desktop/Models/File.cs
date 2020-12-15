@@ -34,7 +34,8 @@ namespace JDE_Scanner_Desktop.Models
         public string Token { get; set; }
         [DisplayName("Przesłany")]
         public bool? IsUploaded { get; set; } = false;
-        public bool? IsSaved { get; set; } = false;
+        [DisplayName("Typ")]
+        public string Type { get; set; }
 
         public async Task<bool> Add(int? PartId = null, int? PlaceId = null, int? ProcessId = null)
         {

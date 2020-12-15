@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.Menu;
+using File = JDE_Scanner_Desktop.Models.File;
 
 namespace JDE_Scanner_Desktop
 {
@@ -141,6 +142,20 @@ namespace JDE_Scanner_Desktop
             }
         }
         
+        private async Task<bool> SaveFiles()
+        {
+            bool result = true;
+            List<Task<bool>> tasks = new List<Task<bool>>();
+            tasks.Add(files.AddAll($"PartId={_this.PartId}"));
+            tasks.Add(files.RemoveAll());
+
+            var res = await Task.WhenAll<bool>(tasks);
+            if (res.Any(r => r == false))
+            {
+                result = false;
+            }
+            return result;
+        }
 
         private async void Save(object sender, EventArgs e)
         {
@@ -170,12 +185,6 @@ namespace JDE_Scanner_Desktop
                     
                     if(await _this.Add(photoPath))
                     {
-                        if (files.Items.Where(i => i.IsUploaded == false).Any())
-                        {
-                            //there are some files not uploaded to cloud
-                            List<Entity<Models.File>> fls = files.Items.Where(i => i.IsSaved == false).ToList();
-                            await files.AddAll(fls, $"PartId={_this.PartId}");
-                        }
                         mode = 2;
                         this.Text = "Szczegóły części";
                         GenerateQrCode(_this.Token);
@@ -188,7 +197,13 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.Edit(photoPath);
                 }
-            }catch(Exception ex)
+                bool res = await SaveFiles();
+                if (res != true)
+                {
+                    MessageBox.Show("Wystąpiły problemy podczas zapisywania plików.", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Błąd podczas zapisywania", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -294,7 +309,7 @@ namespace JDE_Scanner_Desktop
 
         private void btnAttach_Click(object sender, EventArgs e)
         {
-            //files.ShowFiles();
+            files.ShowFiles();
         }
 
         private void pbImage_DoubleClick(object sender, EventArgs e)

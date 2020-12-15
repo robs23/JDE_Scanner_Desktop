@@ -271,7 +271,7 @@ namespace JDE_Scanner_Desktop.Models
 
         }
 
-        public async Task<string> AddAll(List<Entity<T>> items, string args)
+        public virtual async Task<string> AddAll(List<Entity<T>> items, string args)
         {
             string res = "OK";
 

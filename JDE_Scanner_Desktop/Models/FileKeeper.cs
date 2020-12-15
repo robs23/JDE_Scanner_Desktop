@@ -22,9 +22,12 @@ namespace JDE_Scanner_Desktop.Models
         public Form FileForm { get; set; }
         public OpenFileDialog OpenFileDialog;
 
+        public List<File> RemovedItems { get; set; }
+
         public FileKeeper(Form mainForm) : base()
         {
             MainForm = mainForm;
+            RemovedItems = new List<File>();
         }
 
         public async void LoadFromDisk(bool multiselect = true)
@@ -44,6 +47,7 @@ namespace JDE_Scanner_Desktop.Models
                         File nFile = new File();
                         nFile.Link = file;
                         nFile.Name = name;
+                        nFile.Type = name.Split('.').Last();
                         if (!multiselect)
                             Items.Clear();
                         Items.Add(nFile);
@@ -167,6 +171,43 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
 
+        }
+
+        public async Task<bool> AddAll(string args)
+        {
+            bool res = true;
+
+            List<Task<bool>> tasks = new List<Task<bool>>();
+            foreach (var i in Items.Where(f=>f.FileId==0))
+            {
+                tasks.Add(i.Add(args));
+            }
+
+            IEnumerable<bool> results = await Task.WhenAll<bool>(tasks);
+            if (results.Any(r => r == false))
+            {
+                res = false;
+            }
+            return res;
+        }
+
+        public async Task<bool> RemoveAll()
+        {
+            List<int> rItems = new List<int>();
+
+            if (RemovedItems.Any())
+            {
+                foreach (File f in RemovedItems)
+                {
+                    if (f.FileId > 0)
+                    {
+                        //make sure its saved first
+                        rItems.Add(f.FileId);
+                    }
+                }
+                await Remove(rItems);
+            }
+            return true;
         }
 
         public async Task AddToUploadQueue()
