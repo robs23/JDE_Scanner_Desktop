@@ -5,6 +5,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -36,6 +37,95 @@ namespace JDE_Scanner_Desktop.Models
         public bool? IsUploaded { get; set; } = false;
         [DisplayName("Typ")]
         public string Type { get; set; }
+        [DisplayName("Rozmiar")]
+        public long Size { get; set; }
+
+        public bool IsImage
+        {
+            get
+            {
+                string[] imageFormats = { "png", "jpg", "jpeg", "gif" };
+                bool res = false;
+                
+                if (!string.IsNullOrEmpty(Type))
+                {
+                    if (imageFormats.Contains(Type.ToLower()))
+                    {
+                        res = true;
+                    }
+                }else if (!string.IsNullOrEmpty(Name))
+                {
+                    if (imageFormats.Contains(Name.Split('.').Last().ToLower()))
+                    {
+                        res = true;
+                    }
+                }
+                return res;
+            }
+        }
+
+        public Image ThumbnailPlaceholder
+        {
+            get
+            {
+                Image res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_unknown);
+                string[] excels = { "xls", "xlsx", "xlsm" };
+                string[] words = { "doc", "docx", "docm" };
+                string[] videos = { "mp4", "avi" };
+
+                if (IsImage)
+                {
+                    //if (IsUploaded==true)
+                    //{
+                    //    //prefer online thumb
+                    //    //first load placeholder local img
+                    //    //to be replaced wtih downloaded file
+                    //    res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.Image_icon_64);
+                    //}
+                    //else
+                    //{
+                    //    //get from disk
+                    //    res = Image.FromFile(Link);
+                    //}
+                    res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.Image_icon_64);
+                }
+                else
+                {
+                    if (excels.Contains(Type.ToLower()))
+                    {
+                        res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_excel);
+                    }
+                    if (words.Contains(Type.ToLower()))
+                    {
+                        res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_word);
+                    }
+                    if (videos.Contains(Type.ToLower()))
+                    {
+                        res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_video);
+                    }
+                    if(Type.ToLower() == "pdf")
+                    {
+                        res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_pdf);
+                    }
+                }
+                return res;
+            }
+        }
+
+        public async Task<Image> GetPreview()
+        {
+            Image res = null;
+            if (IsUploaded==true)
+            {
+                //try to get online thumb
+            }
+            else
+            {
+                res = Image.FromFile(Link);
+                res = res.Resize(50, 50);
+            }
+            return res;
+        }
 
         public async Task<bool> Add(int? PartId = null, int? PlaceId = null, int? ProcessId = null)
         {
@@ -140,6 +230,11 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 return _Result;
             }
+        }
+
+        public void Open()
+        {
+            System.Diagnostics.Process.Start(Link);
         }
     }
 }

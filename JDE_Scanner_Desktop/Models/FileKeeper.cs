@@ -31,11 +31,11 @@ namespace JDE_Scanner_Desktop.Models
         }
 
         public async void LoadFromDisk(bool multiselect = true)
-        {
+        { 
             OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Title = "Wybierz plik(i)";
             OpenFileDialog.Multiselect = multiselect;
-            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG)|*.JPG;*.GIF;*.PNG";
+            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG), Dokumenty (*.PDF, *.DOC, *.XLS)|*.JPG;*.GIF;*.PNG;*.PDF;*.DOC;*.DOCX;*.XLS;*.XLSX";
 
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -60,7 +60,7 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void DownloadFromCloud(bool? min = false)
+        public async void DownloadFromCloud()
         {
             if (this.Items.Any())
             {
@@ -212,12 +212,19 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task AddToUploadQueue()
         {
-            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
-            db.CreateTable<File>();
-            if (Items.Any())
+            try
             {
-                db.InsertAll(Items);
+                var db = new SQLiteConnection(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3"), SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex | SQLiteOpenFlags.ReadWrite );
+                db.CreateTable<File>();
+                if (Items.Any(i => i.IsUploaded == false))
+                {
+                    db.InsertOrReplaceAll(Items.Where(i => i.IsUploaded == false));
+                }
+            }catch(Exception ex)
+            {
+
             }
+            
 
         }
 

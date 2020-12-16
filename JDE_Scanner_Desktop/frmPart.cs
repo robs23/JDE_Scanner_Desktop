@@ -150,6 +150,9 @@ namespace JDE_Scanner_Desktop
             tasks.Add(files.RemoveAll());
 
             var res = await Task.WhenAll<bool>(tasks);
+
+            Task.Run(() => files.AddToUploadQueue());
+
             if (res.Any(r => r == false))
             {
                 result = false;

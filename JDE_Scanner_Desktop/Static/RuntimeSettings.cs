@@ -38,6 +38,9 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        public static string ThumbnailsPath { get { return "Files/Thumbnails/"; } }
+        public static string FilesPath { get { return "Files/"; } }
+
         public static string LocalFilesPath {
             get {
                 CreateLocalFilesFolders();

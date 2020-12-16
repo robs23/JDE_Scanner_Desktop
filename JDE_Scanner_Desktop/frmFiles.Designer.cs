@@ -60,11 +60,13 @@
             // lvImages
             // 
             this.lvImages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvImages.HideSelection = false;
             this.lvImages.Location = new System.Drawing.Point(3, 38);
             this.lvImages.Name = "lvImages";
             this.lvImages.Size = new System.Drawing.Size(598, 406);
             this.lvImages.TabIndex = 2;
             this.lvImages.UseCompatibleStateImageBehavior = false;
+            this.lvImages.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvImages_MouseDoubleClick);
             // 
             // tlpGalleryButtons
             // 

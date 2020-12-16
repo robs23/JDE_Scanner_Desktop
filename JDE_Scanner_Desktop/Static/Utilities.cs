@@ -141,5 +141,26 @@ namespace JDE_Scanner_Desktop.Static
 
             return res;
         }
+
+        public static bool IsImage(string name = null, string ext=null) 
+        {
+            string[] imageFormats = { "png", "jpg", "jpeg", "gif" };
+            bool res = false;
+            if (!string.IsNullOrEmpty(name))
+            {
+                if (imageFormats.Contains(name.Split('.').Last()))
+                {
+                    res = true;
+                }
+            }
+            if (!string.IsNullOrEmpty(ext))
+            {
+                if (imageFormats.Contains(ext))
+                {
+                    res = true;
+                }
+            }
+            return res;
+        }
     }
 }

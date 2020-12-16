@@ -1,10 +1,12 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,15 +37,40 @@ namespace JDE_Scanner_Desktop
                 lvImages.LargeImageList = iList;
                 foreach (Models.File f in files.Items)
                 {
-                    iList.Images.Add(f.Link, Image.FromFile(f.Link));
-                    lvImages.Items.Add(new ListViewItem { ImageKey = f.Link });
+                    //load placeholder
+                    iList.Images.Add(f.Name, f.ThumbnailPlaceholder);
+                    lvImages.Items.Add(new ListViewItem { ImageKey = f.Name, Text= f.Name });
                 }
-
+                LoadPreviews();
                 //lvImages.Refresh();
             }
             else
             {
                 lvImages.Clear();
+            }
+        }
+
+        public async Task LoadPreviews()
+        {
+            for (int i = 0; i < lvImages.Items.Count; i++)
+            {
+                string name = lvImages.Items[i].Text;
+                File f = files.Items.FirstOrDefault(x => x.Name == name);
+                if (f != null)
+                {
+                    if (f.IsImage)
+                    {
+                        Image img = await f.GetPreview();
+                        if (img != null)
+                        {
+                            for (int n = 0; n < iList.Images.Count; n++)
+                            {
+                                iList.Images[iList.Images.IndexOfKey(name)] = img;
+                            }
+                            iList.Images[i] = img;
+                        }
+                    }
+                }
             }
         }
 
@@ -73,6 +100,21 @@ namespace JDE_Scanner_Desktop
                 }
 
                 LoadImages();
+            }
+        }
+
+        private void lvImages_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < lvImages.Items.Count; i++)
+            {
+                var rectangle = lvImages.GetItemRect(i);
+                if (rectangle.Contains(e.Location))
+                {
+                    if (files.Items.Any(x => x.Name == lvImages.Items[i].Text))
+                    {
+                        files.Items.Where(x => x.Name == lvImages.Items[i].Text).FirstOrDefault().Open();
+                    }
+                }
             }
         }
     }

@@ -35,6 +35,7 @@
             this.btnStartedOnClear = new System.Windows.Forms.Button();
             this.btnFinishedOnClear = new System.Windows.Forms.Button();
             this.btnEditAssignedList = new System.Windows.Forms.Button();
+            this.btnAttachments = new System.Windows.Forms.Button();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.lblAssignedUsers = new System.Windows.Forms.Label();
@@ -82,7 +83,6 @@
             this.dgvActions = new System.Windows.Forms.DataGridView();
             this.pbParts = new System.Windows.Forms.TabPage();
             this.dgvUsedParts = new System.Windows.Forms.DataGridView();
-            this.btnAttachments = new System.Windows.Forms.Button();
             this.tlpButtons.SuspendLayout();
             this.tlpMain.SuspendLayout();
             this.tab.SuspendLayout();
@@ -152,6 +152,20 @@
             this.btnEditAssignedList.UseVisualStyleBackColor = true;
             this.btnEditAssignedList.Visible = false;
             this.btnEditAssignedList.Click += new System.EventHandler(this.btnEditAssignedList_Click);
+            // 
+            // btnAttachments
+            // 
+            this.btnAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAttachments.Image = global::JDE_Scanner_Desktop.Properties.Resources.Attach_24;
+            this.btnAttachments.Location = new System.Drawing.Point(43, 3);
+            this.btnAttachments.Name = "btnAttachments";
+            this.btnAttachments.Size = new System.Drawing.Size(34, 28);
+            this.btnAttachments.TabIndex = 6;
+            this.tooltip.SetToolTip(this.btnAttachments, "Zobacz załączone pliki..");
+            this.btnAttachments.UseVisualStyleBackColor = true;
+            this.btnAttachments.Click += new System.EventHandler(this.btnAttachments_Click);
             // 
             // lblCreated
             // 
@@ -736,20 +750,6 @@
             this.dgvUsedParts.Name = "dgvUsedParts";
             this.dgvUsedParts.Size = new System.Drawing.Size(579, 488);
             this.dgvUsedParts.TabIndex = 0;
-            // 
-            // btnAttachments
-            // 
-            this.btnAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAttachments.Image = global::JDE_Scanner_Desktop.Properties.Resources.Attach_24;
-            this.btnAttachments.Location = new System.Drawing.Point(43, 3);
-            this.btnAttachments.Name = "btnAttachments";
-            this.btnAttachments.Size = new System.Drawing.Size(34, 28);
-            this.btnAttachments.TabIndex = 6;
-            this.tooltip.SetToolTip(this.btnAttachments, "Zobacz załączone pliki..");
-            this.btnAttachments.UseVisualStyleBackColor = true;
-            this.btnAttachments.Click += new System.EventHandler(this.btnAttachments_Click);
             // 
             // frmProcess
             // 
