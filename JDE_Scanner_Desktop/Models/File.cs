@@ -1,7 +1,6 @@
 ﻿using JDE_Scanner_Desktop.Classes;
 using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +14,6 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    [Table("Files")]
     public class File : Entity<File>
     {
         [DisplayName("ID")]

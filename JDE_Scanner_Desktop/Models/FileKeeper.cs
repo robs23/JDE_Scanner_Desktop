@@ -1,7 +1,7 @@
 ﻿using JDE_Scanner_Desktop.Static;
-using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -212,26 +212,58 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task AddToUploadQueue()
         {
-            try
+            if (!System.IO.File.Exists(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")))
             {
-                var db = new SQLiteConnection(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3"), SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex | SQLiteOpenFlags.ReadWrite );
-                db.CreateTable<File>();
-                if (Items.Any(i => i.IsUploaded == false))
-                {
-                    db.InsertOrReplaceAll(Items.Where(i => i.IsUploaded == false));
-                }
-            }catch(Exception ex)
-            {
-
+                CreateLocalDb();
             }
-            
 
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                string iSql;
+
+                foreach(File f in Items.Where(i=>i.IsUploaded == false))
+                {
+                    iSql = $"INSERT INTO (FileId, Name, Link, Token, IsUploaded, Type, Size) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size})";
+
+                    SQLiteCommand command = new SQLiteCommand(iSql, con);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void CreateLocalDb()
+        {
+            SQLiteConnection.CreateFile(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3"));
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                try
+                {
+                    if(con.State != System.Data.ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50), IsUploaded int, Type varchar(10), Size int)";
+                    SQLiteCommand command = new SQLiteCommand(sql, con);
+                    command.ExecuteNonQuery();
+                }catch(Exception ex)
+                {
+
+                }
+                    
+            }
         }
 
         public async Task RestoreUploadQueue()
         {
-            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
-            Items = new List<File>(db.Table<File>());
+            //var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
+            //Items = new List<File>(db.Table<File>());
         }
 
         public async Task Upload()
@@ -256,14 +288,14 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task DeleteUploaded()
         {
-            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
+            //var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
 
-            foreach (File f in Items.Where(i => i.IsUploaded == true))
-            {
-                db.Delete<File>(f.FileId);
-                Items.Remove(f);
-            }
-            db.Close();
+            //foreach (File f in Items.Where(i => i.IsUploaded == true))
+            //{
+            //    db.Delete<File>(f.FileId);
+            //    Items.Remove(f);
+            //}
+            //db.Close();
         }
     }
 }

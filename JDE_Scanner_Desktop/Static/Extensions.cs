@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq.Dynamic;
 using System.Drawing;
-using SQLite;
 using System.Collections;
 
 namespace JDE_Scanner_Desktop.Static
@@ -85,33 +84,6 @@ namespace JDE_Scanner_Desktop.Static
             graph.DrawImage(iImg, new Rectangle(0, 0, width, height)); //resize new image to proper size
 
             return bmp;
-        }
-
-        static public int InsertOrReplaceAll(this SQLiteConnection connection, IEnumerable objects, bool runInTransaction = true)
-        {
-            var c = 0;
-            if (objects == null)
-                return c;
-
-            if (runInTransaction)
-            {
-                connection.RunInTransaction(() =>
-                {
-                    foreach (var r in objects)
-                    {
-                        c += connection.Insert(r, "OR REPLACE", Orm.GetType(r));
-                    }
-                });
-            }
-            else
-            {
-                foreach (var r in objects)
-                {
-                    c += connection.Insert(r, "OR REPLACE", Orm.GetType(r));
-                }
-            }
-
-            return c;
         }
     }
 }

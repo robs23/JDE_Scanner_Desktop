@@ -1,6 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Static;
 using Newtonsoft.Json;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -263,13 +262,6 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async Task CreateLocalBackup()
-        {
-            var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
-            db.CreateTable<T>();
-            await this.Refresh();
-
-        }
 
         public virtual async Task<string> AddAll(List<Entity<T>> items, string args)
         {
