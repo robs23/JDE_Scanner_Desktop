@@ -37,6 +37,13 @@ namespace JDE_Scanner_Desktop.Models
         public string Type { get; set; }
         [DisplayName("Rozmiar")]
         public long Size { get; set; }
+        public double SizeInMB
+        {
+            get
+            {
+                return (double)Size / 1048576;
+            }
+        }
 
         public bool IsImage
         {

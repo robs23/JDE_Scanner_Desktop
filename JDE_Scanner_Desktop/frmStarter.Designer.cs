@@ -49,6 +49,7 @@
             this.komponentyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.wszystkieToolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.masoweDodawanieKomponentówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zgłoszeniaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.noweToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,7 +86,7 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.masoweDodawanieKomponentówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kolejkaPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,7 +111,8 @@
             // plikToolStripMenuItem
             // 
             this.plikToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.koniecToolStripMenuItem});
+            this.koniecToolStripMenuItem,
+            this.kolejkaPlikówToolStripMenuItem});
             this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
             this.plikToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.plikToolStripMenuItem.Text = "Plik";
@@ -118,7 +120,7 @@
             // koniecToolStripMenuItem
             // 
             this.koniecToolStripMenuItem.Name = "koniecToolStripMenuItem";
-            this.koniecToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.koniecToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.koniecToolStripMenuItem.Text = "Koniec";
             this.koniecToolStripMenuItem.Click += new System.EventHandler(this.koniecToolStripMenuItem_Click);
             // 
@@ -163,7 +165,7 @@
             this.nowyToolStripMenuItem4,
             this.wszystkieToolStripMenuItem1});
             this.zasobyToolStripMenuItem1.Name = "zasobyToolStripMenuItem1";
-            this.zasobyToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.zasobyToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
             this.zasobyToolStripMenuItem1.Text = "Zasoby";
             // 
             // nowyToolStripMenuItem4
@@ -183,7 +185,7 @@
             // zasobyXToolStripMenuItem
             // 
             this.zasobyXToolStripMenuItem.Name = "zasobyXToolStripMenuItem";
-            this.zasobyXToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zasobyXToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.zasobyXToolStripMenuItem.Text = "Zasoby X";
             this.zasobyXToolStripMenuItem.Click += new System.EventHandler(this.zasobyXToolStripMenuItem_Click);
             // 
@@ -193,7 +195,7 @@
             this.nowaToolStripMenuItem1,
             this.wszystkieToolStripMenuItem2});
             this.instalacjeToolStripMenuItem2.Name = "instalacjeToolStripMenuItem2";
-            this.instalacjeToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.instalacjeToolStripMenuItem2.Size = new System.Drawing.Size(143, 22);
             this.instalacjeToolStripMenuItem2.Text = "Instalacje";
             // 
             // nowaToolStripMenuItem1
@@ -216,7 +218,7 @@
             this.nowyToolStripMenuItem5,
             this.wszystkieToolStripMenuItem3});
             this.obszaryToolStripMenuItem2.Name = "obszaryToolStripMenuItem2";
-            this.obszaryToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.obszaryToolStripMenuItem2.Size = new System.Drawing.Size(143, 22);
             this.obszaryToolStripMenuItem2.Text = "Obszary";
             // 
             // nowyToolStripMenuItem5
@@ -240,7 +242,7 @@
             this.wszystkieToolStripMenuItem11,
             this.masoweDodawanieKomponentówToolStripMenuItem});
             this.komponentyToolStripMenuItem.Name = "komponentyToolStripMenuItem";
-            this.komponentyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.komponentyToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.komponentyToolStripMenuItem.Text = "Komponenty";
             // 
             // nowyToolStripMenuItem2
@@ -256,6 +258,13 @@
             this.wszystkieToolStripMenuItem11.Size = new System.Drawing.Size(260, 22);
             this.wszystkieToolStripMenuItem11.Text = "Wszystkie";
             this.wszystkieToolStripMenuItem11.Click += new System.EventHandler(this.wszystkieToolStripMenuItem11_Click);
+            // 
+            // masoweDodawanieKomponentówToolStripMenuItem
+            // 
+            this.masoweDodawanieKomponentówToolStripMenuItem.Name = "masoweDodawanieKomponentówToolStripMenuItem";
+            this.masoweDodawanieKomponentówToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.masoweDodawanieKomponentówToolStripMenuItem.Text = "Masowe dodawanie komponentów";
+            this.masoweDodawanieKomponentówToolStripMenuItem.Click += new System.EventHandler(this.masoweDodawanieKomponentówToolStripMenuItem_Click);
             // 
             // zgłoszeniaToolStripMenuItem
             // 
@@ -429,7 +438,7 @@
             this.nowyToolStripMenuItem1,
             this.wszystkieToolStripMenuItem8});
             this.typyFirmToolStripMenuItem.Name = "typyFirmToolStripMenuItem";
-            this.typyFirmToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.typyFirmToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.typyFirmToolStripMenuItem.Text = "Typy firm";
             // 
             // nowyToolStripMenuItem1
@@ -452,7 +461,7 @@
             this.nowaToolStripMenuItem2,
             this.wszystkieToolStripMenuItem5});
             this.firmyToolStripMenuItem1.Name = "firmyToolStripMenuItem1";
-            this.firmyToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.firmyToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
             this.firmyToolStripMenuItem1.Text = "Firmy";
             // 
             // nowaToolStripMenuItem2
@@ -534,12 +543,12 @@
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
             // 
-            // masoweDodawanieKomponentówToolStripMenuItem
+            // kolejkaPlikówToolStripMenuItem
             // 
-            this.masoweDodawanieKomponentówToolStripMenuItem.Name = "masoweDodawanieKomponentówToolStripMenuItem";
-            this.masoweDodawanieKomponentówToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.masoweDodawanieKomponentówToolStripMenuItem.Text = "Masowe dodawanie komponentów";
-            this.masoweDodawanieKomponentówToolStripMenuItem.Click += new System.EventHandler(this.masoweDodawanieKomponentówToolStripMenuItem_Click);
+            this.kolejkaPlikówToolStripMenuItem.Name = "kolejkaPlikówToolStripMenuItem";
+            this.kolejkaPlikówToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kolejkaPlikówToolStripMenuItem.Text = "Kolejka plików";
+            this.kolejkaPlikówToolStripMenuItem.Click += new System.EventHandler(this.kolejkaPlikówToolStripMenuItem_Click);
             // 
             // frmStarter
             // 
@@ -619,5 +628,6 @@
         private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem wszystkieToolStripMenuItem11;
         private System.Windows.Forms.ToolStripMenuItem masoweDodawanieKomponentówToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kolejkaPlikówToolStripMenuItem;
     }
 }

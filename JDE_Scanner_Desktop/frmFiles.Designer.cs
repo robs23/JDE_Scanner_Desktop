@@ -36,6 +36,8 @@
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.iList = new System.Windows.Forms.ImageList(this.components);
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbView = new System.Windows.Forms.ComboBox();
             this.tlpGallery.SuspendLayout();
             this.tlpGalleryButtons.SuspendLayout();
             this.SuspendLayout();
@@ -73,17 +75,20 @@
             this.tlpGalleryButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpGalleryButtons.ColumnCount = 3;
+            this.tlpGalleryButtons.ColumnCount = 5;
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpGalleryButtons.Controls.Add(this.btnAddFile, 0, 0);
             this.tlpGalleryButtons.Controls.Add(this.btnDeleteFile, 1, 0);
+            this.tlpGalleryButtons.Controls.Add(this.label1, 3, 0);
+            this.tlpGalleryButtons.Controls.Add(this.cmbView, 4, 0);
             this.tlpGalleryButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpGalleryButtons.Name = "tlpGalleryButtons";
             this.tlpGalleryButtons.RowCount = 1;
             this.tlpGalleryButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpGalleryButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpGalleryButtons.Size = new System.Drawing.Size(598, 29);
             this.tlpGalleryButtons.TabIndex = 3;
             // 
@@ -119,6 +124,26 @@
             this.iList.ImageSize = new System.Drawing.Size(50, 50);
             this.iList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(451, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Widok";
+            // 
+            // cmbView
+            // 
+            this.cmbView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbView.FormattingEnabled = true;
+            this.cmbView.Location = new System.Drawing.Point(501, 4);
+            this.cmbView.Name = "cmbView";
+            this.cmbView.Size = new System.Drawing.Size(94, 21);
+            this.cmbView.TabIndex = 3;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
+            // 
             // frmFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -131,6 +156,7 @@
             this.Load += new System.EventHandler(this.frmFiles_Load);
             this.tlpGallery.ResumeLayout(false);
             this.tlpGalleryButtons.ResumeLayout(false);
+            this.tlpGalleryButtons.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -144,5 +170,7 @@
         private System.Windows.Forms.Button btnDeleteFile;
         private System.Windows.Forms.ImageList iList;
         private System.Windows.Forms.ToolTip tooltip;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbView;
     }
 }

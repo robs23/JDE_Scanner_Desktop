@@ -74,10 +74,22 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        public async void LoadItems()
+        {
+            if ((string)cmbView.SelectedValue == "Miniatury")
+            {
+                LoadImages();
+            }
+            else
+            {
+                LoadDetails();
+            }
+        }
+
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             files.LoadFromDisk();
-            LoadImages();
+            LoadItems();
         }
 
         private void frmFiles_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,7 +99,39 @@ namespace JDE_Scanner_Desktop
 
         private void frmFiles_Load(object sender, EventArgs e)
         {
-            LoadImages();
+            string[] cmbItems = { "Miniatury", "Szczegóły"};
+            this.cmbView.DataSource = cmbItems;
+            LoadItems();
+            
+        }
+
+        private void LoadDetails()
+        {
+            lvImages.Columns.Add("ID", 30);
+            lvImages.Columns.Add("Nazwa",100);
+            lvImages.Columns.Add("Typ", 50);
+            lvImages.Columns.Add("Utworzono", 80);
+            lvImages.Columns.Add("Ścieżka", 150);
+            lvImages.Columns.Add("Wysłano", 50);
+            lvImages.Columns.Add("Rozmiar", 50);
+
+            if (files.Items.Any())
+            {
+                if (lvImages.Items.Count > 0)
+                {
+                    lvImages.Items.Clear();
+                }
+                
+                foreach (Models.File f in files.Items)
+                {
+                    lvImages.Items.Add(new ListViewItem(new string[] {f.FileId.ToString(), f.Name, f.Type, f.CreatedOn.ToString(), f.Link, f.IsUploaded.ToString(), f.SizeInMB.ToString()}));
+                }
+            }
+            else
+            {
+                lvImages.Clear();
+            }
+            lvImages.View = View.Details;
         }
 
         private void btnDeleteFile_Click(object sender, EventArgs e)
@@ -115,6 +159,18 @@ namespace JDE_Scanner_Desktop
                         files.Items.Where(x => x.Name == lvImages.Items[i].Text).FirstOrDefault().Open();
                     }
                 }
+            }
+        }
+
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((string)cmbView.SelectedValue == "Miniatury")
+            {
+                LoadImages();
+            }
+            else
+            {
+                LoadDetails();
             }
         }
     }

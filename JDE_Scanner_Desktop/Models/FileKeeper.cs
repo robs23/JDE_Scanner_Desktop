@@ -20,14 +20,47 @@ namespace JDE_Scanner_Desktop.Models
         protected override string PluralizedObjectName => "Files";
         public Form MainForm { get; set; }
         public Form FileForm { get; set; }
+        public int? PartId { get; set; }
+        public int? PlaceId { get; set; }
+        public int? ProcessId { get; set; }
+        public bool UploadKeeper { get; set; }
         public OpenFileDialog OpenFileDialog;
 
         public List<File> RemovedItems { get; set; }
 
-        public FileKeeper(Form mainForm) : base()
+        public FileKeeper(Form mainForm, int? partId = null, int? placeId = null, int? processId = null, bool uploadKeeper = false) : base()
         {
             MainForm = mainForm;
             RemovedItems = new List<File>();
+            PartId = partId;
+            PlaceId = placeId;
+            ProcessId = processId;
+            UploadKeeper = uploadKeeper;
+        }
+
+        public async Task Initialize()
+        {
+            if (PartId != null)
+            {
+
+            }
+            else if (PlaceId != null)
+            {
+
+            }
+            else if (ProcessId != null)
+            {
+
+            }
+            else if (UploadKeeper)
+            {
+                //it's uploadKeeper. Show all files that wait for upload
+                RestoreUploadQueue();
+            }
+            else
+            {
+                //it's general fileKeeper. Show all files
+            }
         }
 
         public async void LoadFromDisk(bool multiselect = true)
@@ -44,10 +77,13 @@ namespace JDE_Scanner_Desktop.Models
                     try
                     {
                         string name = new FileInfo(file).Name;
+                        long size = new FileInfo(file).Length;
                         File nFile = new File();
                         nFile.Link = file;
                         nFile.Name = name;
                         nFile.Type = name.Split('.').Last();
+                        nFile.CreatedOn = DateTime.Now;
+                        nFile.Size = size;
                         if (!multiselect)
                             Items.Clear();
                         Items.Add(nFile);
@@ -229,7 +265,7 @@ namespace JDE_Scanner_Desktop.Models
 
                 foreach(File f in Items.Where(i=>i.IsUploaded == false))
                 {
-                    iSql = $"INSERT INTO (FileId, Name, Link, Token, IsUploaded, Type, Size) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size})";
+                    iSql = $"INSERT INTO (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, '{f.CreatedOn}')";
 
                     SQLiteCommand command = new SQLiteCommand(iSql, con);
                     command.ExecuteNonQuery();
@@ -249,7 +285,7 @@ namespace JDE_Scanner_Desktop.Models
                     {
                         con.Open();
                     }
-                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50), IsUploaded int, Type varchar(10), Size int)";
+                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50), IsUploaded int, Type varchar(10), Size int, CreatedOn varchar(20))";
                     SQLiteCommand command = new SQLiteCommand(sql, con);
                     command.ExecuteNonQuery();
                 }catch(Exception ex)
@@ -262,8 +298,41 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task RestoreUploadQueue()
         {
-            //var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
-            //Items = new List<File>(db.Table<File>());
+            if (!System.IO.File.Exists(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")))
+            {
+                CreateLocalDb();
+            }
+
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                string sql = "SELECT * FROM Files";
+
+                SQLiteCommand command = new SQLiteCommand(sql, con);
+                SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        File f = new File();
+                        f.FileId = reader.GetInt32(reader.GetOrdinal("FileId"));
+                        f.Type = reader.GetString(reader.GetOrdinal("Type"));
+                        f.Token = reader.GetString(reader.GetOrdinal("Token"));
+                        f.Size = reader.GetInt64(reader.GetOrdinal("Size"));
+                        f.Link = reader.GetString(reader.GetOrdinal("Link"));
+                        f.Name = reader.GetString(reader.GetOrdinal("Name"));
+                        f.CreatedOn = reader.GetDateTime(reader.GetOrdinal("CreatedOn"));
+                        f.IsUploaded = reader.GetBoolean(reader.GetOrdinal("IsUploaded"));
+                        this.Items.Add(f);
+                    }
+                }
+                
+            }
         }
 
         public async Task Upload()
@@ -288,14 +357,34 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task DeleteUploaded()
         {
-            //var db = new SQLiteConnection(RuntimeSettings.LocalDbPath);
+            if (!System.IO.File.Exists(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")))
+            {
+                CreateLocalDb();
+            }
 
-            //foreach (File f in Items.Where(i => i.IsUploaded == true))
-            //{
-            //    db.Delete<File>(f.FileId);
-            //    Items.Remove(f);
-            //}
-            //db.Close();
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                string dSql;
+                string dList = "";
+
+                foreach (File f in Items.Where(i => i.IsUploaded == true))
+                {
+                    dList += $"{f.FileId},";   
+                }
+                if (!string.IsNullOrEmpty(dList))
+                {
+                    dList = dList.Substring(0, dList.Length - 1);
+                    dSql = $"DELETE FROM Files WHERE FileId IN ({dList})";
+                    SQLiteCommand command = new SQLiteCommand(dSql, con);
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

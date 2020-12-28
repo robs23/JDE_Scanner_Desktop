@@ -272,5 +272,12 @@ namespace JDE_Scanner_Desktop
             frmAddComponents FrmAddComponents = new frmAddComponents(this);
             FrmAddComponents.Show(this);
         }
+
+        private async void kolejkaPlikówToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileKeeper fileQueue = new FileKeeper(this, uploadKeeper: true);
+            await fileQueue.Initialize();
+            fileQueue.ShowFiles();
+        }
     }
 }
