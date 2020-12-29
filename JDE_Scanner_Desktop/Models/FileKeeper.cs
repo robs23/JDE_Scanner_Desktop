@@ -40,26 +40,30 @@ namespace JDE_Scanner_Desktop.Models
 
         public async Task Initialize()
         {
+            string args = null;
+
             if (PartId != null)
             {
-
+                args = $"PartId={PartId}";
             }
             else if (PlaceId != null)
             {
-
+                args = $"PlaceId={PlaceId}";
             }
             else if (ProcessId != null)
             {
-
+                args = $"ProcessId={ProcessId}";
             }
-            else if (UploadKeeper)
+
+            if (UploadKeeper)
             {
-                //it's uploadKeeper. Show all files that wait for upload
+                //it's uploadKeeper. Show all files that wait for upload in local Db
                 RestoreUploadQueue();
             }
             else
             {
-                //it's general fileKeeper. Show all files
+                //Bring from the cloud Db
+                await this.Refresh(args);
             }
         }
 
@@ -246,8 +250,10 @@ namespace JDE_Scanner_Desktop.Models
             return true;
         }
 
-        public async Task AddToUploadQueue()
+        public async Task<string> AddToUploadQueue()
         {
+            string res = "OK";
+
             if (!System.IO.File.Exists(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")))
             {
                 CreateLocalDb();
@@ -265,11 +271,20 @@ namespace JDE_Scanner_Desktop.Models
 
                 foreach(File f in Items.Where(i=>i.IsUploaded == false))
                 {
-                    iSql = $"INSERT INTO (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, '{f.CreatedOn}')";
+                    iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, '{f.CreatedOn}')";
 
-                    SQLiteCommand command = new SQLiteCommand(iSql, con);
-                    command.ExecuteNonQuery();
+                    try
+                    {
+                        SQLiteCommand command = new SQLiteCommand(iSql, con);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        res = $"Błąd podczas dodawania plików do kolejki. Szczegóły: {ex.ToString()}";
+                        break;
+                    }
                 }
+                return res;
             }
         }
 
@@ -285,7 +300,7 @@ namespace JDE_Scanner_Desktop.Models
                     {
                         con.Open();
                     }
-                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50), IsUploaded int, Type varchar(10), Size int, CreatedOn varchar(20))";
+                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50) UNIQUE, IsUploaded int, Type varchar(10), Size int, CreatedOn varchar(20))";
                     SQLiteCommand command = new SQLiteCommand(sql, con);
                     command.ExecuteNonQuery();
                 }catch(Exception ex)

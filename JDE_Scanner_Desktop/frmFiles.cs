@@ -39,9 +39,9 @@ namespace JDE_Scanner_Desktop
                 {
                     //load placeholder
                     iList.Images.Add(f.Name, f.ThumbnailPlaceholder);
-                    lvImages.Items.Add(new ListViewItem { ImageKey = f.Name, Text= f.Name });
+                    lvImages.Items.Add(new ListViewItem { ImageKey = f.Name, Text= f.Name, Tag=f.Token });
                 }
-                LoadPreviews();
+                Task.Run(()=> LoadPreviews());
                 //lvImages.Refresh();
             }
             else
@@ -54,7 +54,13 @@ namespace JDE_Scanner_Desktop
         {
             for (int i = 0; i < lvImages.Items.Count; i++)
             {
-                string name = lvImages.Items[i].Text;
+                string name = "";
+                Invoke(new System.Action(() =>
+                {
+                    //Updating UI from other thread, that this method is working on
+                    name = lvImages.Items[i].Text;
+                }));
+                
                 File f = files.Items.FirstOrDefault(x => x.Name == name);
                 if (f != null)
                 {
@@ -65,13 +71,15 @@ namespace JDE_Scanner_Desktop
                         {
                             for (int n = 0; n < iList.Images.Count; n++)
                             {
-                                iList.Images[iList.Images.IndexOfKey(name)] = img;
+                                Invoke(new System.Action(() => { iList.Images[iList.Images.IndexOfKey(name)] = img; }));
+                                
                             }
-                            iList.Images[i] = img;
+                            Invoke(new System.Action(() => { iList.Images[i] = img; }));
                         }
                     }
                 }
             }
+            Invoke(new System.Action(() => { lvImages.Refresh(); }));
         }
 
         public async void LoadItems()
@@ -124,7 +132,9 @@ namespace JDE_Scanner_Desktop
                 
                 foreach (Models.File f in files.Items)
                 {
-                    lvImages.Items.Add(new ListViewItem(new string[] {f.FileId.ToString(), f.Name, f.Type, f.CreatedOn.ToString(), f.Link, f.IsUploaded.ToString(), f.SizeInMB.ToString()}));
+                    ListViewItem i = new ListViewItem(new string[] { f.FileId.ToString(), f.Name, f.Type, f.CreatedOn.ToString(), f.Link, f.IsUploaded.ToString(), f.SizeInMB.ToString() });
+                    i.Tag = f.Token;
+                    lvImages.Items.Add(i);
                 }
             }
             else
@@ -134,16 +144,17 @@ namespace JDE_Scanner_Desktop
             lvImages.View = View.Details;
         }
 
-        private void btnDeleteFile_Click(object sender, EventArgs e)
+        private async void btnDeleteFile_Click(object sender, EventArgs e)
         {
             if(lvImages.SelectedItems.Count > 0)
             {
                 for (int i = lvImages.SelectedItems.Count - 1; i >= 0; i--)
                 {
+                    files.RemovedItems.Add(files.Items.Where(x => x.Token == (string)lvImages.SelectedItems[i].Tag).FirstOrDefault()) ;
                     files.Items.RemoveAt(lvImages.SelectedItems[i].Index);
                 }
 
-                LoadImages();
+                LoadItems();
             }
         }
 

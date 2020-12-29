@@ -57,7 +57,7 @@ namespace JDE_Scanner_Desktop
             mode = 2;
             this.Text = "Szczegóły części";
             _this = Item;
-            files = new FileKeeper(this);
+            files = new FileKeeper(this, Item.PartId);
             txtName.Text = _this.Name;
             txtDescription.Text = _this.Description;
             txtEAN.Text = _this.EAN;
@@ -115,6 +115,7 @@ namespace JDE_Scanner_Desktop
                 btnAdd.Enabled = false;
                 btnRemove.Enabled = false;
             }
+            files.Initialize();
             Looper.Hide();
         }
 
@@ -151,11 +152,21 @@ namespace JDE_Scanner_Desktop
 
             var res = await Task.WhenAll<bool>(tasks);
 
-            Task.Run(() => files.AddToUploadQueue());
+            
 
             if (res.Any(r => r == false))
             {
                 result = false;
+            }
+            else
+            {
+                string _res = await files.AddToUploadQueue();
+                if(_res != "OK")
+                {
+                    //something went wrong
+                    MessageBox.Show(_res, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    result = false;
+                }
             }
             return result;
         }

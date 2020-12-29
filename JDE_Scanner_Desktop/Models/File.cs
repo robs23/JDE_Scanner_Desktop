@@ -54,13 +54,13 @@ namespace JDE_Scanner_Desktop.Models
                 
                 if (!string.IsNullOrEmpty(Type))
                 {
-                    if (imageFormats.Contains(Type.ToLower()))
+                    if (imageFormats.Contains(Type.ToLower().Trim()))
                     {
                         res = true;
                     }
                 }else if (!string.IsNullOrEmpty(Name))
                 {
-                    if (imageFormats.Contains(Name.Split('.').Last().ToLower()))
+                    if (imageFormats.Contains(Name.Split('.').Last().ToLower().Trim()))
                     {
                         res = true;
                     }
@@ -96,19 +96,19 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 else
                 {
-                    if (excels.Contains(Type.ToLower()))
+                    if (excels.Contains(Type.ToLower().Trim()))
                     {
                         res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_excel);
                     }
-                    if (words.Contains(Type.ToLower()))
+                    if (words.Contains(Type.ToLower().Trim()))
                     {
                         res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_word);
                     }
-                    if (videos.Contains(Type.ToLower()))
+                    if (videos.Contains(Type.ToLower().Trim()))
                     {
                         res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_video);
                     }
-                    if(Type.ToLower() == "pdf")
+                    if(Type.ToLower().Trim() == "pdf")
                     {
                         res = new Bitmap(JDE_Scanner_Desktop.Properties.Resources.icon_pdf);
                     }
@@ -132,47 +132,35 @@ namespace JDE_Scanner_Desktop.Models
             return res;
         }
 
-        public async Task<bool> Add(int? PartId = null, int? PlaceId = null, int? ProcessId = null)
-        {
-            ModelValidator validator = new ModelValidator();
-            if (validator.Validate(this))
-            {
-                using (var client = new HttpClient())
-                {
-                    var serializedProduct = JsonConvert.SerializeObject(this);
-                    string url = Secrets.ApiAddress + $"CreateFile?token=" + Secrets.TenantToken + $"&fileJson={serializedProduct}" + "&UserId=" + RuntimeSettings.UserId + $"&PartId={PartId}&PlaceId={PlaceId}&ProcessId={ProcessId}";
-                    MultipartFormDataContent content = new MultipartFormDataContent();
-                    //var body = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
 
-                    try
-                    {
-                        using (var fileStream = System.IO.File.OpenRead(Link))
-                        {
-                            var fileInfo = new FileInfo(Link);
-                            StreamContent fcontent = new StreamContent(fileStream);
-                            fcontent.Headers.Add("Content-Type", "application/octet-stream");
-                            fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
-                            content.Add(fcontent, "file", fileInfo.Name);
-                            var result = await client.PostAsync(new Uri(url), content);
-                            if (result.IsSuccessStatusCode)
-                            {
-                                var rString = await result.Content.ReadAsStringAsync();
-                                AddedItem = rString;
-                                return true;
-                            }
-                            else
-                            {
-                                MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia rekordu. Wiadomość: " + result.ReasonPhrase);
-                                return false;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        return false;
-                    }
+        public async override Task<bool> Add(string args = null)
+        {
+            bool x;
+            if (args == null)
+            {
+                x = await base.Add();
+            }
+            else
+            {
+                x = await base.Add(args);
+            }
+
+            if (x)
+            {
+                try
+                {
+                    File _this = JsonConvert.DeserializeObject<File>(AddedItem);
+                    this.FileId = _this.FileId;
+                    this.Token = _this.Token;
+                    this.TenantId = _this.TenantId;
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
+                return true;
             }
             else
             {

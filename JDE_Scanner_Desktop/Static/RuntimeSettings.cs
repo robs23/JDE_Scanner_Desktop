@@ -61,7 +61,7 @@ namespace JDE_Scanner_Desktop
         {
             get
             {
-                //return System.Windows.Forms.Application.StartupPath;
+                //return C:\Users\<User_name>\AppData\Local\Temp\
                 return Path.GetTempPath();
             }
         }
