@@ -107,6 +107,18 @@ namespace JDE_Scanner_Desktop
 
         private void frmFiles_Load(object sender, EventArgs e)
         {
+            if (files.UploadKeeper)
+            {
+                btnAddFile.Visible = false;
+                btnDeleteFile.Visible = false;
+                btnUpload.Visible = true;
+            }
+            else
+            {
+                btnAddFile.Visible = true;
+                btnDeleteFile.Visible = true;
+                btnUpload.Visible = false;
+            }
             string[] cmbItems = { "Miniatury", "Szczegóły"};
             this.cmbView.DataSource = cmbItems;
             LoadItems();
@@ -167,7 +179,7 @@ namespace JDE_Scanner_Desktop
                 {
                     if (files.Items.Any(x => x.Name == lvImages.Items[i].Text))
                     {
-                        files.Items.Where(x => x.Name == lvImages.Items[i].Text).FirstOrDefault().Open();
+                        files.OpenFile(files.Items.Where(x => x.Name == lvImages.Items[i].Text).FirstOrDefault());
                     }
                 }
             }
@@ -183,6 +195,11 @@ namespace JDE_Scanner_Desktop
             {
                 LoadDetails();
             }
+        }
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            files.Upload();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -123,6 +124,7 @@ namespace JDE_Scanner_Desktop.Models
             if (IsUploaded==true)
             {
                 //try to get online thumb
+                res = await new FileKeeper(null).GetImage($"{this.Token}.{this.Type}", true);
             }
             else
             {
@@ -168,24 +170,6 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        //public async Task Download(bool? min = false)
-        //{
-        //    using (var client = new HttpClient())
-        //    {
-        //        string url = Secrets.ApiAddress + $"GetFile?token=" + Secrets.TenantToken + "&id=" + this.FileId;
-        //        using (var response = await client.GetAsync(new Uri(url)))
-        //        {
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                var userJsonString = await response.Content.ReadAsStringAsync();
-        //                var vItems = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
-        //                Items.AddRange(vItems);
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //}
-
         public async Task<string> Upload()
         {
             string _Result = "OK";
@@ -193,7 +177,6 @@ namespace JDE_Scanner_Desktop.Models
 
             using (var client = new HttpClient())
             {
-                var serializedProduct = JsonConvert.SerializeObject(this);
                 string url = Secrets.ApiAddress + $"UploadFile?token=" + Secrets.TenantToken + $"&fileToken={this.Token}";
 
                 try
@@ -202,7 +185,7 @@ namespace JDE_Scanner_Desktop.Models
                     {
                         var fileInfo = new FileInfo(Link);
                         StreamContent fcontent = new StreamContent(fileStream);
-                        fcontent.Headers.Add("Content-Type", "application/octet-stream");
+                        fcontent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
                         fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
                         content.Add(fcontent, "file", fileInfo.Name);
                         var result = await client.PostAsync(new Uri(url), content);
@@ -223,11 +206,6 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 return _Result;
             }
-        }
-
-        public void Open()
-        {
-            System.Diagnostics.Process.Start(Link);
         }
     }
 }

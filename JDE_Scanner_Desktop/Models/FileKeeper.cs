@@ -30,7 +30,11 @@ namespace JDE_Scanner_Desktop.Models
 
         public FileKeeper(Form mainForm, int? partId = null, int? placeId = null, int? processId = null, bool uploadKeeper = false) : base()
         {
-            MainForm = mainForm;
+            if(mainForm != null)
+            {
+                MainForm = mainForm;
+            }
+                
             RemovedItems = new List<File>();
             PartId = partId;
             PlaceId = placeId;
@@ -117,9 +121,28 @@ namespace JDE_Scanner_Desktop.Models
             FileForm.Show(MainForm);
         }
 
-        public void OpenFile(int id)
+        public async void OpenFile(File file)
         {
-            System.Diagnostics.Process.Start(Items[id].Link);
+            if (file.IsUploaded == true)
+            {
+                //download it first
+                bool success = await GetAttachment($"{file.Token}.{file.Type}", false);
+                if (success)
+                {
+                    string path = Path.Combine(RuntimeSettings.LocalFilesPath, $"{file.Token}.{file.Type}");
+                    System.Diagnostics.Process.Start(path);
+                }
+                else
+                {
+                    MessageBox.Show("Pobieranie pliku z serwera zakończyło się niepowodzeniem..", "Niepowodzenie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(file.Link);
+            }
+
+            
         }
 
         public async Task<Image> GetImage(string name, bool min, bool save = false)
@@ -271,7 +294,7 @@ namespace JDE_Scanner_Desktop.Models
 
                 foreach(File f in Items.Where(i=>i.IsUploaded == false))
                 {
-                    iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, '{f.CreatedOn}')";
+                    iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedBy, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, {f.CreatedBy}, '{f.CreatedOn}')";
 
                     try
                     {
@@ -300,7 +323,7 @@ namespace JDE_Scanner_Desktop.Models
                     {
                         con.Open();
                     }
-                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50) UNIQUE, IsUploaded int, Type varchar(10), Size int, CreatedOn varchar(20))";
+                    string sql = "create table Files (FileId int, Name varchar(50), Link varchar(150), Token varchar(50) UNIQUE, IsUploaded int, Type varchar(10), Size int, CreatedBy int, CreatedOn varchar(20))";
                     SQLiteCommand command = new SQLiteCommand(sql, con);
                     command.ExecuteNonQuery();
                 }catch(Exception ex)
@@ -342,6 +365,7 @@ namespace JDE_Scanner_Desktop.Models
                         f.Link = reader.GetString(reader.GetOrdinal("Link"));
                         f.Name = reader.GetString(reader.GetOrdinal("Name"));
                         f.CreatedOn = reader.GetDateTime(reader.GetOrdinal("CreatedOn"));
+                        f.CreatedBy = reader.GetInt32(reader.GetOrdinal("CreatedBy"));
                         f.IsUploaded = reader.GetBoolean(reader.GetOrdinal("IsUploaded"));
                         this.Items.Add(f);
                     }
@@ -400,6 +424,34 @@ namespace JDE_Scanner_Desktop.Models
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public async Task<string> Save(string IdString)
+        {
+            //IdString = e.g. PartId=1
+            string result = "OK";
+            List<Task<bool>> tasks = new List<Task<bool>>();
+            tasks.Add(this.AddAll(IdString));
+            tasks.Add(this.RemoveAll());
+
+            var res = await Task.WhenAll<bool>(tasks);
+
+
+
+            if (res.Any(r => r == false))
+            {
+                result = "Zapis jednego lub więcej plików zakończył sie niepowodzeniem!";
+            }
+            else
+            {
+                string _res = await this.AddToUploadQueue();
+                if (_res != "OK")
+                {
+                    //something went wrong
+                    result = _res;
+                }
+            }
+            return result;
         }
     }
 }

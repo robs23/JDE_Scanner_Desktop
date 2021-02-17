@@ -34,10 +34,11 @@
             this.tlpGalleryButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddFile = new System.Windows.Forms.Button();
             this.btnDeleteFile = new System.Windows.Forms.Button();
-            this.iList = new System.Windows.Forms.ImageList(this.components);
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.cmbView = new System.Windows.Forms.ComboBox();
+            this.iList = new System.Windows.Forms.ImageList(this.components);
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnUpload = new System.Windows.Forms.Button();
             this.tlpGallery.SuspendLayout();
             this.tlpGalleryButtons.SuspendLayout();
             this.SuspendLayout();
@@ -75,16 +76,18 @@
             this.tlpGalleryButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpGalleryButtons.ColumnCount = 5;
+            this.tlpGalleryButtons.ColumnCount = 6;
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpGalleryButtons.Controls.Add(this.btnAddFile, 0, 0);
             this.tlpGalleryButtons.Controls.Add(this.btnDeleteFile, 1, 0);
-            this.tlpGalleryButtons.Controls.Add(this.label1, 3, 0);
-            this.tlpGalleryButtons.Controls.Add(this.cmbView, 4, 0);
+            this.tlpGalleryButtons.Controls.Add(this.label1, 4, 0);
+            this.tlpGalleryButtons.Controls.Add(this.cmbView, 5, 0);
+            this.tlpGalleryButtons.Controls.Add(this.btnUpload, 3, 0);
             this.tlpGalleryButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpGalleryButtons.Name = "tlpGalleryButtons";
             this.tlpGalleryButtons.RowCount = 1;
@@ -118,12 +121,6 @@
             this.btnDeleteFile.UseVisualStyleBackColor = true;
             this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
             // 
-            // iList
-            // 
-            this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.iList.ImageSize = new System.Drawing.Size(50, 50);
-            this.iList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -143,6 +140,27 @@
             this.cmbView.Size = new System.Drawing.Size(94, 21);
             this.cmbView.TabIndex = 3;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
+            // 
+            // iList
+            // 
+            this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.iList.ImageSize = new System.Drawing.Size(50, 50);
+            this.iList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // btnUpload
+            // 
+            this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpload.Image = global::JDE_Scanner_Desktop.Properties.Resources.upload_24;
+            this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpload.Location = new System.Drawing.Point(351, 3);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(94, 23);
+            this.btnUpload.TabIndex = 4;
+            this.btnUpload.Text = "Upload";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // frmFiles
             // 
@@ -172,5 +190,6 @@
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbView;
+        private System.Windows.Forms.Button btnUpload;
     }
 }

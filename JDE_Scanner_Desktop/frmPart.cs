@@ -143,33 +143,6 @@ namespace JDE_Scanner_Desktop
             }
         }
         
-        private async Task<bool> SaveFiles()
-        {
-            bool result = true;
-            List<Task<bool>> tasks = new List<Task<bool>>();
-            tasks.Add(files.AddAll($"PartId={_this.PartId}"));
-            tasks.Add(files.RemoveAll());
-
-            var res = await Task.WhenAll<bool>(tasks);
-
-            
-
-            if (res.Any(r => r == false))
-            {
-                result = false;
-            }
-            else
-            {
-                string _res = await files.AddToUploadQueue();
-                if(_res != "OK")
-                {
-                    //something went wrong
-                    MessageBox.Show(_res, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    result = false;
-                }
-            }
-            return result;
-        }
 
         private async void Save(object sender, EventArgs e)
         {
@@ -211,10 +184,10 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.Edit(photoPath);
                 }
-                bool res = await SaveFiles();
-                if (res != true)
+                string res = await files.Save($"PartId={_this.PartId}");
+                if (res != "OK")
                 {
-                    MessageBox.Show("Wystąpiły problemy podczas zapisywania plików.", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Wystąpiły problemy podczas zapisywania plików. Szczegóły: {res}", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch(Exception ex)
@@ -362,7 +335,7 @@ namespace JDE_Scanner_Desktop
             {
                 if (img.Items.Any())
                 {
-                    img.OpenFile(0);
+                    img.OpenFile(img.Items.FirstOrDefault());
                 }
                 else
                 {

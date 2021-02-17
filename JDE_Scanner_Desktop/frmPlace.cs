@@ -225,7 +225,7 @@ namespace JDE_Scanner_Desktop
             {
                 if (img.Items.Any())
                 {
-                    img.OpenFile(0);
+                    img.OpenFile(img.Items.FirstOrDefault());
                 }
                 else
                 {
