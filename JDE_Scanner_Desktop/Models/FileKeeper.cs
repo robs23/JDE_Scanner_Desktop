@@ -76,7 +76,7 @@ namespace JDE_Scanner_Desktop.Models
             OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Title = "Wybierz plik(i)";
             OpenFileDialog.Multiselect = multiselect;
-            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG), Dokumenty (*.PDF, *.DOC, *.XLS)|*.JPG;*.GIF;*.PNG;*.PDF;*.DOC;*.DOCX;*.XLS;*.XLSX";
+            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG), Filmy (*.MP4), Dokumenty (*.PDF, *.DOC, *.XLS)|*.JPG;*.GIF;*.PNG;*.MP4;*.PDF;*.DOC;*.DOCX;*.XLS;*.XLSX";
 
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
