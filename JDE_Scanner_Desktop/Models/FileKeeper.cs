@@ -126,15 +126,24 @@ namespace JDE_Scanner_Desktop.Models
             if (file.IsUploaded == true)
             {
                 //download it first
-                bool success = await GetAttachment($"{file.Token}.{file.Type}", false);
-                if (success)
+
+                if (!file.IsImage && !file.IsVideo)
                 {
-                    string path = Path.Combine(RuntimeSettings.LocalFilesPath, $"{file.Token}.{file.Type}");
-                    System.Diagnostics.Process.Start(path);
+                    bool success = await GetAttachment($"{file.Token}.{file.Type}", false);
+                    if (success)
+                    {
+                        string path = Path.Combine(RuntimeSettings.LocalFilesPath, $"{file.Token}.{file.Type}");
+                        System.Diagnostics.Process.Start(path);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pobieranie pliku z serwera zakończyło się niepowodzeniem..", "Niepowodzenie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Pobieranie pliku z serwera zakończyło się niepowodzeniem..", "Niepowodzenie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //Prefer streaming for media files
+                    System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Token}.{file.Type}");
                 }
             }
             else

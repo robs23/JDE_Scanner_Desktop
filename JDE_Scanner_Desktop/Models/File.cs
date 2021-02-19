@@ -70,6 +70,31 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public bool IsVideo
+        {
+            get
+            {
+                string[] videoFormats = { "mp4", "avi" };
+                bool res = false;
+
+                if (!string.IsNullOrEmpty(Type))
+                {
+                    if (videoFormats.Contains(Type.ToLower().Trim()))
+                    {
+                        res = true;
+                    }
+                }
+                else if (!string.IsNullOrEmpty(Name))
+                {
+                    if (videoFormats.Contains(Name.Split('.').Last().ToLower().Trim()))
+                    {
+                        res = true;
+                    }
+                }
+                return res;
+            }
+        }
+
         public Image ThumbnailPlaceholder
         {
             get
