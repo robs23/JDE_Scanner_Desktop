@@ -10,11 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Timer = System.Timers.Timer;
+using System.Timers;
 
 namespace JDE_Scanner_Desktop
 {
     public partial class frmStarter : Form
     {
+        BackgroundWorker filesSync;
+        FileKeeper files;
+        Timer filesSyncTimer;
+
         public frmStarter()
         {
             InitializeComponent();
@@ -62,10 +68,28 @@ namespace JDE_Scanner_Desktop
             FrmProcesses.Show(this);
         }
 
-        private void formLoaded(object sender, EventArgs e)
+        private async void formLoaded(object sender, EventArgs e)
         {
             frmLogin FrmLogin = new frmLogin(this);
             FrmLogin.ShowDialog(this);
+            files = new FileKeeper(mainForm: this, uploadKeeper: true);
+            await files.Initialize();
+            filesSyncTimer = new Timer(60000); //run it everyminute
+            filesSyncTimer.Elapsed += Timer_Elapsed;
+            filesSync = new BackgroundWorker();
+            filesSync.DoWork += (obj, ea) => SyncFiles();
+            filesSyncTimer.Start();
+        }
+
+        void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (!filesSync.IsBusy)
+                filesSync.RunWorkerAsync();
+        }
+
+        public async Task SyncFiles()
+        {
+            await files.Upload();   
         }
 
         private async void frmStarter_Shown(object sender, EventArgs e)
