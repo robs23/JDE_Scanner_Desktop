@@ -191,8 +191,15 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        var userJsonString = await response.Content.ReadAsStringAsync();
-                        Items = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
+                        try
+                        {
+                            var userJsonString = await response.Content.ReadAsStringAsync();
+                            Items = JsonConvert.DeserializeObject<T[]>(userJsonString).ToList();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Wystąpił błąd podczas deserializacji odpowiedzi z serwera. Szczegóły: {ex.ToString()}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                        }
                     }
                 }
             }

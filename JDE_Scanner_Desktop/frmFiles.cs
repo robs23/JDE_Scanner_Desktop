@@ -111,7 +111,7 @@ namespace JDE_Scanner_Desktop
             {
                 btnAddFile.Visible = false;
                 btnDeleteFile.Visible = false;
-                btnUpload.Visible = true;
+                btnUpload.Visible = false;
             }
             else
             {

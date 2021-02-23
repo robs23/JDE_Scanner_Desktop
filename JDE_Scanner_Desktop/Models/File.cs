@@ -186,7 +186,6 @@ namespace JDE_Scanner_Desktop.Models
                     MessageBox.Show(ex.Message);
                 }
 
-                MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
                 return true;
             }
             else

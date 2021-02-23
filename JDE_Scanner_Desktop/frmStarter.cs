@@ -74,6 +74,7 @@ namespace JDE_Scanner_Desktop
             FrmLogin.ShowDialog(this);
             files = new FileKeeper(mainForm: this, uploadKeeper: true);
             await files.Initialize();
+            RuntimeSettings.FileKeeper = files;
             filesSyncTimer = new Timer(60000); //run it everyminute
             filesSyncTimer.Elapsed += Timer_Elapsed;
             filesSync = new BackgroundWorker();
@@ -89,6 +90,7 @@ namespace JDE_Scanner_Desktop
 
         public async Task SyncFiles()
         {
+            await files.RestoreUploadQueue();
             await files.Upload();   
         }
 
@@ -299,9 +301,22 @@ namespace JDE_Scanner_Desktop
 
         private async void kolejkaPlikówToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileKeeper fileQueue = new FileKeeper(this, uploadKeeper: true);
-            await fileQueue.Initialize();
-            fileQueue.ShowFiles();
+            await files.RestoreUploadQueue();
+            files.ShowFiles();
+        }
+
+        private void frmStarter_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (files.Items.Any(i => i.IsUploaded == false))
+            {
+                var res = MessageBox.Show($@"Niektóre pliki, które dodałeś, nie zostały jeszcze zsynchronizowane. Jeśli teraz zamkniesz program, pozostałe pliki zostaną przesłane na serwer przy ponownym uruchomieniu programu. Do tego czasu pliki te będą niedostępne dla pozostałych użytkowników.{Environment.NewLine}{Environment.NewLine}Czy napewno chcesz zamknąć program?",
+                                            "Synchronizacja w toku", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if(res == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

@@ -27,7 +27,6 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Kod EAN")]
         public string EAN { get; set; }
         [Browsable(false)]
-        [Required(ErrorMessage = "Wybierz producenta z rozwijanej listy! Jeśli lista jest pusta, dodaj korzystając z przycisku + obok listy")]
         public Nullable<int> ProducerId { get; set; }
         [DisplayName("Producent")]
         public string ProducerName { get; set; }

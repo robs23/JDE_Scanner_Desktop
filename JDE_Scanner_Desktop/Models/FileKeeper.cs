@@ -45,27 +45,25 @@ namespace JDE_Scanner_Desktop.Models
         public async Task Initialize()
         {
             string args = null;
-
-            if (PartId != null)
-            {
-                args = $"PartId={PartId}";
-            }
-            else if (PlaceId != null)
-            {
-                args = $"PlaceId={PlaceId}";
-            }
-            else if (ProcessId != null)
-            {
-                args = $"ProcessId={ProcessId}";
-            }
-
             if (UploadKeeper)
             {
                 //it's uploadKeeper. Show all files that wait for upload in local Db
                 RestoreUploadQueue();
             }
-            else
+            else if(PartId != null || PlaceId != null || ProcessId != null)
             {
+                if (PartId != null)
+                {
+                    args = $"PartId={PartId}";
+                }
+                else if (PlaceId != null)
+                {
+                    args = $"PlaceId={PlaceId}";
+                }
+                else if (ProcessId != null)
+                {
+                    args = $"ProcessId={ProcessId}";
+                }
                 //Bring from the cloud Db
                 await this.Refresh(args);
             }
@@ -76,7 +74,7 @@ namespace JDE_Scanner_Desktop.Models
             OpenFileDialog = new OpenFileDialog();
             OpenFileDialog.Title = "Wybierz plik(i)";
             OpenFileDialog.Multiselect = multiselect;
-            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG), Filmy (*.MP4), Dokumenty (*.PDF, *.DOC, *.XLS)|*.JPG;*.GIF;*.PNG;*.MP4;*.PDF;*.DOC;*.DOCX;*.XLS;*.XLSX";
+            OpenFileDialog.Filter = "Obrazy (*.JPG;*.GIF,*.PNG), Filmy (*.MP4), Dokumenty (*.PDF, *.DOC, *.XLS)|*.JPG;*.GIF;*.PNG;*.MP4;*.PDF;*.DOC;*.DOCX;*.XLS;*.XLSX;*.XLSM";
 
             if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -303,18 +301,23 @@ namespace JDE_Scanner_Desktop.Models
 
                 foreach(File f in Items.Where(i=>i.IsUploaded == false))
                 {
-                    iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedBy, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, {f.CreatedBy}, '{f.CreatedOn}')";
+                    if (!ExistInUploadQueue(f.Token))
+                    {
+                        try
+                        {
+                            iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedBy, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, {f.CreatedBy}, '{f.CreatedOn}')";
+                            SQLiteCommand command = new SQLiteCommand(iSql, con);
+                            command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            res = $"Błąd podczas dodawania plików do kolejki. Szczegóły: {ex.ToString()}";
+                            break;
+                        }
+                    }
+                    
 
-                    try
-                    {
-                        SQLiteCommand command = new SQLiteCommand(iSql, con);
-                        command.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        res = $"Błąd podczas dodawania plików do kolejki. Szczegóły: {ex.ToString()}";
-                        break;
-                    }
+                    
                 }
                 return res;
             }
@@ -350,6 +353,7 @@ namespace JDE_Scanner_Desktop.Models
                 CreateLocalDb();
             }
 
+
             string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
             using (var con = new SQLiteConnection(connectionString))
             {
@@ -366,33 +370,62 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     while (reader.Read())
                     {
-                        File f = new File();
-                        f.FileId = reader.GetInt32(reader.GetOrdinal("FileId"));
-                        f.Type = reader.GetString(reader.GetOrdinal("Type"));
-                        f.Token = reader.GetString(reader.GetOrdinal("Token"));
-                        f.Size = reader.GetInt64(reader.GetOrdinal("Size"));
-                        f.Link = reader.GetString(reader.GetOrdinal("Link"));
-                        f.Name = reader.GetString(reader.GetOrdinal("Name"));
-                        f.CreatedOn = reader.GetDateTime(reader.GetOrdinal("CreatedOn"));
-                        f.CreatedBy = reader.GetInt32(reader.GetOrdinal("CreatedBy"));
-                        f.IsUploaded = reader.GetBoolean(reader.GetOrdinal("IsUploaded"));
-                        this.Items.Add(f);
+                        if (!Items.Any(i => i.Token == reader.GetString(reader.GetOrdinal("Token"))))
+                        {
+                            File f = new File();
+                            f.FileId = reader.GetInt32(reader.GetOrdinal("FileId"));
+                            f.Type = reader.GetString(reader.GetOrdinal("Type"));
+                            f.Token = reader.GetString(reader.GetOrdinal("Token"));
+                            f.Size = reader.GetInt64(reader.GetOrdinal("Size"));
+                            f.Link = reader.GetString(reader.GetOrdinal("Link"));
+                            f.Name = reader.GetString(reader.GetOrdinal("Name"));
+                            f.CreatedOn = reader.GetDateTime(reader.GetOrdinal("CreatedOn"));
+                            f.CreatedBy = reader.GetInt32(reader.GetOrdinal("CreatedBy"));
+                            f.IsUploaded = reader.GetBoolean(reader.GetOrdinal("IsUploaded"));
+                            this.Items.Add(f);
+                        }
                     }
                 }
                 
             }
         }
 
+        public bool ExistInUploadQueue(string token)
+        {
+            bool res = false;
+
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                string sql = $"SELECT * FROM Files WHERE Token='{token}'";
+
+                SQLiteCommand command = new SQLiteCommand(sql, con);
+                SQLiteDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    res = true;   
+                }
+
+            }
+            return res;
+        }
+
         public async Task Upload()
         {
             if (Items.Any())
             {
-                foreach (File f in Items)
+                foreach (File f in Items.Where(i=>i.IsUploaded == false))
                 {
                     var res = await f.Upload();
                     if (res == "OK")
                     {
                         f.IsUploaded = true;
+                        SetUploaded(f.Token);
                     }
                     else
                     {
@@ -400,6 +433,31 @@ namespace JDE_Scanner_Desktop.Models
                     }
                 }
                 await DeleteUploaded();
+            }
+        }
+
+        private void SetUploaded(string token)
+        {
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                string iSql;
+
+                try
+                {
+                    iSql = $"UPDATE Files SET IsUploaded=1 WHERE Token='{token}'";
+                    SQLiteCommand command = new SQLiteCommand(iSql, con);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
@@ -431,6 +489,7 @@ namespace JDE_Scanner_Desktop.Models
                     dSql = $"DELETE FROM Files WHERE FileId IN ({dList})";
                     SQLiteCommand command = new SQLiteCommand(dSql, con);
                     command.ExecuteNonQuery();
+                    Items.RemoveAll(i => i.IsUploaded == true);
                 }
             }
         }
@@ -458,6 +517,11 @@ namespace JDE_Scanner_Desktop.Models
                 {
                     //something went wrong
                     result = _res;
+                }
+                else
+                {
+                    if(RuntimeSettings.FileKeeper != null)
+                        RuntimeSettings.FileKeeper.RestoreUploadQueue();
                 }
             }
             return result;

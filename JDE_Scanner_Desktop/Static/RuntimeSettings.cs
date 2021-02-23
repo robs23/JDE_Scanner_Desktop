@@ -77,5 +77,7 @@ namespace JDE_Scanner_Desktop
             if (!Directory.Exists(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Upload")))
                 Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Upload"));
         }
+
+        public static FileKeeper FileKeeper { get; set; }
     }
 }

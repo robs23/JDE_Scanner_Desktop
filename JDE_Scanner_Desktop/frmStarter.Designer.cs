@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.koniecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kolejkaPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.użytkownicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uzytkownicyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +87,6 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.kolejkaPlikówToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,9 +120,16 @@
             // koniecToolStripMenuItem
             // 
             this.koniecToolStripMenuItem.Name = "koniecToolStripMenuItem";
-            this.koniecToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.koniecToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.koniecToolStripMenuItem.Text = "Koniec";
             this.koniecToolStripMenuItem.Click += new System.EventHandler(this.koniecToolStripMenuItem_Click);
+            // 
+            // kolejkaPlikówToolStripMenuItem
+            // 
+            this.kolejkaPlikówToolStripMenuItem.Name = "kolejkaPlikówToolStripMenuItem";
+            this.kolejkaPlikówToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.kolejkaPlikówToolStripMenuItem.Text = "Kolejka plików";
+            this.kolejkaPlikówToolStripMenuItem.Click += new System.EventHandler(this.kolejkaPlikówToolStripMenuItem_Click);
             // 
             // użytkownicyToolStripMenuItem
             // 
@@ -543,13 +550,6 @@
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
             // 
-            // kolejkaPlikówToolStripMenuItem
-            // 
-            this.kolejkaPlikówToolStripMenuItem.Name = "kolejkaPlikówToolStripMenuItem";
-            this.kolejkaPlikówToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.kolejkaPlikówToolStripMenuItem.Text = "Kolejka plików";
-            this.kolejkaPlikówToolStripMenuItem.Click += new System.EventHandler(this.kolejkaPlikówToolStripMenuItem_Click);
-            // 
             // frmStarter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,6 +560,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmStarter";
             this.Text = "JDE Scanner";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmStarter_FormClosing);
             this.Load += new System.EventHandler(this.formLoaded);
             this.Shown += new System.EventHandler(this.frmStarter_Shown);
             this.menuStrip1.ResumeLayout(false);
