@@ -141,7 +141,15 @@ namespace JDE_Scanner_Desktop.Models
                 else
                 {
                     //Prefer streaming for media files
-                    System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Token}.{file.Type}");
+                    if(file.Token != null && file.Type != null)
+                    {
+                        System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Token}.{file.Type}");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Name}");
+                    }
+                    
                 }
             }
             else

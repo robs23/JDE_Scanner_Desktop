@@ -58,7 +58,7 @@ namespace JDE_Scanner_Desktop.Models
             }
             else
             {
-                x = await base.Add(attachmentPath);
+                x = await base.Add(attachmentPath, null);
             }
 
             if (x)

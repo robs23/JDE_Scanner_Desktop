@@ -137,7 +137,7 @@ namespace JDE_Scanner_Desktop
         {
             if (!string.IsNullOrEmpty(_this.Image))
             {
-                pbImage.Image = await img.GetImage(_this.Image, false,true);
+                pbImage.ImageLocation = $"{Secrets.ApiAddress}{RuntimeSettings.ThumbnailsPath}/{_this.Image}";
                 pbImage.SizeMode = PictureBoxSizeMode.Zoom;
                 img.Items.Add(new Models.File { Name = _this.Image, IsUploaded = true, Link = Path.Combine(RuntimeSettings.LocalFilesPath, _this.Image) });
             }
