@@ -79,7 +79,7 @@ namespace JDE_Scanner_Desktop
             txtOutput.Text = _this.Output;
             assignedUsersHandler = new AssignedUsersHandler(this);
             assignedUsersHandler.ProcessId = Process.ProcessId;
-            files = new FileKeeper(this);
+            files = new FileKeeper(this,null,null,Process.ProcessId);
         }
 
         private bool IsMesSyncSelected()
@@ -301,6 +301,7 @@ namespace JDE_Scanner_Desktop
             }
             
             ChangeLook();
+            files.Initialize();
             Looper.Hide();
         }
 
@@ -508,10 +509,10 @@ namespace JDE_Scanner_Desktop
                     {
                         if (assignedUsersHandler.AssignedUsers.Any())
                         {
-                            string res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
-                            if (res != null)
+                            string _res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
+                            if (_res != null)
                             {
-                                MessageBox.Show(res, "Błąd", MessageBoxButtons.OK);
+                                MessageBox.Show(_res, "Błąd", MessageBoxButtons.OK);
                             }
                         }
                         
@@ -524,10 +525,10 @@ namespace JDE_Scanner_Desktop
                     if (assignedUsersHandler.AssignedUsers.Any())
                     {
                         var edit = Task.Run(()=>_this.Edit());
-                        string res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
-                        if (res != null)
+                        string result = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
+                        if (result != null)
                         {
-                            MessageBox.Show(res, "Błąd", MessageBoxButtons.OK);
+                            MessageBox.Show(result, "Błąd", MessageBoxButtons.OK);
                         }
                     }
                     else
@@ -536,7 +537,13 @@ namespace JDE_Scanner_Desktop
                     }
                     
                 }
-            }catch(Exception ex)
+                string res = await files.Save($"ProcessId={_this.ProcessId}");
+                if (res != "OK")
+                {
+                    MessageBox.Show($"Wystąpiły problemy podczas zapisywania plików. Szczegóły: {res}", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch(Exception ex)
             {
 
             }

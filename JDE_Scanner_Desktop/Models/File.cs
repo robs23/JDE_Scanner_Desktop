@@ -150,7 +150,23 @@ namespace JDE_Scanner_Desktop.Models
             if (IsUploaded==true)
             {
                 //try to get online thumb
-                res = await new FileKeeper(null).GetImage($"{this.Token}.{this.Type}", true);
+                if (this.Token != null && this.Type != null)
+                {
+                    res = await new FileKeeper(null).GetImage($"{this.Token}.{this.Type}", true);
+                }
+                else
+                {
+                    if (this.Token == null)
+                    {
+                        res = await new FileKeeper(null).GetImage($"{this.Name}", true);
+                    }
+                    else
+                    {
+                        string t = System.IO.Path.GetExtension(this.Name);
+                        res = await new FileKeeper(null).GetImage($"{this.Token}{t}", true);
+                    }
+                }
+                    
             }
             else
             {

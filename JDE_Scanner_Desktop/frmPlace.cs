@@ -27,6 +27,7 @@ namespace JDE_Scanner_Desktop
         PartUsageKeeper parts = new PartUsageKeeper();
         ComponentKeeper Components = new ComponentKeeper();
         frmLooper Looper;
+        FileKeeper files;
         FileKeeper img;
         ContextMenu buttonContextMenu;
         public frmPlace(Form parent)
@@ -39,6 +40,7 @@ namespace JDE_Scanner_Desktop
             this.Text = "Nowy zasób";
             _this = new Place();
             img = new FileKeeper(this);
+            files = new FileKeeper(this);
         }
 
         public frmPlace(Place Place, Form parent)
@@ -49,6 +51,7 @@ namespace JDE_Scanner_Desktop
             mode = 2;
             this.Text = "Szczegóły zasobu";
             _this = Place;
+            files = new FileKeeper(this, null, Place.PlaceId);
             txtNumber1.Text = _this.Number1;
             txtNumber2.Text = _this.Number2;
             txtDescription.Text = _this.Description;
@@ -93,6 +96,7 @@ namespace JDE_Scanner_Desktop
 #if (DEBUG == true)
             pbQrCode.Visible = true;
 #endif
+            files.Initialize();
 
         }
 
@@ -136,7 +140,13 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.Edit(photoPath);
                 }
-            }catch(Exception ex)
+                string res = await files.Save($"PlaceId={_this.PlaceId}");
+                if (res != "OK")
+                {
+                    MessageBox.Show($"Wystąpiły problemy podczas zapisywania plików. Szczegóły: {res}", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch(Exception ex)
             {
 
             }
@@ -311,6 +321,11 @@ namespace JDE_Scanner_Desktop
                 await Components.Remove(SelectedRows);
                 GetComponents();
             }
+        }
+
+        private void btnAttach_Click(object sender, EventArgs e)
+        {
+            files.ShowFiles();
         }
     }
 }

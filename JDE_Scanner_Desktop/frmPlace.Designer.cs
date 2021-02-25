@@ -73,6 +73,7 @@
             this.btnRefreshComponents = new System.Windows.Forms.Button();
             this.dgvComponents = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAttach = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -118,14 +119,16 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 4;
+            this.tlpButtons.ColumnCount = 5;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
             this.tlpButtons.Controls.Add(this.btnQR, 1, 0);
-            this.tlpButtons.Controls.Add(this.cboxArchived, 3, 0);
+            this.tlpButtons.Controls.Add(this.cboxArchived, 4, 0);
+            this.tlpButtons.Controls.Add(this.btnAttach, 2, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -648,6 +651,20 @@
             this.dgvComponents.Size = new System.Drawing.Size(568, 331);
             this.dgvComponents.TabIndex = 2;
             // 
+            // btnAttach
+            // 
+            this.btnAttach.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAttach.Image = global::JDE_Scanner_Desktop.Properties.Resources.Attach_24;
+            this.btnAttach.Location = new System.Drawing.Point(83, 3);
+            this.btnAttach.Name = "btnAttach";
+            this.btnAttach.Size = new System.Drawing.Size(34, 28);
+            this.btnAttach.TabIndex = 3;
+            this.tooltip.SetToolTip(this.btnAttach, "Powiązane pliki..");
+            this.btnAttach.UseVisualStyleBackColor = true;
+            this.btnAttach.Click += new System.EventHandler(this.btnAttach_Click);
+            // 
             // frmPlace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -729,5 +746,6 @@
         private System.Windows.Forms.Button btnDeleteComponents;
         private System.Windows.Forms.Button btnRefreshComponents;
         private CustomControls.DBDataGridView dgvComponents;
+        private System.Windows.Forms.Button btnAttach;
     }
 }

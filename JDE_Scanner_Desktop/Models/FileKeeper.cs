@@ -147,14 +147,31 @@ namespace JDE_Scanner_Desktop.Models
                     }
                     else
                     {
-                        System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Name}");
+                        if(file.Token == null)
+                        {
+                            System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Name}");
+                        }
+                        else
+                        {
+                            string t = System.IO.Path.GetExtension(file.Name);
+                            System.Diagnostics.Process.Start($"{Secrets.ApiAddress}Files/{file.Token}{t}");
+                        }
+                        
                     }
                     
                 }
             }
             else
             {
-                System.Diagnostics.Process.Start(file.Link);
+                if (System.IO.File.Exists(file.Link))
+                {
+                    System.Diagnostics.Process.Start(file.Link);
+                }
+                else
+                {
+                    MessageBox.Show($"Ten plik nie został jeszcze zsynchronizowany i na razie znajduje się tylko na urządzeniu, z którego pochodzi. Spróbuj ponownie później lub skontaktuj się z {file.CreatedByName}, który przesłał ten plik", "Plik niedostępny", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                
             }
 
             
@@ -309,19 +326,24 @@ namespace JDE_Scanner_Desktop.Models
 
                 foreach(File f in Items.Where(i=>i.IsUploaded == false))
                 {
-                    if (!ExistInUploadQueue(f.Token))
+                    //Make sure the file exists in the location
+                    //it can be someone else's file
+                    if (System.IO.File.Exists(f.Link))
                     {
-                        try
+                        if (!ExistInUploadQueue(f.Token))
                         {
-                            iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedBy, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, {f.CreatedBy}, '{f.CreatedOn}')";
-                            SQLiteCommand command = new SQLiteCommand(iSql, con);
-                            command.ExecuteNonQuery();
-                        }
-                        catch (Exception ex)
-                        {
-                            res = $"Błąd podczas dodawania plików do kolejki. Szczegóły: {ex.ToString()}";
-                            break;
-                        }
+                            try
+                            {
+                                iSql = $"INSERT INTO Files (FileId, Name, Link, Token, IsUploaded, Type, Size, CreatedBy, CreatedOn) VALUES ({f.FileId}, '{f.Name}', '{f.Link}', '{f.Token}', {f.IsUploaded}, '{f.Type}', {f.Size}, {f.CreatedBy}, '{f.CreatedOn}')";
+                                SQLiteCommand command = new SQLiteCommand(iSql, con);
+                                command.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                res = $"Błąd podczas dodawania plików do kolejki. Szczegóły: {ex.ToString()}";
+                                break;
+                            }
+                        } 
                     }
                     
 
