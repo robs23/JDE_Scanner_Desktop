@@ -78,6 +78,6 @@ namespace JDE_Scanner_Desktop
                 Directory.CreateDirectory(Path.Combine(LocalFilesPathRoot, "JDE_Scan", "Upload"));
         }
 
-        public static FileKeeper FileKeeper { get; set; }
+        public static FileKeeper UploadKeeper { get; set; }
     }
 }

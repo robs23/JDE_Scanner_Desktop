@@ -36,9 +36,9 @@
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbView = new System.Windows.Forms.ComboBox();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.iList = new System.Windows.Forms.ImageList(this.components);
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnUpload = new System.Windows.Forms.Button();
             this.tlpGallery.SuspendLayout();
             this.tlpGalleryButtons.SuspendLayout();
             this.SuspendLayout();
@@ -83,11 +83,11 @@
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tlpGalleryButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpGalleryButtons.Controls.Add(this.btnAddFile, 0, 0);
-            this.tlpGalleryButtons.Controls.Add(this.btnDeleteFile, 1, 0);
             this.tlpGalleryButtons.Controls.Add(this.label1, 4, 0);
             this.tlpGalleryButtons.Controls.Add(this.cmbView, 5, 0);
             this.tlpGalleryButtons.Controls.Add(this.btnUpload, 3, 0);
+            this.tlpGalleryButtons.Controls.Add(this.btnAddFile, 1, 0);
+            this.tlpGalleryButtons.Controls.Add(this.btnDeleteFile, 0, 0);
             this.tlpGalleryButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpGalleryButtons.Name = "tlpGalleryButtons";
             this.tlpGalleryButtons.RowCount = 1;
@@ -100,7 +100,7 @@
             this.btnAddFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddFile.Location = new System.Drawing.Point(3, 3);
+            this.btnAddFile.Location = new System.Drawing.Point(153, 3);
             this.btnAddFile.Name = "btnAddFile";
             this.btnAddFile.Size = new System.Drawing.Size(144, 23);
             this.btnAddFile.TabIndex = 0;
@@ -113,7 +113,7 @@
             this.btnDeleteFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDeleteFile.Location = new System.Drawing.Point(153, 3);
+            this.btnDeleteFile.Location = new System.Drawing.Point(3, 3);
             this.btnDeleteFile.Name = "btnDeleteFile";
             this.btnDeleteFile.Size = new System.Drawing.Size(144, 23);
             this.btnDeleteFile.TabIndex = 1;
@@ -141,12 +141,6 @@
             this.cmbView.TabIndex = 3;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
-            // iList
-            // 
-            this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.iList.ImageSize = new System.Drawing.Size(50, 50);
-            this.iList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // btnUpload
             // 
             this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -161,6 +155,12 @@
             this.btnUpload.Text = "Upload";
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
+            // iList
+            // 
+            this.iList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.iList.ImageSize = new System.Drawing.Size(50, 50);
+            this.iList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // frmFiles
             // 

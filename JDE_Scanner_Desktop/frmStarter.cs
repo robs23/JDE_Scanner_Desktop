@@ -74,7 +74,7 @@ namespace JDE_Scanner_Desktop
             FrmLogin.ShowDialog(this);
             files = new FileKeeper(mainForm: this, uploadKeeper: true);
             await files.Initialize();
-            RuntimeSettings.FileKeeper = files;
+            RuntimeSettings.UploadKeeper = files;
             filesSyncTimer = new Timer(60000); //run it everyminute
             filesSyncTimer.Elapsed += Timer_Elapsed;
             filesSync = new BackgroundWorker();

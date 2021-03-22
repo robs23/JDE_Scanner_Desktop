@@ -300,10 +300,13 @@ namespace JDE_Scanner_Desktop.Models
                         rItems.Add(f.FileId);
                     }
                 }
+                await RemoveFromLocal(rItems);
                 await Remove(rItems);
             }
             return true;
         }
+
+
 
         public async Task<string> AddToUploadQueue()
         {
@@ -420,7 +423,7 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public bool ExistInUploadQueue(string token)
+        public bool ExistInUploadQueue(string token = null, int? id = null)
         {
             bool res = false;
 
@@ -432,14 +435,29 @@ namespace JDE_Scanner_Desktop.Models
                     con.Open();
                 }
 
-                string sql = $"SELECT * FROM Files WHERE Token='{token}'";
-
-                SQLiteCommand command = new SQLiteCommand(sql, con);
-                SQLiteDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
+                string sql = string.Empty;
+                if (token != null)
                 {
-                    res = true;   
+                    sql = $"SELECT * FROM Files WHERE Token='{token}'";
                 }
+                else
+                {
+                    if (id != null)
+                    {
+                        sql = $"SELECT * FROM Files WHERE FileId={id}";
+                    }
+                }
+
+                if(sql != null)
+                {
+                    SQLiteCommand command = new SQLiteCommand(sql, con);
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        res = true;
+                    }
+                }
+                
 
             }
             return res;
@@ -524,6 +542,43 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+
+
+        public async Task RemoveFromLocal(List<int> ids)
+        {
+            if (!System.IO.File.Exists(Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")))
+            {
+                CreateLocalDb();
+            }
+
+            string connectionString = $@"Data Source={Path.Combine(RuntimeSettings.LocalDbPath, "JDE_Scan.db3")};Version=3";
+            using (var con = new SQLiteConnection(connectionString))
+            {
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                string dSql;
+                string dList = "";
+
+                foreach (int id in ids)
+                {
+                    //if (ExistInUploadQueue(null, id))
+                    //{
+                    dList += $"{id},";
+                    //}
+                }
+                if (!string.IsNullOrEmpty(dList))
+                {
+                    dList = dList.Substring(0, dList.Length - 1);
+                    dSql = $"DELETE FROM Files WHERE FileId IN ({dList})";
+                    SQLiteCommand command = new SQLiteCommand(dSql, con);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         public async Task<string> Save(string IdString)
         {
             //IdString = e.g. PartId=1
@@ -550,8 +605,8 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 else
                 {
-                    if(RuntimeSettings.FileKeeper != null)
-                        RuntimeSettings.FileKeeper.RestoreUploadQueue();
+                    if(RuntimeSettings.UploadKeeper != null)
+                        RuntimeSettings.UploadKeeper.RestoreUploadQueue();
                 }
             }
             return result;

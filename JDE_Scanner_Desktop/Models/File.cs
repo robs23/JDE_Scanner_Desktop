@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using MimeTypes;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -225,8 +226,8 @@ namespace JDE_Scanner_Desktop.Models
                     using (var fileStream = System.IO.File.OpenRead(Link))
                     {
                         var fileInfo = new FileInfo(Link);
-                        StreamContent fcontent = new StreamContent(fileStream);
-                        fcontent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(fileInfo.Name)); //new MediaTypeHeaderValue("image/jpeg");
+                        StreamContent fcontent = new StreamContent(fileStream); 
+                        fcontent.Headers.ContentType = new MediaTypeHeaderValue(MimeTypeMap.GetMimeType(fileInfo.Extension));
                         fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
                         content.Add(fcontent, "file", fileInfo.Name);
                         var result = await client.PostAsync(new Uri(url), content);

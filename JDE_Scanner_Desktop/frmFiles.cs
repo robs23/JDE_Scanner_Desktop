@@ -110,7 +110,7 @@ namespace JDE_Scanner_Desktop
             if (files.UploadKeeper)
             {
                 btnAddFile.Visible = false;
-                btnDeleteFile.Visible = false;
+                btnDeleteFile.Visible = true;
                 btnUpload.Visible = false;
             }
             else
@@ -165,7 +165,15 @@ namespace JDE_Scanner_Desktop
                     files.RemovedItems.Add(files.Items.Where(x => x.Token == (string)lvImages.SelectedItems[i].Tag).FirstOrDefault()) ;
                     files.Items.RemoveAt(lvImages.SelectedItems[i].Index);
                 }
-
+                if (files.UploadKeeper)
+                {
+                    bool res = await files.RemoveAll();
+                    if (!res)
+                    {
+                        MessageBox.Show("Usuwanie jednego lub więcej plików zakończyło się niepowodzeniem..", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                
                 LoadItems();
             }
         }
