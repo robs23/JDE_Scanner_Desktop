@@ -30,6 +30,7 @@ namespace JDE_Scanner_Desktop
         FileKeeper files;
         FileKeeper img;
         ContextMenu buttonContextMenu;
+
         public frmPlace(Form parent)
         {
             InitializeComponent();
@@ -119,7 +120,10 @@ namespace JDE_Scanner_Desktop
             string photoPath = null;
             if (img.Items.Any())
             {
-                photoPath = img.Items[0].Link;
+                if (img.Items[0].IsUploaded != true)
+                {
+                    photoPath = img.Items[0].Link;
+                }
             }
             try
             {

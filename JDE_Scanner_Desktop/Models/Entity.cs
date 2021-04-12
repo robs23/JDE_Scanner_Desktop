@@ -156,14 +156,19 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void Edit()
+        public async void Edit(bool DeleteImage = false)
         {
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
             {
                 using (var client = new HttpClient())
                 {
+                    
                     string url = Secrets.ApiAddress + $"Edit{typeof(T).Name}?token=" + Secrets.TenantToken + "&id={0}&UserId={1}";
+                    if (DeleteImage)
+                    {
+                        url += "&DeleteImage=1";
+                    }
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.Id, RuntimeSettings.UserId), content);

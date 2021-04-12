@@ -160,7 +160,10 @@ namespace JDE_Scanner_Desktop
             string photoPath = null;
             if (img.Items.Any())
             {
-                photoPath = img.Items[0].Link;
+                if(img.Items[0].IsUploaded != true)
+                {
+                    photoPath = img.Items[0].Link;
+                }
             }
             try
             {
@@ -182,7 +185,9 @@ namespace JDE_Scanner_Desktop
                 }
                 else if (mode == 2)
                 {
+
                     _this.Edit(photoPath);
+                    
                 }
                 string res = await files.Save($"PartId={_this.PartId}");
                 if (res != "OK")
