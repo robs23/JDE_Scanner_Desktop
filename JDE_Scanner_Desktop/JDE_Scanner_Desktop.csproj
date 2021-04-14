@@ -71,6 +71,9 @@
     <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
     </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net45\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="JsonDiffPatchDotNet, Version=2.2.0.0, Culture=neutral, PublicKeyToken=a407b9994a6d66d5, processorArchitecture=MSIL">
       <HintPath>..\packages\JsonDiffPatch.Net.2.2.0\lib\net45\JsonDiffPatchDotNet.dll</HintPath>
     </Reference>
@@ -152,6 +155,7 @@
     <Compile Include="Classes\AutoCompleteBehavior.cs" />
     <Compile Include="Classes\AutoSum.cs" />
     <Compile Include="Classes\DgvMerger.cs" />
+    <Compile Include="Classes\EditableAttribute.cs" />
     <Compile Include="Classes\MergableAttribute.cs" />
     <Compile Include="Classes\ModelValidator.cs" />
     <Compile Include="ClientSettings.cs" />
@@ -181,6 +185,12 @@
     </Compile>
     <Compile Include="frmBomItem.Designer.cs">
       <DependentUpon>frmBomItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCILTs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCILTs.Designer.cs">
+      <DependentUpon>frmCILTs.cs</DependentUpon>
     </Compile>
     <Compile Include="frmFiles.cs">
       <SubType>Form</SubType>
@@ -465,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBomItem.resx">
       <DependentUpon>frmBomItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCILTs.resx">
+      <DependentUpon>frmCILTs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFiles.resx">
       <DependentUpon>frmFiles.cs</DependentUpon>

@@ -362,6 +362,13 @@ namespace JDE_Scanner_Desktop
                 AttributeEvaluator evaluator = new AttributeEvaluator(new ProcessAction());
                 List<string> cols = evaluator.PropertiesByValueBool(true, typeof(MergableAttribute), "Mergable");
                 DgvMerger merger = new DgvMerger(dgvActions, cols);
+                dgvActions.NullableBoolCheckbox(); //make bool? column a checkbox column 
+                //List<string> colsEditable = evaluator.PropertiesByValueBool(true, typeof(EditableAttribute), "Editable");
+                foreach(DataGridViewColumn col in dgvActions.Columns)
+                {
+                    col.ReadOnly = true;    
+                }
+                dgvActions.Columns[1].ReadOnly = false;
                 return true;
             }
             else

@@ -22,6 +22,9 @@ namespace JDE_Scanner_Desktop.Models
         public int ProcessActionId { get; set; }
         [Browsable(false)]
         public Nullable<int> ProcessId { get; set; }
+        [DisplayName("Zrobiono")]
+        [Editable(true)]
+        public bool? IsChecked { get; set; }
         [DisplayName("Planowany start")]
         [Mergable(true)]
         public Nullable<DateTime> PlannedStart { get; set; }
@@ -39,6 +42,7 @@ namespace JDE_Scanner_Desktop.Models
         public int? GivenTime { get; set; }
         [DisplayName("Typ")]
         public string Type { get; set; }
+        
         [Browsable(false)]
         public string[] AssignedUsers { get; set; }
         [DisplayName("Przypisani użytkownicy")]

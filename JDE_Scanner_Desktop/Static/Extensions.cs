@@ -67,6 +67,26 @@ namespace JDE_Scanner_Desktop.Static
             }
         }
 
+        public static void NullableBoolCheckbox(this DataGridView g)
+        {
+            //allows nullable bool column to be displayed as normal 3 state checkbox
+            //otherwise the column is converted to text
+            g.Columns.Cast<DataGridViewColumn>()
+                .Where(x => x.ValueType == typeof(bool?))
+                .ToList().ForEach(x =>
+                {
+                    var index = x.Index;
+                    g.Columns.RemoveAt(index);
+                    var c = new DataGridViewCheckBoxColumn();
+                    c.ValueType = x.ValueType;
+                    c.ThreeState = true;
+                    c.DataPropertyName = x.DataPropertyName;
+                    c.HeaderText = x.HeaderText;
+                    c.Name = x.Name;
+                    g.Columns.Insert(index, c);
+                });
+        }
+
         public static bool ContainsNullSafe(this string str, string search)
         {
             bool res = false;
