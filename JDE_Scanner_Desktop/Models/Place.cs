@@ -48,6 +48,8 @@ namespace JDE_Scanner_Desktop.Models
         public string PlaceToken { get; set; }
         [DisplayName("Zdjęcie")]
         public string Image { get; set; }
+        [DisplayName("Ma załączniki")]
+        public bool HasAttachments { get; set; } 
 
         public async override Task<bool> Add(string attachmentPath = null)
         {

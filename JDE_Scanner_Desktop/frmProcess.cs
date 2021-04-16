@@ -211,6 +211,22 @@ namespace JDE_Scanner_Desktop
                 lblAssignedUsers.Visible = false;
                 btnEditAssignedList.Visible = false;
             }
+            if(_this.Status == "Planowany")
+            {
+                btnChangeState.Text = "Rozpocznij";
+                btnChangeState.BackColor = Color.Green;
+                btnChangeState.Enabled = true;
+            }else if(_this.Status == "Rozpoczęty" || _this.Status == "Wstrzymany")
+            {
+                btnChangeState.Text = "Zakończ";
+                btnChangeState.BackColor = Color.Red;
+                btnChangeState.Enabled = true;
+            }else if(_this.Status == "Zakończony" || _this.Status == "Zrealizowany")
+            {
+                btnChangeState.Text = "Zakończony";
+                btnChangeState.BackColor = Color.DarkGray;
+                btnChangeState.Enabled = false;
+            }
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -363,12 +379,15 @@ namespace JDE_Scanner_Desktop
                 List<string> cols = evaluator.PropertiesByValueBool(true, typeof(MergableAttribute), "Mergable");
                 DgvMerger merger = new DgvMerger(dgvActions, cols);
                 dgvActions.NullableBoolCheckbox(); //make bool? column a checkbox column 
-                //List<string> colsEditable = evaluator.PropertiesByValueBool(true, typeof(EditableAttribute), "Editable");
                 foreach(DataGridViewColumn col in dgvActions.Columns)
                 {
                     col.ReadOnly = true;    
                 }
-                dgvActions.Columns[1].ReadOnly = false;
+                if(_this.Status == "Rozpoczęty")
+                {
+                    dgvActions.Columns[1].ReadOnly = false;
+                }
+                
                 return true;
             }
             else
@@ -635,6 +654,49 @@ namespace JDE_Scanner_Desktop
         private void btnAttachments_Click(object sender, EventArgs e)
         {
             files.ShowFiles();
+        }
+
+        private async void btnChangeState_Click(object sender, EventArgs e)
+        {
+            string _Res = "OK";
+
+            if(_this.Status == "Rozpoczęty")
+            {
+                await End();
+            }else if(_this.Status == "Planowany")
+            {
+                await Start();
+            }
+            if(_Res == "OK")
+            {
+                MessageBox.Show("Zmiana status zgłoszenia zakończona powodzeniem!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private async Task End()
+        {
+            string _Res = "OK";
+            if (_Res == "OK")
+            {
+                MessageBox.Show("Zgłoszenie zostało zamknięte!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Napotkano błąd przy próbie zamknięcie zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task Start()
+        {
+            string _Res = "OK";
+            if (_Res == "OK")
+            {
+                MessageBox.Show("Zgłoszenie zostało rozpoczęte!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Napotkano błąd przy próbie rozpoczęcia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -186,6 +186,8 @@ namespace JDE_Scanner_Desktop.Models
         public string TimingVsPlan { get; set; }
         [DisplayName("Reaktywowany")]
         public bool? IsResurrected { get; set; }
+        [DisplayName("Ma załączniki")]
+        public bool HasAttachments { get; set; }
 
         public async Task<bool> Add()
         {

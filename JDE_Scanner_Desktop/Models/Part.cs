@@ -49,6 +49,8 @@ namespace JDE_Scanner_Desktop.Models
         public string UsedOn { get; set; }
         [DisplayName("Token")]
         public string Token { get; set; }
+        [DisplayName("Ma załączniki")]
+        public bool HasAttachments { get; set; }
         [Browsable(false)]
         public string Identifier { get
             {
