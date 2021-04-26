@@ -50,6 +50,8 @@ namespace JDE_Scanner_Desktop.Models
         public bool? PartsApplicable { get; set; }
         [DisplayName("Zawiera czynności")]
         public bool? ActionsApplicable { get; set; }
+        [DisplayName("Wymaga przypisania użytkownika")]
+        public bool? RequireUsersAssignment { get; set; }
 
 
         public async Task<bool> Add()
