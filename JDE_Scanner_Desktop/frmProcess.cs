@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,6 +122,56 @@ namespace JDE_Scanner_Desktop
                     if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).Any())
                     {
                         if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).FirstOrDefault().ShowInPlanning == true)
+                        {
+                            val = true;
+                        }
+                    }
+                }
+
+            }
+
+            return val;
+        }
+
+        private bool IsQrToStartSelected()
+        {
+            int sel = 0;
+            bool val = false;
+
+            if (cmbActionType.ValueMember != "")
+            {
+                if (cmbActionType.SelectedItem != null)
+                {
+                    sel = (int)cmbActionType.SelectedValue;
+
+                    if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).Any())
+                    {
+                        if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).FirstOrDefault().RequireQrToStart == true)
+                        {
+                            val = true;
+                        }
+                    }
+                }
+
+            }
+
+            return val;
+        }
+
+        private bool IsQrToFinishSelected()
+        {
+            int sel = 0;
+            bool val = false;
+
+            if (cmbActionType.ValueMember != "")
+            {
+                if (cmbActionType.SelectedItem != null)
+                {
+                    sel = (int)cmbActionType.SelectedValue;
+
+                    if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).Any())
+                    {
+                        if (ActionTypes.Items.Where(i => i.ActionTypeId == sel).FirstOrDefault().RequireQrToFinish == true)
                         {
                             val = true;
                         }
@@ -454,14 +505,25 @@ namespace JDE_Scanner_Desktop
 
         }
 
-        private async void Save(object sender, EventArgs e)
+        private async void SaveCommand(object sender, EventArgs e)
+        {
+            string res = await Save();
+            if(res != "OK")
+            {
+                MessageBox.Show($"Coś poszło nie tak.. Szczegóły: {res}", "Niepowodzenie", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private async Task<string> Save()
         {
             ForceRefresh = true;
             _this.Output = txtOutput.Text;
             _this.InitialDiagnosis = txtInitialDiagnosis.Text;
             _this.RepairActions = txtRepairActions.Text;
             _this.Comment = txtComment.Text;
-            if(IsMesSyncSelected())
+            string _Result = "OK";
+
+            if (IsMesSyncSelected())
             {
                 _this.MesId = txtMesId.Text;
                 _this.Reason = txtDescription.Text;
@@ -470,8 +532,8 @@ namespace JDE_Scanner_Desktop
             {
                 _this.Description = txtDescription.Text;
             }
-                    
-            if(txtStartedOn.Text == " ")
+
+            if (txtStartedOn.Text == " ")
             {
                 _this.StartedOn = null;
             }
@@ -487,7 +549,7 @@ namespace JDE_Scanner_Desktop
             {
                 _this.FinishedOn = txtFinishedOn.Value;
             }
-            if(txtPlannedStart.Text == " ")
+            if (txtPlannedStart.Text == " ")
             {
                 _this.PlannedStart = null;
             }
@@ -507,19 +569,19 @@ namespace JDE_Scanner_Desktop
             {
                 _this.PlaceId = (int)cmbPlace.GetSelectedValue<Place>();
             }
-            if(cmbActionType.SelectedItem != null)
+            if (cmbActionType.SelectedItem != null)
             {
                 _this.ActionTypeId = Convert.ToInt32(cmbActionType.SelectedValue.ToString());
             }
-            if(cmbStatus.SelectedItem != null)
+            if (cmbStatus.SelectedItem != null)
             {
                 _this.Status = cmbStatus.SelectedItem.ToString();
             }
-            if(cmbStartedBy.SelectedItem != null)
+            if (cmbStartedBy.SelectedItem != null)
             {
                 _this.StartedBy = Convert.ToInt32(cmbStartedBy.SelectedValue.ToString());
             }
-            if(cmbFinishedBy.SelectedItem != null)
+            if (cmbFinishedBy.SelectedItem != null)
             {
                 _this.FinishedBy = Convert.ToInt32(cmbFinishedBy.SelectedValue.ToString());
             }
@@ -535,50 +597,58 @@ namespace JDE_Scanner_Desktop
                     {
                         if (assignedUsersHandler.AssignedUsers.Any())
                         {
-                            string _res = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
-                            if (_res != null)
-                            {
-                                MessageBox.Show(_res, "Błąd", MessageBoxButtons.OK);
-                            }
+                            _Result = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
                         }
-                        
+
                         mode = 2;
                         this.Text = "Szczegóły zgłoszenia";
+                    }
+                    else
+                    {
+                        _Result = "Błąd podczas tworzenia nowego zgłoszenia..";
                     }
                 }
                 else if (mode == 2)
                 {
-                    if (assignedUsersHandler.AssignedUsers.Any())
+                    if (await _this.Edit())
                     {
-                        var edit = Task.Run(()=>_this.Edit());
-                        string result = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
-                        if (result != null)
+                        if (assignedUsersHandler.AssignedUsers.Any())
                         {
-                            MessageBox.Show(result, "Błąd", MessageBoxButtons.OK);
+
+                           _Result = await _this.AssignUsers(assignedUsersHandler.AssignedUsers);
                         }
                     }
                     else
                     {
-                        await _this.Edit();
+                        _Result = "Błąd podczas edycji zgłoszenia..";
                     }
                     
+
                 }
-                string res = await files.Save($"ProcessId={_this.ProcessId}");
-                if (res != "OK")
+                if(_Result == "OK")
                 {
-                    MessageBox.Show($"Wystąpiły problemy podczas zapisywania plików. Szczegóły: {res}", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _Result = await files.Save($"ProcessId={_this.ProcessId}");
+                }
+                
+                if (_Result != "OK")
+                {
+                    _Result = $"Wystąpiły problemy podczas zapisywania plików. Szczegóły: {_Result}";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                _Result = ex.ToString();
             }
             finally
             {
                 Looper.Hide();
             }
-               
+            ChangeLook();
+
+            return _Result;
         }
+
+
 
         private void txtStartedOn_ValueChanged(object sender, EventArgs e)
         {
@@ -658,7 +728,6 @@ namespace JDE_Scanner_Desktop
 
         private async void btnChangeState_Click(object sender, EventArgs e)
         {
-            string _Res = "OK";
 
             if(_this.Status == "Rozpoczęty")
             {
@@ -667,36 +736,95 @@ namespace JDE_Scanner_Desktop
             {
                 await Start();
             }
-            if(_Res == "OK")
-            {
-                MessageBox.Show("Zmiana status zgłoszenia zakończona powodzeniem!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+
         }
 
         private async Task End()
         {
             string _Res = "OK";
-            if (_Res == "OK")
+
+            try
             {
-                MessageBox.Show("Zgłoszenie zostało zamknięte!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _Res = await Validate(true);
+
+                if (_Res == "OK")
+                {
+                    cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(RuntimeSettings.UserId.ToString());
+                    txtFinishedOn.Value = DateTime.Now;
+                    cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Zakończony");
+                    _Res = await Save();
+
+                }
+                if (_Res == "OK")
+                {
+                    MessageBox.Show("Zgłoszenie zostało zakończone!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Napotkano błąd przy próbie zakończenia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show($"Napotkano błąd przy próbie zamknięcie zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                MessageBox.Show($"Napotkano błąd przy próbie rozpoczęcia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private async Task Start()
         {
             string _Res = "OK";
-            if (_Res == "OK")
+
+            try
             {
-                MessageBox.Show("Zgłoszenie zostało rozpoczęte!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _Res = await Validate();
+
+                if (_Res == "OK")
+                {
+                    cmbStartedBy.SelectedIndex = cmbStartedBy.Items.Where()
+                    txtStartedOn.Value = DateTime.Now;
+                    cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Rozpoczęty");
+                    _Res = await Save();
+                    
+                }
+                if (_Res == "OK")
+                {
+                    MessageBox.Show("Zgłoszenie zostało rozpoczęte!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Napotkano błąd przy próbie rozpoczęcia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"Napotkano błąd przy próbie rozpoczęcia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task<string> Validate(bool EndValidation = false)
+        {
+            string _res = "OK";
+
+            if (EndValidation)
+            {
+                if (this.IsQrToFinishSelected())
+                {
+                    _res = "Zgłoszenie może być zakończone jedynie na telefonie, ponieważ wymagane jest zeskanowanie kodu QR maszyny.. ";
+                }
             }
             else
             {
-                MessageBox.Show($"Napotkano błąd przy próbie rozpoczęcia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (this.IsQrToStartSelected())
+                {
+                    _res = "Zgłoszenie może być rozpoczęte jedynie na telefonie, ponieważ wymagane jest zeskanowanie kodu QR maszyny.. ";
+                }
             }
+
+            return _res;
         }
     }
 }

@@ -278,7 +278,7 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 else
                 {
-                    return null;
+                    return "OK";
                 }
             }
         }

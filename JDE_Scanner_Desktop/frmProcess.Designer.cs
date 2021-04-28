@@ -111,7 +111,7 @@
             this.btnSave.TabIndex = 0;
             this.tooltip.SetToolTip(this.btnSave, "Zapisz zmiany..");
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.Save);
+            this.btnSave.Click += new System.EventHandler(this.SaveCommand);
             // 
             // btnStartedOnClear
             // 
@@ -220,7 +220,7 @@
             this.btnChangeState.BackColor = System.Drawing.Color.PaleGreen;
             this.btnChangeState.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnChangeState.Location = new System.Drawing.Point(82, 2);
-            this.btnChangeState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnChangeState.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeState.Name = "btnChangeState";
             this.btnChangeState.Size = new System.Drawing.Size(101, 29);
             this.btnChangeState.TabIndex = 7;
@@ -270,7 +270,7 @@
             this.pgProcess.Controls.Add(this.tplTextboxes);
             this.pgProcess.Location = new System.Drawing.Point(4, 22);
             this.pgProcess.Name = "pgProcess";
-            this.pgProcess.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgProcess.Padding = new System.Windows.Forms.Padding(3);
             this.pgProcess.Size = new System.Drawing.Size(585, 494);
             this.pgProcess.TabIndex = 0;
             this.pgProcess.Text = "Zgłoszenie";
@@ -684,7 +684,7 @@
             this.pgHandling.Controls.Add(this.lvHandlings);
             this.pgHandling.Location = new System.Drawing.Point(4, 22);
             this.pgHandling.Name = "pgHandling";
-            this.pgHandling.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgHandling.Padding = new System.Windows.Forms.Padding(3);
             this.pgHandling.Size = new System.Drawing.Size(585, 494);
             this.pgHandling.TabIndex = 1;
             this.pgHandling.Text = "Obsługa";
@@ -706,7 +706,7 @@
             this.pgHistory.Controls.Add(this.lvHistory);
             this.pgHistory.Location = new System.Drawing.Point(4, 22);
             this.pgHistory.Name = "pgHistory";
-            this.pgHistory.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgHistory.Padding = new System.Windows.Forms.Padding(3);
             this.pgHistory.Size = new System.Drawing.Size(585, 494);
             this.pgHistory.TabIndex = 2;
             this.pgHistory.Text = "Historia";
@@ -728,7 +728,7 @@
             this.pgActions.Controls.Add(this.dgvActions);
             this.pgActions.Location = new System.Drawing.Point(4, 22);
             this.pgActions.Name = "pgActions";
-            this.pgActions.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgActions.Padding = new System.Windows.Forms.Padding(3);
             this.pgActions.Size = new System.Drawing.Size(585, 494);
             this.pgActions.TabIndex = 3;
             this.pgActions.Text = "Czynności";
@@ -753,7 +753,7 @@
             this.pbParts.Controls.Add(this.dgvUsedParts);
             this.pbParts.Location = new System.Drawing.Point(4, 22);
             this.pbParts.Name = "pbParts";
-            this.pbParts.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pbParts.Padding = new System.Windows.Forms.Padding(3);
             this.pbParts.Size = new System.Drawing.Size(585, 494);
             this.pbParts.TabIndex = 4;
             this.pbParts.Text = "Użyte części";

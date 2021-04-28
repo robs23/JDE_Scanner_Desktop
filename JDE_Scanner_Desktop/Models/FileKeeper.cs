@@ -583,6 +583,7 @@ namespace JDE_Scanner_Desktop.Models
         {
             //IdString = e.g. PartId=1
             string result = "OK";
+
             List<Task<bool>> tasks = new List<Task<bool>>();
             tasks.Add(this.AddAll(IdString));
             tasks.Add(this.RemoveAll());
@@ -605,10 +606,11 @@ namespace JDE_Scanner_Desktop.Models
                 }
                 else
                 {
-                    if(RuntimeSettings.UploadKeeper != null)
+                    if (RuntimeSettings.UploadKeeper != null)
                         RuntimeSettings.UploadKeeper.RestoreUploadQueue();
                 }
-            }
+            } 
+
             return result;
         }
     }
