@@ -749,7 +749,7 @@ namespace JDE_Scanner_Desktop
 
                 if (_Res == "OK")
                 {
-                    cmbFinishedBy.SelectedIndex = cmbFinishedBy.FindStringExact(RuntimeSettings.UserId.ToString());
+                    cmbFinishedBy.SelectedValue = RuntimeSettings.UserId;
                     txtFinishedOn.Value = DateTime.Now;
                     cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Zakończony");
                     _Res = await Save();
@@ -782,7 +782,7 @@ namespace JDE_Scanner_Desktop
 
                 if (_Res == "OK")
                 {
-                    cmbStartedBy.SelectedIndex = cmbStartedBy.Items.Where()
+                    cmbStartedBy.SelectedValue = RuntimeSettings.UserId;
                     txtStartedOn.Value = DateTime.Now;
                     cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Rozpoczęty");
                     _Res = await Save();
