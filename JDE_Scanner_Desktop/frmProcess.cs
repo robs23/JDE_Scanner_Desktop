@@ -749,17 +749,48 @@ namespace JDE_Scanner_Desktop
 
                 if (_Res == "OK")
                 {
-                    cmbFinishedBy.SelectedValue = RuntimeSettings.UserId;
-                    txtFinishedOn.Value = DateTime.Now;
-                    cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Zakończony");
-                    _Res = await Save();
+                    // Taking care of handling
+                    HandlingsKeeper hk = new HandlingsKeeper();
+                    await hk.Refresh($"UserId={RuntimeSettings.UserId} and ProcessId={_this.ProcessId}");
+                    Handling h;
+                    if (hk.Items.Any(i => i.Status == "Rozpoczęty"))
+                    {
+                        //User has a handling that is started, let's use it
+                        h = hk.Items.FirstOrDefault(i => i.Status == "Rozpoczęty");
+                        h.PlaceId = _this.PlaceId;
+                        h.Status = "Zakończony";
+                        h.ActionTypeId = _this.ActionTypeId;
+                        h.FinishedOn = DateTime.Now;
+                        h.Output = "Obsługa utworzona na komputerze";
+                        _Res = await h.Edit();
+                    }
+                    else
+                    {
+                        h = new Handling();
+                        h.StartedOn = DateTime.Now;
+                        h.UserId = RuntimeSettings.UserId;
+                        h.TenantId = RuntimeSettings.TenantId;
+                        h.ProcessId = _this.ProcessId;
+                        h.PlaceId = _this.PlaceId;
+                        h.Status = "Zakończony";
+                        h.FinishedOn = DateTime.Now;
+                        h.ActionTypeId = _this.ActionTypeId;
+                        h.Output = "Obsługa utworzona na komputerze";
+                        if (!await h.Add())
+                        {
+                            _Res = "Wystąpił problem przy tworzeniu obsługi tego zgłoszenia dla bieżącego użytkownika";
+                        }
+                    }
+                    if(_Res == "OK")
+                    {
+                        cmbFinishedBy.SelectedValue = RuntimeSettings.UserId;
+                        txtFinishedOn.Value = DateTime.Now;
+                        cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Zakończony");
+                        _Res = await Save();
+                    }
 
                 }
-                if (_Res == "OK")
-                {
-                    MessageBox.Show("Zgłoszenie zostało zakończone!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
+                if (_Res != "OK")
                 {
                     MessageBox.Show($"Napotkano błąd przy próbie zakończenia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -786,13 +817,31 @@ namespace JDE_Scanner_Desktop
                     txtStartedOn.Value = DateTime.Now;
                     cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Rozpoczęty");
                     _Res = await Save();
-                    
+
+                    if(ActionTypes.Items.Any(at => at.ActionTypeId == _this.ActionTypeId))
+                    {
+                        if (ActionTypes.Items.FirstOrDefault(at => at.ActionTypeId == _this.ActionTypeId).ClosePreviousInSamePlace == true)
+                        {
+                            Task.Run(() => _this.CompleteAllProcessesOfTheTypeInThePlace("Zamknięte ponieważ nowsze zgłoszenie tego typu zostało rozpoczęte"));
+                        }
+                    }
+
+                    // Taking care of handling
+                    Handling h = new Handling();
+                    h.StartedOn = DateTime.Now;
+                    h.UserId = RuntimeSettings.UserId;
+                    h.TenantId = RuntimeSettings.TenantId;
+                    h.Status = "Rozpoczęty";
+                    h.ProcessId = _this.ProcessId;
+                    h.PlaceId = _this.PlaceId;
+                    h.ActionTypeId = _this.ActionTypeId;
+                    if(!await h.Add())
+                    {
+                        _Res = "Wystąpił problem przy tworzeniu obsługi tego zgłoszenia dla bieżącego użytkownika";
+                    }
+
                 }
-                if (_Res == "OK")
-                {
-                    MessageBox.Show("Zgłoszenie zostało rozpoczęte!", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
+                if (_Res != "OK")
                 {
                     MessageBox.Show($"Napotkano błąd przy próbie rozpoczęcia zgłoszenia. Szczegóły: {_Res}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

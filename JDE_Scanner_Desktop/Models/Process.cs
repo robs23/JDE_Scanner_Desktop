@@ -352,7 +352,33 @@ namespace JDE_Scanner_Desktop.Models
             return _isOk;
         }
 
-        
+        public async Task<string> CompleteAllProcessesOfTheTypeInThePlace(string reason)
+        {
+            string url = Secrets.ApiAddress + "CompleteAllProcessesOfTheTypeInThePlace?token=" + Secrets.TenantToken + $"&thePlace={this.PlaceId}&theType={this.ActionTypeId}&excludeProcess={this.ProcessId}&UserId={RuntimeSettings.UserId}&reasonForClosure={reason}";
+            string _Result = "OK";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var serializedProduct = JsonConvert.SerializeObject(this);
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    var result = await client.PutAsync(String.Format(url, this.ProcessId, RuntimeSettings.UserId), content);
+                    if (!result.IsSuccessStatusCode)
+                    {
+                        _Result = result.ReasonPhrase;
+                    }
+                }
+                
+                
+            }
+            catch (Exception ex)
+            {
+                _Result = ex.Message;
+            }
+
+            return _Result;
+        }
     }
 
     public enum ProcessStatus

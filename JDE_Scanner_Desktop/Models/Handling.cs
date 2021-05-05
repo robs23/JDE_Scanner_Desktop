@@ -125,12 +125,10 @@ namespace JDE_Scanner_Desktop.Models
                         var rString = await result.Content.ReadAsStringAsync();
                         Handling _this = JsonConvert.DeserializeObject<Handling>(rString);
                         this.HandlingId = _this.HandlingId;
-                        MessageBox.Show("Tworzenie obsługi zakończone powodzeniem!");
                         return true;
                     }
                     else
                     {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie utworzenia obsługi. Wiadomość: " + result.ReasonPhrase);
                         return false;
                     }
                 }
@@ -141,8 +139,9 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void Edit()
+        public async Task<string> Edit()
         {
+            string _Result = "OK";
             ModelValidator validator = new ModelValidator();
             if (validator.Validate(this))
             {
@@ -152,16 +151,13 @@ namespace JDE_Scanner_Desktop.Models
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.HandlingId, RuntimeSettings.UserId), content);
-                    if (result.IsSuccessStatusCode)
+                    if (!result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Edycja obsługi zakończona powodzeniem!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie edycji obsługi. Wiadomość: " + result.ReasonPhrase);
+                        _Result = "Serwer zwrócił błąd przy próbie edycji obsługi. Wiadomość: " + result.ReasonPhrase;
                     }
                 }
             }
+            return _Result;
         }
     }
 }
