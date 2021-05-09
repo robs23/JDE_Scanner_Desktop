@@ -79,7 +79,7 @@ namespace JDE_Scanner_Desktop.Static
                     g.Columns.RemoveAt(index);
                     var c = new DataGridViewCheckBoxColumn();
                     c.ValueType = x.ValueType;
-                    c.ThreeState = true;
+                    c.ThreeState = false;
                     c.DataPropertyName = x.DataPropertyName;
                     c.HeaderText = x.HeaderText;
                     c.Name = x.Name;

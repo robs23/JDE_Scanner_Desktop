@@ -22,6 +22,7 @@ namespace JDE_Scanner_Desktop.Models
         public int ProcessActionId { get; set; }
         [Browsable(false)]
         public Nullable<int> ProcessId { get; set; }
+
         [DisplayName("Zrobiono")]
         [Editable(true)]
         public bool? IsChecked { get; set; }
@@ -36,6 +37,8 @@ namespace JDE_Scanner_Desktop.Models
         public string PlaceName { get; set; }
         [Browsable(false)]
         public Nullable<int> ActionId { get; set; }
+        [Browsable(false)]
+        public int? HandlingId { get; set; }
         [DisplayName("Czynność")]
         public string ActionName { get; set; }
         [DisplayName("Założony czas [min]")]

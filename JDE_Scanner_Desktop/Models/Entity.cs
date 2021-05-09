@@ -156,9 +156,11 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
-        public async void Edit(bool DeleteImage = false)
+        public async Task<string> Edit(bool DeleteImage = false)
         {
             ModelValidator validator = new ModelValidator();
+            string _Res = "OK";
+
             if (validator.Validate(this))
             {
                 using (var client = new HttpClient())
@@ -172,24 +174,23 @@ namespace JDE_Scanner_Desktop.Models
                     var serializedProduct = JsonConvert.SerializeObject(this);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync(String.Format(url, this.Id, RuntimeSettings.UserId), content);
-                    if (result.IsSuccessStatusCode)
+                    if (!result.IsSuccessStatusCode)
                     {
-                        MessageBox.Show("Edycja zakończona powodzeniem!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase);
+                        _Res = ("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase);
                     }
                 }
-            }
 
+            }
+            return _Res;
         }
 
-        public async void Edit(string attachmentPath)
+        public async Task<string> Edit(string attachmentPath)
         {
+            string _Res = "OK";
+
             if (string.IsNullOrEmpty(attachmentPath))
             {
-                Edit();
+                _Res = await Edit();
             }
             else
             {
@@ -212,24 +213,21 @@ namespace JDE_Scanner_Desktop.Models
                                 fcontent.Headers.Add("Content-Disposition", "form-data; name=\"file\"; filename=\"" + fileInfo.Name + "\"");
                                 content.Add(fcontent, "file", fileInfo.Name);
                                 result = await client.PutAsync(url, content);
-                                if (result.IsSuccessStatusCode)
+                                if (!result.IsSuccessStatusCode)
                                 {
-                                    MessageBox.Show("Edycja zakończona powodzeniem!");
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase, "Nieudane żądanie", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    _Res = "Serwer zwrócił błąd przy próbie edycji. Wiadomość: " + result.ReasonPhrase;
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Problem z wysyłką żądania do serwera. Wiadomość: " + ex.ToString(), "Błąd żądania", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            _Res = "Problem z wysyłką żądania do serwera. Wiadomość: " + ex.ToString();
                         }
                     }
                 }
             }
-            
+            return _Res;
 
         }
     }

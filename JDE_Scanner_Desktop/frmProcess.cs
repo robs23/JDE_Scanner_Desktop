@@ -272,7 +272,13 @@ namespace JDE_Scanner_Desktop
                 btnChangeState.Text = "Zakończ";
                 btnChangeState.BackColor = Color.Red;
                 btnChangeState.Enabled = true;
-            }else if(_this.Status == "Zakończony" || _this.Status == "Zrealizowany")
+                if(dgvActions.Columns.Count > 0)
+                {
+                    dgvActions.Columns[1].ReadOnly = false;
+                }
+                
+            }
+            else if(_this.Status == "Zakończony" || _this.Status == "Zrealizowany")
             {
                 btnChangeState.Text = "Zakończony";
                 btnChangeState.BackColor = Color.DarkGray;
@@ -434,10 +440,7 @@ namespace JDE_Scanner_Desktop
                 {
                     col.ReadOnly = true;    
                 }
-                if(_this.Status == "Rozpoczęty")
-                {
-                    dgvActions.Columns[1].ReadOnly = false;
-                }
+                
                 
                 return true;
             }
@@ -648,7 +651,27 @@ namespace JDE_Scanner_Desktop
             return _Result;
         }
 
+        private async Task<string> SaveActions(int handlingId)
+        {
+            string _Res = "OK";
 
+            foreach(DataGridViewRow row in dgvActions.Rows)
+            {
+                var processActionId = (int)row.Cells["ProcessActionId"].Value;
+                var isChecked = row.Cells["IsChecked"].Value;
+                if ((bool)isChecked == true)
+                {
+                    ProcessAction pa = _this.ProcessActions.Items.FirstOrDefault(i => i.ProcessActionId == processActionId);
+                    if (pa!= null)
+                    {
+                        pa.IsChecked = true;
+                        pa.HandlingId = handlingId;
+                        await pa.Edit();
+                    }
+                }
+            }
+            return _Res;
+        }
 
         private void txtStartedOn_ValueChanged(object sender, EventArgs e)
         {
@@ -783,10 +806,15 @@ namespace JDE_Scanner_Desktop
                     }
                     if(_Res == "OK")
                     {
-                        cmbFinishedBy.SelectedValue = RuntimeSettings.UserId;
-                        txtFinishedOn.Value = DateTime.Now;
-                        cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Zakończony");
-                        _Res = await Save();
+                        _Res = await SaveActions(h.HandlingId);
+                        if(_Res == "OK")
+                        {
+                            cmbFinishedBy.SelectedValue = RuntimeSettings.UserId;
+                            txtFinishedOn.Value = DateTime.Now;
+                            cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Zakończony");
+                            _Res = await Save();
+                        }
+                        
                     }
 
                 }

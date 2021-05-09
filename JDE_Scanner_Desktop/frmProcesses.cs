@@ -22,17 +22,23 @@ namespace JDE_Scanner_Desktop
         int page;
         BindingSource source = new BindingSource();
         bool MaintenanceOnly;
+        bool OperatorsOnly;
 
-        public frmProcesses(frmStarter parent, bool maintenanceOnly = false)
+        public frmProcesses(frmStarter parent, bool maintenanceOnly = false, bool operatorsOnly = false)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             MaintenanceOnly = maintenanceOnly;
+            OperatorsOnly = operatorsOnly;
             if (MaintenanceOnly)
             {
                 Keeper.PageSize = 100;
                 this.Text = "Konserwacje";
+            }else if (OperatorsOnly)
+            {
+                Keeper.PageSize = 100;
+                this.Text = "Smarowanie";
             }
         }
 
@@ -42,6 +48,9 @@ namespace JDE_Scanner_Desktop
             if (MaintenanceOnly)
             {
                 await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true&FinishRate=true");
+            }else if(OperatorsOnly)
+            {
+                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Smarowanie\") ", 'p', "GivenTime=true&FinishRate=true");
             }
             else
             {
@@ -51,7 +60,7 @@ namespace JDE_Scanner_Desktop
             source.DataSource = Keeper.Items;
             dgItems.DataSource = source;
             source.ResetBindings(false);
-            if (MaintenanceOnly)
+            if (MaintenanceOnly || OperatorsOnly)
             {
                 List<string> Columns = new List<string>() {"ProcessId","Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
                 AdjustColumnVisibility(Columns);

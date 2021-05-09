@@ -265,7 +265,7 @@ namespace JDE_Scanner_Desktop
 
         private void KonserwacjeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmProcesses FrmProcesses = new frmProcesses(this,true);
+            frmProcesses FrmProcesses = new frmProcesses(this,maintenanceOnly:true);
             FrmProcesses.Show(this);
         }
 
@@ -317,6 +317,12 @@ namespace JDE_Scanner_Desktop
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void smarowaniaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProcesses FrmProcesses = new frmProcesses(this, operatorsOnly: true);
+            FrmProcesses.Show(this);
         }
     }
 }

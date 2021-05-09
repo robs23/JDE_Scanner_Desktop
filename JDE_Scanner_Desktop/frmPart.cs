@@ -168,6 +168,8 @@ namespace JDE_Scanner_Desktop
             try
             {
                 Looper.Show(this);
+                string res = string.Empty;
+
                 if (mode == 1)
                 {
                     _this.CreatedBy = RuntimeSettings.UserId;
@@ -186,10 +188,10 @@ namespace JDE_Scanner_Desktop
                 else if (mode == 2)
                 {
 
-                    _this.Edit(photoPath);
+                    res = await _this.Edit(photoPath);
                     
                 }
-                string res = await files.Save($"PartId={_this.PartId}");
+                res = await files.Save($"PartId={_this.PartId}");
                 if (res != "OK")
                 {
                     MessageBox.Show($"Wystąpiły problemy podczas zapisywania plików. Szczegóły: {res}", "Problemy", buttons: MessageBoxButtons.OK, MessageBoxIcon.Warning);
