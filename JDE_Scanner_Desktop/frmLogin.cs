@@ -1,4 +1,6 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,9 +28,10 @@ namespace JDE_Scanner_Desktop
             frmLooper Looper = new frmLooper(this);
             Looper.Show(this);
             await Keeper.Refresh();
-            cmbUsers.DataSource = Keeper.Items;
-            cmbUsers.DisplayMember = "FullName";
-            cmbUsers.ValueMember = "UserId";
+            //cmbUsers.DataSource = Keeper.Items;
+            //cmbUsers.DisplayMember = "FullName";
+            //cmbUsers.ValueMember = "UserId";
+            SetComboboxes();
             txtPassword.Text = "Hasło";
             txtPassword.ForeColor = Color.Gray;
             Looper.Hide();
@@ -60,11 +63,18 @@ namespace JDE_Scanner_Desktop
             Login();
         }
 
+        private async Task SetComboboxes()
+        {
+            new AutoCompleteBehavior<User>(cmbUsers, Keeper.Items);
+            cmbUsers.DisplayMember = "FullName";
+            cmbUsers.ValueMember = "UserId";
+        }
+
         private void Login()
         {
             if (txtPassword.ForeColor == Color.Black && cmbUsers.SelectedItem != null)
             {
-                int UserId = Convert.ToInt32(cmbUsers.SelectedValue.ToString());
+                int UserId = Convert.ToInt32(cmbUsers.GetSelectedValue<User>());
                 if (Keeper.Items.Where(u => u.UserId == UserId && u.Password == txtPassword.Text).Any())
                 {
                     //login and password OK

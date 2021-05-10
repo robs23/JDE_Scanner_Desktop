@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Linq.Dynamic;
 using System.Threading;
+using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop.Classes
 {
@@ -22,7 +23,7 @@ namespace JDE_Scanner_Desktop.Classes
         {
 
             this.comboBox = comboBox;
-            Thread t = new Thread(() => { this.comboBox.Invoke((Action)(() => { this.comboBox.AutoCompleteMode = AutoCompleteMode.Suggest; })); });// crucial otherwise exceptions occur when the user types in text which is not found in the autocompletion list
+            Thread t = new Thread(() => { this.comboBox.Invoke((System.Action)(() => { this.comboBox.AutoCompleteMode = AutoCompleteMode.Suggest; })); });// crucial otherwise exceptions occur when the user types in text which is not found in the autocompletion list
             this.comboBox.TextChanged += this.OnTextChanged;
             this.comboBox.KeyPress += this.OnKeyPress;
             this.comboBox.SelectionChangeCommitted += this.OnSelectionChangeCommitted;
@@ -42,6 +43,31 @@ namespace JDE_Scanner_Desktop.Classes
             
         }
 
+        private void HandleTab()
+        {
+            if (this.comboBox.GetSelectedValue<T>()==null)
+            {
+                this.comboBox.PreviewKeyDown += (sender, e) =>
+                {
+                    if (e.KeyData == Keys.Tab)
+                    {
+                        e.IsInputKey = true;
+                    }
+                };
+            }
+            else
+            {
+                this.comboBox.PreviewKeyDown += (sender, e) =>
+                {
+                    if (e.KeyData == Keys.Tab)
+                    {
+                        e.IsInputKey = false;
+                    }
+                };
+            }
+            
+        }
+
         private void OnSelectionChangeCommitted(object sender, EventArgs e)
         {
             if (this.comboBox.SelectedItem == null)
@@ -56,6 +82,7 @@ namespace JDE_Scanner_Desktop.Classes
 
         private void OnTextChanged(object sender, EventArgs e)
         {
+            HandleTab();
             if (!string.IsNullOrEmpty(this.comboBox.Text) || !this.comboBox.Visible || !this.comboBox.Enabled)
             {
                 return;
@@ -66,13 +93,13 @@ namespace JDE_Scanner_Desktop.Classes
 
         private void OnKeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '\r' || e.KeyChar == '\n')
+            if (e.KeyChar == '\r' || e.KeyChar == '\n' || e.KeyChar == '\t')
             {
                 e.Handled = true;
-                if (this.comboBox.SelectedIndex == -1 && this.comboBox.Items.Count > 0
-                    && this.comboBox.Items[0].ToString().ToLowerInvariant().StartsWith(this.comboBox.Text.ToLowerInvariant()))
+                string displayMember = this.comboBox.DisplayMember;
+                if (this.comboBox.SelectedIndex == -1 && this.comboBox.Items.Count > 0 && ((string)((T)this.comboBox.Items[0]).GetType().GetProperty(displayMember).GetValue(this.comboBox.Items[0], null)).ToLowerInvariant().Contains(this.comboBox.Text.ToLowerInvariant()))
                 {
-                    this.comboBox.Text = this.comboBox.Items[0].ToString();
+                    this.comboBox.Text = (string)((T)this.comboBox.Items[0]).GetType().GetProperty(displayMember).GetValue(this.comboBox.Items[0],null);
                 }
 
                 this.comboBox.DroppedDown = false;
@@ -82,7 +109,7 @@ namespace JDE_Scanner_Desktop.Classes
             }
 
             // Its crucial that we use begininvoke because we need the changes to sink into the textfield  Omitting begininvoke would cause the searchterm to lag behind by one character  That is the last character that got typed in
-            this.comboBox.BeginInvoke(new Action(this.ReevaluateCompletionList));
+            this.comboBox.BeginInvoke(new System.Action(this.ReevaluateCompletionList));
         }
 
         private void ResetCompletionList()
