@@ -16,6 +16,8 @@ namespace JDE_Scanner_Desktop
         
         public static int UserId { get; set; }
 
+        public static User CurrentUser { get; set; }
+
         public static int PageSize { get; set; }
 
         public async static void GetPageSize()

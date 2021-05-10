@@ -80,6 +80,7 @@ namespace JDE_Scanner_Desktop
                     //login and password OK
                     RuntimeSettings.UserId = UserId;
                     User _this = Keeper.Items.Where(u => u.UserId == UserId).FirstOrDefault();
+                    RuntimeSettings.CurrentUser = _this;
                     _this.Login();
                     this.Close();
                 }

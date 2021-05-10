@@ -47,6 +47,8 @@ namespace JDE_Scanner_Desktop.Models
         public string Password { get; set; }
         [DisplayName("Mechanik?")]
         public bool IsMechanic { get; set; }
+        [DisplayName("Operator?")]
+        public bool? IsOperator { get; set; }
         [Required(AllowEmptyStrings = false, ErrorMessage = "Pole Login MES nie może być puste!")]
         [DisplayName("Login MES")]
         public string MesLogin { get; set; }
@@ -80,6 +82,18 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public bool IsAuthorized()
+        {
+            bool res = true;
+
+            if (IsOperator == true)
+            {
+                res = false;
+                MessageBox.Show("Niestety nie posiadasz autoryzacji do wybranej funkcji!", "Brak autoryzacji",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            return res;
+        }
 
         public async void Login()
         {
