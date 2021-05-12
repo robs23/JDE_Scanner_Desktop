@@ -40,6 +40,9 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.lblAssignedUsers = new System.Windows.Forms.Label();
             this.btnChangeState = new System.Windows.Forms.Button();
+            this.lblReactivateLabel = new System.Windows.Forms.Label();
+            this.lblReactivateCounter = new System.Windows.Forms.Label();
+            this.pbReactivate = new System.Windows.Forms.ProgressBar();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tab = new System.Windows.Forms.TabControl();
             this.pgProcess = new System.Windows.Forms.TabPage();
@@ -125,6 +128,7 @@
             this.btnStartedOnClear.TabIndex = 16;
             this.tooltip.SetToolTip(this.btnStartedOnClear, "Wyczyść datę..");
             this.btnStartedOnClear.UseVisualStyleBackColor = true;
+            this.btnStartedOnClear.Click += new System.EventHandler(this.btnStartedOnClear_Click);
             // 
             // btnFinishedOnClear
             // 
@@ -138,6 +142,7 @@
             this.btnFinishedOnClear.TabIndex = 18;
             this.tooltip.SetToolTip(this.btnFinishedOnClear, "Wyczyść datę..");
             this.btnFinishedOnClear.UseVisualStyleBackColor = true;
+            this.btnFinishedOnClear.Click += new System.EventHandler(this.btnFinishedOnClear_Click);
             // 
             // btnEditAssignedList
             // 
@@ -181,17 +186,23 @@
             // 
             // tlpButtons
             // 
-            this.tlpButtons.ColumnCount = 5;
+            this.tlpButtons.ColumnCount = 8;
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 105F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
-            this.tlpButtons.Controls.Add(this.lblAssignedUsers, 3, 0);
-            this.tlpButtons.Controls.Add(this.btnEditAssignedList, 4, 0);
+            this.tlpButtons.Controls.Add(this.lblAssignedUsers, 6, 0);
+            this.tlpButtons.Controls.Add(this.btnEditAssignedList, 7, 0);
             this.tlpButtons.Controls.Add(this.btnAttachments, 1, 0);
             this.tlpButtons.Controls.Add(this.btnChangeState, 2, 0);
+            this.tlpButtons.Controls.Add(this.lblReactivateLabel, 3, 0);
+            this.tlpButtons.Controls.Add(this.lblReactivateCounter, 4, 0);
+            this.tlpButtons.Controls.Add(this.pbReactivate, 5, 0);
             this.tlpButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
@@ -227,6 +238,38 @@
             this.btnChangeState.Text = "ROZPOCZNIJ";
             this.btnChangeState.UseVisualStyleBackColor = false;
             this.btnChangeState.Click += new System.EventHandler(this.btnChangeState_Click);
+            // 
+            // lblReactivateLabel
+            // 
+            this.lblReactivateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblReactivateLabel.AutoSize = true;
+            this.lblReactivateLabel.Location = new System.Drawing.Point(188, 10);
+            this.lblReactivateLabel.Name = "lblReactivateLabel";
+            this.lblReactivateLabel.Size = new System.Drawing.Size(57, 13);
+            this.lblReactivateLabel.TabIndex = 8;
+            this.lblReactivateLabel.Text = "Wznów za";
+            this.lblReactivateLabel.Visible = false;
+            // 
+            // lblReactivateCounter
+            // 
+            this.lblReactivateCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblReactivateCounter.AutoSize = true;
+            this.lblReactivateCounter.Location = new System.Drawing.Point(251, 10);
+            this.lblReactivateCounter.Name = "lblReactivateCounter";
+            this.lblReactivateCounter.Size = new System.Drawing.Size(24, 13);
+            this.lblReactivateCounter.TabIndex = 9;
+            this.lblReactivateCounter.Text = "10";
+            this.lblReactivateCounter.Visible = false;
+            // 
+            // pbReactivate
+            // 
+            this.pbReactivate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbReactivate.ForeColor = System.Drawing.Color.Red;
+            this.pbReactivate.Location = new System.Drawing.Point(281, 5);
+            this.pbReactivate.Name = "pbReactivate";
+            this.pbReactivate.Size = new System.Drawing.Size(94, 23);
+            this.pbReactivate.TabIndex = 10;
+            this.pbReactivate.Visible = false;
             // 
             // tlpMain
             // 
@@ -858,5 +901,8 @@
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.Button btnAttachments;
         private System.Windows.Forms.Button btnChangeState;
+        private System.Windows.Forms.Label lblReactivateLabel;
+        private System.Windows.Forms.Label lblReactivateCounter;
+        private System.Windows.Forms.ProgressBar pbReactivate;
     }
 }

@@ -208,7 +208,7 @@ namespace JDE_Scanner_Desktop
             return val;
         }
 
-        private void ChangeLook()
+        private async void ChangeLook()
         {
             if (!string.IsNullOrEmpty(_this.MesId))
             {
@@ -267,12 +267,18 @@ namespace JDE_Scanner_Desktop
                 btnChangeState.Text = "Rozpocznij";
                 btnChangeState.BackColor = Color.Green;
                 btnChangeState.Enabled = true;
+                lblReactivateLabel.Visible = false;
+                lblReactivateCounter.Visible = false;
+                pbReactivate.Visible = false;
             }else if(_this.Status == "Rozpoczęty" || _this.Status == "Wstrzymany")
             {
                 btnChangeState.Text = "Zakończ";
                 btnChangeState.BackColor = Color.Red;
                 btnChangeState.Enabled = true;
-                if(dgvActions.Columns.Count > 0)
+                lblReactivateLabel.Visible = false;
+                lblReactivateCounter.Visible = false;
+                pbReactivate.Visible = false;
+                if (dgvActions.Columns.Count > 0)
                 {
                     dgvActions.Columns[1].ReadOnly = false;
                 }
@@ -283,7 +289,42 @@ namespace JDE_Scanner_Desktop
                 btnChangeState.Text = "Zakończony";
                 btnChangeState.BackColor = Color.DarkGray;
                 btnChangeState.Enabled = false;
+                
             }
+        }
+
+        private async Task Wait4Reactivation()
+        {
+            lblReactivateLabel.Visible = true;
+            lblReactivateCounter.Visible = true;
+            pbReactivate.Visible = true;
+            pbReactivate.Minimum = 0;
+            pbReactivate.Maximum = 10;
+
+            for (int i = 10; i > 0; i--)
+            {
+                lblReactivateCounter.Text = i.ToString();
+                pbReactivate.Value = i;
+                if (i > 6)
+                {
+                    pbReactivate.SetState(2);
+                }else if(i <=6 && i >3)
+                {
+                    pbReactivate.SetState(3);
+                }
+                else
+                {
+                    pbReactivate.SetState(1);
+                }
+                await Task.Delay(1000);
+            }
+            btnChangeState.Text = "Wznów";
+            btnChangeState.BackColor = Color.Green;
+            btnChangeState.Enabled = true;
+            lblReactivateLabel.Visible = false;
+            lblReactivateCounter.Visible = false;
+            pbReactivate.Visible = false;
+
         }
 
         private async void FormLoaded(object sender, EventArgs e)
@@ -374,6 +415,17 @@ namespace JDE_Scanner_Desktop
             }
             
             ChangeLook();
+            if(_this.Status == "Zakończony" || _this.Status == "Zrealizowany")
+            {
+                try
+                {
+                    Wait4Reactivation();
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
             files.Initialize();
             Looper.Hide();
         }
@@ -659,41 +711,49 @@ namespace JDE_Scanner_Desktop
             {
                 var processActionId = (int)row.Cells["ProcessActionId"].Value;
                 var isChecked = row.Cells["IsChecked"].Value;
-                if ((bool)isChecked == true)
+                if(isChecked != null)
                 {
-                    ProcessAction pa = _this.ProcessActions.Items.FirstOrDefault(i => i.ProcessActionId == processActionId);
-                    if (pa!= null)
+                    if ((bool)isChecked == true)
                     {
-                        pa.IsChecked = true;
-                        pa.HandlingId = handlingId;
-                        await pa.Edit();
+                        ProcessAction pa = _this.ProcessActions.Items.FirstOrDefault(i => i.ProcessActionId == processActionId);
+                        if (pa != null)
+                        {
+                            pa.IsChecked = true;
+                            pa.HandlingId = handlingId;
+                            _Res = await pa.Edit();
+                        }
                     }
                 }
+                
             }
             return _Res;
         }
 
         private void txtStartedOn_ValueChanged(object sender, EventArgs e)
         {
-            txtStartedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
-            txtStartedOn.Format = DateTimePickerFormat.Custom;
-        }
+            if (txtStartedOn.Value == DateTimePicker.MinimumDateTime)
+            {
+                txtStartedOn.CustomFormat = " ";
+            }
+            else
+            {
+                txtStartedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
+            }
 
-        private void btnStartedOnClear_Click(object sender, EventArgs e)
-        {
-            txtStartedOn.CustomFormat = " ";
             txtStartedOn.Format = DateTimePickerFormat.Custom;
-        }
-
-        private void btnFinishedOnClear_Click(object sender, EventArgs e)
-        {
-            txtFinishedOn.CustomFormat = " ";
-            txtFinishedOn.Format = DateTimePickerFormat.Custom;
         }
 
         private void txtFinishedOn_ValueChanged(object sender, EventArgs e)
         {
-            txtFinishedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
+            if(txtFinishedOn.Value == DateTimePicker.MinimumDateTime)
+            {
+                txtFinishedOn.CustomFormat = " ";
+            }
+            else
+            {
+                txtFinishedOn.CustomFormat = "yyyy-MM-dd HH:mm:ss tt";
+            }
+            
             txtFinishedOn.Format = DateTimePickerFormat.Custom;
         }
 
@@ -751,14 +811,30 @@ namespace JDE_Scanner_Desktop
 
         private async void btnChangeState_Click(object sender, EventArgs e)
         {
-
-            if(_this.Status == "Rozpoczęty")
+            btnChangeState.Enabled = false;
+            try
             {
-                await End();
-            }else if(_this.Status == "Planowany")
-            {
-                await Start();
+                if (_this.Status == "Rozpoczęty")
+                {
+                    await End();
+                }
+                else if (_this.Status == "Planowany")
+                {
+                    await Start();
+                }
+                else if (_this.Status == "Zakończony")
+                {
+                    await _this.Resurrect();
+                    cmbFinishedBy.SelectedIndex = -1;
+                    ClearFinishedDate();
+                    await Start(true);
+                }
             }
+            finally
+            {
+                btnChangeState.Enabled = true;
+            }
+
 
         }
 
@@ -831,7 +907,7 @@ namespace JDE_Scanner_Desktop
             }
         }
 
-        private async Task Start()
+        private async Task Start(bool resurrection = false)
         {
             string _Res = "OK";
 
@@ -841,10 +917,8 @@ namespace JDE_Scanner_Desktop
 
                 if (_Res == "OK")
                 {
-                    cmbStartedBy.SelectedValue = RuntimeSettings.UserId;
-                    txtStartedOn.Value = DateTime.Now;
-                    cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Rozpoczęty");
-                    _Res = await Save();
+                    
+                    
 
                     if(ActionTypes.Items.Any(at => at.ActionTypeId == _this.ActionTypeId))
                     {
@@ -855,17 +929,40 @@ namespace JDE_Scanner_Desktop
                     }
 
                     // Taking care of handling
-                    Handling h = new Handling();
-                    h.StartedOn = DateTime.Now;
-                    h.UserId = RuntimeSettings.UserId;
-                    h.TenantId = RuntimeSettings.TenantId;
-                    h.Status = "Rozpoczęty";
-                    h.ProcessId = _this.ProcessId;
-                    h.PlaceId = _this.PlaceId;
-                    h.ActionTypeId = _this.ActionTypeId;
-                    if(!await h.Add())
+                    //this handling is completely new, create it
+                    //But first, let's make sure User don't have any other open handligs elsewhere. If he does, let's complete them first
+                    HandlingsKeeper Handlings = new HandlingsKeeper();
+                    _Res = await Handlings.CompleteUsersHandlings();
+
+                    if (_Res == "OK")
                     {
-                        _Res = "Wystąpił problem przy tworzeniu obsługi tego zgłoszenia dla bieżącego użytkownika";
+                        Handling h = new Handling();
+                        h.StartedOn = DateTime.Now;
+                        h.UserId = RuntimeSettings.UserId;
+                        h.TenantId = RuntimeSettings.TenantId;
+                        h.Status = "Rozpoczęty";
+                        h.ProcessId = _this.ProcessId;
+                        h.PlaceId = _this.PlaceId;
+                        h.ActionTypeId = _this.ActionTypeId;
+                        if (!await h.Add())
+                        {
+                            _Res = "Wystąpił problem przy tworzeniu obsługi tego zgłoszenia dla bieżącego użytkownika";
+                        }
+                        if (_Res == "OK")
+                        {
+                            //_Res = await SaveActions(h.HandlingId);
+                            //if (_Res == "OK")
+                            //{
+                            if (!resurrection)
+                            {
+                                cmbStartedBy.SelectedValue = RuntimeSettings.UserId;
+                                txtStartedOn.Value = DateTime.Now;
+                            }
+
+                            cmbStatus.SelectedIndex = cmbStatus.FindStringExact("Rozpoczęty");
+                            _Res = await Save();
+                            //}
+                        } 
                     }
 
                 }
@@ -902,6 +999,26 @@ namespace JDE_Scanner_Desktop
             }
 
             return _res;
+        }
+
+        private void btnFinishedOnClear_Click(object sender, EventArgs e)
+        {
+            ClearFinishedDate();
+        }
+
+        private void ClearFinishedDate()
+        {
+            txtFinishedOn.Value = DateTimePicker.MinimumDateTime;
+        }
+
+        private void btnStartedOnClear_Click(object sender, EventArgs e)
+        {
+            ClearStartedDate();
+        }
+
+        private void ClearStartedDate()
+        {
+            txtStartedOn.Value = DateTimePicker.MinimumDateTime;
         }
     }
 }

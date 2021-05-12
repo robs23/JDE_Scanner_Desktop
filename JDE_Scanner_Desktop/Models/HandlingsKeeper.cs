@@ -39,5 +39,31 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public async Task<string> CompleteUsersHandlings()
+        {
+            string url = Secrets.ApiAddress + "CompleteUsersHandlings?token=" + Secrets.TenantToken + $"&UserId={RuntimeSettings.UserId}";
+            string _Result = "OK";
+
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, url));
+
+                    if (!result.IsSuccessStatusCode)
+                    {
+                        _Result = "Serwer zwrócił błąd przy próbie zakończenia poprzednich obsług. Wiadomość: " + result.ReasonPhrase;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _Result = ex.Message;
+            }
+
+            return _Result;
+        }
     }
 }

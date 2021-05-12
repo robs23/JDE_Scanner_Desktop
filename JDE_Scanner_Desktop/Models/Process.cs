@@ -379,6 +379,18 @@ namespace JDE_Scanner_Desktop.Models
 
             return _Result;
         }
+
+        public async Task Resurrect()
+        {
+            IsCompleted = false;
+            IsActive = true;
+            FinishedBy = null;
+            FinishedOn = null;
+            IsResurrected = true;
+            LastStatus = ProcessStatus.Wznowiony;
+            LastStatusBy = RuntimeSettings.UserId;
+            LastStatusOn = DateTime.Now;
+        }
     }
 
     public enum ProcessStatus

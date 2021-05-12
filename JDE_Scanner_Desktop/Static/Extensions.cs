@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Collections;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace JDE_Scanner_Desktop.Static
 {
@@ -145,6 +146,13 @@ namespace JDE_Scanner_Desktop.Static
                     @this,
                     new object[] { value });
             }
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
+        public static void SetState(this ProgressBar pBar, int state)
+        {
+            SendMessage(pBar.Handle, 1040, (IntPtr)state, IntPtr.Zero);
         }
     }
 }
