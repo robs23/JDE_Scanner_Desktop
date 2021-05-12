@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
-    public partial class frmCILTs : Form
+    public partial class frmOverview : Form
     {
-        public frmCILTs()
+        public frmOverview()
         {
             InitializeComponent();
         }
