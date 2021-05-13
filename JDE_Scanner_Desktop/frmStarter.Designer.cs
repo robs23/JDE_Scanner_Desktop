@@ -61,6 +61,7 @@
             this.konserwacjeCategoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CzynnosciKonserwacyjneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.KonserwacjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smarowaniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.częściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,7 @@
             this.wszystkieToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.zapasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wgCzęściToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.smarowaniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlOverview = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -290,21 +291,21 @@
             // zgłoszeniaToolStripMenuItem1
             // 
             this.zgłoszeniaToolStripMenuItem1.Name = "zgłoszeniaToolStripMenuItem1";
-            this.zgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.zgłoszeniaToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.zgłoszeniaToolStripMenuItem1.Text = "Zgłoszenia";
             this.zgłoszeniaToolStripMenuItem1.Click += new System.EventHandler(this.zgłoszeniaToolStripMenuItem1_Click);
             // 
             // noweToolStripMenuItem1
             // 
             this.noweToolStripMenuItem1.Name = "noweToolStripMenuItem1";
-            this.noweToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.noweToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
             this.noweToolStripMenuItem1.Text = "Nowe zgłoszenie";
             this.noweToolStripMenuItem1.Click += new System.EventHandler(this.noweToolStripMenuItem1_Click);
             // 
             // obsługaZgłoszeńToolStripMenuItem
             // 
             this.obsługaZgłoszeńToolStripMenuItem.Name = "obsługaZgłoszeńToolStripMenuItem";
-            this.obsługaZgłoszeńToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.obsługaZgłoszeńToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.obsługaZgłoszeńToolStripMenuItem.Text = "Obsługa zgłoszeń";
             this.obsługaZgłoszeńToolStripMenuItem.Click += new System.EventHandler(this.obsługaZgłoszeńToolStripMenuItem_Click);
             // 
@@ -314,7 +315,7 @@
             this.nowyToolStripMenuItem3,
             this.wszystkieToolStripMenuItem});
             this.typyZgłoszeniaToolStripMenuItem2.Name = "typyZgłoszeniaToolStripMenuItem2";
-            this.typyZgłoszeniaToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.typyZgłoszeniaToolStripMenuItem2.Size = new System.Drawing.Size(166, 22);
             this.typyZgłoszeniaToolStripMenuItem2.Text = "Typy zgłoszenia";
             // 
             // nowyToolStripMenuItem3
@@ -337,7 +338,7 @@
             this.CzynnosciKonserwacyjneToolStripMenuItem1,
             this.KonserwacjeToolStripMenuItem});
             this.konserwacjeCategoryToolStripMenuItem.Name = "konserwacjeCategoryToolStripMenuItem";
-            this.konserwacjeCategoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.konserwacjeCategoryToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.konserwacjeCategoryToolStripMenuItem.Text = "Konserwacje";
             // 
             // CzynnosciKonserwacyjneToolStripMenuItem1
@@ -353,6 +354,13 @@
             this.KonserwacjeToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.KonserwacjeToolStripMenuItem.Text = "Konserwacje";
             this.KonserwacjeToolStripMenuItem.Click += new System.EventHandler(this.KonserwacjeToolStripMenuItem_Click);
+            // 
+            // smarowaniaToolStripMenuItem
+            // 
+            this.smarowaniaToolStripMenuItem.Name = "smarowaniaToolStripMenuItem";
+            this.smarowaniaToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.smarowaniaToolStripMenuItem.Text = "Smarowania";
+            this.smarowaniaToolStripMenuItem.Click += new System.EventHandler(this.smarowaniaToolStripMenuItem_Click);
             // 
             // historiaToolStripMenuItem
             // 
@@ -552,18 +560,21 @@
             this.wgCzęściToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.wgCzęściToolStripMenuItem.Text = "Wg części";
             // 
-            // smarowaniaToolStripMenuItem
+            // pnlOverview
             // 
-            this.smarowaniaToolStripMenuItem.Name = "smarowaniaToolStripMenuItem";
-            this.smarowaniaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.smarowaniaToolStripMenuItem.Text = "Smarowania";
-            this.smarowaniaToolStripMenuItem.Click += new System.EventHandler(this.smarowaniaToolStripMenuItem_Click);
+            this.pnlOverview.BackColor = System.Drawing.Color.White;
+            this.pnlOverview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOverview.Location = new System.Drawing.Point(0, 24);
+            this.pnlOverview.Name = "pnlOverview";
+            this.pnlOverview.Size = new System.Drawing.Size(707, 426);
+            this.pnlOverview.TabIndex = 1;
             // 
             // frmStarter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(707, 450);
+            this.Controls.Add(this.pnlOverview);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -640,5 +651,6 @@
         private System.Windows.Forms.ToolStripMenuItem masoweDodawanieKomponentówToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kolejkaPlikówToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smarowaniaToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlOverview;
     }
 }

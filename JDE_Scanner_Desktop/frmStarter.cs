@@ -20,11 +20,20 @@ namespace JDE_Scanner_Desktop
         BackgroundWorker filesSync;
         FileKeeper files;
         Timer filesSyncTimer;
+        Form OverviewForm;
 
         public frmStarter()
         {
             InitializeComponent();
             RuntimeSettings.GetPageSize();
+            OverviewForm = new frmOverview();
+            OverviewForm.TopLevel = false;
+            OverviewForm.FormBorderStyle = FormBorderStyle.None;
+            OverviewForm.Dock = DockStyle.Fill;
+            pnlOverview.Controls.Add(OverviewForm);
+            pnlOverview.Tag = OverviewForm;
+            OverviewForm.BringToFront();
+            OverviewForm.Show();
         }
 
         private void koniecToolStripMenuItem_Click(object sender, EventArgs e)
