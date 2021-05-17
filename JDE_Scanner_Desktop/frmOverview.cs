@@ -1,4 +1,5 @@
 ﻿using FontAwesome.Sharp;
+using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,8 +59,8 @@ namespace JDE_Scanner_Desktop
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-            panelDesktop.Controls.Add(childForm);
-            panelDesktop.Tag = childForm;
+            pnlDesktop.Controls.Add(childForm);
+            pnlDesktop.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
@@ -67,11 +68,17 @@ namespace JDE_Scanner_Desktop
         private void btnToday_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, Color.BlueViolet);
+            DateTime now = DateTime.Now;
+            frmDetailedOverview DetailForm = new frmDetailedOverview(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), new DateTime(now.Year, now.Month, now.Day, 23, 59, 59));
+            DetailForm.ShowInPanel(pnlDesktop);
         }
 
         private void btnYesterday_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, Color.Coral);
+            DateTime now = DateTime.Now.AddDays(-1);
+            frmDetailedOverview DetailForm = new frmDetailedOverview(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), new DateTime(now.Year, now.Month, now.Day, 23, 59, 59));
+            DetailForm.ShowInPanel(pnlDesktop);
         }
 
         private void btnThisWeek_Click(object sender, EventArgs e)
@@ -87,11 +94,19 @@ namespace JDE_Scanner_Desktop
         private void btnThisMonth_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, Color.Chocolate);
+            DateTime start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
+            DateTime end = start.AddMonths(1).AddDays(-1);
+            frmDetailedOverview DetailForm = new frmDetailedOverview(start, end);
+            DetailForm.ShowInPanel(pnlDesktop);
         }
 
         private void btnPrevMonth_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, Color.DeepPink);
+            DateTime start = new DateTime(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month, 1, 0, 0, 0);
+            DateTime end = start.AddMonths(1).AddDays(-1);
+            frmDetailedOverview DetailForm = new frmDetailedOverview(start, end);
+            DetailForm.ShowInPanel(pnlDesktop);
         }
     }
 }

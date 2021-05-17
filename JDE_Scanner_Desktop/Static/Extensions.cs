@@ -154,5 +154,16 @@ namespace JDE_Scanner_Desktop.Static
         {
             SendMessage(pBar.Handle, 1040, (IntPtr)state, IntPtr.Zero);
         }
+
+        public static void ShowInPanel(this Form form, Panel panel)
+        {
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            panel.Controls.Add(form);
+            panel.Tag = form;
+            form.BringToFront();
+            form.Show();
+        }
     }
 }

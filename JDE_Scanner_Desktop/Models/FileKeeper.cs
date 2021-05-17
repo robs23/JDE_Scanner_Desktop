@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Static;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -307,7 +308,6 @@ namespace JDE_Scanner_Desktop.Models
         }
 
 
-
         public async Task<string> AddToUploadQueue()
         {
             string res = "OK";
@@ -542,7 +542,61 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public async Task<List<ImageInfo>> GetImageInfos(DateTime dateFrom, DateTime dateTo, string query = null, char type = 'p', string parameters = null)
+        {
+            List<ImageInfo> ImageInfos = new List<ImageInfo>();
 
+            using (var client = new HttpClient())
+            {
+                string url = Secrets.ApiAddress + $"GetImages?token={Secrets.TenantToken}&dateFrom={dateFrom}&dateTo={dateTo}";
+                if (type == 'p')
+                {
+                    url += "&page=1";
+                }
+                if (query != null)
+                {
+                    QueryString = query;
+                    url += "&query=" + query;
+                    if (this.FilterString != null)
+                    {
+                        url += "AND " + this.FilterString;
+                    }
+                }
+                else
+                {
+
+                    url += "&query=" + this.FilterString;
+                }
+                if (parameters != null)
+                {
+                    url += "&" + parameters;
+                }
+                this.Parameters = parameters;
+
+                if (this.PageSize != null)
+                {
+                    url += $"&pageSize={this.PageSize}";
+                }
+
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        try
+                        {
+                            var userJsonString = await response.Content.ReadAsStringAsync();
+                            ImageInfos = JsonConvert.DeserializeObject<ImageInfo[]>(userJsonString).ToList();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Wystąpił błąd podczas deserializacji odpowiedzi z serwera. Szczegóły: {ex.ToString()}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+
+            return ImageInfos;
+        }
 
         public async Task RemoveFromLocal(List<int> ids)
         {
