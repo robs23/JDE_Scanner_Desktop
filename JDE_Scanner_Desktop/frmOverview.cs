@@ -24,6 +24,7 @@ namespace JDE_Scanner_Desktop
             LeftBorderBtn = new Panel();
             LeftBorderBtn.Size = new Size(7, 50);
             pnlSide.Controls.Add(LeftBorderBtn);
+            TodayClicked(btnToday);
         }
 
         private void ActivateButton(object sender, Color color)
@@ -66,6 +67,11 @@ namespace JDE_Scanner_Desktop
         }
 
         private void btnToday_Click(object sender, EventArgs e)
+        {
+            TodayClicked(sender);
+        }
+
+        private void TodayClicked(object sender)
         {
             ActivateButton(sender, Color.BlueViolet);
             DateTime now = DateTime.Now;

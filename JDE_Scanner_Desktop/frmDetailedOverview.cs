@@ -1,5 +1,7 @@
-﻿using JDE_Scanner_Desktop.CustomControls;
+﻿using FontAwesome.Sharp;
+using JDE_Scanner_Desktop.CustomControls;
 using JDE_Scanner_Desktop.Models;
+using NuGet;
 using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace JDE_Scanner_Desktop
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public FileKeeper ImageInfoKeeper { get; set; }
+        public List<ImageInfo> ImageInfos { get; set; }
 
         public frmDetailedOverview()
         {
@@ -34,26 +37,52 @@ namespace JDE_Scanner_Desktop
         }
 
         public async Task LoadRecentImages()
+        {  
+            ImageInfos = await ImageInfoKeeper.GetImageInfos(DateFrom, DateTo);
+        }
+        public async Task LoadProcessResults()
+        {
+            await Task.Delay(100);
+        }
+
+        public async Task DisplayProcessResutls()
+        {
+            pnlProcesses.Controls.Clear();
+            ThreeRowsColumn DefectCards = new ThreeRowsColumn(name: "Karty defektów", icon: IconChar.Viruses, l1Text: "10", l2Text: "150", l2Color: Color.Green);
+            DefectCards.Dock = DockStyle.Left;
+            pnlProcesses.Controls.Add(DefectCards);
+            ThreeRowsColumn Smearings = new ThreeRowsColumn(name: "Smarowania", icon: IconChar.OilCan, l1Text: "10", l2Text: "150", l2Color: Color.Green);
+            Smearings.Dock = DockStyle.Left;
+            pnlProcesses.Controls.Add(Smearings);
+            ThreeRowsColumn Maintenance = new ThreeRowsColumn(name: "Konserwacje", icon: IconChar.Tasks, l1Text: "10", l2Text: "150", l2Color: Color.Green);
+            Maintenance.Dock = DockStyle.Left;
+            pnlProcesses.Controls.Add(Maintenance);
+            ThreeRowsColumn Breakdowns = new ThreeRowsColumn(name: "Awarie", icon: IconChar.ExclamationTriangle, l1Text: "3", l2Text: "290", l2Color: Color.Red);
+            Breakdowns.Dock = DockStyle.Left;
+            pnlProcesses.Controls.Add(Breakdowns);
+            ThreeRowsColumn Headlines = new ThreeRowsColumn();
+            Headlines.Dock = DockStyle.Left;
+            pnlProcesses.Controls.Add(Headlines);
+        }
+
+        private async Task DisplayRecentImages()
         {
             pnlImages.Controls.Clear();
-            List<ImageInfoControl> ImageInfoControls = new List<ImageInfoControl>();    
-
-            List<ImageInfo> Items = await ImageInfoKeeper.GetImageInfos(DateFrom, DateTo);
-
-            
-            foreach(var i in Items)
+            foreach (var i in ImageInfos)
             {
                 ImageInfoControl item = new ImageInfoControl(this);
                 item.thisItem = i;
-                ImageInfoControls.Add(item);
                 pnlImages.Controls.Add(item);
             }
-            
         }
 
         private async void frmDetailedOverview_Load(object sender, EventArgs e)
         {
-            await LoadRecentImages();
+            Task loadImagesTask = Task.Run(() => LoadRecentImages());
+            Task loadResults = Task.Run(() => LoadProcessResults());
+            await Task.WhenAll(loadImagesTask, loadResults);
+            DisplayRecentImages();
+            DisplayProcessResutls();
         }
     }
 }

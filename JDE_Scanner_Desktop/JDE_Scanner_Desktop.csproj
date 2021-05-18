@@ -168,6 +168,12 @@
     <Compile Include="CustomControls\ImageInfoControl.Designer.cs">
       <DependentUpon>ImageInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\ThreeRowsColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ThreeRowsColumn.Designer.cs">
+      <DependentUpon>ThreeRowsColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmActionType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -479,6 +485,9 @@
     <Compile Include="Static\Utilities.cs" />
     <EmbeddedResource Include="CustomControls\ImageInfoControl.resx">
       <DependentUpon>ImageInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\ThreeRowsColumn.resx">
+      <DependentUpon>ThreeRowsColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmActionType.resx">
       <DependentUpon>frmActionType.cs</DependentUpon>
