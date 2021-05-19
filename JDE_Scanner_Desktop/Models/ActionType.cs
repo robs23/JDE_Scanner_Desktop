@@ -52,6 +52,8 @@ namespace JDE_Scanner_Desktop.Models
         public bool? ActionsApplicable { get; set; }
         [DisplayName("Wymaga przypisania użytkownika")]
         public bool? RequireUsersAssignment { get; set; }
+        [DisplayName("Pokaż na pulpicie")]
+        public bool? ShowOnDashboard { get; set; }
 
 
         public async Task<bool> Add()

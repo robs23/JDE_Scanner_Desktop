@@ -61,6 +61,7 @@ namespace JDE_Scanner_Desktop
             cmbPartsApplicable.DataSource = new List<bool> { false, true };
             cmbActionsApplicable.DataSource = new List<bool> { false, true };
             cmbRequireUserAssignment.DataSource = new List<bool> { false, true };
+            cmbShowOnDashboard.DataSource = new List<bool> { false, true };
 
             if (mode == 2)
             {
@@ -74,6 +75,7 @@ namespace JDE_Scanner_Desktop
                 cmbPartsApplicable.SelectedIndex = cmbPartsApplicable.FindStringExact(_this.PartsApplicable.ToString());
                 cmbActionsApplicable.SelectedIndex = cmbActionsApplicable.FindStringExact(_this.ActionsApplicable.ToString());
                 cmbRequireUserAssignment.SelectedIndex = cmbRequireUserAssignment.FindStringExact(_this.RequireUsersAssignment.ToString());
+                cmbShowOnDashboard.SelectedIndex = cmbShowOnDashboard.FindStringExact(_this.ShowOnDashboard.ToString());
             }
             
         }
@@ -124,6 +126,10 @@ namespace JDE_Scanner_Desktop
                 {
                     _this.RequireUsersAssignment = bool.Parse(cmbRequireUserAssignment.Text);
                 }
+                if (cmbShowOnDashboard.SelectedItem != null)
+                {
+                    _this.ShowOnDashboard = bool.Parse(cmbShowOnDashboard.Text);
+                }
                 if (mode == 1)
                 {
                     _this.CreatedBy = RuntimeSettings.UserId;
@@ -149,5 +155,6 @@ namespace JDE_Scanner_Desktop
             }
             
         }
+
     }
 }
