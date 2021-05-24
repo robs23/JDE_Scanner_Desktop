@@ -47,14 +47,14 @@ namespace JDE_Scanner_Desktop
             looper.Show(this);
             if (MaintenanceOnly)
             {
-                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true&FinishRate=true");
+                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true&FinishRate=true&HandlingsLength=true");
             }else if(OperatorsOnly)
             {
-                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Smarowanie\") ", 'p', "GivenTime=true&FinishRate=true");
+                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Smarowanie\") ", 'p', "GivenTime=true&FinishRate=true&HandlingsLength=true");
             }
             else
             {
-                await Keeper.Refresh();
+                await Keeper.Refresh(parameters: "HandlingsLength=true");
             }
             
             source.DataSource = Keeper.Items;
@@ -62,7 +62,7 @@ namespace JDE_Scanner_Desktop
             source.ResetBindings(false);
             if (MaintenanceOnly || OperatorsOnly)
             {
-                List<string> Columns = new List<string>() {"ProcessId","Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
+                List<string> Columns = new List<string>() {"ProcessId","Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan", "HandlingsLength", "ProcessLength" };
                 AdjustColumnVisibility(Columns);
             }
             else

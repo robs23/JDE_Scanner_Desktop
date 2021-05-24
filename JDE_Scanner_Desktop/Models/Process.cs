@@ -168,6 +168,7 @@ namespace JDE_Scanner_Desktop.Models
         public LogsKeeper Logs { get; set; }
         [DisplayName("Przypisani obsługujący")]
         public string AssignedUserNames { get; set; }
+
         [Browsable(false)]
         public ProcessActionsKeeper ProcessActions { get; set; }
         [Browsable(false)]
@@ -184,6 +185,10 @@ namespace JDE_Scanner_Desktop.Models
 
         [DisplayName("Terminowość")]
         public string TimingVsPlan { get; set; }
+        [DisplayName("Długość zgłoszenia")]
+        public int? ProcessLength { get; set; }
+        [DisplayName("Długość obsługi")]
+        public int? HandlingsLength { get; set; }
         [DisplayName("Reaktywowany")]
         public bool? IsResurrected { get; set; }
         [DisplayName("Ma załączniki")]
