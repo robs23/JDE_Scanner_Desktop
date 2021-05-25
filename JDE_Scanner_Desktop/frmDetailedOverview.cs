@@ -2,7 +2,6 @@
 using JDE_Scanner_Desktop.CustomControls;
 using JDE_Scanner_Desktop.Models;
 using NuGet;
-using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,6 +82,11 @@ namespace JDE_Scanner_Desktop
             await Task.WhenAll(loadImagesTask, loadResults);
             DisplayRecentImages();
             DisplayProcessResutls();
+        }
+
+        private void chartProgress_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
