@@ -1,4 +1,5 @@
-﻿using JDE_Scanner_Desktop.Models;
+﻿using FontAwesome.Sharp;
+using JDE_Scanner_Desktop.Models;
 using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
@@ -81,5 +82,13 @@ namespace JDE_Scanner_Desktop
         }
 
         public static FileKeeper UploadKeeper { get; set; }
+
+        public static Dictionary<string, IconChar> ProcessIcons = new Dictionary<string, IconChar>()
+        {
+            {"Awaria", IconChar.ExclamationTriangle },
+            {"Konserwacja", IconChar.Tasks },
+            {"Smarowanie", IconChar.OilCan },
+            {"Karta defektu", IconChar.Viruses }
+        };
     }
 }

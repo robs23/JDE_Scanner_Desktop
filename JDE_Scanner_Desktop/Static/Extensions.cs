@@ -10,6 +10,7 @@ using System.Collections;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace JDE_Scanner_Desktop.Static
 {
@@ -164,6 +165,26 @@ namespace JDE_Scanner_Desktop.Static
             panel.Tag = form;
             form.BringToFront();
             form.Show();
+        }
+
+        public static DateTime StartOfWeek(this DateTime dt)
+        {
+            DayOfWeek startOfWeek = DayOfWeek.Monday;
+            int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
+            DateTime mon = dt.AddDays(-1 * diff).Date;
+            return mon.AddHours(-2);
+        }
+
+        public static int IsoWeekOfYear(this DateTime time)
+        {
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            {
+                time = time.AddDays(3);
+            }
+
+            // Return the week of our adjusted day
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Sunday);
         }
     }
 }

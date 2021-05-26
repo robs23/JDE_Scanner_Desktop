@@ -75,7 +75,7 @@ namespace JDE_Scanner_Desktop
         {
             ActivateButton(sender, Color.BlueViolet);
             DateTime now = DateTime.Now;
-            frmDetailedOverview DetailForm = new frmDetailedOverview(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), new DateTime(now.Year, now.Month, now.Day, 23, 59, 59));
+            frmDetailedOverview DetailForm = new frmDetailedOverview(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), new DateTime(now.Year, now.Month, now.Day, 23, 59, 59), Enums.ProcessActionStatsDivisionType.Daily);
             DetailForm.ShowInPanel(pnlDesktop);
         }
 
@@ -83,18 +83,26 @@ namespace JDE_Scanner_Desktop
         {
             ActivateButton(sender, Color.Coral);
             DateTime now = DateTime.Now.AddDays(-1);
-            frmDetailedOverview DetailForm = new frmDetailedOverview(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), new DateTime(now.Year, now.Month, now.Day, 23, 59, 59));
+            frmDetailedOverview DetailForm = new frmDetailedOverview(new DateTime(now.Year, now.Month, now.Day, 0, 0, 0), new DateTime(now.Year, now.Month, now.Day, 23, 59, 59), Enums.ProcessActionStatsDivisionType.Daily);
             DetailForm.ShowInPanel(pnlDesktop);
         }
 
         private void btnThisWeek_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, Color.ForestGreen);
+            DateTime now = DateTime.Now;
+            DateTime monday = now.StartOfWeek();
+            frmDetailedOverview DetailForm = new frmDetailedOverview(monday, monday.AddDays(7), Enums.ProcessActionStatsDivisionType.Weekly);
+            DetailForm.ShowInPanel(pnlDesktop);
         }
 
         private void btnPrevWeek_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, Color.DarkKhaki);
+            DateTime now = DateTime.Now;
+            DateTime monday = now.StartOfWeek().AddDays(-7);
+            frmDetailedOverview DetailForm = new frmDetailedOverview(monday, monday.AddDays(7), Enums.ProcessActionStatsDivisionType.Weekly);
+            DetailForm.ShowInPanel(pnlDesktop);
         }
 
         private void btnThisMonth_Click(object sender, EventArgs e)
@@ -102,7 +110,7 @@ namespace JDE_Scanner_Desktop
             ActivateButton(sender, Color.Chocolate);
             DateTime start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0);
             DateTime end = start.AddMonths(1).AddDays(-1);
-            frmDetailedOverview DetailForm = new frmDetailedOverview(start, end);
+            frmDetailedOverview DetailForm = new frmDetailedOverview(start, end, Enums.ProcessActionStatsDivisionType.Monthly);
             DetailForm.ShowInPanel(pnlDesktop);
         }
 
@@ -111,7 +119,7 @@ namespace JDE_Scanner_Desktop
             ActivateButton(sender, Color.DeepPink);
             DateTime start = new DateTime(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month, 1, 0, 0, 0);
             DateTime end = start.AddMonths(1).AddDays(-1);
-            frmDetailedOverview DetailForm = new frmDetailedOverview(start, end);
+            frmDetailedOverview DetailForm = new frmDetailedOverview(start, end, Enums.ProcessActionStatsDivisionType.Monthly);
             DetailForm.ShowInPanel(pnlDesktop);
         }
     }

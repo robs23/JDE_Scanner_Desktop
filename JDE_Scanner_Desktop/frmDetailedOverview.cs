@@ -1,16 +1,19 @@
 ﻿using FontAwesome.Sharp;
 using JDE_Scanner_Desktop.CustomControls;
 using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using NuGet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static JDE_Scanner_Desktop.Static.Enums;
 
 namespace JDE_Scanner_Desktop
 {
@@ -19,20 +22,22 @@ namespace JDE_Scanner_Desktop
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public FileKeeper ImageInfoKeeper { get; set; }
+        public ProcessesKeeper ProcessKeeper { get; set; }
+        public ProcessActionsKeeper ProcessActionKeeper { get; set; }
         public List<ImageInfo> ImageInfos { get; set; }
+        public List<dynamic> ProcessStats { get; set; }
+        public List<dynamic> ProcessActionStats { get; set; }
+        public ProcessActionStatsDivisionType DivisionType { get; set; }
 
-        public frmDetailedOverview()
+        public frmDetailedOverview(DateTime dateFrom, DateTime dateTo, ProcessActionStatsDivisionType divisionType)
         {
             InitializeComponent();
             ImageInfoKeeper = new FileKeeper(this);
-        }
-
-        public frmDetailedOverview(DateTime dateFrom, DateTime dateTo)
-        {
-            InitializeComponent();
-            ImageInfoKeeper = new FileKeeper(this);
+            ProcessKeeper = new ProcessesKeeper();
+            ProcessActionKeeper = new ProcessActionsKeeper();
             DateFrom = dateFrom;
             DateTo = dateTo;
+            DivisionType = divisionType;
         }
 
         public async Task LoadRecentImages()
@@ -41,24 +46,75 @@ namespace JDE_Scanner_Desktop
         }
         public async Task LoadProcessResults()
         {
-            await Task.Delay(100);
+            ProcessStats = await ProcessKeeper.GetProcessStats(DateFrom, DateTo);
+        }
+
+        public async Task LoadProcessActions()
+        {
+            if(DivisionType == ProcessActionStatsDivisionType.Daily)
+            {
+                try
+                {
+                    List<Task<List<dynamic>>> tasks = new List<Task<List<dynamic>>>();
+                    ActionTypesKeeper atk = new ActionTypesKeeper();
+                    await atk.Refresh();
+                    int year = DateTime.Now.Year;
+                    int week = DateTime.Now.IsoWeekOfYear();
+
+                    foreach (var at in atk.Items)
+                    {
+                        if (at.ActionsApplicable == true)
+                        {
+                            //let's get its stats
+                            Task<List<dynamic>> getAtStats = Task.Run(() => ProcessActionKeeper.GetProcessActionStats(year, week, ProcessActionStatsDivisionType.Daily, at.ActionTypeId));
+                            tasks.Add(getAtStats);
+                        }
+                    }
+                    if (tasks.Any())
+                    {
+                        var results = await Task.WhenAll(tasks);
+                        List<dynamic> ints = new List<dynamic>();
+                        foreach (var r in results)
+                        {
+                            ints.Add(r.FirstOrDefault());
+                        }
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Wystąpił problem przy pobieraniu statystyk wykonania czynności w listach kontrolnych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         public async Task DisplayProcessResutls()
         {
             pnlProcesses.Controls.Clear();
-            ThreeRowsColumn DefectCards = new ThreeRowsColumn(name: "Karty defektów", icon: IconChar.Viruses, l1Text: "10", l2Text: "150", l2Color: Color.Green);
-            DefectCards.Dock = DockStyle.Left;
-            pnlProcesses.Controls.Add(DefectCards);
-            ThreeRowsColumn Smearings = new ThreeRowsColumn(name: "Smarowania", icon: IconChar.OilCan, l1Text: "10", l2Text: "150", l2Color: Color.Green);
-            Smearings.Dock = DockStyle.Left;
-            pnlProcesses.Controls.Add(Smearings);
-            ThreeRowsColumn Maintenance = new ThreeRowsColumn(name: "Konserwacje", icon: IconChar.Tasks, l1Text: "10", l2Text: "150", l2Color: Color.Green);
-            Maintenance.Dock = DockStyle.Left;
-            pnlProcesses.Controls.Add(Maintenance);
-            ThreeRowsColumn Breakdowns = new ThreeRowsColumn(name: "Awarie", icon: IconChar.ExclamationTriangle, l1Text: "3", l2Text: "290", l2Color: Color.Red);
-            Breakdowns.Dock = DockStyle.Left;
-            pnlProcesses.Controls.Add(Breakdowns);
+            if (ProcessStats.Any())
+            {
+                foreach(var item in ProcessStats)
+                {
+                    if (item.ShowOnDashboard == true)
+                    {
+                        IconChar icon = IconChar.None;
+                        string n = item.Name;
+                        bool existent = RuntimeSettings.ProcessIcons.TryGetValue(n, out icon);
+
+
+                        ThreeRowsColumn card = new ThreeRowsColumn();
+                        card.Name = item.Name;
+                        card.Icon = icon;
+                        card.L1Text = item.Count.ToString();
+                        card.L2Text = item.Result.ToString();
+                        card.L3Text = item.PercentOfAll.ToString("0.00");
+                        card.Dock = DockStyle.Left;
+                        pnlProcesses.Controls.Add(card);
+                    }
+                }
+            }
+
             ThreeRowsColumn Headlines = new ThreeRowsColumn();
             Headlines.Dock = DockStyle.Left;
             pnlProcesses.Controls.Add(Headlines);
@@ -79,9 +135,18 @@ namespace JDE_Scanner_Desktop
         {
             Task loadImagesTask = Task.Run(() => LoadRecentImages());
             Task loadResults = Task.Run(() => LoadProcessResults());
-            await Task.WhenAll(loadImagesTask, loadResults);
+            Task loadProcessActions = Task.Run(() => LoadProcessActions());
+
+            await Task.WhenAll(loadImagesTask, loadResults, loadProcessActions);
+
             DisplayRecentImages();
             DisplayProcessResutls();
+            DisplayProcessActions();
+        }
+
+        private async Task DisplayProcessActions()
+        {
+            
         }
 
         private void chartProgress_Click(object sender, EventArgs e)

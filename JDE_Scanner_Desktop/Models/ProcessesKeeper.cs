@@ -118,6 +118,33 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+        public async Task<dynamic> GetProcessStats(DateTime dateFrom, DateTime dateTo)
+        {
+            List<dynamic> Stats = new List<dynamic>();
+
+            string url = Secrets.ApiAddress + $"GetProcessStats?token={Secrets.TenantToken}&dateFrom={dateFrom}&dateTo={dateTo}";
+
+            using (var client = new HttpClient())
+            {
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        try
+                        {
+                            var userJsonString = await response.Content.ReadAsStringAsync();
+                            Stats = JsonConvert.DeserializeObject<dynamic[]>(userJsonString).ToList();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Wystąpił błąd podczas deserializacji odpowiedzi z serwera. Szczegóły: {ex.ToString()}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                } 
+            }
+
+            return Stats;
+        }
         
     }
 }

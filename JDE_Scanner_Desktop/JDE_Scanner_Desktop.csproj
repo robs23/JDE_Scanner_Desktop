@@ -480,6 +480,7 @@
     <Compile Include="rrComboBox.Designer.cs">
       <DependentUpon>rrComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Static\Enums.cs" />
     <Compile Include="Static\Extensions.cs" />
     <Compile Include="Static\RuntimeSettings.cs" />
     <Compile Include="Static\Secrets.cs" />
