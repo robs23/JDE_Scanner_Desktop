@@ -23,7 +23,7 @@ namespace JDE_Scanner_Desktop.Models
             string url = string.Empty;
             if(divisionType == Enums.ProcessActionStatsDivisionType.Daily)
             {
-                url = Secrets.ApiAddress + $"GetDoneActionsDaily?token={Secrets.TenantToken}&year={year}&week={week}&actionTypeId={actionTypeId}&cumulative=true";
+                url = Secrets.ApiAddress + $"GetDoneActionsDaily?token={Secrets.TenantToken}&year={year}&week={week}&actionTypeId={actionTypeId}&cumulate=true";
             }
 
             if (!string.IsNullOrEmpty(url))
