@@ -24,6 +24,12 @@ namespace JDE_Scanner_Desktop.Models
             if(divisionType == Enums.ProcessActionStatsDivisionType.Daily)
             {
                 url = Secrets.ApiAddress + $"GetDoneActionsDaily?token={Secrets.TenantToken}&year={year}&week={week}&actionTypeId={actionTypeId}&cumulate=true";
+            }else if(divisionType == Enums.ProcessActionStatsDivisionType.Weekly)
+            {
+                url = Secrets.ApiAddress + $"GetDoneActionsWeekly?token={Secrets.TenantToken}&actionTypeId={actionTypeId}";
+            }else if(divisionType == Enums.ProcessActionStatsDivisionType.Monthly)
+            {
+                url = Secrets.ApiAddress + $"GetDoneActionsMonthly?token={Secrets.TenantToken}&actionTypeId={actionTypeId}";
             }
 
             if (!string.IsNullOrEmpty(url))
@@ -37,7 +43,10 @@ namespace JDE_Scanner_Desktop.Models
                             try
                             {
                                 var userJsonString = await response.Content.ReadAsStringAsync();
-                                Stats = JsonConvert.DeserializeObject<dynamic[]>(userJsonString).ToList();
+                                if (!string.IsNullOrEmpty(userJsonString))
+                                {
+                                    Stats = JsonConvert.DeserializeObject<dynamic[]>(userJsonString).ToList();
+                                }
                             }
                             catch (Exception ex)
                             {

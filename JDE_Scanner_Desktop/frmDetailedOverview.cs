@@ -56,43 +56,40 @@ namespace JDE_Scanner_Desktop
 
         public async Task LoadProcessActions()
         {
-            if(DivisionType == ProcessActionStatsDivisionType.Daily)
+            try
             {
-                try
-                {
-                    List<Task<List<dynamic>>> tasks = new List<Task<List<dynamic>>>();
+                List<Task<List<dynamic>>> tasks = new List<Task<List<dynamic>>>();
                     
-                    await ActionTypes.Refresh();
-                    int year = DateTime.Now.Year;
-                    int week = DateTime.Now.IsoWeekOfYear();
+                await ActionTypes.Refresh();
+                int year = DateTime.Now.Year;
+                int week = DateTime.Now.IsoWeekOfYear();
 
-                    foreach (var at in ActionTypes.Items)
+                foreach (var at in ActionTypes.Items)
+                {
+                    if (at.ActionsApplicable == true)
                     {
-                        if (at.ActionsApplicable == true)
-                        {
-                            //let's get its stats
-                            Task<List<dynamic>> getAtStats = Task.Run(() => ProcessActionKeeper.GetProcessActionStats(year, week, ProcessActionStatsDivisionType.Daily, at.ActionTypeId));
-                            tasks.Add(getAtStats);
-                        }
+                        //let's get its stats
+                        Task<List<dynamic>> getAtStats = Task.Run(() => ProcessActionKeeper.GetProcessActionStats(year, week, DivisionType, at.ActionTypeId));
+                        tasks.Add(getAtStats);
                     }
-                    if (tasks.Any())
-                    {
-                        var results = await Task.WhenAll(tasks);
+                }
+                if (tasks.Any())
+                {
+                    var results = await Task.WhenAll(tasks);
                         
 
-                        foreach (var r in results)
-                        {
-                            chartSeries.Add(r);
-                        }
-                        //string s = chartSeries.FirstOrDefault().FirstOrDefault().Weekday;
+                    foreach (var r in results)
+                    {
+                        chartSeries.Add(r);
                     }
+                    //string s = chartSeries.FirstOrDefault().FirstOrDefault().Weekday;
+                }
                     
-                }
-                catch (Exception ex)
-                {
+            }
+            catch (Exception ex)
+            {
 
-                    MessageBox.Show("Wystąpił problem przy pobieraniu statystyk wykonania czynności w listach kontrolnych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Wystąpił problem przy pobieraniu statystyk wykonania czynności w listach kontrolnych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -166,22 +163,38 @@ namespace JDE_Scanner_Desktop
                
                 foreach (var s in chartSeries)
                 {
-                    int atId = Convert.ToInt32(s.FirstOrDefault().Type);
-                    string sName = ActionTypes.Items.FirstOrDefault(i => i.ActionTypeId == atId).Name;
-                    if (!string.IsNullOrEmpty(sName))
+                    if (s.Any())
                     {
-                        chartProgress.Series.Add(sName);
-                        chartProgress.Series[sName].XValueType = ChartValueType.String;
-                        chartProgress.Series[sName].ChartType = SeriesChartType.Column;
-                        chartProgress.Series[sName].IsValueShownAsLabel = true;
-                        foreach(var p in s)
+                        if(DivisionType == ProcessActionStatsDivisionType.Weekly || DivisionType == ProcessActionStatsDivisionType.Monthly)
                         {
-                            string day = p.Weekday;
-                            double percent = Math.Round(Convert.ToDouble(p.Done),1);
-                            int i = chartProgress.Series[sName].Points.AddXY(day, percent);
+                            s.Reverse();
                         }
+                        int atId = Convert.ToInt32(s.FirstOrDefault().Type);
+                        string sName = ActionTypes.Items.FirstOrDefault(i => i.ActionTypeId == atId).Name;
+                        if (!string.IsNullOrEmpty(sName))
+                        {
+                            chartProgress.Series.Add(sName);
+                            chartProgress.Series[sName].XValueType = ChartValueType.String;
+                            chartProgress.Series[sName].ChartType = SeriesChartType.Column;
+                            chartProgress.Series[sName].IsValueShownAsLabel = true;
+                            foreach (var p in s)
+                            {
+                                double percent = Math.Round(Convert.ToDouble(p.Done), 1);
+                                if (DivisionType == ProcessActionStatsDivisionType.Daily)
+                                {
+                                    int i = chartProgress.Series[sName].Points.AddXY((string)p.Weekday, percent);
+                                }else if(DivisionType == ProcessActionStatsDivisionType.Weekly)
+                                {
+                                    int i = chartProgress.Series[sName].Points.AddXY((int)p.Week, percent);
+                                }else if (DivisionType == ProcessActionStatsDivisionType.Monthly)
+                                {
+                                    int i = chartProgress.Series[sName].Points.AddXY((string)p.Year + "_" + (string)p.Month, percent);
+                                }
+
+                            }
+                        }
+                        //chartProgress.Series[sName].Points[1].Color = Color.Red; 
                     }
-                    chartProgress.Series[sName].Points[1].Color = Color.Red;
                 }
             }
         }
