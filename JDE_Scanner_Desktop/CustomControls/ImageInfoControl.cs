@@ -18,6 +18,7 @@ namespace JDE_Scanner_Desktop.CustomControls
     {
         public Form ParentForm { get; set; }
         public ImageInfo _thisItem;
+        frmLooper looper;
         public ImageInfo thisItem
         {
             get { return _thisItem; }
@@ -34,35 +35,52 @@ namespace JDE_Scanner_Desktop.CustomControls
         {
             InitializeComponent();
             ParentForm = parent;
+            looper = new frmLooper(parent);
         }
 
         public async Task OpenImage()
         {
+            looper.Show();
             System.Diagnostics.Process.Start($"{Secrets.ApiAddress}{RuntimeSettings.FilesPath}{thisItem.LinkName}");
+            looper.Hide();
         }
 
         public async Task GoToAssign()
         {
-            if(thisItem.ProcessId != null)
+            looper.Show();
+            try
             {
-                var processKeeper = new ProcessesKeeper();
-                await processKeeper.GetByProcessId((int)thisItem.ProcessId);
-                frmProcess FrmProcess = new frmProcess(processKeeper.Items.FirstOrDefault(), ParentForm);
-                FrmProcess.Show();
-            }else if(thisItem.PlaceId != null)
-            {
-                var placeKeeper = new PlacesKeeper();
-                await placeKeeper.Refresh(query: $"PlaceId={thisItem.PlaceId}");
-                frmPlace FrmPlace = new frmPlace(placeKeeper.Items.FirstOrDefault(), ParentForm);
-                FrmPlace.Show();
+                if (thisItem.ProcessId != null)
+                {
+                    var processKeeper = new ProcessesKeeper();
+                    await processKeeper.GetByProcessId((int)thisItem.ProcessId);
+                    frmProcess FrmProcess = new frmProcess(processKeeper.Items.FirstOrDefault(), ParentForm);
+                    FrmProcess.Show();
+                }
+                else if (thisItem.PlaceId != null)
+                {
+                    var placeKeeper = new PlacesKeeper();
+                    await placeKeeper.Refresh(query: $"PlaceId={thisItem.PlaceId}");
+                    frmPlace FrmPlace = new frmPlace(placeKeeper.Items.FirstOrDefault(), ParentForm);
+                    FrmPlace.Show();
+                }
+                else if (thisItem.PartId != null)
+                {
+                    var partKeeper = new PartKeeper();
+                    await partKeeper.Refresh(query: $"PartId={thisItem.PartId}");
+                    frmPart FrmPart = new frmPart(partKeeper.Items.FirstOrDefault(), ParentForm);
+                    FrmPart.Show();
+                }
             }
-            else if (thisItem.PartId != null)
+            catch (Exception ex)
             {
-                var partKeeper = new PartKeeper();
-                await partKeeper.Refresh(query: $"PartId={thisItem.PartId}");
-                frmPart FrmPart = new frmPart(partKeeper.Items.FirstOrDefault(), ParentForm);
-                FrmPart.Show();
+                throw;
             }
+            finally
+            {
+                looper.Hide();
+            }
+
         }
 
         private void ImageInfoControl_MouseEnter(object sender, EventArgs e)

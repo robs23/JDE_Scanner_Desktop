@@ -174,7 +174,15 @@ namespace JDE_Scanner_Desktop
                         if (!string.IsNullOrEmpty(sName))
                         {
                             chartProgress.Series.Add(sName);
-                            chartProgress.Series[sName].XValueType = ChartValueType.String;
+                            if(DivisionType == ProcessActionStatsDivisionType.Monthly)
+                            {
+                                chartProgress.Series[sName].XValueType = ChartValueType.Date;
+                            }
+                            else
+                            {
+                                chartProgress.Series[sName].XValueType = ChartValueType.String;
+                            }
+                            
                             chartProgress.Series[sName].ChartType = SeriesChartType.Column;
                             chartProgress.Series[sName].IsValueShownAsLabel = true;
                             foreach (var p in s)
@@ -188,7 +196,17 @@ namespace JDE_Scanner_Desktop
                                     int i = chartProgress.Series[sName].Points.AddXY((int)p.Week, percent);
                                 }else if (DivisionType == ProcessActionStatsDivisionType.Monthly)
                                 {
-                                    int i = chartProgress.Series[sName].Points.AddXY((string)p.Year + "_" + (string)p.Month, percent);
+                                    int month = Convert.ToInt32(p.Month);
+                                    string prefix = "";
+
+                                    if (month < 10)
+                                    {
+                                        prefix = "0";
+                                    }
+                                    string label = (string)p.Year + "_" + prefix + (string)p.Month;
+                                    DateTime firstDate = p.FirstDate;
+
+                                    int i = chartProgress.Series[sName].Points.AddXY(firstDate, percent);
                                 }
 
                             }
