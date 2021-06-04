@@ -22,6 +22,11 @@ namespace JDE_Scanner_Desktop.CustomControls
         private Color _L2Color;
         private string _L3Text;
         private Color _L3Color;
+        private Action<int> _Action;
+        private int? _ActionTypeId;
+        private DateTime? _DateFrom;
+        private DateTime? _DateTo;
+
 
         public string Name
         {
@@ -106,8 +111,36 @@ namespace JDE_Scanner_Desktop.CustomControls
             }
         }
 
+        public Action<int> Action
+        {
+            get { return _Action; }
+            set
+            {
+                _Action = value;
+            }
+        }
+
+        public int? ActionTypeId
+        {
+            get { return _ActionTypeId; }
+            set { _ActionTypeId = value; }
+        }
+        
+        public DateTime? DateFrom
+        {
+            get { return _DateFrom; }
+            set { _DateFrom = value; }
+        }
+
+        public DateTime? DateTo
+        {
+            get { return _DateTo; }
+            set { _DateTo = value; }
+        }
+
+
         public ThreeRowsColumn(string name = null, IconChar icon = IconChar.None, Color? nameColor = null, string l1Text = null, Color? l1Color = null,
-                                string l2Text = null, Color? l2Color = null, string l3Text = null, Color? l3Color = null)
+                                string l2Text = null, Color? l2Color = null, string l3Text = null, Color? l3Color = null, Action<int> action=null, int? actionTypeId = null, DateTime? dateFrom=null, DateTime? dateTo=null)
         {
             InitializeComponent();
             Name = name ?? "Rodzaj";
@@ -119,6 +152,10 @@ namespace JDE_Scanner_Desktop.CustomControls
             L2Color = l2Color ?? Color.Black;
             L3Text = l3Text ?? "Razem [%]";
             L3Color = l3Color ?? Color.Black;
+            Action = action;
+            ActionTypeId = actionTypeId;
+            DateFrom = dateFrom;
+            DateTo = dateTo;
         }
 
 

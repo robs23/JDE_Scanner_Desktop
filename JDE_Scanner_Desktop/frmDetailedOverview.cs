@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,6 +114,10 @@ namespace JDE_Scanner_Desktop
                         card.L1Text = item.Count.ToString();
                         card.L2Text = item.Result.ToString();
                         card.L3Text = item.PercentOfAll.ToString("0.00");
+                        card.Action = new Action<int>(OpenProcesses);
+                        card.ActionTypeId = 2;
+                        card.DateFrom = DateFrom;
+                        card.DateTo = DateTo;
                         card.Dock = DockStyle.Left;
                         pnlProcesses.Controls.Add(card);
                     }
@@ -122,6 +127,12 @@ namespace JDE_Scanner_Desktop
             ThreeRowsColumn Headlines = new ThreeRowsColumn();
             Headlines.Dock = DockStyle.Left;
             pnlProcesses.Controls.Add(Headlines);
+        }
+
+        public void OpenProcesses(int typeId)
+        {
+            frmProcesses FrmProcesses = new frmProcesses(this, typeId);
+            FrmProcesses.Show(this);
         }
 
         private async Task DisplayRecentImages()
@@ -154,6 +165,7 @@ namespace JDE_Scanner_Desktop
 
             if (chartSeries.Any())
             {
+                List<CustomLabel> Labels = new List<CustomLabel>();
                 chartProgress.ChartAreas[0].AxisY.Title = "Wykonanie [%]";
                 chartProgress.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Gray;
                 chartProgress.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
@@ -168,6 +180,7 @@ namespace JDE_Scanner_Desktop
                         if(DivisionType == ProcessActionStatsDivisionType.Weekly || DivisionType == ProcessActionStatsDivisionType.Monthly)
                         {
                             s.Reverse();
+                            chartProgress.ChartAreas[0].AxisY.Minimum = 50;
                         }
                         int atId = Convert.ToInt32(s.FirstOrDefault().Type);
                         string sName = ActionTypes.Items.FirstOrDefault(i => i.ActionTypeId == atId).Name;
@@ -190,23 +203,21 @@ namespace JDE_Scanner_Desktop
                                 double percent = Math.Round(Convert.ToDouble(p.Done), 1);
                                 if (DivisionType == ProcessActionStatsDivisionType.Daily)
                                 {
-                                    int i = chartProgress.Series[sName].Points.AddXY((string)p.Weekday, percent);
-                                }else if(DivisionType == ProcessActionStatsDivisionType.Weekly)
+                                    DateTime date = p.Date;
+                                    string label = p.Weekday;
+                                    int i = chartProgress.Series[sName].Points.AddXY(date, percent);
+                                    chartProgress.ChartAreas[0].AxisX.CustomLabels.Add(date.AddHours(-12).ToOADate(), date.AddHours(12).ToOADate(), label);
+                                }
+                                else if(DivisionType == ProcessActionStatsDivisionType.Weekly)
                                 {
                                     int i = chartProgress.Series[sName].Points.AddXY((int)p.Week, percent);
                                 }else if (DivisionType == ProcessActionStatsDivisionType.Monthly)
                                 {
                                     int month = Convert.ToInt32(p.Month);
-                                    string prefix = "";
-
-                                    if (month < 10)
-                                    {
-                                        prefix = "0";
-                                    }
-                                    string label = (string)p.Year + "_" + prefix + (string)p.Month;
                                     DateTime firstDate = p.FirstDate;
-
+                                    string label = firstDate.ToString("MMMM", CultureInfo.GetCultureInfo("pl-PL"));
                                     int i = chartProgress.Series[sName].Points.AddXY(firstDate, percent);
+                                    chartProgress.ChartAreas[0].AxisX.CustomLabels.Add(firstDate.AddDays(-15).ToOADate(), firstDate.AddDays(15).ToOADate(), label);
                                 }
 
                             }

@@ -21,49 +21,62 @@ namespace JDE_Scanner_Desktop
         frmFilter FrmFilter;
         int page;
         BindingSource source = new BindingSource();
-        bool MaintenanceOnly;
-        bool OperatorsOnly;
+        int? TypeId = null;
+        string QueryParameters = string.Empty;
 
-        public frmProcesses(frmStarter parent, bool maintenanceOnly = false, bool operatorsOnly = false)
+        public frmProcesses(Form parent, int? typeId = null, string queryParameters = null)
         {
             InitializeComponent();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
-            MaintenanceOnly = maintenanceOnly;
-            OperatorsOnly = operatorsOnly;
-            if (MaintenanceOnly)
+            TypeId = typeId;
+            if (queryParameters != null)
+                QueryParameters = "&" + queryParameters;
+        
+            if(typeId != null)
             {
-                Keeper.PageSize = 100;
-                this.Text = "Konserwacje";
-            }else if (OperatorsOnly)
-            {
-                Keeper.PageSize = 100;
-                this.Text = "Smarowanie";
+                if(typeId == 2)
+                {
+                    //Maintenance only
+                    Keeper.PageSize = 100;
+                    this.Text = "Konserwacje";
+                }else if(typeId == 24)
+                {
+                    //Operators only
+                    Keeper.PageSize = 100;
+                    this.Text = "Smarowanie";
+                }
             }
         }
 
         private async void Reload()
         {
             looper.Show(this);
-            if (MaintenanceOnly)
+            if(TypeId != null)
             {
-                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Konserwacja\") ",'p',"GivenTime=true&FinishRate=true&HandlingsLength=true");
-            }else if(OperatorsOnly)
-            {
-                await Keeper.Refresh("ActionTypeName.ToLower().Contains(\"Smarowanie\") ", 'p', "GivenTime=true&FinishRate=true&HandlingsLength=true");
+                await Keeper.Refresh($"ActionTypeId={TypeId}", 'p', "GivenTime=true&FinishRate=true&HandlingsLength=true" + QueryParameters);
             }
             else
             {
-                await Keeper.Refresh(parameters: "HandlingsLength=true");
+                await Keeper.Refresh(parameters: "HandlingsLength=true" + QueryParameters);
             }
             
             source.DataSource = Keeper.Items;
             dgItems.DataSource = source;
             source.ResetBindings(false);
-            if (MaintenanceOnly || OperatorsOnly)
+            if (TypeId != null)
             {
-                List<string> Columns = new List<string>() {"ProcessId","Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan", "HandlingsLength", "ProcessLength" };
-                AdjustColumnVisibility(Columns);
+                if(TypeId ==2 || TypeId == 24)
+                {
+                    List<string> Columns = new List<string>() { "ProcessId", "Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan", "HandlingsLength", "ProcessLength" };
+                    AdjustColumnVisibility(Columns);
+                }
+                else
+                {
+                    List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "Comment", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
+                    AdjustColumnVisibility(null, Columns);
+                }
+                
             }
             else
             {

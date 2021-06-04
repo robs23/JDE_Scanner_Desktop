@@ -328,7 +328,7 @@ namespace JDE_Scanner_Desktop
         {
             if (!RuntimeSettings.CurrentUser.IsAuthorized())
                 return;
-            frmProcesses FrmProcesses = new frmProcesses(this,maintenanceOnly:true);
+            frmProcesses FrmProcesses = new frmProcesses(this,typeId:2);
             FrmProcesses.Show(this);
         }
 
@@ -394,7 +394,7 @@ namespace JDE_Scanner_Desktop
 
         private void smarowaniaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmProcesses FrmProcesses = new frmProcesses(this, operatorsOnly: true);
+            frmProcesses FrmProcesses = new frmProcesses(this, typeId: 24);
             FrmProcesses.Show(this);
         }
     }
