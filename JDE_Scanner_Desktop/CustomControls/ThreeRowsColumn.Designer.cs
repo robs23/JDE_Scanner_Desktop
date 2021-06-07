@@ -61,6 +61,7 @@
             this.btnProcess.Text = "Text";
             this.btnProcess.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnProcess.UseVisualStyleBackColor = true;
+            this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
             // 
             // label1
             // 

@@ -22,7 +22,7 @@ namespace JDE_Scanner_Desktop
         int page;
         BindingSource source = new BindingSource();
         int? TypeId = null;
-        string QueryParameters = string.Empty;
+        string QueryParameters = null;
 
         public frmProcesses(Form parent, int? typeId = null, string queryParameters = null)
         {
@@ -31,7 +31,7 @@ namespace JDE_Scanner_Desktop
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             TypeId = typeId;
             if (queryParameters != null)
-                QueryParameters = "&" + queryParameters;
+                QueryParameters = queryParameters;
         
             if(typeId != null)
             {
@@ -54,11 +54,13 @@ namespace JDE_Scanner_Desktop
             looper.Show(this);
             if(TypeId != null)
             {
-                await Keeper.Refresh($"ActionTypeId={TypeId}", 'p', "GivenTime=true&FinishRate=true&HandlingsLength=true" + QueryParameters);
+                string connector = QueryParameters == null ? "" : " AND ";
+                
+                await Keeper.Refresh($"ActionTypeId={TypeId}{connector}{QueryParameters}" , 'p', "GivenTime=true&FinishRate=true&HandlingsLength=true");
             }
             else
             {
-                await Keeper.Refresh(parameters: "HandlingsLength=true" + QueryParameters);
+                await Keeper.Refresh(query: QueryParameters, parameters: "HandlingsLength=true");
             }
             
             source.DataSource = Keeper.Items;

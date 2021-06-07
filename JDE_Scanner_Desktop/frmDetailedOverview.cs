@@ -114,8 +114,8 @@ namespace JDE_Scanner_Desktop
                         card.L1Text = item.Count.ToString();
                         card.L2Text = item.Result.ToString();
                         card.L3Text = item.PercentOfAll.ToString("0.00");
-                        card.Action = new Action<int>(OpenProcesses);
-                        card.ActionTypeId = 2;
+                        card.Action = new Action<int, string>(OpenProcesses);
+                        card.ActionTypeId = item.ActionTypeId;
                         card.DateFrom = DateFrom;
                         card.DateTo = DateTo;
                         card.Dock = DockStyle.Left;
@@ -129,10 +129,10 @@ namespace JDE_Scanner_Desktop
             pnlProcesses.Controls.Add(Headlines);
         }
 
-        public void OpenProcesses(int typeId)
+        public void OpenProcesses(int typeId, string parameters)
         {
-            frmProcesses FrmProcesses = new frmProcesses(this, typeId);
-            FrmProcesses.Show(this);
+            frmProcesses FrmProcesses = new frmProcesses(this, typeId, parameters);
+            FrmProcesses.Show();
         }
 
         private async Task DisplayRecentImages()
