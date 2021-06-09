@@ -122,7 +122,7 @@ namespace JDE_Scanner_Desktop.Models
         {
             List<dynamic> Stats = new List<dynamic>();
 
-            string url = Secrets.ApiAddress + $"GetProcessStats?token={Secrets.TenantToken}&dateFrom={dateFrom}&dateTo={dateTo}";
+            string url = Secrets.ApiAddress + $"GetProcessStats?token={Secrets.TenantToken}&dateFrom={dateFrom.ToString("yyyy-MM-dd HH:mm:ss")}&dateTo={dateTo.ToString("yyyy-MM-dd HH:mm:ss")}";
 
             using (var client = new HttpClient())
             {
