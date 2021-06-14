@@ -448,6 +448,8 @@
     <Compile Include="Models\CompaniesKeeper.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\PartKeeper.cs" />
+    <Compile Include="Models\PartPrice.cs" />
+    <Compile Include="Models\PartPriceKeeper.cs" />
     <Compile Include="Models\PartUsage.cs" />
     <Compile Include="Models\PartUsageKeeper.cs" />
     <Compile Include="Models\Process.cs" />
@@ -461,6 +463,8 @@
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\AreasKeeper.cs" />
     <Compile Include="Models\Set.cs" />
+    <Compile Include="Models\StockTaking.cs" />
+    <Compile Include="Models\StockTakingKeeper.cs" />
     <Compile Include="Models\Tenant.cs" />
     <Compile Include="Models\Unit.cs" />
     <Compile Include="Models\UnitKeeper.cs" />

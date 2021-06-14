@@ -14,5 +14,11 @@ namespace JDE_Scanner_Desktop.Static
             Weekly,
             Monthly
         }
+
+        public enum Currency
+        {
+            PLN,
+            EUR
+        }
     }
 }

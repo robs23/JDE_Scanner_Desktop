@@ -118,6 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnChangeStock.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAADKSURBVDhPvdI/DgFBHMXxEUougAtoRBxDuIno9KJQKBQ4
+        gQL9xjm4AxKJltKf70t2kilmZkfjJZ9sdrO/t5OZNf9KGWPM0NSDX6LhDT65G1pITgV72AI5o4rCjDCB
+        SnZwS3qIZoA39LIt2eb3d9QRTBdPuF+0JWu0EYx2+Qp32C2JpoYTfMOyRDBa3gG+QcmgIw1mBd+gHBE9
+        thKm8A1f0EA0C6hEv6o7/EAHhdHLc6hEV92/0EdS7Be1ApVoRUMkxxaI9kIlCTHmC5RYTO27QZLOAAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnChangePrice.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAADKSURBVDhPvdI/DgFBHMXxEUougAtoRBxDuIno9KJQKBQ4
+        gQL9xjm4AxKJltKf70t2kilmZkfjJZ9sdrO/t5OZNf9KGWPM0NSDX6LhDT65G1pITgV72AI5o4rCjDCB
+        SnZwS3qIZoA39LIt2eb3d9QRTBdPuF+0JWu0EYx2+Qp32C2JpoYTfMOyRDBa3gG+QcmgIw1mBd+gHBE9
+        thKm8A1f0EA0C6hEv6o7/EAHhdHLc6hEV92/0EdS7Be1ApVoRUMkxxaI9kIlCTHmC5RYTO27QZLOAAAA
+        AElFTkSuQmCC
+</value>
+  </data>
   <data name="btnSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
