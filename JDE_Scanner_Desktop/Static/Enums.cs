@@ -20,5 +20,16 @@ namespace JDE_Scanner_Desktop.Static
             PLN,
             EUR
         }
+
+        public enum PartUnit
+        {
+            sztuki
+        }
+
+        public enum PartDataFormType
+        {
+            Price,
+            Stock
+        }
     }
 }

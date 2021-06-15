@@ -205,6 +205,12 @@
     <Compile Include="frmDetailedOverview.Designer.cs">
       <DependentUpon>frmDetailedOverview.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmGetPartData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGetPartData.Designer.cs">
+      <DependentUpon>frmGetPartData.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOverview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -509,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDetailedOverview.resx">
       <DependentUpon>frmDetailedOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGetPartData.resx">
+      <DependentUpon>frmGetPartData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOverview.resx">
       <DependentUpon>frmOverview.cs</DependentUpon>

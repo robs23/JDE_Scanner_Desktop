@@ -367,5 +367,29 @@ namespace JDE_Scanner_Desktop
             img.Items.Clear();
             pbImage.Image = pbImage.InitialImage;
         }
+
+        private void btnChangePrice_Click(object sender, EventArgs e)
+        {
+            frmGetPartData theForm = new frmGetPartData(Enums.PartDataFormType.Price);
+            theForm.ShowDialog(this);
+        }
+
+        private void btnChangeStock_Click(object sender, EventArgs e)
+        {
+            frmGetPartData theForm = new frmGetPartData(Enums.PartDataFormType.Stock);
+            theForm.ShowDialog(this);
+        }
+
+        private void btnUpdateStock_Click(object sender, EventArgs e)
+        {
+            frmGetPartData StockForm = new frmGetPartData(Enums.PartDataFormType.Stock);
+            StockForm.Show(this);
+        }
+
+        private void btnUpdatePrice_Click(object sender, EventArgs e)
+        {
+            frmGetPartData PriceForm = new frmGetPartData(Enums.PartDataFormType.Price);
+            PriceForm.Show(this);
+        }
     }
 }
