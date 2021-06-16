@@ -368,28 +368,31 @@ namespace JDE_Scanner_Desktop
             pbImage.Image = pbImage.InitialImage;
         }
 
-        private void btnChangePrice_Click(object sender, EventArgs e)
-        {
-            frmGetPartData theForm = new frmGetPartData(Enums.PartDataFormType.Price);
-            theForm.ShowDialog(this);
-        }
-
-        private void btnChangeStock_Click(object sender, EventArgs e)
-        {
-            frmGetPartData theForm = new frmGetPartData(Enums.PartDataFormType.Stock);
-            theForm.ShowDialog(this);
-        }
-
         private void btnUpdateStock_Click(object sender, EventArgs e)
         {
-            frmGetPartData StockForm = new frmGetPartData(Enums.PartDataFormType.Stock);
-            StockForm.Show(this);
+            if(_this.PartId > 0)
+            {
+                frmGetPartData StockForm = new frmGetPartData(Enums.PartDataFormType.Stock, _this.PartId);
+                StockForm.Show(this);
+            }
+            else
+            {
+                MessageBox.Show("Aby zinwentaryzować zapas, należy najpierw zapisać część. Kliknij ikonę dyskietki by zapisać część.", "Część nie została jeszcze utworzona", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
         }
 
         private void btnUpdatePrice_Click(object sender, EventArgs e)
         {
-            frmGetPartData PriceForm = new frmGetPartData(Enums.PartDataFormType.Price);
-            PriceForm.Show(this);
+            if (_this.PartId > 0)
+            {
+                frmGetPartData PriceForm = new frmGetPartData(Enums.PartDataFormType.Price, _this.PartId);
+                PriceForm.Show(this);
+            }
+            else
+            {
+                MessageBox.Show("Aby zaktualizować cenę, należy najpierw zapisać część. Kliknij ikonę dyskietki by zapisać część.", "Część nie została jeszcze utworzona", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }
