@@ -70,7 +70,16 @@
             this.pbQrCode = new System.Windows.Forms.PictureBox();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.pgStock = new System.Windows.Forms.TabPage();
+            this.tlpStocks = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpStocksButtons = new System.Windows.Forms.TableLayoutPanel();
+            this.btnUpdateStock = new System.Windows.Forms.Button();
+            this.dgvStocks = new System.Windows.Forms.DataGridView();
             this.pgPrices = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvPrices = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnUpdatePrice = new System.Windows.Forms.Button();
+            this.pgPlaces = new System.Windows.Forms.TabPage();
             this.pgBoms = new System.Windows.Forms.TabPage();
             this.tlpBoms = new System.Windows.Forms.TableLayoutPanel();
             this.tlpBomsControl = new System.Windows.Forms.TableLayoutPanel();
@@ -78,17 +87,8 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnRefreshBoms = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
-            this.pgPlaces = new System.Windows.Forms.TabPage();
-            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.tlpStocks = new System.Windows.Forms.TableLayoutPanel();
-            this.tlpStocksButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvStocks = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvPrices = new System.Windows.Forms.DataGridView();
-            this.btnUpdatePrice = new System.Windows.Forms.Button();
-            this.btnUpdateStock = new System.Windows.Forms.Button();
+            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -100,19 +100,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.pgStock.SuspendLayout();
+            this.tlpStocks.SuspendLayout();
+            this.tlpStocksButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStocks)).BeginInit();
             this.pgPrices.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).BeginInit();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.pgPlaces.SuspendLayout();
             this.pgBoms.SuspendLayout();
             this.tlpBoms.SuspendLayout();
             this.tlpBomsControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
-            this.pgPlaces.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).BeginInit();
-            this.tlpStocks.SuspendLayout();
-            this.tlpStocksButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStocks)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -620,6 +620,66 @@
             this.pgStock.Text = "Zapas ";
             this.pgStock.UseVisualStyleBackColor = true;
             // 
+            // tlpStocks
+            // 
+            this.tlpStocks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpStocks.ColumnCount = 1;
+            this.tlpStocks.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpStocks.Controls.Add(this.tlpStocksButtons, 0, 0);
+            this.tlpStocks.Controls.Add(this.dgvStocks, 0, 1);
+            this.tlpStocks.Location = new System.Drawing.Point(3, 6);
+            this.tlpStocks.Name = "tlpStocks";
+            this.tlpStocks.RowCount = 2;
+            this.tlpStocks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpStocks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpStocks.Size = new System.Drawing.Size(460, 406);
+            this.tlpStocks.TabIndex = 0;
+            // 
+            // tlpStocksButtons
+            // 
+            this.tlpStocksButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpStocksButtons.ColumnCount = 2;
+            this.tlpStocksButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpStocksButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpStocksButtons.Controls.Add(this.btnUpdateStock, 0, 0);
+            this.tlpStocksButtons.Location = new System.Drawing.Point(3, 3);
+            this.tlpStocksButtons.Name = "tlpStocksButtons";
+            this.tlpStocksButtons.RowCount = 1;
+            this.tlpStocksButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpStocksButtons.Size = new System.Drawing.Size(454, 34);
+            this.tlpStocksButtons.TabIndex = 0;
+            // 
+            // btnUpdateStock
+            // 
+            this.btnUpdateStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateStock.Location = new System.Drawing.Point(3, 3);
+            this.btnUpdateStock.Name = "btnUpdateStock";
+            this.btnUpdateStock.Size = new System.Drawing.Size(94, 28);
+            this.btnUpdateStock.TabIndex = 0;
+            this.btnUpdateStock.Text = "Inwentaryzuj";
+            this.btnUpdateStock.UseVisualStyleBackColor = true;
+            this.btnUpdateStock.Click += new System.EventHandler(this.btnUpdateStock_Click);
+            // 
+            // dgvStocks
+            // 
+            this.dgvStocks.AllowUserToAddRows = false;
+            this.dgvStocks.AllowUserToDeleteRows = false;
+            this.dgvStocks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvStocks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStocks.Location = new System.Drawing.Point(3, 43);
+            this.dgvStocks.Name = "dgvStocks";
+            this.dgvStocks.ReadOnly = true;
+            this.dgvStocks.Size = new System.Drawing.Size(454, 360);
+            this.dgvStocks.TabIndex = 1;
+            // 
             // pgPrices
             // 
             this.pgPrices.Controls.Add(this.tableLayoutPanel2);
@@ -630,6 +690,77 @@
             this.pgPrices.TabIndex = 3;
             this.pgPrices.Text = "Cena";
             this.pgPrices.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.dgvPrices, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 4);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(460, 406);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // dgvPrices
+            // 
+            this.dgvPrices.AllowUserToAddRows = false;
+            this.dgvPrices.AllowUserToDeleteRows = false;
+            this.dgvPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPrices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPrices.Location = new System.Drawing.Point(3, 43);
+            this.dgvPrices.Name = "dgvPrices";
+            this.dgvPrices.ReadOnly = true;
+            this.dgvPrices.Size = new System.Drawing.Size(454, 360);
+            this.dgvPrices.TabIndex = 1;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.btnUpdatePrice, 0, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(454, 34);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // btnUpdatePrice
+            // 
+            this.btnUpdatePrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdatePrice.Location = new System.Drawing.Point(3, 3);
+            this.btnUpdatePrice.Name = "btnUpdatePrice";
+            this.btnUpdatePrice.Size = new System.Drawing.Size(94, 28);
+            this.btnUpdatePrice.TabIndex = 0;
+            this.btnUpdatePrice.Text = "Aktualizuj";
+            this.btnUpdatePrice.UseVisualStyleBackColor = true;
+            this.btnUpdatePrice.Click += new System.EventHandler(this.btnUpdatePrice_Click);
+            // 
+            // pgPlaces
+            // 
+            this.pgPlaces.Controls.Add(this.dgvPlaces);
+            this.pgPlaces.Location = new System.Drawing.Point(4, 22);
+            this.pgPlaces.Name = "pgPlaces";
+            this.pgPlaces.Padding = new System.Windows.Forms.Padding(3);
+            this.pgPlaces.Size = new System.Drawing.Size(466, 415);
+            this.pgPlaces.TabIndex = 2;
+            this.pgPlaces.Text = "W zasobach";
+            this.pgPlaces.UseVisualStyleBackColor = true;
             // 
             // pgBoms
             // 
@@ -734,17 +865,6 @@
             this.dgvBoms.TabIndex = 1;
             this.dgvBoms.DoubleClick += new System.EventHandler(this.dgvBoms_DoubleClick);
             // 
-            // pgPlaces
-            // 
-            this.pgPlaces.Controls.Add(this.dgvPlaces);
-            this.pgPlaces.Location = new System.Drawing.Point(4, 22);
-            this.pgPlaces.Name = "pgPlaces";
-            this.pgPlaces.Padding = new System.Windows.Forms.Padding(3);
-            this.pgPlaces.Size = new System.Drawing.Size(466, 415);
-            this.pgPlaces.TabIndex = 2;
-            this.pgPlaces.Text = "W zasobach";
-            this.pgPlaces.UseVisualStyleBackColor = true;
-            // 
             // dgvPlaces
             // 
             this.dgvPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -756,126 +876,6 @@
             this.dgvPlaces.Name = "dgvPlaces";
             this.dgvPlaces.Size = new System.Drawing.Size(577, 309);
             this.dgvPlaces.TabIndex = 0;
-            // 
-            // tlpStocks
-            // 
-            this.tlpStocks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpStocks.ColumnCount = 1;
-            this.tlpStocks.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpStocks.Controls.Add(this.tlpStocksButtons, 0, 0);
-            this.tlpStocks.Controls.Add(this.dgvStocks, 0, 1);
-            this.tlpStocks.Location = new System.Drawing.Point(3, 6);
-            this.tlpStocks.Name = "tlpStocks";
-            this.tlpStocks.RowCount = 2;
-            this.tlpStocks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpStocks.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpStocks.Size = new System.Drawing.Size(460, 406);
-            this.tlpStocks.TabIndex = 0;
-            // 
-            // tlpStocksButtons
-            // 
-            this.tlpStocksButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpStocksButtons.ColumnCount = 2;
-            this.tlpStocksButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpStocksButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpStocksButtons.Controls.Add(this.btnUpdateStock, 0, 0);
-            this.tlpStocksButtons.Location = new System.Drawing.Point(3, 3);
-            this.tlpStocksButtons.Name = "tlpStocksButtons";
-            this.tlpStocksButtons.RowCount = 1;
-            this.tlpStocksButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpStocksButtons.Size = new System.Drawing.Size(454, 34);
-            this.tlpStocksButtons.TabIndex = 0;
-            // 
-            // dgvStocks
-            // 
-            this.dgvStocks.AllowUserToAddRows = false;
-            this.dgvStocks.AllowUserToDeleteRows = false;
-            this.dgvStocks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvStocks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStocks.Location = new System.Drawing.Point(3, 43);
-            this.dgvStocks.Name = "dgvStocks";
-            this.dgvStocks.ReadOnly = true;
-            this.dgvStocks.Size = new System.Drawing.Size(454, 360);
-            this.dgvStocks.TabIndex = 1;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.dgvPrices, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 4);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(460, 406);
-            this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.btnUpdatePrice, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(454, 34);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // dgvPrices
-            // 
-            this.dgvPrices.AllowUserToAddRows = false;
-            this.dgvPrices.AllowUserToDeleteRows = false;
-            this.dgvPrices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPrices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPrices.Location = new System.Drawing.Point(3, 43);
-            this.dgvPrices.Name = "dgvPrices";
-            this.dgvPrices.ReadOnly = true;
-            this.dgvPrices.Size = new System.Drawing.Size(454, 360);
-            this.dgvPrices.TabIndex = 1;
-            // 
-            // btnUpdatePrice
-            // 
-            this.btnUpdatePrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdatePrice.Location = new System.Drawing.Point(3, 3);
-            this.btnUpdatePrice.Name = "btnUpdatePrice";
-            this.btnUpdatePrice.Size = new System.Drawing.Size(94, 28);
-            this.btnUpdatePrice.TabIndex = 0;
-            this.btnUpdatePrice.Text = "Aktualizuj";
-            this.btnUpdatePrice.UseVisualStyleBackColor = true;
-            this.btnUpdatePrice.Click += new System.EventHandler(this.btnUpdatePrice_Click);
-            // 
-            // btnUpdateStock
-            // 
-            this.btnUpdateStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateStock.Location = new System.Drawing.Point(3, 3);
-            this.btnUpdateStock.Name = "btnUpdateStock";
-            this.btnUpdateStock.Size = new System.Drawing.Size(94, 28);
-            this.btnUpdateStock.TabIndex = 0;
-            this.btnUpdateStock.Text = "Inwentaryzuj";
-            this.btnUpdateStock.UseVisualStyleBackColor = true;
-            this.btnUpdateStock.Click += new System.EventHandler(this.btnUpdateStock_Click);
             // 
             // frmPart
             // 
@@ -902,19 +902,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbQrCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.pgStock.ResumeLayout(false);
+            this.tlpStocks.ResumeLayout(false);
+            this.tlpStocksButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStocks)).EndInit();
             this.pgPrices.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).EndInit();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.pgPlaces.ResumeLayout(false);
             this.pgBoms.ResumeLayout(false);
             this.tlpBoms.ResumeLayout(false);
             this.tlpBomsControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
-            this.pgPlaces.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).EndInit();
-            this.tlpStocks.ResumeLayout(false);
-            this.tlpStocksButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStocks)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).EndInit();
             this.ResumeLayout(false);
 
         }
