@@ -73,7 +73,7 @@ namespace JDE_Scanner_Desktop.Models
         {
             int A = (int)ToPrint[0];
             
-            Bitmap bm = Utilities.GetQR("<Part>" + Items.Where(i=>i.PartId==A).FirstOrDefault().Token, 3);
+            Bitmap bm = Utilities.GetQR("<Part>" + Items.Where(i=>i.PartId==A).FirstOrDefault().Token, 4);
             e.Graphics.DrawImage(bm, 30, 10);
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
@@ -84,7 +84,7 @@ namespace JDE_Scanner_Desktop.Models
             if (ToPrint[1] != null)
             {
                 int B = (int)ToPrint[1];
-                Bitmap bmB = Utilities.GetQR("<Part>" + Items.Where(i => i.PartId == B).FirstOrDefault().Token, 3);
+                Bitmap bmB = Utilities.GetQR("<Part>" + Items.Where(i => i.PartId == B).FirstOrDefault().Token, 4);
                 e.Graphics.DrawImage(bmB, 230, 10);
                 RectangleF rectFB = new RectangleF(220, 130, 150, 50);//part's name
                 RectangleF rectFB2 = new RectangleF(225, 170, 150, 50);//part's code

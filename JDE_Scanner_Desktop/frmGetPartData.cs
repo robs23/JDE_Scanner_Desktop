@@ -21,6 +21,7 @@ namespace JDE_Scanner_Desktop
         public PartPrice Price { get; set; }
         public StockTaking Stock { get; set; }
         public int PartId { get; set; }
+        public frmLooper Looper { get; set; }
 
         public frmGetPartData(PartDataFormType type, int partId)
         {
@@ -37,6 +38,7 @@ namespace JDE_Scanner_Desktop
 
         private void frmGetPartData_Load(object sender, EventArgs e)
         {
+            Looper = new frmLooper(this);
             if(Type == PartDataFormType.Price)
             {
                 StyleAsPriceForm();
@@ -94,21 +96,35 @@ namespace JDE_Scanner_Desktop
             string res = Validate();
             if(res == "OK")
             {
-                //Save
-                if(Type == PartDataFormType.Price)
+                try
                 {
-                    Price.Price = decimal.Parse(txtValue.Text);
-                    Price.Currency = cmbUnit.SelectedText;
-                    Price.ValidFrom = txtDate.Value;
-                    await SavePrice();
+                    Looper.Show();
+                    //Save
+                    if (Type == PartDataFormType.Price)
+                    {
+                        Price.Price = decimal.Parse(txtValue.Text);
+                        Price.Currency = cmbUnit.SelectedItem.ToString();
+                        Price.ValidFrom = txtDate.Value;
+                        await SavePrice();
+                    }
+                    else
+                    {
+                        Stock.Amount = int.Parse(txtValue.Text);
+                        Stock.CreatedOn = txtDate.Value;
+                        await SaveStock();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Stock.Amount = int.Parse(txtValue.Text);
-                    Stock.CreatedOn = txtDate.Value;
-                    await SaveStock();
+                    MessageBox.Show($"Napotkano błąd. Szczegóły: {ex.Message}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw;
                 }
-                this.Close();
+                finally
+                {
+                    Looper.Hide();
+                    this.Close();
+                }
+                
             }
             else
             {
