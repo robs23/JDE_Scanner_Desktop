@@ -38,7 +38,10 @@ namespace JDE_Scanner_Desktop.Models
         public string Symbol { get; set; }
         [DisplayName("Opis")]
         public string Description { get; set; }
-
+        [Browsable(false)]
+        public int? StorageBinId { get; set; }
+        [DisplayName("Regał")]
+        public string StorageBinNumber { get; set; }
         [DisplayName("Pozostało [szt]")]
         public string Comment { get; set; }
 

@@ -23,5 +23,9 @@ namespace JDE_Scanner_Desktop.Models
         public string Name { get; set; }
         [DisplayName("Ilość sztuk")]
         public int? Amount { get; set; }
+        [Browsable(false)]
+        public int? StorageBinId { get; set; }
+        [DisplayName("Regał")]
+        public string StorageBinNumber { get; set; }
     }
 }
