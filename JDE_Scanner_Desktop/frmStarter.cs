@@ -397,5 +397,17 @@ namespace JDE_Scanner_Desktop
             frmProcesses FrmProcesses = new frmProcesses(this, typeId: 24);
             FrmProcesses.Show(this);
         }
+
+        private void regałyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmStorageBins FrmStorageBins = new frmStorageBins(this);
+            FrmStorageBins.Show(this);
+        }
+
+        private void nowyRegałToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmStorageBin FrmStorageBin = new frmStorageBin(this);
+            FrmStorageBin.Show(this);
+        }
     }
 }
