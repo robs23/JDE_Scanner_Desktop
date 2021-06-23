@@ -31,5 +31,11 @@ namespace JDE_Scanner_Desktop.Static
             Price,
             Stock
         }
+
+        public enum StockTakingType
+        {
+            ByPart,
+            ByStorageBin
+        }
     }
 }

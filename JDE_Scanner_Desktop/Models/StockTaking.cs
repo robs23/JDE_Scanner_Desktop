@@ -29,6 +29,8 @@ namespace JDE_Scanner_Desktop.Models
         public int? StorageBinId { get; set; }
         [DisplayName("Regał")]
         public string StorageBinNumber { get; set; }
+        [DisplayName("Data inwentaryzacji")]
+        public DateTime? TakingDate { get; set; }
 
         public async override Task<bool> Add()
         {

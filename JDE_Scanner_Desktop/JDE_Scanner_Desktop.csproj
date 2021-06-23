@@ -248,6 +248,12 @@
     <Compile Include="frmComponents.Designer.cs">
       <DependentUpon>frmComponents.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmStockTaking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStockTaking.Designer.cs">
+      <DependentUpon>frmStockTaking.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStorageBin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -551,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmComponents.resx">
       <DependentUpon>frmComponents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStockTaking.resx">
+      <DependentUpon>frmStockTaking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStorageBin.resx">
       <DependentUpon>frmStorageBin.cs</DependentUpon>

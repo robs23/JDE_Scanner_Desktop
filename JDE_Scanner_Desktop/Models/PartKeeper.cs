@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
-    class PartKeeper : Keeper<Part>
+    public class PartKeeper : Keeper<Part>
     {
         protected override string ObjectName => "Part";
 
