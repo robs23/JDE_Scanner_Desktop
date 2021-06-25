@@ -32,6 +32,7 @@ namespace JDE_Scanner_Desktop
         PartUsageKeeper usedParts = new PartUsageKeeper();
         FileKeeper files;
         FileKeeper img;
+        PartPriceKeeper PriceKeeper;
         ContextMenu buttonContextMenu;
 
         public frmPart(Form parent)
@@ -46,12 +47,14 @@ namespace JDE_Scanner_Desktop
             _this = new Part();
             files = new FileKeeper(this);
             img = new FileKeeper(this);
+            PriceKeeper = new PartPriceKeeper();
         }
 
         public frmPart(Part Item, Form parent)
         {
             InitializeComponent();
             img = new FileKeeper(this);
+            PriceKeeper = new PartPriceKeeper();
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             mode = 2;
@@ -106,9 +109,14 @@ namespace JDE_Scanner_Desktop
             InitiailizeButtonContextMenu();
             if (mode > 1)
             {
-                GetBoms();
-                GetImage();
-                GetUsedParts();
+                List<Task> tasks = new List<Task>()
+                {
+                    Task.Run(() => GetBoms()),
+                    Task.Run(() => GetImage()),
+                    Task.Run(() => GetUsedParts()),
+                    Task.Run(() => GetPrices())
+                };
+                await Task.WhenAll(tasks);
             }
             else
             {
@@ -119,21 +127,21 @@ namespace JDE_Scanner_Desktop
             Looper.Hide();
         }
 
-        private async void GetBoms()
+        private async Task GetBoms()
         {
             await boms.Refresh($"PartId={_this.PartId}");
             dgvBoms.DataSource = boms.Items;
 
         }
 
-        private async void GetUsedParts()
+        private async Task GetUsedParts()
         {
             await usedParts.Refresh($"PartId={_this.PartId}");
             dgvPlaces.DataSource = usedParts.Items;
         }
        
 
-        private async void GetImage()
+        private async Task GetImage()
         {
             if (!string.IsNullOrEmpty(_this.Image))
             {
@@ -141,6 +149,12 @@ namespace JDE_Scanner_Desktop
                 pbImage.SizeMode = PictureBoxSizeMode.Zoom;
                 img.Items.Add(new Models.File { Name = _this.Image, IsUploaded = true, Link = Path.Combine(RuntimeSettings.LocalFilesPath, _this.Image) });
             }
+        }
+
+        private async Task GetPrices()
+        {
+            await PriceKeeper.Refresh($"PartId={_this.PartId}");
+            dgvPrices.DataSource = PriceKeeper.Items;
         }
         
 
@@ -392,6 +406,14 @@ namespace JDE_Scanner_Desktop
             else
             {
                 MessageBox.Show("Aby zaktualizować cenę, należy najpierw zapisać część. Kliknij ikonę dyskietki by zapisać część.", "Część nie została jeszcze utworzona", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private async void btnPriceRefresh_Click(object sender, EventArgs e)
+        {
+            if(mode > 1)
+            {
+                await GetPrices();
             }
         }
     }

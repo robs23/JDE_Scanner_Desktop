@@ -193,9 +193,9 @@ namespace JDE_Scanner_Desktop
             {
                 if (pointer.RowIndex != previousRow)
                 {
-                    if (dgItems.Rows[pointer.RowIndex].Cells[8].Value != null)
+                    if (dgItems.Rows[pointer.RowIndex].Cells[10].Value != null)
                     {
-                        string img = dgItems.Rows[pointer.RowIndex].Cells[8].Value.ToString();
+                        string img = dgItems.Rows[pointer.RowIndex].Cells[10].Value.ToString();
                         if (!string.IsNullOrEmpty(img) && cboxShowPreview.CheckState == CheckState.Checked)
                         {
                             imagePreview.Load(img, true);

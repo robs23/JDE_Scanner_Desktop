@@ -18,7 +18,9 @@ namespace JDE_Scanner_Desktop.Models
             set => value = PartPriceId;
             get => PartPriceId;
         }
-        [DisplayName("ID części")]
+        [DisplayName("Ważna od")]
+        public DateTime? ValidFrom { get; set; }
+        [Browsable(false)]
         public int? PartId { get; set; }
         [DisplayName("Część")]
         public string Name { get; set; }
@@ -26,8 +28,7 @@ namespace JDE_Scanner_Desktop.Models
         public decimal Price { get; set; }
         [DisplayName("Waluta")]
         public string Currency { get; set; }
-        [DisplayName("Ważna od")]
-        public DateTime? ValidFrom { get; set; }
+        
 
         public async override Task<bool> Add()
         {
@@ -46,7 +47,6 @@ namespace JDE_Scanner_Desktop.Models
                     MessageBox.Show(ex.Message);
                 }
 
-                MessageBox.Show("Tworzenie nowego rekordu zakończone powodzeniem!");
                 return true;
             }
             else

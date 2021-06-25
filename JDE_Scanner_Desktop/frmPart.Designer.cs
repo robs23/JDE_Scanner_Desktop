@@ -79,7 +79,10 @@
             this.dgvPrices = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btnUpdatePrice = new System.Windows.Forms.Button();
+            this.btnPriceRefresh = new System.Windows.Forms.Button();
+            this.btnPriceDelete = new System.Windows.Forms.Button();
             this.pgPlaces = new System.Windows.Forms.TabPage();
+            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.pgBoms = new System.Windows.Forms.TabPage();
             this.tlpBoms = new System.Windows.Forms.TableLayoutPanel();
             this.tlpBomsControl = new System.Windows.Forms.TableLayoutPanel();
@@ -88,7 +91,6 @@
             this.btnRefreshBoms = new System.Windows.Forms.Button();
             this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -108,11 +110,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.pgPlaces.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).BeginInit();
             this.pgBoms.SuspendLayout();
             this.tlpBoms.SuspendLayout();
             this.tlpBomsControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -727,10 +729,14 @@
             this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 4;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel3.Controls.Add(this.btnUpdatePrice, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnPriceRefresh, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnPriceDelete, 2, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
@@ -747,9 +753,36 @@
             this.btnUpdatePrice.Name = "btnUpdatePrice";
             this.btnUpdatePrice.Size = new System.Drawing.Size(94, 28);
             this.btnUpdatePrice.TabIndex = 0;
-            this.btnUpdatePrice.Text = "Aktualizuj";
+            this.btnUpdatePrice.Text = "Aktualizuj cenę";
             this.btnUpdatePrice.UseVisualStyleBackColor = true;
             this.btnUpdatePrice.Click += new System.EventHandler(this.btnUpdatePrice_Click);
+            // 
+            // btnPriceRefresh
+            // 
+            this.btnPriceRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPriceRefresh.Image = global::JDE_Scanner_Desktop.Properties.Resources.Cloud_30;
+            this.btnPriceRefresh.Location = new System.Drawing.Point(417, 3);
+            this.btnPriceRefresh.Name = "btnPriceRefresh";
+            this.btnPriceRefresh.Size = new System.Drawing.Size(34, 28);
+            this.btnPriceRefresh.TabIndex = 1;
+            this.tooltip.SetToolTip(this.btnPriceRefresh, "Odśwież dane..");
+            this.btnPriceRefresh.UseVisualStyleBackColor = true;
+            this.btnPriceRefresh.Click += new System.EventHandler(this.btnPriceRefresh_Click);
+            // 
+            // btnPriceDelete
+            // 
+            this.btnPriceDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPriceDelete.Image = global::JDE_Scanner_Desktop.Properties.Resources.delete_24;
+            this.btnPriceDelete.Location = new System.Drawing.Point(377, 3);
+            this.btnPriceDelete.Name = "btnPriceDelete";
+            this.btnPriceDelete.Size = new System.Drawing.Size(34, 28);
+            this.btnPriceDelete.TabIndex = 2;
+            this.tooltip.SetToolTip(this.btnPriceDelete, "Usuń zaznaczone pozycje..");
+            this.btnPriceDelete.UseVisualStyleBackColor = true;
             // 
             // pgPlaces
             // 
@@ -761,6 +794,18 @@
             this.pgPlaces.TabIndex = 2;
             this.pgPlaces.Text = "W zasobach";
             this.pgPlaces.UseVisualStyleBackColor = true;
+            // 
+            // dgvPlaces
+            // 
+            this.dgvPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlaces.DoubleBuffered = true;
+            this.dgvPlaces.Location = new System.Drawing.Point(3, 3);
+            this.dgvPlaces.Name = "dgvPlaces";
+            this.dgvPlaces.Size = new System.Drawing.Size(577, 309);
+            this.dgvPlaces.TabIndex = 0;
             // 
             // pgBoms
             // 
@@ -865,18 +910,6 @@
             this.dgvBoms.TabIndex = 1;
             this.dgvBoms.DoubleClick += new System.EventHandler(this.dgvBoms_DoubleClick);
             // 
-            // dgvPlaces
-            // 
-            this.dgvPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlaces.DoubleBuffered = true;
-            this.dgvPlaces.Location = new System.Drawing.Point(3, 3);
-            this.dgvPlaces.Name = "dgvPlaces";
-            this.dgvPlaces.Size = new System.Drawing.Size(577, 309);
-            this.dgvPlaces.TabIndex = 0;
-            // 
             // frmPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -910,11 +943,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.pgPlaces.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).EndInit();
             this.pgBoms.ResumeLayout(false);
             this.tlpBoms.ResumeLayout(false);
             this.tlpBomsControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -980,5 +1013,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnUpdateStock;
         private System.Windows.Forms.Button btnUpdatePrice;
+        private System.Windows.Forms.Button btnPriceRefresh;
+        private System.Windows.Forms.Button btnPriceDelete;
     }
 }

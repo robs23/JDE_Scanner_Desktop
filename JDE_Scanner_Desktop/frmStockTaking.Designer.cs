@@ -154,6 +154,7 @@ namespace JDE_Scanner_Desktop
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmStockTaking";
             this.Text = "Inwentaryzacja";
+            this.Load += new System.EventHandler(this.frmStockTaking_Load);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);
             this.tlpButtons.PerformLayout();

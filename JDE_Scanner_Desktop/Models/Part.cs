@@ -39,6 +39,10 @@ namespace JDE_Scanner_Desktop.Models
         public string SupplierName { get; set; }
         [DisplayName("Symbol")]
         public string Symbol { get; set; }
+        [DisplayName("Cena")]
+        public decimal? Price { get; set; }
+        [DisplayName("Waluta")]
+        public string Currency { get; set; }
         [DisplayName("Zdjęcie")]
         public string Image { get; set; }
         [DisplayName("Przeznaczenie")]
@@ -51,6 +55,7 @@ namespace JDE_Scanner_Desktop.Models
         public string Token { get; set; }
         [DisplayName("Ma załączniki")]
         public bool HasAttachments { get; set; }
+        
         [Browsable(false)]
         public string Identifier { get
             {

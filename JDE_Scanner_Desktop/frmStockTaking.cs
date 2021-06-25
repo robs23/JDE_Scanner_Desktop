@@ -42,17 +42,29 @@ namespace JDE_Scanner_Desktop
             StockTakingKeeper = new StockTakingKeeper();
         }
 
-        private async Task LoadPartsAndStorages()
+        private async Task LoadAllData()
         {
+            List<Task> tasks = new List<Task>();
             Task partsLoad = Task.Run(() => PartKeeper.Refresh());
             Task storagesLoad = Task.Run(() => StorageBinKeeper.Refresh());
-            await Task.WhenAll(partsLoad, storagesLoad);
+            tasks.Add(partsLoad);
+            tasks.Add(storagesLoad);
+            if(StorageBin != null)
+            {
+                tasks.Add(Task.Run(() => StockTakingKeeper.Refresh()));
+            }
+            await Task.WhenAll(tasks);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
 
 
+        }
+
+        private async void frmStockTaking_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

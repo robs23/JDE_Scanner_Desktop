@@ -160,7 +160,7 @@ namespace JDE_Scanner_Desktop
             foreach(DataGridViewColumn col in dg.Columns)
             {
                 FilterColumnValueType cType;
-                if (col.ValueType == typeof(int) || col.ValueType == typeof(float) || col.ValueType == typeof(Nullable<int>) || col.ValueType == typeof(Nullable<float>))
+                if (col.ValueType == typeof(int) || col.ValueType == typeof(float) || col.ValueType == typeof(Nullable<int>) || col.ValueType == typeof(Nullable<float>) || col.ValueType == typeof(decimal) || col.ValueType == typeof(Nullable<decimal>))
                 {
                     cType = FilterColumnValueType.Number;
                 }
