@@ -239,5 +239,23 @@ namespace JDE_Scanner_Desktop
                 Reload();
             }
         }
+
+        private void btnUpdatePrice_Click(object sender, EventArgs e)
+        {
+            if (dgItems.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby zakutalizować cenę dla wybranych wierszy, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgItems.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgItems.SelectedRows[i].Cells[0].Value);
+                }
+                frmGetPartData Form = new frmGetPartData(Static.Enums.PartDataFormType.Price, SelectedRows);
+                Form.Show(this);
+            }
+        }
     }
 }

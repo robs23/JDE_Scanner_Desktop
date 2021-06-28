@@ -109,6 +109,7 @@ namespace JDE_Scanner_Desktop
             InitiailizeButtonContextMenu();
             if (mode > 1)
             {
+                EnableButtons();
                 List<Task> tasks = new List<Task>()
                 {
                     Task.Run(() => GetBoms()),
@@ -118,11 +119,7 @@ namespace JDE_Scanner_Desktop
                 };
                 await Task.WhenAll(tasks);
             }
-            else
-            {
-                btnAdd.Enabled = false;
-                btnRemove.Enabled = false;
-            }
+
             files.Initialize();
             Looper.Hide();
         }
@@ -194,8 +191,7 @@ namespace JDE_Scanner_Desktop
                         mode = 2;
                         this.Text = "Szczegóły części";
                         GenerateQrCode(_this.Token);
-                        btnAdd.Enabled = true;
-                        btnRemove.Enabled = true;
+                        EnableButtons();
                     }
                     
                 }
@@ -220,6 +216,17 @@ namespace JDE_Scanner_Desktop
                 Looper.Hide();
             }
                 
+        }
+
+        private void EnableButtons()
+        {
+            btnAdd.Enabled = true;
+            btnRemove.Enabled = true;
+            btnUpdatePrice.Enabled = true;
+            btnUpdateStock.Enabled = true;
+            btnPriceDelete.Enabled = true;
+            btnRefreshBoms.Enabled = true;
+            btnPriceRefresh.Enabled = true;
         }
 
         private void AddCompany(object sender, EventArgs e)
@@ -413,6 +420,24 @@ namespace JDE_Scanner_Desktop
         {
             if(mode > 1)
             {
+                await GetPrices();
+            }
+        }
+
+        private async void btnPriceDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvPrices.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Żaden wiersz nie jest zaznaczony. Aby usunąć wybrane wiersze, najpierw zaznacz je kliknięciem po ich lewej stronie.");
+            }
+            else
+            {
+                List<int> SelectedRows = new List<int>();
+                for (int i = 0; i < dgvPrices.SelectedRows.Count; i++)
+                {
+                    SelectedRows.Add((int)dgvPrices.SelectedRows[i].Cells[0].Value);
+                }
+                await PriceKeeper.Remove(SelectedRows);
                 await GetPrices();
             }
         }

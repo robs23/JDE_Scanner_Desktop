@@ -82,15 +82,15 @@
             this.btnPriceRefresh = new System.Windows.Forms.Button();
             this.btnPriceDelete = new System.Windows.Forms.Button();
             this.pgPlaces = new System.Windows.Forms.TabPage();
-            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.pgBoms = new System.Windows.Forms.TabPage();
-            this.tlpBoms = new System.Windows.Forms.TableLayoutPanel();
-            this.tlpBomsControl = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnRefreshBoms = new System.Windows.Forms.Button();
-            this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvPlaces = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
+            this.tlpBomsControl = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRefreshBoms = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.tlpBoms = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvBoms = new System.Windows.Forms.DataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -110,10 +110,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.pgPlaces.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).BeginInit();
             this.pgBoms.SuspendLayout();
-            this.tlpBoms.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).BeginInit();
             this.tlpBomsControl.SuspendLayout();
+            this.tlpBoms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).BeginInit();
             this.SuspendLayout();
             // 
@@ -660,6 +660,7 @@
             this.btnUpdateStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateStock.Enabled = false;
             this.btnUpdateStock.Location = new System.Drawing.Point(3, 3);
             this.btnUpdateStock.Name = "btnUpdateStock";
             this.btnUpdateStock.Size = new System.Drawing.Size(94, 28);
@@ -749,6 +750,7 @@
             this.btnUpdatePrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdatePrice.Enabled = false;
             this.btnUpdatePrice.Location = new System.Drawing.Point(3, 3);
             this.btnUpdatePrice.Name = "btnUpdatePrice";
             this.btnUpdatePrice.Size = new System.Drawing.Size(94, 28);
@@ -762,6 +764,7 @@
             this.btnPriceRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPriceRefresh.Enabled = false;
             this.btnPriceRefresh.Image = global::JDE_Scanner_Desktop.Properties.Resources.Cloud_30;
             this.btnPriceRefresh.Location = new System.Drawing.Point(417, 3);
             this.btnPriceRefresh.Name = "btnPriceRefresh";
@@ -776,6 +779,7 @@
             this.btnPriceDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPriceDelete.Enabled = false;
             this.btnPriceDelete.Image = global::JDE_Scanner_Desktop.Properties.Resources.delete_24;
             this.btnPriceDelete.Location = new System.Drawing.Point(377, 3);
             this.btnPriceDelete.Name = "btnPriceDelete";
@@ -783,6 +787,7 @@
             this.btnPriceDelete.TabIndex = 2;
             this.tooltip.SetToolTip(this.btnPriceDelete, "Usuń zaznaczone pozycje..");
             this.btnPriceDelete.UseVisualStyleBackColor = true;
+            this.btnPriceDelete.Click += new System.EventHandler(this.btnPriceDelete_Click);
             // 
             // pgPlaces
             // 
@@ -792,20 +797,8 @@
             this.pgPlaces.Padding = new System.Windows.Forms.Padding(3);
             this.pgPlaces.Size = new System.Drawing.Size(466, 415);
             this.pgPlaces.TabIndex = 2;
-            this.pgPlaces.Text = "W zasobach";
+            this.pgPlaces.Text = "Rozchody";
             this.pgPlaces.UseVisualStyleBackColor = true;
-            // 
-            // dgvPlaces
-            // 
-            this.dgvPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlaces.DoubleBuffered = true;
-            this.dgvPlaces.Location = new System.Drawing.Point(3, 3);
-            this.dgvPlaces.Name = "dgvPlaces";
-            this.dgvPlaces.Size = new System.Drawing.Size(577, 309);
-            this.dgvPlaces.TabIndex = 0;
             // 
             // pgBoms
             // 
@@ -818,22 +811,17 @@
             this.pgBoms.Text = "W BOMach";
             this.pgBoms.UseVisualStyleBackColor = true;
             // 
-            // tlpBoms
+            // dgvPlaces
             // 
-            this.tlpBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvPlaces.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpBoms.ColumnCount = 1;
-            this.tlpBoms.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpBoms.Controls.Add(this.tlpBomsControl, 0, 0);
-            this.tlpBoms.Controls.Add(this.dgvBoms, 0, 1);
-            this.tlpBoms.Location = new System.Drawing.Point(6, 6);
-            this.tlpBoms.Name = "tlpBoms";
-            this.tlpBoms.RowCount = 2;
-            this.tlpBoms.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tlpBoms.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpBoms.Size = new System.Drawing.Size(571, 303);
-            this.tlpBoms.TabIndex = 0;
+            this.dgvPlaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlaces.DoubleBuffered = true;
+            this.dgvPlaces.Location = new System.Drawing.Point(-1, 0);
+            this.dgvPlaces.Name = "dgvPlaces";
+            this.dgvPlaces.Size = new System.Drawing.Size(467, 415);
+            this.dgvPlaces.TabIndex = 1;
             // 
             // tlpBomsControl
             // 
@@ -852,40 +840,15 @@
             this.tlpBomsControl.Name = "tlpBomsControl";
             this.tlpBomsControl.RowCount = 1;
             this.tlpBomsControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpBomsControl.Size = new System.Drawing.Size(565, 29);
+            this.tlpBomsControl.Size = new System.Drawing.Size(454, 29);
             this.tlpBomsControl.TabIndex = 0;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(3, 3);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(144, 23);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "Dodaj przypisanie";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(153, 3);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(144, 23);
-            this.btnRemove.TabIndex = 1;
-            this.btnRemove.Text = "Usuń przypisanie";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // btnRefreshBoms
             // 
             this.btnRefreshBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRefreshBoms.Enabled = false;
             this.btnRefreshBoms.Image = global::JDE_Scanner_Desktop.Properties.Resources.Cloud_30;
             this.btnRefreshBoms.Location = new System.Drawing.Point(303, 3);
             this.btnRefreshBoms.Name = "btnRefreshBoms";
@@ -894,6 +857,51 @@
             this.tooltip.SetToolTip(this.btnRefreshBoms, "Odśwież..");
             this.btnRefreshBoms.UseVisualStyleBackColor = true;
             this.btnRefreshBoms.Click += new System.EventHandler(this.btnRefreshBoms_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Enabled = false;
+            this.btnRemove.Location = new System.Drawing.Point(153, 3);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(144, 23);
+            this.btnRemove.TabIndex = 1;
+            this.btnRemove.Text = "Usuń przypisanie";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Enabled = false;
+            this.btnAdd.Location = new System.Drawing.Point(3, 3);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(144, 23);
+            this.btnAdd.TabIndex = 0;
+            this.btnAdd.Text = "Dodaj przypisanie";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // tlpBoms
+            // 
+            this.tlpBoms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpBoms.ColumnCount = 1;
+            this.tlpBoms.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBoms.Controls.Add(this.dgvBoms, 0, 1);
+            this.tlpBoms.Controls.Add(this.tlpBomsControl, 0, 0);
+            this.tlpBoms.Location = new System.Drawing.Point(6, 6);
+            this.tlpBoms.Name = "tlpBoms";
+            this.tlpBoms.RowCount = 2;
+            this.tlpBoms.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tlpBoms.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBoms.Size = new System.Drawing.Size(460, 409);
+            this.tlpBoms.TabIndex = 0;
             // 
             // dgvBoms
             // 
@@ -906,9 +914,8 @@
             this.dgvBoms.Location = new System.Drawing.Point(3, 38);
             this.dgvBoms.Name = "dgvBoms";
             this.dgvBoms.ReadOnly = true;
-            this.dgvBoms.Size = new System.Drawing.Size(565, 262);
-            this.dgvBoms.TabIndex = 1;
-            this.dgvBoms.DoubleClick += new System.EventHandler(this.dgvBoms_DoubleClick);
+            this.dgvBoms.Size = new System.Drawing.Size(454, 368);
+            this.dgvBoms.TabIndex = 2;
             // 
             // frmPart
             // 
@@ -943,10 +950,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrices)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.pgPlaces.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).EndInit();
             this.pgBoms.ResumeLayout(false);
-            this.tlpBoms.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlaces)).EndInit();
             this.tlpBomsControl.ResumeLayout(false);
+            this.tlpBoms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBoms)).EndInit();
             this.ResumeLayout(false);
 
@@ -990,19 +997,12 @@
         private System.Windows.Forms.TextBox txtAppliance;
         private System.Windows.Forms.TextBox txtUsedOn;
         private System.Windows.Forms.TabPage pgBoms;
-        private System.Windows.Forms.TableLayoutPanel tlpBoms;
-        private System.Windows.Forms.TableLayoutPanel tlpBomsControl;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridView dgvBoms;
-        private System.Windows.Forms.Button btnRefreshBoms;
-        private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAttach;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pbQrCode;
         private System.Windows.Forms.PictureBox pbImage;
         private System.Windows.Forms.CheckBox cboxArchived;
         private System.Windows.Forms.TabPage pgPlaces;
-        private CustomControls.DBDataGridView dgvPlaces;
         private System.Windows.Forms.TabPage pgStock;
         private System.Windows.Forms.TabPage pgPrices;
         private System.Windows.Forms.TableLayoutPanel tlpStocks;
@@ -1015,5 +1015,12 @@
         private System.Windows.Forms.Button btnUpdatePrice;
         private System.Windows.Forms.Button btnPriceRefresh;
         private System.Windows.Forms.Button btnPriceDelete;
+        private CustomControls.DBDataGridView dgvPlaces;
+        private System.Windows.Forms.TableLayoutPanel tlpBoms;
+        private System.Windows.Forms.DataGridView dgvBoms;
+        private System.Windows.Forms.TableLayoutPanel tlpBomsControl;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnRefreshBoms;
     }
 }

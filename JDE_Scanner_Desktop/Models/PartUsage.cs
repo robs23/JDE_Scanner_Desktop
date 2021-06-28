@@ -44,6 +44,10 @@ namespace JDE_Scanner_Desktop.Models
         public string StorageBinNumber { get; set; }
         [DisplayName("Pozostało [szt]")]
         public string Comment { get; set; }
+        [DisplayName("Koszt")]
+        public double? Cost { get; set; }
+        [DisplayName("Waluta")]
+        public string CostCurrency { get; set; }
 
         [DisplayName("Zdjęcie")]
         public string Image { get; set; }

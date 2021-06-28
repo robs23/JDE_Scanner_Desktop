@@ -18,16 +18,30 @@ namespace JDE_Scanner_Desktop
         public decimal Value { get; set; }
         public string Unit { get; set; }
         public DateTime Date { get; set; }
-        public PartPrice Price { get; set; }
-        public StockTaking Stock { get; set; }
-        public int PartId { get; set; }
+        public List<PartPrice> Prices { get; set; }
+        public List<StockTaking> Stocks { get; set; }
+        public List<int> PartIds { get; set; }
         public frmLooper Looper { get; set; }
 
         public frmGetPartData(PartDataFormType type, int partId)
         {
+            Init(type);
+            PartIds.Add(partId);
+        }
+
+        public frmGetPartData(PartDataFormType type, List<int> partsId)
+        {
+            Init(type);
+            PartIds = partsId;
+        }
+
+        private void Init(PartDataFormType type)
+        {
             InitializeComponent();
             Type = type;
-            PartId = partId;
+            PartIds = new List<int>();
+            Prices = new List<PartPrice>();
+            Stocks = new List<StockTaking>();
             this.Location = new Point(Cursor.Position.X, Cursor.Position.Y);
         }
 
@@ -42,35 +56,41 @@ namespace JDE_Scanner_Desktop
             if(Type == PartDataFormType.Price)
             {
                 StyleAsPriceForm();
-                CreatePrice();
+                CreatePrices();
             }
             else
             {
                 StyleAsStockForm();
-                CreateStock();
+                CreateStocks();
             }
         }
 
-        private void CreatePrice()
+        private void CreatePrices()
         {
-            Price = new PartPrice()
+            foreach (var partId in PartIds)
             {
-                PartId = PartId,
-                CreatedOn = DateTime.Now,
-                CreatedBy = RuntimeSettings.CurrentUser.UserId,
-                TenantId = RuntimeSettings.TenantId
-            };
+                Prices.Add(new PartPrice()
+                {
+                    PartId = partId,
+                    CreatedOn = DateTime.Now,
+                    CreatedBy = RuntimeSettings.CurrentUser.UserId,
+                    TenantId = RuntimeSettings.TenantId
+                });
+            }
         }
 
-        private void CreateStock()
+        private void CreateStocks()
         {
-            Stock = new StockTaking()
+            foreach(var partId in PartIds)
             {
-                PartId = PartId,
-                CreatedOn = DateTime.Now,
-                CreatedBy = RuntimeSettings.CurrentUser.UserId,
-                TenantId = RuntimeSettings.TenantId
-            };
+                Stocks.Add(new StockTaking()
+                {
+                    PartId = partId,
+                    CreatedOn = DateTime.Now,
+                    CreatedBy = RuntimeSettings.CurrentUser.UserId,
+                    TenantId = RuntimeSettings.TenantId
+                });
+            }
         }
 
         private void StyleAsPriceForm()
@@ -102,15 +122,21 @@ namespace JDE_Scanner_Desktop
                     //Save
                     if (Type == PartDataFormType.Price)
                     {
-                        Price.Price = decimal.Parse(txtValue.Text);
-                        Price.Currency = cmbUnit.SelectedItem.ToString();
-                        Price.ValidFrom = txtDate.Value;
+                        foreach(PartPrice Price in Prices)
+                        {
+                            Price.Price = decimal.Parse(txtValue.Text);
+                            Price.Currency = cmbUnit.SelectedItem.ToString();
+                            Price.ValidFrom = txtDate.Value;
+                        }
                         await SavePrice();
                     }
                     else
                     {
-                        Stock.Amount = int.Parse(txtValue.Text);
-                        Stock.CreatedOn = txtDate.Value;
+                        foreach(StockTaking Stock in Stocks)
+                        {
+                            Stock.Amount = int.Parse(txtValue.Text);
+                            Stock.CreatedOn = txtDate.Value;
+                        }
                         await SaveStock();
                     }
                 }
@@ -134,26 +160,60 @@ namespace JDE_Scanner_Desktop
 
         private async Task SaveStock()
         {
-            if (await Stock.Add())
+            List<Task<bool>> tasks = new List<Task<bool>>();
+            if (PartIds.Any())
             {
-                MessageBox.Show($"Inwentaryzacja została zapisana i zapas zaktualizowany", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Serwer zwrócił błąd, inwentaryzacja nie została zapisana..", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                foreach (StockTaking Stock in Stocks)
+                {
+                    tasks.Add(Task.Run(() => Stock.Add()));
+                }
+                var res = await Task.WhenAll<bool>(tasks);
+                if (res.Any(i => i == false))
+                {
+                    int number = res.Count(i => i == false);
+                    string msgText = "Serwer zwrócił błąd, inwentaryzacja nie została zapisana..";
+
+                    if (number > 1)
+                    {
+                        msgText = $"Próba zaktualizowania zapasu zakończyła się niepowodzeniem w przypadku {number} części..";
+                    }
+
+                    MessageBox.Show(msgText, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Inwentaryzacja została zapisana i zapas zaktualizowany", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
         private async Task SavePrice()
         {
-            if (await Price.Add())
+            List<Task<bool>> tasks = new List<Task<bool>>();
+            if (PartIds.Any())
             {
-                MessageBox.Show($"Zaktualizowano cenę. Nowa cena będzie obowiązywać od {Price.ValidFrom}.", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Serwer zwrócił błąd podczas aktualizacji ceny, cena nie została zaktualizowana..", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                foreach(PartPrice Price in Prices)
+                {
+                    tasks.Add(Task.Run(() => Price.Add()));
+                }
+                var res = await Task.WhenAll<bool>(tasks);
+                if(res.Any(i=>i == false))
+                {
+                    int number = res.Count(i => i == false);
+                    string msgText = "Serwer zwrócił błąd podczas aktualizacji ceny, cena nie została zaktualizowana..";
+
+                    if (number > 1)
+                    {
+                        msgText = $"Próba zaktualizowania ceny zakończyła się niepowodzeniem w przypadku {number} części..";
+                    }
+
+                    MessageBox.Show(msgText, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show($"Zaktualizowano cenę. Nowa cena będzie obowiązywać od {Prices.FirstOrDefault().ValidFrom}.", "Powodzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            } 
         }
 
         private string Validate()

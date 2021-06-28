@@ -41,9 +41,10 @@ namespace JDE_Scanner_Desktop
             this.btnFilter = new System.Windows.Forms.Button();
             this.cboxShowPreview = new System.Windows.Forms.CheckBox();
             this.btnArchive = new System.Windows.Forms.Button();
-            this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.sumStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.btnUpdatePrice = new System.Windows.Forms.Button();
+            this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -71,7 +72,8 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 7;
+            this.tlpButtons.ColumnCount = 8;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
@@ -84,8 +86,9 @@ namespace JDE_Scanner_Desktop
             this.tlpButtons.Controls.Add(this.btnRefresh, 2, 0);
             this.tlpButtons.Controls.Add(this.btnPrint, 4, 0);
             this.tlpButtons.Controls.Add(this.btnFilter, 3, 0);
-            this.tlpButtons.Controls.Add(this.cboxShowPreview, 6, 0);
+            this.tlpButtons.Controls.Add(this.cboxShowPreview, 7, 0);
             this.tlpButtons.Controls.Add(this.btnArchive, 5, 0);
+            this.tlpButtons.Controls.Add(this.btnUpdatePrice, 6, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -172,7 +175,7 @@ namespace JDE_Scanner_Desktop
             this.cboxShowPreview.AutoSize = true;
             this.cboxShowPreview.Checked = true;
             this.cboxShowPreview.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxShowPreview.Location = new System.Drawing.Point(243, 3);
+            this.cboxShowPreview.Location = new System.Drawing.Point(283, 3);
             this.cboxShowPreview.Name = "cboxShowPreview";
             this.cboxShowPreview.Size = new System.Drawing.Size(105, 28);
             this.cboxShowPreview.TabIndex = 5;
@@ -193,6 +196,28 @@ namespace JDE_Scanner_Desktop
             this.btnArchive.UseVisualStyleBackColor = true;
             this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
+            // sumStatusStrip
+            // 
+            this.sumStatusStrip.Location = new System.Drawing.Point(0, 378);
+            this.sumStatusStrip.Name = "sumStatusStrip";
+            this.sumStatusStrip.Size = new System.Drawing.Size(595, 22);
+            this.sumStatusStrip.TabIndex = 1;
+            this.sumStatusStrip.Text = "statusStrip1";
+            // 
+            // btnUpdatePrice
+            // 
+            this.btnUpdatePrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdatePrice.Image = global::JDE_Scanner_Desktop.Properties.Resources.price_24;
+            this.btnUpdatePrice.Location = new System.Drawing.Point(243, 3);
+            this.btnUpdatePrice.Name = "btnUpdatePrice";
+            this.btnUpdatePrice.Size = new System.Drawing.Size(34, 28);
+            this.btnUpdatePrice.TabIndex = 7;
+            this.tooltip.SetToolTip(this.btnUpdatePrice, "Aktualizuj cenę dla zaznaczonych części..");
+            this.btnUpdatePrice.UseVisualStyleBackColor = true;
+            this.btnUpdatePrice.Click += new System.EventHandler(this.btnUpdatePrice_Click);
+            // 
             // dgItems
             // 
             this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -209,14 +234,6 @@ namespace JDE_Scanner_Desktop
             this.dgItems.DoubleClick += new System.EventHandler(this.View);
             this.dgItems.MouseLeave += new System.EventHandler(this.dgItems_MouseLeave);
             this.dgItems.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgItems_MouseMove);
-            // 
-            // sumStatusStrip
-            // 
-            this.sumStatusStrip.Location = new System.Drawing.Point(0, 378);
-            this.sumStatusStrip.Name = "sumStatusStrip";
-            this.sumStatusStrip.Size = new System.Drawing.Size(595, 22);
-            this.sumStatusStrip.TabIndex = 1;
-            this.sumStatusStrip.Text = "statusStrip1";
             // 
             // frmParts
             // 
@@ -253,6 +270,7 @@ namespace JDE_Scanner_Desktop
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnArchive;
         private System.Windows.Forms.StatusStrip sumStatusStrip;
+        private System.Windows.Forms.Button btnUpdatePrice;
     }
 }
 
