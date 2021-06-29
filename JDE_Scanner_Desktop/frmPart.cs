@@ -392,7 +392,7 @@ namespace JDE_Scanner_Desktop
 
         private void btnUpdateStock_Click(object sender, EventArgs e)
         {
-            if(_this.PartId > 0)
+            if (_this.PartId > 0)
             {
                 frmGetPartData StockForm = new frmGetPartData(Enums.PartDataFormType.Stock, _this.PartId);
                 StockForm.Show(this);
@@ -401,7 +401,7 @@ namespace JDE_Scanner_Desktop
             {
                 MessageBox.Show("Aby zinwentaryzować zapas, należy najpierw zapisać część. Kliknij ikonę dyskietki by zapisać część.", "Część nie została jeszcze utworzona", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            
+
         }
 
         private void btnUpdatePrice_Click(object sender, EventArgs e)

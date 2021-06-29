@@ -38,10 +38,10 @@ namespace JDE_Scanner_Desktop
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
             this.btnArchive = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.dgItems = new JDE_Scanner_Desktop.CustomControls.DBDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.sumStatusStrip = new System.Windows.Forms.StatusStrip();
-            this.btnPrint = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgItems)).BeginInit();
@@ -145,6 +145,20 @@ namespace JDE_Scanner_Desktop
             this.btnArchive.UseVisualStyleBackColor = true;
             this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Image = global::JDE_Scanner_Desktop.Properties.Resources.print_24;
+            this.btnPrint.Location = new System.Drawing.Point(163, 3);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(34, 28);
+            this.btnPrint.TabIndex = 8;
+            this.tooltip.SetToolTip(this.btnPrint, "Wydrukuj kody QR dla zaznaczonych części..");
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // dgItems
             // 
             this.dgItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -168,20 +182,6 @@ namespace JDE_Scanner_Desktop
             this.sumStatusStrip.TabIndex = 1;
             this.sumStatusStrip.Text = "statusStrip1";
             // 
-            // btnPrint
-            // 
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPrint.Image = global::JDE_Scanner_Desktop.Properties.Resources.print_24;
-            this.btnPrint.Location = new System.Drawing.Point(163, 3);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(34, 28);
-            this.btnPrint.TabIndex = 8;
-            this.tooltip.SetToolTip(this.btnPrint, "Wydrukuj kody QR dla zaznaczonych części..");
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
             // frmStorageBins
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,7 +192,7 @@ namespace JDE_Scanner_Desktop
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmStorageBins";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Regały magazynowe";
+            this.Text = "Miejsca magazynowe";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpButtons.ResumeLayout(false);

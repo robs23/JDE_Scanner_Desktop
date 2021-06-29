@@ -43,13 +43,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.pbQrCode = new System.Windows.Forms.PictureBox();
+            this.txtNumber = new System.Windows.Forms.TextBox();
             this.pgStock = new System.Windows.Forms.TabPage();
             this.tlpStocks = new System.Windows.Forms.TableLayoutPanel();
             this.tlpStocksButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnUpdateStock = new System.Windows.Forms.Button();
             this.dgvStocks = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtNumber = new System.Windows.Forms.TextBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -238,13 +238,21 @@
             this.pbQrCode.TabIndex = 29;
             this.pbQrCode.TabStop = false;
             // 
+            // txtNumber
+            // 
+            this.txtNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNumber.Location = new System.Drawing.Point(123, 5);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(295, 20);
+            this.txtNumber.TabIndex = 30;
+            // 
             // pgStock
             // 
             this.pgStock.Controls.Add(this.tlpStocks);
             this.pgStock.Location = new System.Drawing.Point(4, 22);
             this.pgStock.Name = "pgStock";
             this.pgStock.Padding = new System.Windows.Forms.Padding(3);
-            this.pgStock.Size = new System.Drawing.Size(466, 193);
+            this.pgStock.Size = new System.Drawing.Size(416, 193);
             this.pgStock.TabIndex = 4;
             this.pgStock.Text = "Zapas ";
             this.pgStock.UseVisualStyleBackColor = true;
@@ -309,14 +317,6 @@
             this.dgvStocks.Size = new System.Drawing.Size(454, 360);
             this.dgvStocks.TabIndex = 1;
             // 
-            // txtNumber
-            // 
-            this.txtNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNumber.Location = new System.Drawing.Point(123, 5);
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(295, 20);
-            this.txtNumber.TabIndex = 30;
-            // 
             // frmStorageBin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -326,7 +326,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmStorageBin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Szczegóły regału magazynowego";
+            this.Text = "Szczegóły miejsca magazynowego";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.tlpMain.ResumeLayout(false);
             this.tlpMain.PerformLayout();
