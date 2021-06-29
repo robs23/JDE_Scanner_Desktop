@@ -227,6 +227,7 @@ namespace JDE_Scanner_Desktop
             btnPriceDelete.Enabled = true;
             btnRefreshBoms.Enabled = true;
             btnPriceRefresh.Enabled = true;
+            btnUsageRefresh.Enabled = true; 
         }
 
         private void AddCompany(object sender, EventArgs e)
@@ -439,6 +440,14 @@ namespace JDE_Scanner_Desktop
                 }
                 await PriceKeeper.Remove(SelectedRows);
                 await GetPrices();
+            }
+        }
+
+        private async void btnUsageRefresh_Click(object sender, EventArgs e)
+        {
+            if(mode > 1)
+            {
+                await GetUsedParts();
             }
         }
     }
