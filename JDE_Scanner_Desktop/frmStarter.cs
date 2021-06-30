@@ -400,14 +400,26 @@ namespace JDE_Scanner_Desktop
 
         private void regałyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
             frmStorageBins FrmStorageBins = new frmStorageBins(this);
             FrmStorageBins.Show(this);
         }
 
         private void nowyRegałToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
             frmStorageBin FrmStorageBin = new frmStorageBin(this);
             FrmStorageBin.Show(this);
+        }
+
+        private void noweToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
+            frmOrder Frm = new frmOrder(this);
+            Frm.Show(this);
         }
     }
 }

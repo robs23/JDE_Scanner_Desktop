@@ -254,11 +254,23 @@
     <Compile Include="frmStockTaking.Designer.cs">
       <DependentUpon>frmStockTaking.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrder.Designer.cs">
+      <DependentUpon>frmOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStorageBin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmStorageBin.Designer.cs">
       <DependentUpon>frmStorageBin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrders.Designer.cs">
+      <DependentUpon>frmOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="frmStorageBins.cs">
       <SubType>Form</SubType>
@@ -471,6 +483,10 @@
     <Compile Include="Models\HandlingsKeeper.cs" />
     <Compile Include="Models\LogsKeeper.cs" />
     <Compile Include="Models\CompaniesKeeper.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\OrderItemKeeper.cs" />
+    <Compile Include="Models\OrderKeeper.cs" />
     <Compile Include="Models\Part.cs" />
     <Compile Include="Models\PartKeeper.cs" />
     <Compile Include="Models\PartPrice.cs" />
@@ -561,8 +577,14 @@
     <EmbeddedResource Include="frmStockTaking.resx">
       <DependentUpon>frmStockTaking.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOrder.resx">
+      <DependentUpon>frmOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmStorageBin.resx">
       <DependentUpon>frmStorageBin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrders.resx">
+      <DependentUpon>frmOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStorageBins.resx">
       <DependentUpon>frmStorageBins.cs</DependentUpon>
