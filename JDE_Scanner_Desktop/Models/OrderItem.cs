@@ -19,7 +19,7 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("ID zamówienia")]
         public int? OrderId { get; set; }
         [DisplayName("Numer zamówienia")]
-        public int? OrderNo { get; set; }
+        public string OrderNo { get; set; }
         [Browsable(false)]
         public int? PartId { get; set; }
         [DisplayName("Część")]

@@ -28,6 +28,7 @@ namespace JDE_Scanner_Desktop
         frmLooper Looper;
         ContextMenu buttonContextMenu;
         CompaniesKeeper SupplierKeeper;
+        BindingSource source = new BindingSource();
 
         public frmOrder(Form parent)
         {
@@ -85,7 +86,8 @@ namespace JDE_Scanner_Desktop
             new AutoCompleteBehavior<Company>(this.cmbSupplier, SupplierKeeper.Items);
             cmbSupplier.DisplayMember = "Name";
             cmbSupplier.ValueMember = "CompanyId";
-            dgvItems.DataSource = _this.ItemKeeper.Items;
+            source.DataSource = _this.ItemKeeper.Items;
+            dgvItems.DataSource = source;
 
             if (mode > 1)
             {

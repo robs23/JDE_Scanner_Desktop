@@ -279,10 +279,8 @@
             // 
             // dgvItems
             // 
-            this.dgvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItems.Location = new System.Drawing.Point(3, 83);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(625, 270);
