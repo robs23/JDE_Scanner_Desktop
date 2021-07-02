@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JDE_Scanner_Desktop.Static;
+using static JDE_Scanner_Desktop.Static.Enums;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -20,9 +22,9 @@ namespace JDE_Scanner_Desktop.Models
         public int? OrderId { get; set; }
         [DisplayName("Numer zamówienia")]
         public string OrderNo { get; set; }
-        [Browsable(false)]
+        [DisplayName("ID części")]
         public int? PartId { get; set; }
-        [DisplayName("Część")]
+        [DisplayName("Nazwa części")]
         public string PartName { get; set; }
         [DisplayName("Symbol")]
         public string PartSymbol { get; set; }
@@ -32,6 +34,31 @@ namespace JDE_Scanner_Desktop.Models
         public double? Amount { get; set; }
         [DisplayName("Jednostka")]
         public string Unit { get; set; }
+        //public PartUnit? PartUnit
+        //{
+        //    get
+        //    {
+        //        if (!string.IsNullOrEmpty(Unit))
+        //        {
+        //            if(Enum.IsDefined(typeof(PartUnit), Unit))
+        //            {
+        //                return (PartUnit)Enum.Parse(typeof(PartUnit), Unit);
+        //            }
+        //            else
+        //            {
+        //                return (PartUnit)1;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    set
+        //    {
+        //        Unit = value.ToString();
+        //    }
+        //}
         [DisplayName("Koszt")]
         public double? Price { get; set; }
         [DisplayName("Waluta")]

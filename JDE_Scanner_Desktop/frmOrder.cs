@@ -88,6 +88,8 @@ namespace JDE_Scanner_Desktop
             cmbSupplier.ValueMember = "CompanyId";
             source.DataSource = _this.ItemKeeper.Items;
             dgvItems.DataSource = source;
+            var Columns = new List<string>() { "PartId", "PartName", "PartSymbol", "Amount", "Unit", "Price", "Currency" };
+            dgvItems.AdjustColumnVisibility(Columns);
 
             if (mode > 1)
             {
@@ -166,5 +168,23 @@ namespace JDE_Scanner_Desktop
                 
         }
 
+        private void dgvItems_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if(e.ColumnIndex == dgvItems.Columns["Price"].Index)
+            {
+                dgvItems.Rows[e.RowIndex].ErrorText = "";
+                double newValue;
+                if (!dgvItems.Rows[e.RowIndex].IsNewRow)
+                {
+                    if(!double.TryParse(e.FormattedValue.ToString(), out newValue) && e.FormattedValue!=string.Empty)
+                    {
+                        e.Cancel = true;
+                        string errMsg = "Pole Koszt wymaga podania wartości liczbowych!";
+                        dgvItems.Rows[e.RowIndex].ErrorText = errMsg;
+                        MessageBox.Show(errMsg, "Nieprawidłowy format danych", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                }
+            }
+        }
     }
 }

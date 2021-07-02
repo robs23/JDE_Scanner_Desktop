@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JDE_Scanner_Desktop.Static;
 
 namespace JDE_Scanner_Desktop
 {
@@ -71,19 +72,19 @@ namespace JDE_Scanner_Desktop
                 if(TypeId ==2 || TypeId == 24)
                 {
                     List<string> Columns = new List<string>() { "ProcessId", "Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan", "HandlingsLength", "ProcessLength" };
-                    AdjustColumnVisibility(Columns);
+                    dgItems.AdjustColumnVisibility(Columns);
                 }
                 else
                 {
                     List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish", "Comment", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan" };
-                    AdjustColumnVisibility(null, Columns);
+                    dgItems.AdjustColumnVisibility(null, Columns);
                 }
                 
             }
             else
             {
                 List<string> Columns = new List<string>() { "PlannedStart", "PlannedFinish","Comment", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan"};
-                AdjustColumnVisibility(null,Columns);
+                dgItems.AdjustColumnVisibility(null,Columns);
             }
             looper.Hide();
             page = 1;
@@ -156,32 +157,6 @@ namespace JDE_Scanner_Desktop
             MessageBox.Show(this, "Wystąpił problem z dostępem do danych. Szczegóły: " + e.Exception.Message, "Error");
             e.ThrowException = false;
             e.Cancel = false;
-        }
-
-        private void AdjustColumnVisibility(List<string> ToShow = null, List<string> ToHide = null)
-        {
-
-                foreach(DataGridViewColumn c in dgItems.Columns)
-                {
-                    if (ToShow != null)
-                    {
-                        if (!ToShow.Contains(c.Name))
-                        {
-                            c.Visible = false;
-                        }
-                        else
-                        {
-                            c.Visible = true;
-                        }
-                    }
-                if (ToHide != null)
-                {
-                    if (ToHide.Contains(c.Name))
-                    {
-                        c.Visible = false;
-                    }
-                }
-            }
         }
 
         private async void dgItems_Scroll(object sender, ScrollEventArgs e)

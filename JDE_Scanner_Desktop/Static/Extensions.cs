@@ -186,5 +186,31 @@ namespace JDE_Scanner_Desktop.Static
             // Return the week of our adjusted day
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Sunday);
         }
+
+        public static void AdjustColumnVisibility(this DataGridView dataGrid, List<string> ToShow = null, List<string> ToHide = null)
+        {
+
+            foreach (DataGridViewColumn c in dataGrid.Columns)
+            {
+                if (ToShow != null)
+                {
+                    if (!ToShow.Contains(c.Name))
+                    {
+                        c.Visible = false;
+                    }
+                    else
+                    {
+                        c.Visible = true;
+                    }
+                }
+                if (ToHide != null)
+                {
+                    if (ToHide.Contains(c.Name))
+                    {
+                        c.Visible = false;
+                    }
+                }
+            }
+        }
     }
 }
