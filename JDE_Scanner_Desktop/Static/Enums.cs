@@ -23,7 +23,9 @@ namespace JDE_Scanner_Desktop.Static
 
         public enum PartUnit
         {
-            sztuki
+            szt,
+            m,
+            kg
         }
 
         public enum PartDataFormType

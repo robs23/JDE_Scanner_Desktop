@@ -170,6 +170,12 @@
     <Compile Include="CustomControls\ImageInfoControl.Designer.cs">
       <DependentUpon>ImageInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\PartFinder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\PartFinder.Designer.cs">
+      <DependentUpon>PartFinder.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\ThreeRowsColumn.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -534,6 +540,9 @@
     <Compile Include="Static\Utilities.cs" />
     <EmbeddedResource Include="CustomControls\ImageInfoControl.resx">
       <DependentUpon>ImageInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\PartFinder.resx">
+      <DependentUpon>PartFinder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\ThreeRowsColumn.resx">
       <DependentUpon>ThreeRowsColumn.cs</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Classes;
+using JDE_Scanner_Desktop.CustomControls;
 using JDE_Scanner_Desktop.Models;
 using JDE_Scanner_Desktop.Static;
 using MoreLinq.Experimental;
@@ -29,6 +30,7 @@ namespace JDE_Scanner_Desktop
         ContextMenu buttonContextMenu;
         CompaniesKeeper SupplierKeeper;
         BindingSource source = new BindingSource();
+        PartFinder Finder;
 
         public frmOrder(Form parent)
         {
@@ -90,6 +92,10 @@ namespace JDE_Scanner_Desktop
             dgvItems.DataSource = source;
             var Columns = new List<string>() { "PartId", "PartName", "PartSymbol", "Amount", "Unit", "Price", "Currency" };
             dgvItems.AdjustColumnVisibility(Columns);
+            Finder = new PartFinder();
+            this.Controls.Add(Finder);
+            Finder.BringToFront();
+            Task.Run(() => Finder.Init());
 
             if (mode > 1)
             {
@@ -183,6 +189,105 @@ namespace JDE_Scanner_Desktop
                         dgvItems.Rows[e.RowIndex].ErrorText = errMsg;
                         MessageBox.Show(errMsg, "Nieprawidłowy format danych", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
+                }
+            }else if(e.ColumnIndex == dgvItems.Columns["Amount"].Index)
+            {
+                dgvItems.Rows[e.RowIndex].ErrorText = "";
+                double newValue;
+                if (!dgvItems.Rows[e.RowIndex].IsNewRow)
+                {
+                    if (!double.TryParse(e.FormattedValue.ToString(), out newValue) && e.FormattedValue != string.Empty)
+                    {
+                        e.Cancel = true;
+                        string errMsg = "Pole Ilość wymaga podania wartości liczbowych!";
+                        dgvItems.Rows[e.RowIndex].ErrorText = errMsg;
+                        MessageBox.Show(errMsg, "Nieprawidłowy format danych", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                }
+            }
+            else if (e.ColumnIndex == dgvItems.Columns["PartId"].Index)
+            {
+                dgvItems.Rows[e.RowIndex].ErrorText = "";
+                int newValue;
+                if (!dgvItems.Rows[e.RowIndex].IsNewRow)
+                {
+                    if (!int.TryParse(e.FormattedValue.ToString(), out newValue) && e.FormattedValue != string.Empty)
+                    {
+                        e.Cancel = true;
+                        string errMsg = "Pole ID części wymaga podania wartości liczbowych!";
+                        dgvItems.Rows[e.RowIndex].ErrorText = errMsg;
+                        MessageBox.Show(errMsg, "Nieprawidłowy format danych", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                }
+            }
+            else if (e.ColumnIndex == dgvItems.Columns["Unit"].Index)
+            {
+                dgvItems.Rows[e.RowIndex].ErrorText = "";
+                List<string> values = Enum.GetNames(typeof(Enums.PartUnit)).ToList();
+
+                int newValue;
+                if (!dgvItems.Rows[e.RowIndex].IsNewRow)
+                {
+                    if (!values.Contains(e.FormattedValue.ToString()) && e.FormattedValue != string.Empty)
+                    {
+                        e.Cancel = true;
+                        string errMsg = $"Pole Jednostka zawiera nieprawidłową wartość. Prawidłowe wartości to: {string.Join(",", values)}";
+                        dgvItems.Rows[e.RowIndex].ErrorText = errMsg;
+                        MessageBox.Show(errMsg, "Nieprawidłowy wartość", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
+                }
+            }
+        }
+
+        private AutoCompleteStringCollection CreateAutoCompleteList(string colName)
+        {
+            AutoCompleteStringCollection col = new AutoCompleteStringCollection();
+
+            if(colName == "Unit")
+            {
+                foreach (var i in Enum.GetValues(typeof(Enums.PartUnit)))
+                {
+                    col.Add(i.ToString());
+                }
+            }else if(colName == "Currency")
+            {
+                foreach (var i in Enum.GetValues(typeof(Enums.Currency)))
+                {
+                    col.Add(i.ToString());
+                }
+            }
+            return col;
+            
+        }
+
+        private void dgvItems_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            string headerText = dgvItems.Columns[dgvItems.CurrentCell.ColumnIndex].HeaderText;
+            if(headerText == "Jednostka")
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    tb.AutoCompleteCustomSource = CreateAutoCompleteList("Unit");
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }else if (headerText == "Waluta")
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.Suggest;
+                    tb.AutoCompleteCustomSource = CreateAutoCompleteList("Currency");
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
+            else
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.None;
                 }
             }
         }
