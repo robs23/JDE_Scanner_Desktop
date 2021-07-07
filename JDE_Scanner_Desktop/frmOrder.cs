@@ -31,6 +31,8 @@ namespace JDE_Scanner_Desktop
         CompaniesKeeper SupplierKeeper;
         BindingSource source = new BindingSource();
         PartFinder Finder;
+        Point CurrentRowPoint;
+        public bool IsLoading { get; set; } = false;
 
         public frmOrder(Form parent)
         {
@@ -81,6 +83,9 @@ namespace JDE_Scanner_Desktop
         {
             Looper = new frmLooper(this);
             Looper.Show(this);
+            IsLoading = true;
+            Finder = new PartFinder();
+            var LoadParts = Task.Run(() => Finder.Init());
             List<Task> LoadingTasks = new List<Task>();
             LoadingTasks.Add(Task.Run(() => SupplierKeeper.Refresh("TypeId=2")));
             LoadingTasks.Add(Task.Run(() => _this.ItemKeeper.Refresh($"OrderId={_this.OrderId}")));
@@ -92,10 +97,8 @@ namespace JDE_Scanner_Desktop
             dgvItems.DataSource = source;
             var Columns = new List<string>() { "PartId", "PartName", "PartSymbol", "Amount", "Unit", "Price", "Currency" };
             dgvItems.AdjustColumnVisibility(Columns);
-            Finder = new PartFinder();
             this.Controls.Add(Finder);
-            Finder.BringToFront();
-            Task.Run(() => Finder.Init());
+            
 
             if (mode > 1)
             {
@@ -105,6 +108,7 @@ namespace JDE_Scanner_Desktop
             {
 
             }
+            IsLoading = false; 
             Looper.Hide();
         }
 
@@ -282,6 +286,12 @@ namespace JDE_Scanner_Desktop
                     tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
             }
+            else if (headerText == "ID części")
+            {
+                TextBox tb = e.Control as TextBox;
+                tb.TextChanged += new EventHandler(PartIdTextChanged);
+                tb.KeyPress += new KeyPressEventHandler(PartIdKeyPressed);
+            }
             else
             {
                 TextBox tb = e.Control as TextBox;
@@ -290,6 +300,43 @@ namespace JDE_Scanner_Desktop
                     tb.AutoCompleteMode = AutoCompleteMode.None;
                 }
             }
+        }
+
+        private async void PartIdTextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+
+            if (!string.IsNullOrEmpty(tb.Text))
+            {
+                if (tb.Text.Length > 1)
+                {
+                    await Finder.Find(tb.Text);
+                    await Finder.Show(CurrentRowPoint);
+                } 
+            }
+            
+        }
+
+        private void PartIdKeyPressed(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r' || e.KeyChar == '\n' || e.KeyChar == '\t')
+            {
+                MessageBox.Show("TERAZ");
+            }
+        }
+
+        private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string colName = dgvItems.Columns[e.ColumnIndex].Name;
+            if(colName == "PartId")
+            {
+                int rowHeight = dgvItems.Rows[e.RowIndex].Height;
+                Rectangle Cell = dgvItems.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                Cell.X += dgvItems.Left;
+                Cell.Y += dgvItems.Top + rowHeight;
+                CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y));
+            }
+
         }
     }
 }

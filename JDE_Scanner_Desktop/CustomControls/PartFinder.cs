@@ -17,17 +17,18 @@ namespace JDE_Scanner_Desktop.CustomControls
         List<Part> CurrentSelection = new List<Part>();
 
         public bool IsInitialized { get; set; } = false;
+        public bool IsShown { get; set; } = false; 
 
         public PartFinder()
         {
             InitializeComponent();
+            this.Visible = false;
         }
 
         public async Task Init()
         {
-            await Keeper.Refresh();
+            await Keeper.Refresh(type: 't');
             CurrentSelection = Keeper.Items;
-            dgvItems.DataSource = CurrentSelection;
             IsInitialized = true;
         }
 
@@ -36,10 +37,22 @@ namespace JDE_Scanner_Desktop.CustomControls
             if (IsInitialized)
             {
                 CurrentSelection = Keeper.Items.Where(i => i.PartId.ToString().Contains(word)
-                                                         || i.Name.Contains(word)
-                                                         || i.Symbol.Contains(word)).ToList();
+                                                         || i.Name.ToLower().Contains(word.ToLower())).ToList();
             }
             //dgvItems.DataSource = CurrentSelection;
+        }
+
+        public async Task Show(Point position)
+        {
+            if (!IsShown)
+            {
+                this.Left = position.X;
+                this.Top = position.Y;
+                this.Visible = true;
+                this.BringToFront();
+                IsShown = true;
+            }
+            dgvItems.DataSource = CurrentSelection;
         }
     }
 }

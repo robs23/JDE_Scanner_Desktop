@@ -152,7 +152,7 @@
             this.pgGeneral.Controls.Add(this.tlpMajor);
             this.pgGeneral.Location = new System.Drawing.Point(4, 22);
             this.pgGeneral.Name = "pgGeneral";
-            this.pgGeneral.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.pgGeneral.Padding = new System.Windows.Forms.Padding(3);
             this.pgGeneral.Size = new System.Drawing.Size(597, 365);
             this.pgGeneral.TabIndex = 0;
             this.pgGeneral.Text = "Ogólne";
@@ -289,6 +289,7 @@
             this.dgvItems.RowHeadersWidth = 51;
             this.dgvItems.Size = new System.Drawing.Size(585, 270);
             this.dgvItems.TabIndex = 4;
+            this.dgvItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellClick);
             this.dgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvItems_CellValidating);
             this.dgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvItems_EditingControlShowing);
             // 
