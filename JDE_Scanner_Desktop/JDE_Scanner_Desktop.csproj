@@ -161,6 +161,9 @@
     <Compile Include="Classes\MergableAttribute.cs" />
     <Compile Include="Classes\ModelValidator.cs" />
     <Compile Include="ClientSettings.cs" />
+    <Compile Include="CustomControls\SpecKeysDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomControls\DBDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>

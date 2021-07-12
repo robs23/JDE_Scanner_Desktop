@@ -15,13 +15,17 @@ namespace JDE_Scanner_Desktop.CustomControls
     {
         PartKeeper Keeper = new PartKeeper();
         List<Part> CurrentSelection = new List<Part>();
+        public Part ChosenPart { get; set; }
+        public DataGridView DGV { get; set; }
 
         public bool IsInitialized { get; set; } = false;
         public bool IsShown { get; set; } = false; 
 
-        public PartFinder()
+        public PartFinder(Control parent)
         {
             InitializeComponent();
+            this.Parent = parent;
+            DGV = (DataGridView)parent;
             this.Visible = false;
         }
 
@@ -46,13 +50,31 @@ namespace JDE_Scanner_Desktop.CustomControls
         {
             if (!IsShown)
             {
-                this.Left = position.X;
-                this.Top = position.Y;
+                Point pnt = this.PointToClient(position);
+                this.Left = pnt.X;
+                this.Top = pnt.Y;
                 this.Visible = true;
                 this.BringToFront();
                 IsShown = true;
             }
             dgvItems.DataSource = CurrentSelection;
+        }
+
+        public async Task Hide()
+        {
+            this.Visible = false;
+            this.IsShown = false;
+        }
+
+        public void TabPressed()
+        {
+            if (dgvItems.Rows.Count == 1)
+            {
+                ChosenPart = CurrentSelection.FirstOrDefault();
+                DGV.CurrentCell.Value = ChosenPart.PartId;  
+            }
+            Hide();
+
         }
     }
 }

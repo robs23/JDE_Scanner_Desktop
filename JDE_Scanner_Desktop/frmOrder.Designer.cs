@@ -47,8 +47,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSupplier = new System.Windows.Forms.ComboBox();
             this.txtDeliveryDate = new System.Windows.Forms.DateTimePicker();
-            this.dgvItems = new System.Windows.Forms.DataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvItems = new JDE_Scanner_Desktop.CustomControls.SpecKeysDataGridView();
+            this.cboxShowFinder = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -85,12 +86,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpButtons.ColumnCount = 5;
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
             this.tlpButtons.Controls.Add(this.cboxArchived, 4, 0);
+            this.tlpButtons.Controls.Add(this.cboxShowFinder, 1, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -282,16 +284,34 @@
             // 
             // dgvItems
             // 
+            this.dgvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.DoubleBuffered = true;
             this.dgvItems.Location = new System.Drawing.Point(3, 83);
             this.dgvItems.Name = "dgvItems";
-            this.dgvItems.RowHeadersWidth = 51;
             this.dgvItems.Size = new System.Drawing.Size(585, 270);
             this.dgvItems.TabIndex = 4;
             this.dgvItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellClick);
             this.dgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvItems_CellValidating);
             this.dgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvItems_EditingControlShowing);
+            // 
+            // cboxShowFinder
+            // 
+            this.cboxShowFinder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxShowFinder.AutoSize = true;
+            this.cboxShowFinder.Checked = true;
+            this.cboxShowFinder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxShowFinder.Location = new System.Drawing.Point(55, 8);
+            this.cboxShowFinder.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            this.cboxShowFinder.Name = "cboxShowFinder";
+            this.cboxShowFinder.Size = new System.Drawing.Size(132, 17);
+            this.cboxShowFinder.TabIndex = 4;
+            this.cboxShowFinder.Text = "Podpowiadaj części";
+            this.tooltip.SetToolTip(this.cboxShowFinder, "Czy program ma podpowiadać indeksy części wg wprowadzonych liter w polu ID części" +
+        "?");
+            this.cboxShowFinder.UseVisualStyleBackColor = true;
             // 
             // frmOrder
             // 
@@ -338,6 +358,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbSupplier;
         private System.Windows.Forms.DateTimePicker txtDeliveryDate;
-        private System.Windows.Forms.DataGridView dgvItems;
+        private CustomControls.SpecKeysDataGridView dgvItems;
+        private System.Windows.Forms.CheckBox cboxShowFinder;
     }
 }

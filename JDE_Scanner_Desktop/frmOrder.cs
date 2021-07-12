@@ -84,7 +84,7 @@ namespace JDE_Scanner_Desktop
             Looper = new frmLooper(this);
             Looper.Show(this);
             IsLoading = true;
-            Finder = new PartFinder();
+            Finder = new PartFinder(dgvItems);
             var LoadParts = Task.Run(() => Finder.Init());
             List<Task> LoadingTasks = new List<Task>();
             LoadingTasks.Add(Task.Run(() => SupplierKeeper.Refresh("TypeId=2")));
@@ -97,6 +97,7 @@ namespace JDE_Scanner_Desktop
             dgvItems.DataSource = source;
             var Columns = new List<string>() { "PartId", "PartName", "PartSymbol", "Amount", "Unit", "Price", "Currency" };
             dgvItems.AdjustColumnVisibility(Columns);
+            dgvItems.TabAction = () => Finder.TabPressed();
             this.Controls.Add(Finder);
             
 
@@ -308,11 +309,16 @@ namespace JDE_Scanner_Desktop
 
             if (!string.IsNullOrEmpty(tb.Text))
             {
+                //HandleTab(tb);
                 if (tb.Text.Length > 1)
                 {
                     await Finder.Find(tb.Text);
                     await Finder.Show(CurrentRowPoint);
-                } 
+                }
+            }
+            else
+            {
+                //HandleTab(tb);
             }
             
         }
@@ -325,6 +331,31 @@ namespace JDE_Scanner_Desktop
             }
         }
 
+        //private void HandleTab(TextBox tb)
+        //{
+        //    if (tb.Text == null)
+        //    {
+        //        tb.PreviewKeyDown += (sender, e) =>
+        //        {
+        //            if (e.KeyData == Keys.Tab)
+        //            {
+        //                e.IsInputKey = true;
+        //            }
+        //        };
+        //    }
+        //    else
+        //    {
+        //        tb.PreviewKeyDown += (sender, e) =>
+        //        {
+        //            if (e.KeyData == Keys.Tab)
+        //            {
+        //                e.IsInputKey = false;
+        //            }
+        //        };
+        //    }
+
+        //}
+
         private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string colName = dgvItems.Columns[e.ColumnIndex].Name;
@@ -334,7 +365,7 @@ namespace JDE_Scanner_Desktop
                 Rectangle Cell = dgvItems.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
                 Cell.X += dgvItems.Left;
                 Cell.Y += dgvItems.Top + rowHeight;
-                CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y));
+                CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y + dgvItems.Top));
             }
 
         }
