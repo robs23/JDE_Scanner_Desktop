@@ -98,6 +98,8 @@ namespace JDE_Scanner_Desktop
             var Columns = new List<string>() { "PartId", "PartName", "PartSymbol", "Amount", "Unit", "Price", "Currency" };
             dgvItems.AdjustColumnVisibility(Columns);
             dgvItems.TabAction = () => Finder.TabPressed();
+            dgvItems.GetFocusAction = () => Finder.GetFocus();
+            dgvItems.HideFinderAction = () => Finder.Hide();
             this.Controls.Add(Finder);
             
 
@@ -309,7 +311,6 @@ namespace JDE_Scanner_Desktop
 
             if (!string.IsNullOrEmpty(tb.Text))
             {
-                //HandleTab(tb);
                 if (tb.Text.Length > 1)
                 {
                     await Finder.Find(tb.Text);
@@ -318,7 +319,7 @@ namespace JDE_Scanner_Desktop
             }
             else
             {
-                //HandleTab(tb);
+
             }
             
         }
@@ -331,35 +332,21 @@ namespace JDE_Scanner_Desktop
             }
         }
 
-        //private void HandleTab(TextBox tb)
-        //{
-        //    if (tb.Text == null)
-        //    {
-        //        tb.PreviewKeyDown += (sender, e) =>
-        //        {
-        //            if (e.KeyData == Keys.Tab)
-        //            {
-        //                e.IsInputKey = true;
-        //            }
-        //        };
-        //    }
-        //    else
-        //    {
-        //        tb.PreviewKeyDown += (sender, e) =>
-        //        {
-        //            if (e.KeyData == Keys.Tab)
-        //            {
-        //                e.IsInputKey = false;
-        //            }
-        //        };
-        //    }
-
-        //}
-
         private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            
+
+        }
+
+        private void dgvItems_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dgvItems_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
             string colName = dgvItems.Columns[e.ColumnIndex].Name;
-            if(colName == "PartId")
+            if (colName == "PartId" && e.RowIndex >= 0)
             {
                 int rowHeight = dgvItems.Rows[e.RowIndex].Height;
                 Rectangle Cell = dgvItems.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
@@ -367,7 +354,6 @@ namespace JDE_Scanner_Desktop
                 Cell.Y += dgvItems.Top + rowHeight;
                 CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y + dgvItems.Top));
             }
-
         }
     }
 }

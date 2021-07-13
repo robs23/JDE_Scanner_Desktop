@@ -34,6 +34,7 @@
             this.tlpButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.cboxArchived = new System.Windows.Forms.CheckBox();
+            this.cboxShowFinder = new System.Windows.Forms.CheckBox();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pgGeneral = new System.Windows.Forms.TabPage();
@@ -49,7 +50,6 @@
             this.txtDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.dgvItems = new JDE_Scanner_Desktop.CustomControls.SpecKeysDataGridView();
-            this.cboxShowFinder = new System.Windows.Forms.CheckBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -125,6 +125,22 @@
             this.cboxArchived.Text = "Archiwalny";
             this.cboxArchived.ThreeState = true;
             this.cboxArchived.UseVisualStyleBackColor = true;
+            // 
+            // cboxShowFinder
+            // 
+            this.cboxShowFinder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboxShowFinder.AutoSize = true;
+            this.cboxShowFinder.Checked = true;
+            this.cboxShowFinder.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxShowFinder.Location = new System.Drawing.Point(55, 8);
+            this.cboxShowFinder.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
+            this.cboxShowFinder.Name = "cboxShowFinder";
+            this.cboxShowFinder.Size = new System.Drawing.Size(132, 17);
+            this.cboxShowFinder.TabIndex = 4;
+            this.cboxShowFinder.Text = "Podpowiadaj części";
+            this.tooltip.SetToolTip(this.cboxShowFinder, "Czy program ma podpowiadać indeksy części wg wprowadzonych liter w polu ID części" +
+        "?");
+            this.cboxShowFinder.UseVisualStyleBackColor = true;
             // 
             // lblCreated
             // 
@@ -289,29 +305,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DoubleBuffered = true;
+            this.dgvItems.GetFocusAction = null;
             this.dgvItems.Location = new System.Drawing.Point(3, 83);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(585, 270);
+            this.dgvItems.TabAction = null;
             this.dgvItems.TabIndex = 4;
+            this.dgvItems.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvItems_CellBeginEdit);
             this.dgvItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellClick);
+            this.dgvItems.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellEnter);
             this.dgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvItems_CellValidating);
             this.dgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvItems_EditingControlShowing);
-            // 
-            // cboxShowFinder
-            // 
-            this.cboxShowFinder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboxShowFinder.AutoSize = true;
-            this.cboxShowFinder.Checked = true;
-            this.cboxShowFinder.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxShowFinder.Location = new System.Drawing.Point(55, 8);
-            this.cboxShowFinder.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
-            this.cboxShowFinder.Name = "cboxShowFinder";
-            this.cboxShowFinder.Size = new System.Drawing.Size(132, 17);
-            this.cboxShowFinder.TabIndex = 4;
-            this.cboxShowFinder.Text = "Podpowiadaj części";
-            this.tooltip.SetToolTip(this.cboxShowFinder, "Czy program ma podpowiadać indeksy części wg wprowadzonych liter w polu ID części" +
-        "?");
-            this.cboxShowFinder.UseVisualStyleBackColor = true;
             // 
             // frmOrder
             // 

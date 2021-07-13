@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         {
             InitializeComponent();
             this.Parent = parent;
+            this.CausesValidation = false;
             DGV = (DataGridView)parent;
             this.Visible = false;
         }
@@ -60,21 +62,77 @@ namespace JDE_Scanner_Desktop.CustomControls
             dgvItems.DataSource = CurrentSelection;
         }
 
-        public async Task Hide()
+        public bool Hide()
         {
-            this.Visible = false;
-            this.IsShown = false;
+            bool res = false;
+
+            if (this.IsShown)
+            {
+                this.Visible = false;
+                this.IsShown = false;
+                res = true;
+            }
+            return res;
+
         }
 
         public void TabPressed()
         {
-            if (dgvItems.Rows.Count == 1)
+            ReturnPart();
+
+        }
+
+        public void ReturnPart()
+        {
+            int recordsCount = dgvItems.Rows.Count;
+            if (recordsCount ==1)
             {
                 ChosenPart = CurrentSelection.FirstOrDefault();
-                DGV.CurrentCell.Value = ChosenPart.PartId;  
+                DGV.CurrentCell.Value = ChosenPart.PartId;
+
+            }
+            else if (recordsCount > 1)
+            {
+                if (dgvItems.SelectedRows.Count == 1)
+                {
+                    //single row is selected, let's choose it
+                    int id = (int)dgvItems.SelectedRows[0].Cells[0].Value;
+                    if (id > 0)
+                    {
+                        ChosenPart = Keeper.Items.Where(i => i.PartId == id).FirstOrDefault();
+                        DGV.CurrentCell.Value = ChosenPart.PartId;
+                    }
+                }
             }
             Hide();
+        }
 
+        public bool GetFocus()
+        {
+            if (dgvItems.Rows.Count >0)
+            {
+                this.Focus();
+                return true;
+            }
+            Hide();
+            return false;
+        }
+
+        private void dgvItems_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Escape)
+            {
+                LeaveFocus();
+                Hide();
+            }else if(e.KeyChar == (char)Keys.Tab || e.KeyChar == (char)Keys.Enter)
+            {
+                ReturnPart();
+            }
+        }
+
+        private void LeaveFocus()
+        {
+            DGV.BeginEdit(false);
         }
     }
 }

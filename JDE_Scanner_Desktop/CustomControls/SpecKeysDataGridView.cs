@@ -16,6 +16,8 @@ namespace JDE_Scanner_Desktop.CustomControls
         }
 
         public Action TabAction { get; set; }
+        public Func<bool> GetFocusAction { get; set; }
+        public Func<bool> HideFinderAction { get; set; }
 
         public SpecKeysDataGridView()
         {
@@ -55,6 +57,20 @@ namespace JDE_Scanner_Desktop.CustomControls
                 }
 
                 
+            }else if (keyData == Keys.Down)
+            {
+                bool canEnter = GetFocusAction();
+                if (canEnter)
+                {
+                    return true;
+                }
+            }else if(keyData == Keys.Escape)
+            {
+                bool wasShown = HideFinderAction();
+                if (wasShown)
+                {
+                    return true;
+                }
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
