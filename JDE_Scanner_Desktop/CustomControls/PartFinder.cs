@@ -1,4 +1,5 @@
 ﻿using JDE_Scanner_Desktop.Models;
+using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +28,8 @@ namespace JDE_Scanner_Desktop.CustomControls
             InitializeComponent();
             this.Parent = parent;
             this.CausesValidation = false;
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.BackColor = Color.Transparent;
             DGV = (DataGridView)parent;
             this.Visible = false;
         }
@@ -46,6 +49,19 @@ namespace JDE_Scanner_Desktop.CustomControls
                                                          || i.Name.ToLower().Contains(word.ToLower())).ToList();
             }
             //dgvItems.DataSource = CurrentSelection;
+        }
+
+        public void AdjustColumns(List<string> columns = null)
+        {
+            if (columns != null)
+            {
+                if (columns.Any())
+                {
+                    dgvItems.AdjustColumnVisibility(columns);
+                } 
+            }
+            dgvItems.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+
         }
 
         public async Task Show(Point position)
@@ -133,6 +149,11 @@ namespace JDE_Scanner_Desktop.CustomControls
         private void LeaveFocus()
         {
             DGV.BeginEdit(false);
+        }
+
+        private void dgvItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ReturnPart();
         }
     }
 }

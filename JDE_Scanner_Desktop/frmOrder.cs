@@ -84,8 +84,7 @@ namespace JDE_Scanner_Desktop
             Looper = new frmLooper(this);
             Looper.Show(this);
             IsLoading = true;
-            Finder = new PartFinder(dgvItems);
-            var LoadParts = Task.Run(() => Finder.Init());
+            SetPartFinder();
             List<Task> LoadingTasks = new List<Task>();
             LoadingTasks.Add(Task.Run(() => SupplierKeeper.Refresh("TypeId=2")));
             LoadingTasks.Add(Task.Run(() => _this.ItemKeeper.Refresh($"OrderId={_this.OrderId}")));
@@ -95,13 +94,10 @@ namespace JDE_Scanner_Desktop
             cmbSupplier.ValueMember = "CompanyId";
             source.DataSource = _this.ItemKeeper.Items;
             dgvItems.DataSource = source;
-            var Columns = new List<string>() { "PartId", "PartName", "PartSymbol", "Amount", "Unit", "Price", "Currency" };
-            dgvItems.AdjustColumnVisibility(Columns);
+            AdjustColumns();
             dgvItems.TabAction = () => Finder.TabPressed();
             dgvItems.GetFocusAction = () => Finder.GetFocus();
             dgvItems.HideFinderAction = () => Finder.Hide();
-            this.Controls.Add(Finder);
-            
 
             if (mode > 1)
             {
@@ -111,8 +107,27 @@ namespace JDE_Scanner_Desktop
             {
 
             }
-            IsLoading = false; 
+            IsLoading = false;
             Looper.Hide();
+        }
+
+        private void AdjustColumns()
+        {
+            var Columns = new List<string>() { "PartId", "PartName", "Symbol", "Amount", "Unit", "Price", "Currency" };
+            dgvItems.AdjustColumnVisibility(Columns);
+            dgvItems.Columns["PartName"].ReadOnly = true;
+            dgvItems.Columns["PartName"].MinimumWidth = 150;
+            dgvItems.Columns["PartName"].DefaultCellStyle.BackColor = Color.LightGray;
+        }
+
+        private async Task SetPartFinder()
+        {
+            Finder = new PartFinder(dgvItems);
+            var LoadParts = Task.Run(() => Finder.Init());
+            await LoadParts;
+            List<string> columns = new List<string>() { "PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
+            Finder.AdjustColumns(columns);
+            this.Controls.Add(Finder);
         }
 
         private void BindFromObject()
@@ -293,7 +308,6 @@ namespace JDE_Scanner_Desktop
             {
                 TextBox tb = e.Control as TextBox;
                 tb.TextChanged += new EventHandler(PartIdTextChanged);
-                tb.KeyPress += new KeyPressEventHandler(PartIdKeyPressed);
             }
             else
             {
@@ -311,36 +325,17 @@ namespace JDE_Scanner_Desktop
 
             if (!string.IsNullOrEmpty(tb.Text))
             {
-                if (tb.Text.Length > 1)
+                if (dgvItems.Columns[dgvItems.CurrentCell.ColumnIndex].Name == "PartId")
                 {
-                    await Finder.Find(tb.Text);
-                    await Finder.Show(CurrentRowPoint);
+                    if (tb.Text.Length > 1)
+                    {
+                        await Finder.Find(tb.Text);
+                        List<string> columns = new List<string>() { "PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
+                        Finder.AdjustColumns(columns);
+                        await Finder.Show(CurrentRowPoint);
+                    } 
                 }
             }
-            else
-            {
-
-            }
-            
-        }
-
-        private void PartIdKeyPressed(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\r' || e.KeyChar == '\n' || e.KeyChar == '\t')
-            {
-                MessageBox.Show("TERAZ");
-            }
-        }
-
-        private void dgvItems_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-
-        }
-
-        private void dgvItems_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            
         }
 
         private void dgvItems_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

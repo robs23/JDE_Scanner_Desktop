@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAjwAAACaCAYAAACt1ZJAAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        xAAADsQBlSsOGwAABBtJREFUeF7t28GKHGUAhdF5/0cxihoiiiC4cqsLUURcuRFBdxJXxv/TCYQwEodM
+        JeFyPjjVXQ3VvexLN3XzTJIkaTyD54KeHn/8+1SSJL0DGTwX9Pnx0fHbP2eSJOltZ/Bc0OPj4+PR8VUv
+        SJKkt5rBc0GNnfde8N0hSZLeXgbPBRk8kiS9Wxk8F/Ty4MmHt349JEnSm83guaCGzcuD57lPjj8PSZL0
+        5jJ4Luj9466x81x3cH1/SJKkN5PBc0GvGjzpDq5fbkmSpGszeC7og+OukfOiRlGjJ98ekiTpugyeC/o/
+        g+dl3xx/3ZIkSQ+bwXNB9x08nx390vPk1k+HJEl6uAyeC7rv4GnsvHje9T8ekiTpYTJ4LsjgkSTp3crg
+        uaD7Dp7/8sMhSZJeP4Pngh5q8PQ+Px+SJOn1uvn9HHhYnx5fHneNmPv44ujvrq+Puz4HAHi1urnrixYA
+        YEUZPADAtDJ4AIBpZfAAANPK4AEAppXBAwBMK4MHAJhWBg8AMK0MHgBgWhk8AMC0MngAgGll8AAA08rg
+        AQCmlcEDAEwrgwcAmFYGDwAwrQweAGBaGTwAwLQyeACAaWXwAADTyuABAKaVwQMATCuDBwCYVgYPADCt
+        DB4AYFoZPADAtDJ4AIBpZfAAANPK4AEAppXBAwBMK4MHAJhWBg8AMK0MHgBgWhk8AMC0MngAgGll8AAA
+        08rgAQCmlcEDAEwrgwcAmFYGDwAwrQweAGBaGTwAwLQyeACAaWXwAADTyuABAKaVwQMATCuDBwCYVgYP
+        ADCtDB4AYFoZPADAtDJ4AIBpZfAAANPK4AEAppXBAwBMK4MHAJhWBg8AMK0MHgBgWhk8AMC0MngAgGll
+        8AAA08rgAQCmlcEDAEwrgwcAmFYGDwAwrQweAGBaGTwAwLQyeACAaWXwAADTyuABAKaVwQMATCuDBwCY
+        VgYPADCtDB4AYFoZPADAtDJ4AIBpZfAAANPK4AEAppXBAwBMK4MHAJhWBg8AMK0MHgBgWhk8AMC0MngA
+        gGll8AAA08rgAQCmlcEDAEwrgwcAmFYGDwAwrQweAGBaGTwAwLQyeACAaWXwAADTyuABAKaVwQMATCuD
+        BwCYVgYPADCtDB4AYFoZPADAtDJ4AIBpZfAAANPK4AEAppXBAwBMK4MHAJhWBg8AMK0MHgBgWhk8AMC0
+        MngAgGll8AAA08rgAQCmlcEDAEwrgwcAmFYGDwAwrQweAGBaGTwAwLQyeACAaWXwAADTyuABAKaVwQMA
+        TCuDBwCYVgYPADCtDB4AYFoZPADAtDJ4AIBpZfAAANPK4AEAppXBAwBMK4MHAJhWBg8AMK0MHgBgWhk8
+        AMC0MngAgGll8AAA08rgAQCmlcEDAEyrm0fn8Ph4AgAwqG5uHyVJkkZ79uxvh4AETBwFSgMAAAAASUVO
+        RK5CYII=
+</value>
+  </data>
 </root>
