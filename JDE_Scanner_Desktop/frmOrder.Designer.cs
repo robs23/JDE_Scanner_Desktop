@@ -305,7 +305,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DoubleBuffered = true;
-            this.dgvItems.GetFocusAction = null;
+            this.dgvItems.KeyDownAction = null;
             this.dgvItems.Location = new System.Drawing.Point(3, 83);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(585, 270);

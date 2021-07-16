@@ -96,8 +96,11 @@ namespace JDE_Scanner_Desktop
             dgvItems.DataSource = source;
             AdjustColumns();
             dgvItems.TabAction = () => Finder.TabPressed();
-            dgvItems.GetFocusAction = () => Finder.GetFocus();
-            dgvItems.HideFinderAction = () => Finder.Hide();
+            dgvItems.TabListeningColumns = new List<string>() { "PartId" };
+            dgvItems.EnterAction = () => Finder.EnterPressed();
+            dgvItems.EnterListeningColumns = new List<string>() { "PartId" };
+            dgvItems.KeyDownAction = () => Finder.GetFocus();
+            dgvItems.EscapeAction = () => Finder.Hide();
 
             if (mode > 1)
             {

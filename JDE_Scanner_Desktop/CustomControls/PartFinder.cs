@@ -98,6 +98,12 @@ namespace JDE_Scanner_Desktop.CustomControls
 
         }
 
+        public void EnterPressed()
+        {
+            ReturnPart();
+
+        }
+
         public void ReturnPart()
         {
             int recordsCount = dgvItems.Rows.Count;
@@ -155,5 +161,6 @@ namespace JDE_Scanner_Desktop.CustomControls
         {
             ReturnPart();
         }
+
     }
 }
