@@ -272,21 +272,61 @@ namespace JDE_Scanner_Desktop.Models
         }
 
 
-        public virtual async Task<string> AddAll(List<Entity<T>> items, string args)
+        public virtual async Task<string> AddAll(List<Entity<T>> items = null, string args=null)
         {
             string res = "OK";
 
             List<Task<bool>> tasks = new List<Task<bool>>();
 
-            foreach(var i in items)
+            if(items != null)
             {
-                tasks.Add(i.Add(args));
+                foreach (var i in items)
+                {
+                    tasks.Add(i.Add(args));
+                }
             }
+            else
+            {
+                foreach(var i in Items)
+                {
+                    tasks.Add((i as Entity<T>).Add(args));
+                }
+            }
+            
 
             IEnumerable<bool> results = await Task.WhenAll<bool>(tasks);
             if (results.Any(r => r == false))
             {
-                res = "Wystąpił błąd podczas zapisywania niektórych plików";
+                res = "Wystąpił błąd podczas zapisywania niektórych pozycji..";
+            }
+            return res;
+        }
+
+        public virtual async Task<string> EditAll(List<Entity<T>> items = null, string args=null)
+        {
+            string res = "OK";
+
+            List<Task<string>> tasks = new List<Task<string>>();
+
+            if (items != null)
+            {
+                foreach (var i in items)
+                {
+                    tasks.Add(i.Edit());
+                }
+            }
+            else
+            {
+                foreach (var i in Items)
+                {
+                    tasks.Add((i as Entity<T>).Edit());
+                }
+            }
+
+            IEnumerable<string> results = await Task.WhenAll<string>(tasks);
+            if (results.Any(r => r != "OK"))
+            {
+                res = "Wystąpił błąd podczas zapisywania niektórych pozycji..";
             }
             return res;
         }

@@ -23,7 +23,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         public bool IsInitialized { get; set; } = false;
         public bool IsShown { get; set; } = false; 
 
-        public PartFinder(Control parent)
+        public PartFinder(Control parent, PartKeeper keeper)
         {
             InitializeComponent();
             this.Parent = parent;
@@ -31,12 +31,13 @@ namespace JDE_Scanner_Desktop.CustomControls
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.Transparent;
             DGV = (DataGridView)parent;
+            Keeper = keeper;
             this.Visible = false;
+            Init();
         }
 
-        public async Task Init()
+        public void Init()
         {
-            await Keeper.Refresh(type: 't');
             CurrentSelection = Keeper.Items;
             IsInitialized = true;
         }

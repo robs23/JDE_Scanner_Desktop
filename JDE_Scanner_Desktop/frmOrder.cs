@@ -29,9 +29,11 @@ namespace JDE_Scanner_Desktop
         frmLooper Looper;
         ContextMenu buttonContextMenu;
         CompaniesKeeper SupplierKeeper;
+        PartKeeper PartKeeper;
         BindingSource source = new BindingSource();
         PartFinder Finder;
-        Point CurrentRowPoint;
+        Point CurrentRowPoint;   
+
         public bool IsLoading { get; set; } = false;
 
         public frmOrder(Form parent)
@@ -56,6 +58,7 @@ namespace JDE_Scanner_Desktop
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             SupplierKeeper = new CompaniesKeeper();
+            PartKeeper = new PartKeeper();
         }
 
         private void StyleAsNew()
@@ -84,11 +87,13 @@ namespace JDE_Scanner_Desktop
             Looper = new frmLooper(this);
             Looper.Show(this);
             IsLoading = true;
-            SetPartFinder();
+            
             List<Task> LoadingTasks = new List<Task>();
             LoadingTasks.Add(Task.Run(() => SupplierKeeper.Refresh("TypeId=2")));
             LoadingTasks.Add(Task.Run(() => _this.ItemKeeper.Refresh($"OrderId={_this.OrderId}")));
+            LoadingTasks.Add(Task.Run(() => PartKeeper.Refresh(type: 't')));
             await Task.WhenAll(LoadingTasks);
+            SetPartFinder();
             new AutoCompleteBehavior<Company>(this.cmbSupplier, SupplierKeeper.Items);
             cmbSupplier.DisplayMember = "Name";
             cmbSupplier.ValueMember = "CompanyId";
@@ -125,9 +130,7 @@ namespace JDE_Scanner_Desktop
 
         private async Task SetPartFinder()
         {
-            Finder = new PartFinder(dgvItems);
-            var LoadParts = Task.Run(() => Finder.Init());
-            await LoadParts;
+            Finder = new PartFinder(dgvItems, PartKeeper);
             List<string> columns = new List<string>() { "PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
             Finder.AdjustColumns(columns);
             this.Controls.Add(Finder);
@@ -176,15 +179,31 @@ namespace JDE_Scanner_Desktop
                     
                     if(await _this.Add())
                     {
-                        mode = 2;
-                        this.Text = "Szczegóły zamówienia";
+                        string r = await _this.ItemKeeper.AddAll();
+                        if (r == "OK")
+                        {
+                            mode = 2;
+                            this.Text = "Szczegóły zamówienia";
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Upps.. Coś poszło nie tak.. Szczegóły: {r}", "Bład zapisu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        
                     }
                     
                 }
                 else if (mode == 2)
                 {
-
                     res = await _this.Edit();
+                    if(res == "OK")
+                    {
+                        res = await _this.ItemKeeper.EditAll();
+                        if(res == "OK")
+                        {
+                            MessageBox.Show("Zapis zakończony powodzeniem!", "Sukces", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
                     
                 }
             }
@@ -352,6 +371,58 @@ namespace JDE_Scanner_Desktop
                 Cell.Y += dgvItems.Top + rowHeight;
                 CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y + dgvItems.Top));
             }
+        }
+
+        private void dgvItems_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if(IsLoading == false) //avoid triggering when data initally loads on form loading
+            {
+                string colName = dgvItems.Columns[e.ColumnIndex].Name;
+                if (colName == "PartId" && e.RowIndex >= 0)
+                {
+                    if(dgvItems.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                    {
+                        PopulateRow(e.RowIndex);
+                    }
+                    else
+                    {
+                        ClearRow(e.RowIndex);
+                    }
+                }
+            }
+        }
+
+        private void PopulateRow(int rowNumber)
+        {
+            int partId; 
+            if(int.TryParse(dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["PartId"].Index].Value.ToString(), out partId))
+            {
+                Part CurrentPart = PartKeeper.Items.FirstOrDefault(i => i.PartId == partId);
+                if(CurrentPart != null)
+                {
+                    dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["PartName"].Index].Value = CurrentPart.Name;
+                    dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Unit"].Index].Value = Enum.GetValues(typeof(Enums.PartUnit)).GetValue(0).ToString();
+                    if (CurrentPart.Price != null)
+                    {
+                        dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Price"].Index].Value = CurrentPart.Price;
+                        dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Currency"].Index].Value = CurrentPart.Currency;
+                    }
+                    else
+                    {
+                        dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Price"].Index].Value = null;
+                        dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Currency"].Index].Value = null;
+                    }
+                }
+                
+            }
+        }
+
+        private void ClearRow(int rowNumber)
+        {
+            dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["PartName"].Index].Value = null;
+            dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Unit"].Index].Value = null;
+            dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Price"].Index].Value = null;
+            dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Currency"].Index].Value = null;
         }
     }
 }

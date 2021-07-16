@@ -48,8 +48,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cmbSupplier = new System.Windows.Forms.ComboBox();
             this.txtDeliveryDate = new System.Windows.Forms.DateTimePicker();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.dgvItems = new JDE_Scanner_Desktop.CustomControls.SpecKeysDataGridView();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -305,14 +305,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.DoubleBuffered = true;
+            this.dgvItems.EnterAction = null;
+            this.dgvItems.EnterListeningColumns = null;
+            this.dgvItems.EscapeAction = null;
+            this.dgvItems.EscapeListeningColumns = null;
             this.dgvItems.KeyDownAction = null;
+            this.dgvItems.KeyDownListeningColumns = null;
             this.dgvItems.Location = new System.Drawing.Point(3, 83);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.Size = new System.Drawing.Size(585, 270);
             this.dgvItems.TabAction = null;
             this.dgvItems.TabIndex = 4;
+            this.dgvItems.TabListeningColumns = null;
             this.dgvItems.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvItems_CellBeginEdit);
             this.dgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvItems_CellValidating);
+            this.dgvItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellValueChanged);
             this.dgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvItems_EditingControlShowing);
             // 
             // frmOrder

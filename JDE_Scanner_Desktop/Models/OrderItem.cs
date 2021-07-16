@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using JDE_Scanner_Desktop.Static;
+using Newtonsoft.Json;
 using static JDE_Scanner_Desktop.Static.Enums;
 
 namespace JDE_Scanner_Desktop.Models
@@ -34,35 +36,37 @@ namespace JDE_Scanner_Desktop.Models
         public double? Amount { get; set; }
         [DisplayName("Jednostka")]
         public string Unit { get; set; }
-        //public PartUnit? PartUnit
-        //{
-        //    get
-        //    {
-        //        if (!string.IsNullOrEmpty(Unit))
-        //        {
-        //            if(Enum.IsDefined(typeof(PartUnit), Unit))
-        //            {
-        //                return (PartUnit)Enum.Parse(typeof(PartUnit), Unit);
-        //            }
-        //            else
-        //            {
-        //                return (PartUnit)1;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    set
-        //    {
-        //        Unit = value.ToString();
-        //    }
-        //}
+
         [DisplayName("Koszt")]
-        public double? Price { get; set; }
+        public decimal? Price { get; set; }
         [DisplayName("Waluta")]
         public string Currency { get; set; }
+
+        public async override Task<bool> Add(string args = null)
+        {
+            bool x = await base.Add(args);
+            if (x)
+            {
+                try
+                {
+                    OrderItem _this = JsonConvert.DeserializeObject<OrderItem>(AddedItem);
+                    this.OrderItemId = _this.OrderItemId;
+                    this.CreatedOn = _this.CreatedOn;
+                    this.CreatedBy = _this.CreatedBy;
+                    this.TenantId = _this.TenantId;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }

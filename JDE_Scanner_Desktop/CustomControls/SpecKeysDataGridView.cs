@@ -7,6 +7,8 @@ using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.CustomControls
 {
+    // DataGridView offering developer ability to handle special keys e.g. TAB, ENTER
+    // which normally are handled by Control itself and not exposed to the dev
     public class SpecKeysDataGridView : DataGridView
     {
         public new bool DoubleBuffered

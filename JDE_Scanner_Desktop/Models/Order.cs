@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop.Models
 {
@@ -32,6 +34,34 @@ namespace JDE_Scanner_Desktop.Models
         public Order()
         {
             ItemKeeper = new OrderItemKeeper();
+        }
+
+        public async override Task<bool> Add()
+        {
+            bool x = await base.Add();
+            if (x)
+            {
+                try
+                {
+                    Order _this = JsonConvert.DeserializeObject<Order>(AddedItem);
+                    this.OrderId = _this.OrderId;
+                    this.TenantId = _this.TenantId;
+                    foreach(var i in ItemKeeper.Items.Where(n=>n.OrderId == 0 || n.OrderId == null))
+                    {
+                        i.OrderId = this.OrderId;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
