@@ -421,5 +421,29 @@ namespace JDE_Scanner_Desktop
             frmOrder Frm = new frmOrder(this);
             Frm.Show(this);
         }
+
+        private void nowyToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
+            frmAbandonReason Frm = new frmAbandonReason(this);
+            Frm.Show(this);
+        }
+
+        private void wszystkieToolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
+            frmAbandonReasons Frm = new frmAbandonReasons(this);
+            Frm.Show(this);
+        }
+
+        private void masoweToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
+            frmAddAbandonReasons Frm = new frmAddAbandonReasons(this);
+            Frm.Show(this);
+        }
     }
 }

@@ -197,6 +197,12 @@
     <Compile Include="frmActionTypes.Designer.cs">
       <DependentUpon>frmActionTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAddAbandonReasons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddAbandonReasons.Designer.cs">
+      <DependentUpon>frmAddAbandonReasons.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAddComponents.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,18 @@
     </Compile>
     <Compile Include="frmBomItem.Designer.cs">
       <DependentUpon>frmBomItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbandonReason.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbandonReason.Designer.cs">
+      <DependentUpon>frmAbandonReason.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbandonReasons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbandonReasons.Designer.cs">
+      <DependentUpon>frmAbandonReasons.cs</DependentUpon>
     </Compile>
     <Compile Include="frmDetailedOverview.cs">
       <SubType>Form</SubType>
@@ -467,6 +485,8 @@
     <Compile Include="frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AbandonReason.cs" />
+    <Compile Include="Models\AbandonReasonKeeper.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\ActionKeeper.cs" />
     <Compile Include="Models\ActionType.cs" />
@@ -556,11 +576,20 @@
     <EmbeddedResource Include="frmActionTypes.resx">
       <DependentUpon>frmActionTypes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAddAbandonReasons.resx">
+      <DependentUpon>frmAddAbandonReasons.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAddComponents.resx">
       <DependentUpon>frmAddComponents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmBomItem.resx">
       <DependentUpon>frmBomItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbandonReason.resx">
+      <DependentUpon>frmAbandonReason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbandonReasons.resx">
+      <DependentUpon>frmAbandonReasons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDetailedOverview.resx">
       <DependentUpon>frmDetailedOverview.cs</DependentUpon>

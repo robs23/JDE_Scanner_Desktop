@@ -37,7 +37,7 @@ namespace JDE_Scanner_Desktop.Models
         [DisplayName("Jednostka")]
         public string Unit { get; set; }
 
-        [DisplayName("Koszt")]
+        [DisplayName("Koszt jednostkowy")]
         public decimal? Price { get; set; }
         [DisplayName("Waluta")]
         public string Currency { get; set; }
