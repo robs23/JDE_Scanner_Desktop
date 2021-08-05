@@ -27,6 +27,7 @@ namespace JDE_Scanner_Desktop
         UsersKeeper AssignableUsers = new UsersKeeper();
         List<User> AssignedUsers = new List<User>();
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
+        AbandonReasonKeeper AbandonReasons = new AbandonReasonKeeper();
         ProcessAssignKeeper ProcessAssigns = new ProcessAssignKeeper();
         frmLooper Looper;
         AssignedUsersHandler assignedUsersHandler;
@@ -280,7 +281,8 @@ namespace JDE_Scanner_Desktop
                 pbReactivate.Visible = false;
                 if (dgvActions.Columns.Count > 0)
                 {
-                    dgvActions.Columns[1].ReadOnly = false;
+                    dgvActions.Columns["IsChecked"].ReadOnly = false;
+                    dgvActions.Columns["AbandonReason"].ReadOnly = false;
                 }
                 
             }
@@ -333,14 +335,16 @@ namespace JDE_Scanner_Desktop
             Looper.Show(this);
             var PlaceRefreshTask = Task.Run(() => Places.Refresh(null, 'a'));
             var StartingUsersRefreshTask = Task.Run(() => StartingUsers.Refresh(null, 'a'));
-            await Task.WhenAll(PlaceRefreshTask, StartingUsersRefreshTask);
+            var LoadActionTypesTask = Task.Run(() => ActionTypes.Refresh());
+            var LoadAbandonReasonsTask = Task.Run(() => AbandonReasons.Refresh());
+            await Task.WhenAll(PlaceRefreshTask, StartingUsersRefreshTask, LoadActionTypesTask, LoadAbandonReasonsTask);
             FinishingUsers.Items = new List<User>(StartingUsers.Items);
             AssignableUsers.Items = new List<User>(StartingUsers.Items);
             _this.Handlings = new HandlingsKeeper();
             _this.Logs = new LogsKeeper();
             _this.PartUsages = new PartUsageKeeper();
             _this.ProcessActions = new ProcessActionsKeeper();
-            await ActionTypes.Refresh();
+            //await ActionTypes.Refresh();
             if (mode == 1)
             {
                 cmbActionType.DataSource = ActionTypes.Items.Where(i => i.ShowInPlanning == true).ToList();
@@ -488,12 +492,22 @@ namespace JDE_Scanner_Desktop
                 List<string> cols = evaluator.PropertiesByValueBool(true, typeof(MergableAttribute), "Mergable");
                 DgvMerger merger = new DgvMerger(dgvActions, cols);
                 dgvActions.NullableBoolCheckbox(); //make bool? column a checkbox column 
-                foreach(DataGridViewColumn col in dgvActions.Columns)
+                //Make "AbandonReason" column a combobox column
+                var cmbAbandonReason = new DataGridViewComboBoxColumn();
+                cmbAbandonReason.Name = "AbandonReason";
+                cmbAbandonReason.HeaderText = "Powód niewykonania";
+                cmbAbandonReason.DataSource = AbandonReasons.Items;
+                cmbAbandonReason.DisplayMember = "Name";
+                cmbAbandonReason.ValueMember = "AbandonReasonId";
+                cmbAbandonReason.DataPropertyName = "AbandonReasonId";
+                dgvActions.Columns.Insert(6,cmbAbandonReason);
+
+                foreach (DataGridViewColumn col in dgvActions.Columns)
                 {
-                    col.ReadOnly = true;    
+                    col.ReadOnly = true;
                 }
-                
-                
+
+
                 return true;
             }
             else
@@ -501,6 +515,7 @@ namespace JDE_Scanner_Desktop
                 return false;
             }
         }
+
 
         private async Task<bool> LoadParts()
         {
@@ -710,21 +725,18 @@ namespace JDE_Scanner_Desktop
             foreach(DataGridViewRow row in dgvActions.Rows)
             {
                 var processActionId = (int)row.Cells["ProcessActionId"].Value;
-                var isChecked = row.Cells["IsChecked"].Value;
-                if(isChecked != null)
+                var isChecked = (bool?)row.Cells["IsChecked"].Value;
+                //int? AbandonReasonId = (int?)row.Cells["AbandonReason"].Value;
+      
+                ProcessAction pa = _this.ProcessActions.Items.FirstOrDefault(i => i.ProcessActionId == processActionId);
+                if (pa != null)
                 {
-                    if ((bool)isChecked == true)
-                    {
-                        ProcessAction pa = _this.ProcessActions.Items.FirstOrDefault(i => i.ProcessActionId == processActionId);
-                        if (pa != null)
-                        {
-                            pa.IsChecked = true;
-                            pa.HandlingId = handlingId;
-                            _Res = await pa.Edit();
-                        }
-                    }
+                    pa.IsChecked = isChecked;
+                    //pa.AbandonReasonId = AbandonReasonId;
+                    pa.HandlingId = handlingId;
+                    _Res = await pa.Edit();
                 }
-                
+
             }
             return _Res;
         }

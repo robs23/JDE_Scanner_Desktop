@@ -43,9 +43,9 @@ namespace JDE_Scanner_Desktop.Models
         public string ActionName { get; set; }
         [DisplayName("Założony czas [min]")]
         public int? GivenTime { get; set; }
-        [Browsable(false)]
+        [DisplayName("A")]
         public int? AbandonReasonId { get; set; }
-        [DisplayName("Powód niewykonania")]
+        [Browsable(false)]
         public string AbandonReasonName { get; set; }
 
         [DisplayName("Typ")]

@@ -788,7 +788,7 @@
             this.dgvActions.Location = new System.Drawing.Point(3, 3);
             this.dgvActions.Name = "dgvActions";
             this.dgvActions.RowHeadersWidth = 51;
-            this.dgvActions.Size = new System.Drawing.Size(582, 421);
+            this.dgvActions.Size = new System.Drawing.Size(582, 485);
             this.dgvActions.TabIndex = 0;
             // 
             // pbParts
