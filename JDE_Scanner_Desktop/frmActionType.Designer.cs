@@ -59,9 +59,11 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cmbRequireUserAssignment = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.cmbShowOnDashboard = new System.Windows.Forms.ComboBox();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.cmbShowOnDashboard = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.cmbLeaveable = new System.Windows.Forms.ComboBox();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tplTextboxes.SuspendLayout();
@@ -84,7 +86,7 @@
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpMain.Size = new System.Drawing.Size(597, 509);
+            this.tlpMain.Size = new System.Drawing.Size(597, 538);
             this.tlpMain.TabIndex = 0;
             // 
             // tlpButtons
@@ -153,9 +155,11 @@
             this.tplTextboxes.Controls.Add(this.cmbRequireUserAssignment, 1, 11);
             this.tplTextboxes.Controls.Add(this.label13, 0, 12);
             this.tplTextboxes.Controls.Add(this.cmbShowOnDashboard, 1, 12);
+            this.tplTextboxes.Controls.Add(this.label14, 0, 13);
+            this.tplTextboxes.Controls.Add(this.cmbLeaveable, 1, 13);
             this.tplTextboxes.Location = new System.Drawing.Point(3, 43);
             this.tplTextboxes.Name = "tplTextboxes";
-            this.tplTextboxes.RowCount = 14;
+            this.tplTextboxes.RowCount = 15;
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -170,7 +174,8 @@
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tplTextboxes.Size = new System.Drawing.Size(591, 433);
+            this.tplTextboxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tplTextboxes.Size = new System.Drawing.Size(591, 462);
             this.tplTextboxes.TabIndex = 1;
             // 
             // label2
@@ -421,17 +426,6 @@
             this.label13.TabIndex = 26;
             this.label13.Text = "Pokaż na pulpicie";
             // 
-            // lblCreated
-            // 
-            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCreated.AutoSize = true;
-            this.lblCreated.Location = new System.Drawing.Point(3, 487);
-            this.lblCreated.Name = "lblCreated";
-            this.lblCreated.Size = new System.Drawing.Size(591, 13);
-            this.lblCreated.TabIndex = 2;
-            this.lblCreated.Text = "lblCreated";
-            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // cmbShowOnDashboard
             // 
             this.cmbShowOnDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -441,11 +435,41 @@
             this.cmbShowOnDashboard.Size = new System.Drawing.Size(435, 21);
             this.cmbShowOnDashboard.TabIndex = 27;
             // 
+            // lblCreated
+            // 
+            this.lblCreated.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCreated.AutoSize = true;
+            this.lblCreated.Location = new System.Drawing.Point(3, 516);
+            this.lblCreated.Name = "lblCreated";
+            this.lblCreated.Size = new System.Drawing.Size(591, 13);
+            this.lblCreated.TabIndex = 2;
+            this.lblCreated.Text = "lblCreated";
+            this.lblCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(3, 392);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(144, 26);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "Proponuj pozostawienie otwartego zgłoszenia";
+            // 
+            // cmbLeaveable
+            // 
+            this.cmbLeaveable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbLeaveable.FormattingEnabled = true;
+            this.cmbLeaveable.Location = new System.Drawing.Point(153, 394);
+            this.cmbLeaveable.Name = "cmbLeaveable";
+            this.cmbLeaveable.Size = new System.Drawing.Size(435, 21);
+            this.cmbLeaveable.TabIndex = 29;
+            // 
             // frmActionType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 533);
+            this.ClientSize = new System.Drawing.Size(621, 562);
             this.Controls.Add(this.tlpMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmActionType";
@@ -495,5 +519,7 @@
         private System.Windows.Forms.ComboBox cmbRequireUserAssignment;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cmbShowOnDashboard;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cmbLeaveable;
     }
 }

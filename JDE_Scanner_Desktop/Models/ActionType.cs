@@ -54,6 +54,9 @@ namespace JDE_Scanner_Desktop.Models
         public bool? RequireUsersAssignment { get; set; }
         [DisplayName("Pokaż na pulpicie")]
         public bool? ShowOnDashboard { get; set; }
+        [DisplayName("Proponuj pozostawienie otwartego zgłoszenia")]
+        public bool? Leaveable { get; set; }
+
 
 
         public async Task<bool> Add()
