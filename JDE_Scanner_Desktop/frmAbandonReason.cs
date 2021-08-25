@@ -65,6 +65,7 @@ namespace JDE_Scanner_Desktop
         private async void Save(object sender, EventArgs e)
         {
             _this.Name = txtName.Text;
+            _this.IsArchived = cboxArchived.CheckState.CheckboxStateToNullableBool();
 
             try
             {
