@@ -152,11 +152,17 @@ namespace JDE_Scanner_Desktop
             Task loadResults = Task.Run(() => LoadProcessResults());
             Task loadProcessActions = Task.Run(() => LoadProcessActions());
 
-            await Task.WhenAll(loadImagesTask, loadResults, loadProcessActions);
+            try
+            {
+                await Task.WhenAll(loadImagesTask, loadResults, loadProcessActions);
 
-            DisplayRecentImages();
-            DisplayProcessResutls();
-            DisplayProcessActions();
+                DisplayRecentImages();
+                DisplayProcessResutls();
+                DisplayProcessActions();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private async Task DisplayProcessActions()

@@ -25,15 +25,24 @@ namespace JDE_Scanner_Desktop
         public frmStarter()
         {
             InitializeComponent();
-            RuntimeSettings.GetPageSize();
-            OverviewForm = new frmOverview();
-            OverviewForm.TopLevel = false;
-            OverviewForm.FormBorderStyle = FormBorderStyle.None;
-            OverviewForm.Dock = DockStyle.Fill;
-            pnlOverview.Controls.Add(OverviewForm);
-            pnlOverview.Tag = OverviewForm;
-            OverviewForm.BringToFront();
-            OverviewForm.Show();
+            try
+            {
+                RuntimeSettings.GetPageSize();
+                OverviewForm = new frmOverview();
+                OverviewForm.TopLevel = false;
+                OverviewForm.FormBorderStyle = FormBorderStyle.None;
+                OverviewForm.Dock = DockStyle.Fill;
+                pnlOverview.Controls.Add(OverviewForm);
+                pnlOverview.Tag = OverviewForm;
+                OverviewForm.BringToFront();
+                OverviewForm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(RuntimeSettings.ConnectionUnavailableMessage, "Brak połączenia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+            
         }
 
         private void koniecToolStripMenuItem_Click(object sender, EventArgs e)

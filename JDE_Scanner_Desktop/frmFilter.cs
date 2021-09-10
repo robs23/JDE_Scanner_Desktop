@@ -28,9 +28,23 @@ namespace JDE_Scanner_Desktop
                     ComboBox cmb = (ComboBox)this.Controls.Find($"cmbOptions{col.Ordinal}", true).FirstOrDefault();
                     Control val = this.Controls.Find(col.Name, true).FirstOrDefault();
 
-                    if (col.Ordinal > 0 && (!string.IsNullOrEmpty(val.Text) && val.Text != " " ))
+                    if (col.Ordinal > 0)
                     {
-                        if(res.Length > 0) { res += " AND "; }
+                        if(col.ValueType == FilterColumnValueType.Boolean)
+                        {
+                            if(((CheckBox)val).CheckState != CheckState.Indeterminate)
+                            {
+                                if (res.Length > 0) { res += " AND "; }
+                            }
+                        }
+                        else
+                        {
+                            if((!string.IsNullOrEmpty(val.Text) && val.Text != " ") || (cmb.SelectedItem.ToString() == "Jest puste" || cmb.SelectedItem.ToString() == "Nie jest puste"))
+                            {
+                                if (res.Length > 0) { res += " AND "; }
+                            }
+                        }
+                        
                     }
                     if (col.ValueType == FilterColumnValueType.Number)
                     {
@@ -63,6 +77,16 @@ namespace JDE_Scanner_Desktop
                             }
                             res += $"{col.Name}{option}{val.Text}";
                         }
+                        if (cmb.SelectedIndex == 6)
+                        {
+                            //Is null
+                            res += $"{col.Name} = null";
+                        }
+                        else if (cmb.SelectedIndex == 7)
+                        {
+                            //Is NOT null
+                            res += $"{col.Name} <> null";
+                        }
                     }
                     else if (col.ValueType == FilterColumnValueType.Date)
                     {
@@ -85,6 +109,16 @@ namespace JDE_Scanner_Desktop
                                 res += $"{col.Name}{option}DateTime({((DateTimePicker)val).Value.Year},{((DateTimePicker)val).Value.Month},{((DateTimePicker)val).Value.Day})";
                             }
                         }
+                        if (cmb.SelectedIndex == 3)
+                        {
+                            //Is null
+                            res += $"{col.Name} = null";
+                        }
+                        else if (cmb.SelectedIndex == 4)
+                        {
+                            //Is NOT null
+                            res += $"{col.Name} <> null";
+                        }
                     }
                     else if (col.ValueType == FilterColumnValueType.Text)
                     {
@@ -93,43 +127,49 @@ namespace JDE_Scanner_Desktop
                         {
                             if (cmb.SelectedIndex == 0)
                             {
-                                res += $"{col.Name}=\"{val.Text}\"";
+                                res += $"{col.Name}.ToLower().Contains(\"{val.Text}\")";
+                                
                             }
                             else if (cmb.SelectedIndex == 1)
                             {
-                                res += $"{col.Name}<>\"{val.Text}\"";
+                                res += $"!{col.Name}.ToLower().Contains(\"{val.Text}\")";
                             }
                             else if (cmb.SelectedIndex == 2)
                             {
-                                res += $"{col.Name}.ToLower().Contains(\"{val.Text}\")";
+                                res += $"{col.Name}=\"{val.Text}\"";
                             }
                             else if (cmb.SelectedIndex == 3)
                             {
-                                res += $"!{col.Name}.ToLower().Contains(\"{val.Text}\")";
+                                res += $"{col.Name}<>\"{val.Text}\"";
                             }
                         }
-                    }
-                    else if(col.ValueType == FilterColumnValueType.Boolean)
-                    {
-                        val = (TextBox)this.Controls.Find(col.Name, true).FirstOrDefault();
-                        if (!string.IsNullOrEmpty(val.Text))
+                        if (cmb.SelectedIndex == 4)
                         {
-                            bool bVal;
-
-                            if(bool.TryParse(val.Text, out bVal))
-                            {
-                                if (cmb.SelectedIndex == 0)
-                                {
-                                    res += $"{col.Name}={bVal}";
-                                }
-                                else
-                                {
-                                    res += $"{col.Name}<>{bVal}";
-                                }
-                            }
-  
+                            //Is null
+                            res += $"{col.Name} = null";
+                        }
+                        else if (cmb.SelectedIndex == 5)
+                        {
+                            //Is NOT null
+                            res += $"{col.Name} <> null";
                         }
                     }
+                    else if (col.ValueType == FilterColumnValueType.Boolean)
+                    {
+                        var val2 = (CheckBox)val;
+                        if (val2.CheckState != CheckState.Indeterminate)
+                        {
+                            if(val2.CheckState == CheckState.Checked)
+                            {
+                                res += $"{col.Name}=true";
+                            }
+                            else
+                            {
+                                res += $"{col.Name}<>true";
+                            }
+                        }
+                    }
+
                 }
                 return res;
             }
@@ -210,6 +250,7 @@ namespace JDE_Scanner_Desktop
                         nCombo.DataSource = col.Items;
                         nCombo.ValueMember = "ValueMember";
                         nCombo.DisplayMember = "DisplayMember";
+                        nCombo.SelectedIndexChanged += new EventHandler(nCombobox_SelectedIndexChanged);
                         tlpItems.Controls.Add(nCombo, 2, rowIndex);
                         nCombo.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
                         nCombo.SelectionLength = 0;
@@ -228,6 +269,14 @@ namespace JDE_Scanner_Desktop
                             Options.Add("Jest równe");
                             Options.Add("Wcześniej niż");
                             Options.Add("Później niż");
+                            Options.Add("Jest puste");
+                            Options.Add("Nie jest puste");
+                        }else if(col.ValueType == FilterColumnValueType.Boolean)
+                        {
+                            CheckBox nCheckBox = new CheckBox();
+                            nCheckBox.CheckState = CheckState.Indeterminate;
+                            nCheckBox.Name = col.Name;
+                            tlpItems.Controls.Add(nCheckBox, 1, rowIndex);
                         }
                         else
                         {
@@ -237,10 +286,12 @@ namespace JDE_Scanner_Desktop
                             nText.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
                             if (col.ValueType == FilterColumnValueType.Text)
                             {
-                                Options.Add("Jest równe");
-                                Options.Add("Jest różne od");
                                 Options.Add("Zawiera");
                                 Options.Add("Nie zawiera");
+                                Options.Add("Jest równe");
+                                Options.Add("Jest różne od");
+                                Options.Add("Jest puste");
+                                Options.Add("Nie jest puste");
                             }
                             else if (col.ValueType == FilterColumnValueType.Boolean)
                             {
@@ -254,16 +305,21 @@ namespace JDE_Scanner_Desktop
                                 Options.Add("Jest różne od");
                                 Options.Add("Większe niż");
                                 Options.Add("Większe lub równe niż");
+                                Options.Add("Jest puste");
+                                Options.Add("Nie jest puste");
                             }
                         }
-
-
                     }
-                    nComb.DataSource = Options;
-                    nComb.Name = "cmbOptions" + col.Ordinal;
-                    tlpItems.Controls.Add(nComb, 1, rowIndex);
-                    nComb.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
-                    nComb.SelectionLength = 0;
+                    if (Options.Any())
+                    {
+                        nComb.DataSource = Options;
+                        nComb.Name = "cmbOptions" + col.Ordinal;
+                        nComb.SelectedIndexChanged += new EventHandler(nCombobox_SelectedIndexChanged);
+                        tlpItems.Controls.Add(nComb, 1, rowIndex);
+                        nComb.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
+                        nComb.SelectionLength = 0;
+                    }
+                    
                     counter++;
                 }
             }
@@ -277,6 +333,32 @@ namespace JDE_Scanner_Desktop
         private void nDTPicker_ValueChanged(object sender, EventArgs e)
         {
             ((DateTimePicker)sender).CustomFormat = "yyyy-MM-dd";
+        }
+
+        private void nCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var Name = ((ComboBox)sender).Name;
+            string[] StringSeparators = new string[] { "cmbOptions" };
+            var NameArray = Name.Split(StringSeparators, StringSplitOptions.None);
+            bool ControlEnabler = true;
+            var val = ((ComboBox)sender).SelectedItem.ToString();
+            if(val == "Jest puste" || val == "Nie jest puste")
+            {
+                ControlEnabler = false;
+            }
+
+            if (NameArray.Length > 1)
+            {
+                var Index = Convert.ToInt32(NameArray[1]);
+                Control ctrl = tlpItems.GetControlFromPosition(2, Index);
+                if(ctrl != null)
+                {
+                    if (ctrl.Enabled != ControlEnabler)
+                    {
+                        ctrl.Enabled = ControlEnabler;
+                    }
+                }
+            }
         }
 
         private int AddTableRow()

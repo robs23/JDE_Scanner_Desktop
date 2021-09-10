@@ -27,13 +27,21 @@ namespace JDE_Scanner_Desktop
         {
             frmLooper Looper = new frmLooper(this);
             Looper.Show(this);
-            await Keeper.Refresh();
-            //cmbUsers.DataSource = Keeper.Items;
-            //cmbUsers.DisplayMember = "FullName";
-            //cmbUsers.ValueMember = "UserId";
-            SetComboboxes();
-            txtPassword.Text = "Hasło";
-            txtPassword.ForeColor = Color.Gray;
+            try
+            {
+                await Keeper.Refresh();
+                //cmbUsers.DataSource = Keeper.Items;
+                //cmbUsers.DisplayMember = "FullName";
+                //cmbUsers.ValueMember = "UserId";
+                SetComboboxes();
+                txtPassword.Text = "Hasło";
+                txtPassword.ForeColor = Color.Gray;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(RuntimeSettings.ConnectionUnavailableMessage, "Brak połączenia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
             Looper.Hide();
         }
 

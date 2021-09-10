@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace JDE_Scanner_Desktop
 {
@@ -26,17 +27,24 @@ namespace JDE_Scanner_Desktop
             using (var client = new HttpClient())
             {
                 string url = Secrets.ApiAddress + "PageSize";
-                using (HttpResponseMessage response = await client.GetAsync(new Uri(url)))
+                try
                 {
-                    if (response.IsSuccessStatusCode)
+                    using (HttpResponseMessage response = await client.GetAsync(new Uri(url)))
                     {
-                        var reply = response.Content.ReadAsStringAsync();
-                        PageSize =  Convert.ToInt32(reply.Result);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var reply = response.Content.ReadAsStringAsync();
+                            PageSize = Convert.ToInt32(reply.Result);
+                        }
+                        else
+                        {
+                            PageSize = 200;
+                        }
                     }
-                    else
-                    {
-                        PageSize =  200;
-                    }
+                }
+                catch (Exception)
+                {
+                    PageSize = 200;
                 }
             }
         }
@@ -90,5 +98,7 @@ namespace JDE_Scanner_Desktop
             {"Smarowanie", IconChar.OilCan },
             {"Karta defektu", IconChar.Viruses }
         };
+
+        public static string ConnectionUnavailableMessage { get; set; } = "Nie można połączyć się z serwerem, prawdopodobnie utraciłeś połączenie z internetem. Jeśli łaczysz się zdalnie, upewnij się że jesteś zalogowany do korporacyjnego VPNa";
     }
 }
