@@ -71,7 +71,7 @@ namespace JDE_Scanner_Desktop
             {
                 if(TypeId ==2 || TypeId == 24)
                 {
-                    List<string> Columns = new List<string>() { "ProcessId", "Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan", "HandlingsLength", "ProcessLength" };
+                    List<string> Columns = new List<string>() { "ProcessId", "Comment", "Status", "PlannedStart", "PlannedFinish", "PlaceId", "PlaceName", "AssignedUserNames", "StartedOn", "StartedByName", "FinishedOn", "FinishedByName", "Length","AbandonReasonNames", "GivenTime", "TimingStatus", "FinishRate", "TimingVsPlan", "HandlingsLength", "ProcessLength" };
                     dgItems.AdjustColumnVisibility(Columns);
                 }
                 else

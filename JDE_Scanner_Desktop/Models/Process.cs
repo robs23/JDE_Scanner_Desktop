@@ -142,6 +142,8 @@ namespace JDE_Scanner_Desktop.Models
         public string Reason { get; set; }
         [Browsable(false)]
         public DateTime? MesDate { get; set; }
+        [DisplayName("Powody niewykonania")]
+        public string AbandonReasonNames { get; set; }
         [DisplayName("Data utworzenia")]
         public DateTime CreatedOn { get; set; }
         [Browsable(false)]

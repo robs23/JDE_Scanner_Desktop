@@ -146,12 +146,12 @@ namespace JDE_Scanner_Desktop
                         if (cmb.SelectedIndex == 4)
                         {
                             //Is null
-                            res += $"{col.Name} = null";
+                            res += $"({col.Name} = null OR {col.Name} = \"\")";
                         }
                         else if (cmb.SelectedIndex == 5)
                         {
                             //Is NOT null
-                            res += $"{col.Name} <> null";
+                            res += $"({col.Name} <> null AND {col.Name} <> \"\")";
                         }
                     }
                     else if (col.ValueType == FilterColumnValueType.Boolean)
