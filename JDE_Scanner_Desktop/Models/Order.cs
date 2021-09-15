@@ -28,7 +28,7 @@ namespace JDE_Scanner_Desktop.Models
         public int? SupplierId { get; set; }
         [DisplayName("Dostawca")]
         public string SupplierName { get; set; }
-
+        [Browsable(false)]
         public OrderItemKeeper ItemKeeper { get; set; }
 
         public Order()

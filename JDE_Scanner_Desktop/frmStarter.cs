@@ -454,5 +454,13 @@ namespace JDE_Scanner_Desktop
             frmAddAbandonReasons Frm = new frmAddAbandonReasons(this);
             Frm.Show(this);
         }
+
+        private void wszystkieToolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized())
+                return;
+            frmOrders Frm = new frmOrders(this);
+            Frm.Show(this);
+        }
     }
 }
