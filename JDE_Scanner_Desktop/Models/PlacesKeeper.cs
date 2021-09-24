@@ -23,6 +23,34 @@ namespace JDE_Scanner_Desktop.Models
 
         protected override string ArchiveString { get; set; } = "IsArchived<>True";
 
+        public async Task<dynamic> GetPlacesStats(DateTime dateFrom, DateTime dateTo)
+        {
+            List<dynamic> Stats = new List<dynamic>();
+
+            string url = Secrets.ApiAddress + $"GetPlacesStats?token={Secrets.TenantToken}&dateFrom={dateFrom.ToString("yyyy-MM-dd HH:mm:ss")}&dateTo={dateTo.ToString("yyyy-MM-dd HH:mm:ss")}";
+
+            using (var client = new HttpClient())
+            {
+                using (var response = await client.GetAsync(new Uri(url)))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        try
+                        {
+                            var userJsonString = await response.Content.ReadAsStringAsync();
+                            Stats = JsonConvert.DeserializeObject<dynamic[]>(userJsonString).ToList();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Wystąpił błąd podczas deserializacji odpowiedzi z serwera. Szczegóły: {ex.ToString()}", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+
+            return Stats;
+        }
+
         public void PrintQR(List<int> ids)
         {
             int[] aId = ids.ToArray();

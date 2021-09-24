@@ -27,8 +27,10 @@ namespace JDE_Scanner_Desktop
         public FileKeeper ImageInfoKeeper { get; set; }
         public ProcessesKeeper ProcessKeeper { get; set; }
         public ProcessActionsKeeper ProcessActionKeeper { get; set; }
+        public PlacesKeeper PlacesKeeper { get; set; }
         public List<ImageInfo> ImageInfos { get; set; }
         public List<dynamic> ProcessStats { get; set; }
+        public List<dynamic> PlacesStats { get; set; }
         public List<dynamic> ProcessActionStats { get; set; }
         ActionTypesKeeper ActionTypes = new ActionTypesKeeper();
         public ProcessActionStatsDivisionType DivisionType { get; set; }
@@ -41,6 +43,7 @@ namespace JDE_Scanner_Desktop
             ImageInfoKeeper = new FileKeeper(this);
             ProcessKeeper = new ProcessesKeeper();
             ProcessActionKeeper = new ProcessActionsKeeper();
+            PlacesKeeper = new PlacesKeeper();
             DateFrom = dateFrom;
             DateTo = dateTo;
             DivisionType = divisionType;
@@ -91,6 +94,20 @@ namespace JDE_Scanner_Desktop
             {
 
                 MessageBox.Show("Wystąpił problem przy pobieraniu statystyk wykonania czynności w listach kontrolnych", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public async Task LoadPlacesStats()
+        {
+            try
+            {
+                PlacesStats = await PlacesKeeper.GetPlacesStats(DateFrom, DateTo);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Wystąpił problem przy pobieraniu statystyk zgłoszeń wg instalacji", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -151,14 +168,16 @@ namespace JDE_Scanner_Desktop
             Task loadImagesTask = Task.Run(() => LoadRecentImages());
             Task loadResults = Task.Run(() => LoadProcessResults());
             Task loadProcessActions = Task.Run(() => LoadProcessActions());
+            Task loadPlacesStats = Task.Run(() => LoadPlacesStats());
 
             try
             {
-                await Task.WhenAll(loadImagesTask, loadResults, loadProcessActions);
+                await Task.WhenAll(loadImagesTask, loadResults, loadProcessActions, loadPlacesStats);
 
                 DisplayRecentImages();
                 DisplayProcessResutls();
                 DisplayProcessActions();
+                DisplayPlacesStats();
             }
             catch (Exception)
             {
@@ -231,6 +250,58 @@ namespace JDE_Scanner_Desktop
                         //chartProgress.Series[sName].Points[1].Color = Color.Red; 
                     }
                 }
+            }
+        }
+
+        private List<string> GetUniqueActionTypes(List<dynamic> placeStats)
+        {
+            List<string> items = new List<string>();
+            foreach(var place in placeStats)
+            {
+                foreach(var action in place.Handlings)
+                {
+                    string actionName = action.Name;
+                    if (!items.Contains(actionName))
+                    {
+                        items.Add(actionName);
+                    }
+                }
+            }
+            return items;
+        }
+
+        private async Task DisplayPlacesStats()
+        {
+            chrtSets.Series.Clear();
+
+            if (PlacesStats.Any())
+            {
+                List<CustomLabel> Labels = new List<CustomLabel>();
+                chrtSets.ChartAreas[0].AxisX.Title = "Czas obsługi [min]";
+                chrtSets.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Gray;
+                chrtSets.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+                chrtSets.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Gray;
+                chrtSets.ChartAreas[0].AxisX.MajorGrid.LineDashStyle = ChartDashStyle.NotSet;
+                //chartProgress.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 14, FontStyle.Bold);
+
+                //get unique actionTypes which will become series
+                List<string> uniqueActions = GetUniqueActionTypes(PlacesStats);
+
+                foreach(var action in uniqueActions)
+                {
+                    chrtSets.Series.Add(action);
+                }
+                foreach(var place in PlacesStats)
+                {
+                    string placeName = place.SetName;
+
+                    foreach(var action in place.Handlings)
+                    {
+                        string actionName = action.ActionTypeName;
+                        chrtSets.Series[actionName].Points.AddXY(placeName, action.Length);
+                    }
+                }
+
             }
         }
 
