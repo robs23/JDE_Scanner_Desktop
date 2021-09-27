@@ -22,7 +22,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         private Color _L2Color;
         private string _L3Text;
         private Color _L3Color;
-        private Action<int, string> _Action;
+        private Action<int?, string> _Action;
         private int? _ActionTypeId;
         private DateTime? _DateFrom;
         private DateTime? _DateTo;
@@ -111,7 +111,7 @@ namespace JDE_Scanner_Desktop.CustomControls
             }
         }
 
-        public Action<int, string> Action
+        public Action<int?, string> Action
         {
             get { return _Action; }
             set
@@ -140,7 +140,7 @@ namespace JDE_Scanner_Desktop.CustomControls
 
 
         public ThreeRowsColumn(string name = null, IconChar icon = IconChar.None, Color? nameColor = null, string l1Text = null, Color? l1Color = null,
-                                string l2Text = null, Color? l2Color = null, string l3Text = null, Color? l3Color = null, Action<int, string> action=null, int? actionTypeId = null, DateTime? dateFrom=null, DateTime? dateTo=null)
+                                string l2Text = null, Color? l2Color = null, string l3Text = null, Color? l3Color = null, Action<int?, string> action=null, int? actionTypeId = null, DateTime? dateFrom=null, DateTime? dateTo=null)
         {
             InitializeComponent();
             Name = name ?? "Rodzaj";
@@ -162,7 +162,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         {
             string parameters = string.Empty;
             parameters += $@"StartedOn > DateTime({DateFrom.Value.Year},{DateFrom.Value.Month},{DateFrom.Value.Day},{DateFrom.Value.Hour},{DateFrom.Value.Minute},{DateFrom.Value.Second}) 
-                            AND FinishedOn < DateTime({DateTo.Value.Year},{DateTo.Value.Month},{DateTo.Value.Day},{DateTo.Value.Hour},{DateTo.Value.Minute},{DateTo.Value.Second})";
+                            AND StartedOn < DateTime({DateTo.Value.Year},{DateTo.Value.Month},{DateTo.Value.Day},{DateTo.Value.Hour},{DateTo.Value.Minute},{DateTo.Value.Second})";
             Action((int)ActionTypeId, parameters);
         }
     }

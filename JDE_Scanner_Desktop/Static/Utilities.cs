@@ -142,7 +142,7 @@ namespace JDE_Scanner_Desktop.Static
             return res;
         }
 
-        public static bool IsImage(string name = null, string ext=null) 
+        public static bool IsImage(string name = null, string ext = null)
         {
             string[] imageFormats = { "png", "jpg", "jpeg", "gif" };
             bool res = false;
@@ -162,5 +162,6 @@ namespace JDE_Scanner_Desktop.Static
             }
             return res;
         }
+
     }
 }

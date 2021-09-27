@@ -3,6 +3,7 @@ using JDE_Scanner_Desktop.Models;
 using JDE_Scanner_Desktop.Static;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -98,6 +99,15 @@ namespace JDE_Scanner_Desktop
             {"Smarowanie", IconChar.OilCan },
             {"Karta defektu", IconChar.Viruses }
         };
+        public static Dictionary<string, Color> ProcessColors = new Dictionary<string, Color>()
+        {
+            {"Awaria", Color.OrangeRed },
+            {"Konserwacja", Color.FromArgb(65,140,240) },
+            {"Smarowanie", Color.FromArgb(252,180,65) },
+            {"Karta Defektu", Color.LightGreen },
+            {"Pozostałe", Color.LightGray }
+        };
+
 
         public static string ConnectionUnavailableMessage { get; set; } = "Nie można połączyć się z serwerem, prawdopodobnie utraciłeś połączenie z internetem. Jeśli łaczysz się zdalnie, upewnij się że jesteś zalogowany do korporacyjnego VPNa";
     }

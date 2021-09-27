@@ -101,7 +101,8 @@ namespace JDE_Scanner_Desktop
         {
             try
             {
-                PlacesStats = await PlacesKeeper.GetPlacesStats(DateFrom, DateTo);
+                PlacesStats = await PlacesKeeper.GetPlacesStats(DateFrom, DateTo, 10);
+                PlacesStats.Reverse();
 
             }
             catch (Exception ex)
@@ -131,7 +132,7 @@ namespace JDE_Scanner_Desktop
                         card.L1Text = item.Count.ToString();
                         card.L2Text = item.Result.ToString();
                         card.L3Text = item.PercentOfAll.ToString("0.00");
-                        card.Action = new Action<int, string>(OpenProcesses);
+                        card.Action = new Action<int?, string>(OpenProcesses);
                         card.ActionTypeId = item.ActionTypeId;
                         card.DateFrom = DateFrom;
                         card.DateTo = DateTo;
@@ -146,7 +147,7 @@ namespace JDE_Scanner_Desktop
             pnlProcesses.Controls.Add(Headlines);
         }
 
-        public void OpenProcesses(int typeId, string parameters)
+        public void OpenProcesses(int? typeId, string parameters)
         {
             frmProcesses FrmProcesses = new frmProcesses(this, typeId, parameters);
             FrmProcesses.Show();
@@ -222,6 +223,12 @@ namespace JDE_Scanner_Desktop
                             }
                             
                             chartProgress.Series[sName].ChartType = SeriesChartType.Column;
+                            Color color = Color.Empty;
+                            bool existent = RuntimeSettings.ProcessColors.TryGetValue(sName, out color);
+                            if (existent)
+                            {
+                                chartProgress.Series[sName].Color = color;
+                            }
                             chartProgress.Series[sName].IsValueShownAsLabel = true;
                             foreach (var p in s)
                             {
@@ -277,7 +284,8 @@ namespace JDE_Scanner_Desktop
             if (PlacesStats.Any())
             {
                 List<CustomLabel> Labels = new List<CustomLabel>();
-                chrtSets.ChartAreas[0].AxisX.Title = "Czas obsługi [min]";
+                chrtSets.ChartAreas[0].AxisX.Title = "Instalacja";
+                chrtSets.ChartAreas[0].AxisY.Title = "Czas obsługi [min]";
                 chrtSets.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Gray;
                 chrtSets.ChartAreas[0].AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
                 chrtSets.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Gray;
@@ -286,21 +294,45 @@ namespace JDE_Scanner_Desktop
 
                 //get unique actionTypes which will become series
                 List<string> uniqueActions = GetUniqueActionTypes(PlacesStats);
+                int i = 1;
 
                 foreach(var action in uniqueActions)
                 {
                     chrtSets.Series.Add(action);
+                    chrtSets.Series[action].ChartType = SeriesChartType.StackedBar;
+                    Color color = Color.Empty;
+                    bool existent = RuntimeSettings.ProcessColors.TryGetValue(action, out color);
+                    if (existent)
+                    {
+                        chrtSets.Series[action].Color = color;
+                    }
+                    chrtSets.Series[action].XValueType = ChartValueType.String;
                 }
                 foreach(var place in PlacesStats)
                 {
-                    string placeName = place.SetName;
+                    string setName = place.SetName;
+                    int setId = Convert.ToInt32(place.SetId.ToString());
 
-                    foreach(var action in place.Handlings)
+                    foreach(var actionName in uniqueActions)
                     {
-                        string actionName = action.ActionTypeName;
-                        chrtSets.Series[actionName].Points.AddXY(placeName, action.Length);
+                        int actionLength = 0;
+                        foreach (var action in place.Handlings)
+                        {
+                            if(action.Name == actionName)
+                            {
+                                actionLength = Convert.ToInt32(action.Length.ToString());
+                                break;
+                            }
+                        }
+                        int pos = chrtSets.Series[actionName].Points.AddXY(i, actionLength);
+                        chrtSets.ChartAreas[0].AxisX.CustomLabels.Add(i-0.5, i+0.5, setName);
+
                     }
+
+                    i++;
                 }
+                chrtSets.ChartAreas[0].AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
+                chrtSets.ChartAreas[0].AxisX.IsLabelAutoFit = true;
 
             }
         }
@@ -308,6 +340,39 @@ namespace JDE_Scanner_Desktop
         private void chartProgress_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chrtSets_MouseDown(object sender, MouseEventArgs e)
+        {
+            HitTestResult result = chrtSets.HitTest(e.X, e.Y);
+
+            if(result.ChartElementType == ChartElementType.AxisLabels && result.Axis == chrtSets.ChartAreas[0].AxisX)
+            {
+                var label = (CustomLabel)result.Object;
+                if (!string.IsNullOrEmpty(label.Text))
+                {
+                    string parameters = $@"StartedOn > DateTime({DateFrom.Year},{DateFrom.Month},{DateFrom.Day},{DateFrom.Hour},{DateFrom.Minute},{DateFrom.Second}) 
+                            AND StartedOn < DateTime({DateTo.Year},{DateTo.Month},{DateTo.Day},{DateTo.Hour},{DateTo.Minute},{DateTo.Second}) AND SetName.Contains({label.Text})";
+                    OpenProcesses(null, parameters);
+                }
+            }
+        }
+
+        private void chrtSets_MouseMove(object sender, MouseEventArgs e)
+        {
+            HitTestResult result = chrtSets.HitTest(e.X, e.Y);
+
+            if (result.ChartElementType == ChartElementType.AxisLabels && result.Axis == chrtSets.ChartAreas[0].AxisX)
+            {
+                var label = (CustomLabel)result.Object;
+                string txt = label.Text;
+                if (!string.IsNullOrEmpty(txt))
+                {
+                    int i = label.RowIndex;
+                    chrtSets.ChartAreas[0].AxisX.CustomLabels.Where(l => l.Text == txt).FirstOrDefault().ForeColor = Color.Red;
+                }
+                
+            }
         }
     }
 }

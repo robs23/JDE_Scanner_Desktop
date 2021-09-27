@@ -23,11 +23,15 @@ namespace JDE_Scanner_Desktop.Models
 
         protected override string ArchiveString { get; set; } = "IsArchived<>True";
 
-        public async Task<dynamic> GetPlacesStats(DateTime dateFrom, DateTime dateTo)
+        public async Task<dynamic> GetPlacesStats(DateTime dateFrom, DateTime dateTo, int? itemsCount=null)
         {
             List<dynamic> Stats = new List<dynamic>();
 
             string url = Secrets.ApiAddress + $"GetPlacesStats?token={Secrets.TenantToken}&dateFrom={dateFrom.ToString("yyyy-MM-dd HH:mm:ss")}&dateTo={dateTo.ToString("yyyy-MM-dd HH:mm:ss")}";
+            if(itemsCount != null)
+            {
+                url += $"&itemsCount={itemsCount}";
+            }
 
             using (var client = new HttpClient())
             {
