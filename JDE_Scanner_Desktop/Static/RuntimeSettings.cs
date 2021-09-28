@@ -97,15 +97,19 @@ namespace JDE_Scanner_Desktop
             {"Awaria", IconChar.ExclamationTriangle },
             {"Konserwacja", IconChar.Tasks },
             {"Smarowanie", IconChar.OilCan },
-            {"Karta defektu", IconChar.Viruses }
+            {"Karta defektu", IconChar.Viruses },
+            {"Usterka", IconChar.Tools },
+            {"Regulacja", IconChar.SlidersH },
         };
         public static Dictionary<string, Color> ProcessColors = new Dictionary<string, Color>()
         {
             {"Awaria", Color.OrangeRed },
             {"Konserwacja", Color.FromArgb(65,140,240) },
-            {"Smarowanie", Color.FromArgb(252,180,65) },
+            {"Smarowanie", Color.MediumPurple }, //Color.FromArgb(252,180,65) },
             {"Karta Defektu", Color.LightGreen },
-            {"Pozostałe", Color.LightGray }
+            {"Usterka", Color.DarkOrange },
+            {"Pozostałe", Color.LightGray },
+            {"Regulacja", Color.Gold }
         };
 
 

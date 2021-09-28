@@ -34,8 +34,6 @@
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetailedOverview));
             this.pnlImages = new System.Windows.Forms.FlowLayoutPanel();
@@ -182,14 +180,7 @@
             this.chartProgress.MaximumSize = new System.Drawing.Size(800, 200);
             this.chartProgress.MinimumSize = new System.Drawing.Size(400, 190);
             this.chartProgress.Name = "chartProgress";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Konserwacje";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Smarowania";
-            this.chartProgress.Series.Add(series2);
-            this.chartProgress.Series.Add(series3);
+            this.chartProgress.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
             this.chartProgress.Size = new System.Drawing.Size(400, 200);
             this.chartProgress.TabIndex = 6;
             this.chartProgress.Text = "chart1";
