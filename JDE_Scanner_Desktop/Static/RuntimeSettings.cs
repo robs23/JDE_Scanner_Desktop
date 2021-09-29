@@ -97,7 +97,7 @@ namespace JDE_Scanner_Desktop
             {"Awaria", IconChar.ExclamationTriangle },
             {"Konserwacja", IconChar.Tasks },
             {"Smarowanie", IconChar.OilCan },
-            {"Karta defektu", IconChar.Viruses },
+            {"Karta Defektu", IconChar.Paperclip },
             {"Usterka", IconChar.Tools },
             {"Regulacja", IconChar.SlidersH },
         };

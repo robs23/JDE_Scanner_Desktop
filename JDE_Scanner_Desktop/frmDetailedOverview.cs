@@ -125,8 +125,13 @@ namespace JDE_Scanner_Desktop
                         string n = item.Name;
                         bool existent = RuntimeSettings.ProcessIcons.TryGetValue(n, out icon);
 
+                        Color BarColor = Color.Transparent;
+                        if(!string.IsNullOrEmpty(n)){
+                            existent = RuntimeSettings.ProcessColors.TryGetValue(n, out BarColor);
+                        }
+                        
 
-                        ThreeRowsColumn card = new ThreeRowsColumn();
+                        ThreeRowsColumn card = new ThreeRowsColumn(barColor: BarColor);
                         card.Name = item.Name;
                         card.Icon = icon;
                         card.L1Text = item.Count.ToString();
@@ -352,7 +357,8 @@ namespace JDE_Scanner_Desktop
                 if (!string.IsNullOrEmpty(label.Text))
                 {
                     string parameters = $@"StartedOn > DateTime({DateFrom.Year},{DateFrom.Month},{DateFrom.Day},{DateFrom.Hour},{DateFrom.Minute},{DateFrom.Second}) 
-                            AND StartedOn < DateTime({DateTo.Year},{DateTo.Month},{DateTo.Day},{DateTo.Hour},{DateTo.Minute},{DateTo.Second}) AND SetName.Contains({label.Text})";
+                            AND StartedOn < DateTime({DateTo.Year},{DateTo.Month},{DateTo.Day},{DateTo.Hour},{DateTo.Minute},{DateTo.Second})";
+                    parameters += "AND SetName.ToLower().Equals(\"" + label.Text.ToLower() + "\")";
                     OpenProcesses(null, parameters);
                 }
             }

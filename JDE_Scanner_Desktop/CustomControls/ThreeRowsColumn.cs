@@ -26,7 +26,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         private int? _ActionTypeId;
         private DateTime? _DateFrom;
         private DateTime? _DateTo;
-
+        private Color _barColor;
 
         public string Name
         {
@@ -74,6 +74,16 @@ namespace JDE_Scanner_Desktop.CustomControls
                 label1.ForeColor = value;
             }
         }
+
+        public Color BarColor
+        {
+            get { return _barColor; }
+            set
+            {
+                _barColor = value;
+            }
+        }
+
         public string L2Text
         {
             get { return _L2Text; }
@@ -140,7 +150,7 @@ namespace JDE_Scanner_Desktop.CustomControls
 
 
         public ThreeRowsColumn(string name = null, IconChar icon = IconChar.None, Color? nameColor = null, string l1Text = null, Color? l1Color = null,
-                                string l2Text = null, Color? l2Color = null, string l3Text = null, Color? l3Color = null, Action<int?, string> action=null, int? actionTypeId = null, DateTime? dateFrom=null, DateTime? dateTo=null)
+                                string l2Text = null, Color? l2Color = null, string l3Text = null, Color? l3Color = null, Action<int?, string> action=null, int? actionTypeId = null, DateTime? dateFrom=null, DateTime? dateTo=null, Color? barColor = null)
         {
             InitializeComponent();
             Name = name ?? "Rodzaj";
@@ -152,10 +162,25 @@ namespace JDE_Scanner_Desktop.CustomControls
             L2Color = l2Color ?? Color.Black;
             L3Text = l3Text ?? "Razem [%]";
             L3Color = l3Color ?? Color.Black;
+            BarColor = barColor ?? Color.Transparent;
             Action = action;
             ActionTypeId = actionTypeId;
             DateFrom = dateFrom;
             DateTo = dateTo;
+            
+        }
+
+        private void DrawBar(Color barColor)
+        {
+            Graphics g = this.CreateGraphics();
+            Pen p = new Pen(barColor);
+            SolidBrush sb = new SolidBrush(barColor);
+            int x = (btnProcess.Left + (btnProcess.Width / 2))-10;
+            int y = btnProcess.Top + btnProcess.Height -10;
+            int width = 20;
+            int height = 20;
+            g.DrawRectangle(p, x, y, width, height);
+            g.FillRectangle(sb, x, y, width, height);
         }
 
         private void btnProcess_Click(object sender, EventArgs e)
@@ -164,6 +189,16 @@ namespace JDE_Scanner_Desktop.CustomControls
             parameters += $@"StartedOn > DateTime({DateFrom.Value.Year},{DateFrom.Value.Month},{DateFrom.Value.Day},{DateFrom.Value.Hour},{DateFrom.Value.Minute},{DateFrom.Value.Second}) 
                             AND StartedOn < DateTime({DateTo.Value.Year},{DateTo.Value.Month},{DateTo.Value.Day},{DateTo.Value.Hour},{DateTo.Value.Minute},{DateTo.Value.Second})";
             Action((int)ActionTypeId, parameters);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if(BarColor != Color.Transparent)
+            {
+                DrawBar(BarColor);
+            }
+            
         }
     }
 }

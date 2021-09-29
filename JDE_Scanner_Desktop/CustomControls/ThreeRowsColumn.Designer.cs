@@ -39,7 +39,7 @@
             // 
             this.pnlShadow.BackColor = System.Drawing.Color.DimGray;
             this.pnlShadow.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlShadow.Location = new System.Drawing.Point(157, 0);
+            this.pnlShadow.Location = new System.Drawing.Point(150, 0);
             this.pnlShadow.Name = "pnlShadow";
             this.pnlShadow.Size = new System.Drawing.Size(3, 150);
             this.pnlShadow.TabIndex = 0;
@@ -56,7 +56,7 @@
             this.btnProcess.IconSize = 40;
             this.btnProcess.Location = new System.Drawing.Point(0, 0);
             this.btnProcess.Name = "btnProcess";
-            this.btnProcess.Size = new System.Drawing.Size(157, 45);
+            this.btnProcess.Size = new System.Drawing.Size(150, 45);
             this.btnProcess.TabIndex = 1;
             this.btnProcess.Text = "Text";
             this.btnProcess.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -103,7 +103,7 @@
             this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.pnlShadow);
             this.Name = "ThreeRowsColumn";
-            this.Size = new System.Drawing.Size(160, 150);
+            this.Size = new System.Drawing.Size(153, 150);
             this.ResumeLayout(false);
 
         }

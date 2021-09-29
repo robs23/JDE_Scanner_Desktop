@@ -120,6 +120,15 @@ namespace JDE_Scanner_Desktop.Models
         public int PlaceId { get; set; }
         [DisplayName("Zasób")]
         public string PlaceName { get; set; }
+        [Browsable(false)]
+        public int? SetId { get; set; }
+        [DisplayName("Instalacja")]
+        public string SetName { get; set; }
+        [Browsable(false)]
+        public int? AreaId { get; set; }
+        [DisplayName("Obszar")]
+        public string AreaName { get; set; }
+
         [DisplayName("Długość [min]")]
         public int? Length { get; set; }
         [DisplayName("Obsługujący")]
