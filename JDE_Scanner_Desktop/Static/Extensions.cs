@@ -187,6 +187,64 @@ namespace JDE_Scanner_Desktop.Static
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Sunday);
         }
 
+        public static DateTime StartOfShift(this DateTime dt)
+        {
+            DateTime from;
+
+            if (dt.Hour < 6)
+            {
+                //night shift 00:00 - 06:00
+                DateTime yesterday = dt.AddDays(-1);
+
+                from = new DateTime(yesterday.Year, yesterday.Month, yesterday.Day, 22, 0, 0);
+            }
+            else if (dt.Hour >= 22)
+            {
+                //night shift 22:00 - 00:00
+                DateTime tomorrow = dt.AddDays(1);
+
+                from = new DateTime(dt.Year, dt.Month, dt.Day, 22, 0, 0);
+            }
+            else if (dt.Hour >= 6 && dt.Hour < 14)
+            {
+                //1st shift
+                from = new DateTime(dt.Year, dt.Month, dt.Day, 6, 0, 0);
+            }
+            else
+            {
+                //2nd shift
+                from = new DateTime(dt.Year, dt.Month, dt.Day, 14, 0, 0);
+            }
+            return from;
+        }
+
+        public static DateTime StartOfQuarter(this DateTime dt)
+        {
+            DateTime from;
+
+            if (dt.Month < 4)
+            {
+                //I quarter
+                from = new DateTime(dt.Year, 1, 1, 0, 0, 0);
+            }
+            else if (dt.Month >= 4 && dt.Month < 7)
+            {
+                //II quarter
+                from = new DateTime(dt.Year, 4, 1, 0, 0, 0);
+            }
+            else if (dt.Month >= 7 && dt.Month < 10)
+            {
+                //III quarter
+                from = new DateTime(dt.Year, 7, 1, 0, 0, 0);
+            }
+            else
+            {
+                //IV quarter
+                from = new DateTime(dt.Year, 10, 1, 0, 0, 0);
+            }
+            return from;
+        }
+
         public static void AdjustColumnVisibility(this DataGridView dataGrid, List<string> ToShow = null, List<string> ToHide = null)
         {
 

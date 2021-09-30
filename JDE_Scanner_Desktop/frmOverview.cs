@@ -122,5 +122,45 @@ namespace JDE_Scanner_Desktop
             frmDetailedOverview DetailForm = new frmDetailedOverview(start, end, Enums.ProcessActionStatsDivisionType.Monthly);
             DetailForm.ShowInPanel(pnlDesktop);
         }
+
+        private void btnThisShift_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, Color.OrangeRed);
+            DateTime from = DateTime.Now.StartOfShift();
+            DateTime to = from.AddHours(8).AddMinutes(-1);
+
+            frmDetailedOverview DetailForm = new frmDetailedOverview(from, to, Enums.ProcessActionStatsDivisionType.Daily);
+            DetailForm.ShowInPanel(pnlDesktop);
+        }
+
+        private void btnPrevShift_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, Color.DodgerBlue);
+            DateTime from = DateTime.Now.StartOfShift().AddHours(-8);
+            DateTime to = from.AddHours(8).AddMinutes(-1);
+
+            frmDetailedOverview DetailForm = new frmDetailedOverview(from, to, Enums.ProcessActionStatsDivisionType.Daily);
+            DetailForm.ShowInPanel(pnlDesktop);
+        }
+
+        private void btnThisQuarter_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, Color.GreenYellow);
+            DateTime from = DateTime.Now.StartOfQuarter();
+            DateTime to = from.AddMonths(3).AddMinutes(-1);
+
+            frmDetailedOverview DetailForm = new frmDetailedOverview(from, to, Enums.ProcessActionStatsDivisionType.Monthly);
+            DetailForm.ShowInPanel(pnlDesktop);
+        }
+
+        private void btnPrevQuarter_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, Color.DarkGray);
+            DateTime from = DateTime.Now.StartOfQuarter().AddMonths(-3);
+            DateTime to = from.AddMonths(3).AddMinutes(-1);
+
+            frmDetailedOverview DetailForm = new frmDetailedOverview(from, to, Enums.ProcessActionStatsDivisionType.Monthly);
+            DetailForm.ShowInPanel(pnlDesktop);
+        }
     }
 }

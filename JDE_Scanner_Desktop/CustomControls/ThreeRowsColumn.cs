@@ -186,6 +186,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         private void btnProcess_Click(object sender, EventArgs e)
         {
             string parameters = string.Empty;
+
             parameters += $@"StartedOn > DateTime({DateFrom.Value.Year},{DateFrom.Value.Month},{DateFrom.Value.Day},{DateFrom.Value.Hour},{DateFrom.Value.Minute},{DateFrom.Value.Second}) 
                             AND StartedOn < DateTime({DateTo.Value.Year},{DateTo.Value.Month},{DateTo.Value.Day},{DateTo.Value.Hour},{DateTo.Value.Minute},{DateTo.Value.Second})";
             Action((int)ActionTypeId, parameters);
