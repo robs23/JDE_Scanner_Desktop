@@ -36,7 +36,6 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetailedOverview));
-            this.pnlImages = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlMiddleSpacer = new System.Windows.Forms.Panel();
             this.pnlProcesses = new System.Windows.Forms.Panel();
             this.pnlSpacer = new System.Windows.Forms.Panel();
@@ -48,6 +47,7 @@
             this.pnlActionsProgress = new System.Windows.Forms.Panel();
             this.chartProgress = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pnlMidRight = new System.Windows.Forms.Panel();
+            this.pnlImages = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlProcesses.SuspendLayout();
             this.pnlMiddle.SuspendLayout();
             this.pnlMidBottom.SuspendLayout();
@@ -56,30 +56,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartProgress)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlImages
-            // 
-            this.pnlImages.AutoScroll = true;
-            this.pnlImages.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlImages.Location = new System.Drawing.Point(0, 0);
-            this.pnlImages.Name = "pnlImages";
-            this.pnlImages.Size = new System.Drawing.Size(170, 542);
-            this.pnlImages.TabIndex = 0;
-            // 
             // pnlMiddleSpacer
             // 
             this.pnlMiddleSpacer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMiddleSpacer.Location = new System.Drawing.Point(170, 160);
+            this.pnlMiddleSpacer.Location = new System.Drawing.Point(0, 160);
             this.pnlMiddleSpacer.Name = "pnlMiddleSpacer";
-            this.pnlMiddleSpacer.Size = new System.Drawing.Size(630, 10);
+            this.pnlMiddleSpacer.Size = new System.Drawing.Size(800, 10);
             this.pnlMiddleSpacer.TabIndex = 7;
             // 
             // pnlProcesses
             // 
             this.pnlProcesses.Controls.Add(this.pnlSpacer);
             this.pnlProcesses.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlProcesses.Location = new System.Drawing.Point(170, 10);
+            this.pnlProcesses.Location = new System.Drawing.Point(0, 10);
             this.pnlProcesses.Name = "pnlProcesses";
-            this.pnlProcesses.Size = new System.Drawing.Size(630, 150);
+            this.pnlProcesses.Size = new System.Drawing.Size(800, 150);
             this.pnlProcesses.TabIndex = 6;
             // 
             // pnlSpacer
@@ -93,9 +84,9 @@
             // pnlTopSpacer
             // 
             this.pnlTopSpacer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTopSpacer.Location = new System.Drawing.Point(170, 0);
+            this.pnlTopSpacer.Location = new System.Drawing.Point(0, 0);
             this.pnlTopSpacer.Name = "pnlTopSpacer";
-            this.pnlTopSpacer.Size = new System.Drawing.Size(630, 10);
+            this.pnlTopSpacer.Size = new System.Drawing.Size(800, 10);
             this.pnlTopSpacer.TabIndex = 5;
             // 
             // pnlMiddle
@@ -197,6 +188,15 @@
             this.pnlMidRight.Size = new System.Drawing.Size(200, 372);
             this.pnlMidRight.TabIndex = 0;
             // 
+            // pnlImages
+            // 
+            this.pnlImages.AutoScroll = true;
+            this.pnlImages.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlImages.Location = new System.Drawing.Point(0, 170);
+            this.pnlImages.Name = "pnlImages";
+            this.pnlImages.Size = new System.Drawing.Size(170, 372);
+            this.pnlImages.TabIndex = 0;
+            // 
             // frmDetailedOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,10 +204,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 542);
             this.Controls.Add(this.pnlMiddle);
+            this.Controls.Add(this.pnlImages);
             this.Controls.Add(this.pnlMiddleSpacer);
             this.Controls.Add(this.pnlProcesses);
             this.Controls.Add(this.pnlTopSpacer);
-            this.Controls.Add(this.pnlImages);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDetailedOverview";
             this.Text = "frmDetailedOverview";
@@ -223,8 +223,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.FlowLayoutPanel pnlImages;
         private System.Windows.Forms.Panel pnlMiddleSpacer;
         private System.Windows.Forms.Panel pnlProcesses;
         private System.Windows.Forms.Panel pnlSpacer;
@@ -236,5 +234,6 @@
         private System.Windows.Forms.Panel pnlMidRight;
         private System.Windows.Forms.DataVisualization.Charting.Chart chrtSets;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartProgress;
+        private System.Windows.Forms.FlowLayoutPanel pnlImages;
     }
 }

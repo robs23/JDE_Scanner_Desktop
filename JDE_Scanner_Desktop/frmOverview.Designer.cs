@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOverview));
             this.pnlSide = new System.Windows.Forms.Panel();
+            this.btnPrevQuarter = new FontAwesome.Sharp.IconButton();
+            this.btnThisQuarter = new FontAwesome.Sharp.IconButton();
             this.btnPrevMonth = new FontAwesome.Sharp.IconButton();
             this.btnThisMonth = new FontAwesome.Sharp.IconButton();
             this.btnPrevWeek = new FontAwesome.Sharp.IconButton();
             this.btnThisWeek = new FontAwesome.Sharp.IconButton();
             this.btnYesterday = new FontAwesome.Sharp.IconButton();
             this.btnToday = new FontAwesome.Sharp.IconButton();
+            this.btnPrevShift = new FontAwesome.Sharp.IconButton();
+            this.btnThisShift = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlDesktop = new System.Windows.Forms.Panel();
-            this.btnThisShift = new FontAwesome.Sharp.IconButton();
-            this.btnPrevShift = new FontAwesome.Sharp.IconButton();
-            this.btnThisQuarter = new FontAwesome.Sharp.IconButton();
-            this.btnPrevQuarter = new FontAwesome.Sharp.IconButton();
             this.pnlSide.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,6 +68,42 @@
             this.pnlSide.Name = "pnlSide";
             this.pnlSide.Size = new System.Drawing.Size(200, 629);
             this.pnlSide.TabIndex = 2;
+            // 
+            // btnPrevQuarter
+            // 
+            this.btnPrevQuarter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPrevQuarter.FlatAppearance.BorderSize = 0;
+            this.btnPrevQuarter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevQuarter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPrevQuarter.ForeColor = System.Drawing.Color.White;
+            this.btnPrevQuarter.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnPrevQuarter.IconColor = System.Drawing.Color.Black;
+            this.btnPrevQuarter.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPrevQuarter.Location = new System.Drawing.Point(0, 551);
+            this.btnPrevQuarter.Name = "btnPrevQuarter";
+            this.btnPrevQuarter.Size = new System.Drawing.Size(200, 50);
+            this.btnPrevQuarter.TabIndex = 10;
+            this.btnPrevQuarter.Text = "Poprzedni kwartał";
+            this.btnPrevQuarter.UseVisualStyleBackColor = true;
+            this.btnPrevQuarter.Click += new System.EventHandler(this.btnPrevQuarter_Click);
+            // 
+            // btnThisQuarter
+            // 
+            this.btnThisQuarter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnThisQuarter.FlatAppearance.BorderSize = 0;
+            this.btnThisQuarter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThisQuarter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnThisQuarter.ForeColor = System.Drawing.Color.White;
+            this.btnThisQuarter.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnThisQuarter.IconColor = System.Drawing.Color.Black;
+            this.btnThisQuarter.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnThisQuarter.Location = new System.Drawing.Point(0, 501);
+            this.btnThisQuarter.Name = "btnThisQuarter";
+            this.btnThisQuarter.Size = new System.Drawing.Size(200, 50);
+            this.btnThisQuarter.TabIndex = 9;
+            this.btnThisQuarter.Text = "Ten kwartał";
+            this.btnThisQuarter.UseVisualStyleBackColor = true;
+            this.btnThisQuarter.Click += new System.EventHandler(this.btnThisQuarter_Click);
             // 
             // btnPrevMonth
             // 
@@ -178,6 +214,42 @@
             this.btnToday.UseVisualStyleBackColor = true;
             this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
             // 
+            // btnPrevShift
+            // 
+            this.btnPrevShift.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnPrevShift.FlatAppearance.BorderSize = 0;
+            this.btnPrevShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrevShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnPrevShift.ForeColor = System.Drawing.Color.White;
+            this.btnPrevShift.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnPrevShift.IconColor = System.Drawing.Color.Black;
+            this.btnPrevShift.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnPrevShift.Location = new System.Drawing.Point(0, 151);
+            this.btnPrevShift.Name = "btnPrevShift";
+            this.btnPrevShift.Size = new System.Drawing.Size(200, 50);
+            this.btnPrevShift.TabIndex = 8;
+            this.btnPrevShift.Text = "Poprzednia zmiana";
+            this.btnPrevShift.UseVisualStyleBackColor = true;
+            this.btnPrevShift.Click += new System.EventHandler(this.btnPrevShift_Click);
+            // 
+            // btnThisShift
+            // 
+            this.btnThisShift.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnThisShift.FlatAppearance.BorderSize = 0;
+            this.btnThisShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThisShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnThisShift.ForeColor = System.Drawing.Color.White;
+            this.btnThisShift.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnThisShift.IconColor = System.Drawing.Color.Black;
+            this.btnThisShift.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnThisShift.Location = new System.Drawing.Point(0, 101);
+            this.btnThisShift.Name = "btnThisShift";
+            this.btnThisShift.Size = new System.Drawing.Size(200, 50);
+            this.btnThisShift.TabIndex = 7;
+            this.btnThisShift.Text = "Ta zmiana";
+            this.btnThisShift.UseVisualStyleBackColor = true;
+            this.btnThisShift.Click += new System.EventHandler(this.btnThisShift_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.pictureBox1);
@@ -216,78 +288,6 @@
             this.pnlDesktop.Name = "pnlDesktop";
             this.pnlDesktop.Size = new System.Drawing.Size(894, 579);
             this.pnlDesktop.TabIndex = 4;
-            // 
-            // btnThisShift
-            // 
-            this.btnThisShift.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnThisShift.FlatAppearance.BorderSize = 0;
-            this.btnThisShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThisShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnThisShift.ForeColor = System.Drawing.Color.White;
-            this.btnThisShift.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnThisShift.IconColor = System.Drawing.Color.Black;
-            this.btnThisShift.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnThisShift.Location = new System.Drawing.Point(0, 101);
-            this.btnThisShift.Name = "btnThisShift";
-            this.btnThisShift.Size = new System.Drawing.Size(200, 50);
-            this.btnThisShift.TabIndex = 7;
-            this.btnThisShift.Text = "Ta zmiana";
-            this.btnThisShift.UseVisualStyleBackColor = true;
-            this.btnThisShift.Click += new System.EventHandler(this.btnThisShift_Click);
-            // 
-            // btnPrevShift
-            // 
-            this.btnPrevShift.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPrevShift.FlatAppearance.BorderSize = 0;
-            this.btnPrevShift.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPrevShift.ForeColor = System.Drawing.Color.White;
-            this.btnPrevShift.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnPrevShift.IconColor = System.Drawing.Color.Black;
-            this.btnPrevShift.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnPrevShift.Location = new System.Drawing.Point(0, 151);
-            this.btnPrevShift.Name = "btnPrevShift";
-            this.btnPrevShift.Size = new System.Drawing.Size(200, 50);
-            this.btnPrevShift.TabIndex = 8;
-            this.btnPrevShift.Text = "Poprzednia zmiana";
-            this.btnPrevShift.UseVisualStyleBackColor = true;
-            this.btnPrevShift.Click += new System.EventHandler(this.btnPrevShift_Click);
-            // 
-            // btnThisQuarter
-            // 
-            this.btnThisQuarter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnThisQuarter.FlatAppearance.BorderSize = 0;
-            this.btnThisQuarter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThisQuarter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnThisQuarter.ForeColor = System.Drawing.Color.White;
-            this.btnThisQuarter.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnThisQuarter.IconColor = System.Drawing.Color.Black;
-            this.btnThisQuarter.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnThisQuarter.Location = new System.Drawing.Point(0, 501);
-            this.btnThisQuarter.Name = "btnThisQuarter";
-            this.btnThisQuarter.Size = new System.Drawing.Size(200, 50);
-            this.btnThisQuarter.TabIndex = 9;
-            this.btnThisQuarter.Text = "Ten kwartał";
-            this.btnThisQuarter.UseVisualStyleBackColor = true;
-            this.btnThisQuarter.Click += new System.EventHandler(this.btnThisQuarter_Click);
-            // 
-            // btnPrevQuarter
-            // 
-            this.btnPrevQuarter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPrevQuarter.FlatAppearance.BorderSize = 0;
-            this.btnPrevQuarter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevQuarter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPrevQuarter.ForeColor = System.Drawing.Color.White;
-            this.btnPrevQuarter.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btnPrevQuarter.IconColor = System.Drawing.Color.Black;
-            this.btnPrevQuarter.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnPrevQuarter.Location = new System.Drawing.Point(0, 551);
-            this.btnPrevQuarter.Name = "btnPrevQuarter";
-            this.btnPrevQuarter.Size = new System.Drawing.Size(200, 50);
-            this.btnPrevQuarter.TabIndex = 10;
-            this.btnPrevQuarter.Text = "Poprzedni kwartał";
-            this.btnPrevQuarter.UseVisualStyleBackColor = true;
-            this.btnPrevQuarter.Click += new System.EventHandler(this.btnPrevQuarter_Click);
             // 
             // frmOverview
             // 

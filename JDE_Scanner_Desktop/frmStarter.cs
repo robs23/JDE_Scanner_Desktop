@@ -21,6 +21,7 @@ namespace JDE_Scanner_Desktop
         FileKeeper files;
         Timer filesSyncTimer;
         Form OverviewForm;
+        bool IsInitialized = false;
 
         public frmStarter()
         {
@@ -133,6 +134,12 @@ namespace JDE_Scanner_Desktop
             else
             {
                 this.Text = "JDE Scan v." + System.Windows.Forms.Application.ProductVersion;
+                if(IsInitialized == false)
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                    IsInitialized = true;
+                }
+                
 #if (DEBUG == false)
                 ReleaseEntry release = null;
                 string path = string.Empty;
