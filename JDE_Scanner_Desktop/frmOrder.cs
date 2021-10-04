@@ -161,6 +161,8 @@ namespace JDE_Scanner_Desktop
             {
                 _this.DeliveryOn = txtDeliveryDate.Value;
             }
+            _this.AddMissingOrderIds();
+
         }
         
 

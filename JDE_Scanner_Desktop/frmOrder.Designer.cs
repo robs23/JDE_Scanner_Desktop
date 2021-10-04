@@ -50,6 +50,7 @@
             this.txtDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.dgvItems = new JDE_Scanner_Desktop.CustomControls.SpecKeysDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnArchiveItem = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -84,15 +85,17 @@
             this.tlpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpButtons.ColumnCount = 5;
+            this.tlpButtons.ColumnCount = 6;
+            this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tlpButtons.Controls.Add(this.btnSave, 0, 0);
-            this.tlpButtons.Controls.Add(this.cboxArchived, 4, 0);
-            this.tlpButtons.Controls.Add(this.cboxShowFinder, 1, 0);
+            this.tlpButtons.Controls.Add(this.cboxArchived, 5, 0);
+            this.tlpButtons.Controls.Add(this.cboxShowFinder, 2, 0);
+            this.tlpButtons.Controls.Add(this.btnArchiveItem, 1, 0);
             this.tlpButtons.Location = new System.Drawing.Point(3, 3);
             this.tlpButtons.Name = "tlpButtons";
             this.tlpButtons.RowCount = 1;
@@ -132,7 +135,7 @@
             this.cboxShowFinder.AutoSize = true;
             this.cboxShowFinder.Checked = true;
             this.cboxShowFinder.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cboxShowFinder.Location = new System.Drawing.Point(55, 8);
+            this.cboxShowFinder.Location = new System.Drawing.Point(95, 8);
             this.cboxShowFinder.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
             this.cboxShowFinder.Name = "cboxShowFinder";
             this.cboxShowFinder.Size = new System.Drawing.Size(132, 17);
@@ -322,6 +325,19 @@
             this.dgvItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellValueChanged);
             this.dgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvItems_EditingControlShowing);
             // 
+            // btnArchiveItem
+            // 
+            this.btnArchiveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnArchiveItem.Image = global::JDE_Scanner_Desktop.Properties.Resources.delete_24;
+            this.btnArchiveItem.Location = new System.Drawing.Point(43, 3);
+            this.btnArchiveItem.Name = "btnArchiveItem";
+            this.btnArchiveItem.Size = new System.Drawing.Size(34, 28);
+            this.btnArchiveItem.TabIndex = 5;
+            this.tooltip.SetToolTip(this.btnArchiveItem, "Usuń zaznaczone pozycje");
+            this.btnArchiveItem.UseVisualStyleBackColor = true;
+            // 
             // frmOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,5 +385,6 @@
         private System.Windows.Forms.DateTimePicker txtDeliveryDate;
         private CustomControls.SpecKeysDataGridView dgvItems;
         private System.Windows.Forms.CheckBox cboxShowFinder;
+        private System.Windows.Forms.Button btnArchiveItem;
     }
 }

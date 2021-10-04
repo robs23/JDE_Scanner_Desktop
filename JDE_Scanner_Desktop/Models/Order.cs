@@ -46,10 +46,7 @@ namespace JDE_Scanner_Desktop.Models
                     Order _this = JsonConvert.DeserializeObject<Order>(AddedItem);
                     this.OrderId = _this.OrderId;
                     this.TenantId = _this.TenantId;
-                    foreach(var i in ItemKeeper.Items.Where(n=>n.OrderId == 0 || n.OrderId == null))
-                    {
-                        i.OrderId = this.OrderId;
-                    }
+                    AddMissingOrderIds();
                 }
                 catch (Exception ex)
                 {
@@ -61,6 +58,18 @@ namespace JDE_Scanner_Desktop.Models
             else
             {
                 return false;
+            }
+        }
+
+        public void AddMissingOrderIds()
+        {
+            //pass OrderId from parent Order to child OrderItems before saving
+            if(this.OrderId != 0)
+            {
+                foreach (var i in ItemKeeper.Items.Where(n => n.OrderId == 0 || n.OrderId == null))
+                {
+                    i.OrderId = this.OrderId;
+                }
             }
         }
     }

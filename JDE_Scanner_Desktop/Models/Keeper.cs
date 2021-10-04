@@ -282,14 +282,23 @@ namespace JDE_Scanner_Desktop.Models
             {
                 foreach (var i in items)
                 {
-                    tasks.Add(i.Add(args));
+                    if (i.Id == 0) 
+                    {
+                        //it's new one, add it
+                        tasks.Add(i.Add(args));
+                    }
+                    
                 }
             }
             else
             {
                 foreach(var i in Items)
                 {
-                    tasks.Add((i as Entity<T>).Add(args));
+                    if((i as Entity<T>).Id == 0)
+                    {
+                        //it's new one, add it
+                        tasks.Add((i as Entity<T>).Add(args));
+                    }
                 }
             }
             
@@ -297,8 +306,9 @@ namespace JDE_Scanner_Desktop.Models
             IEnumerable<bool> results = await Task.WhenAll<bool>(tasks);
             if (results.Any(r => r == false))
             {
-                res = "Wystąpił błąd podczas zapisywania niektórych pozycji..";
+                res = "Wystąpił błąd podczas edytowania niektórych pozycji..";
             }
+
             return res;
         }
 
@@ -306,20 +316,30 @@ namespace JDE_Scanner_Desktop.Models
         {
             string res = "OK";
 
+            //Eidt existent items first
+
             List<Task<string>> tasks = new List<Task<string>>();
 
             if (items != null)
             {
                 foreach (var i in items)
                 {
-                    tasks.Add(i.Edit());
+                    if(i.Id > 0)
+                    {
+                        //it's exsistent, edit it
+                        tasks.Add(i.Edit());
+                    }                    
                 }
             }
             else
             {
                 foreach (var i in Items)
                 {
-                    tasks.Add((i as Entity<T>).Edit());
+                    if((i as Entity<T>).Id > 0)
+                    {
+                        //it's exsistent, edit it
+                        tasks.Add((i as Entity<T>).Edit());
+                    }
                 }
             }
 
@@ -328,6 +348,22 @@ namespace JDE_Scanner_Desktop.Models
             {
                 res = "Wystąpił błąd podczas zapisywania niektórych pozycji..";
             }
+
+            //Then add new ones
+
+            string resAdd = await AddAll();
+            if (resAdd != "OK")
+            {
+                if (res != "OK")
+                {
+                    res += resAdd;
+                }
+                else
+                {
+                    res = resAdd;
+                }
+            }
+
             return res;
         }
     }

@@ -108,6 +108,8 @@ namespace JDE_Scanner_Desktop.Models
             }
         }
 
+
+
         public virtual async Task<bool> Add(string attachmentPath, string args)
         {
             ModelValidator validator = new ModelValidator();
