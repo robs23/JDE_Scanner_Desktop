@@ -16,8 +16,6 @@ namespace JDE_Scanner_Desktop.Models
 
         protected override string PluralizedObjectName => "StorageBins";
 
-        protected override string ArchiveString { get; set; } = "IsArchived<>True";
-
         private int?[] ToPrint { get; set; } = new int?[2];
 
         public void PrintQR(List<int> ids)

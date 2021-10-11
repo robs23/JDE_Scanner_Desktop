@@ -16,6 +16,5 @@ namespace JDE_Scanner_Desktop.Models
 
         protected override string PluralizedObjectName => "Companies";
 
-        protected override string ArchiveString { get; set; } = "IsArchived<>True";
     }
 }
