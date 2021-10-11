@@ -49,6 +49,7 @@ namespace JDE_Scanner_Desktop
             Init(parent);
             mode = 2;
             _this = Item;
+            StyleAsExistent();
             
         }
 
@@ -100,6 +101,8 @@ namespace JDE_Scanner_Desktop
             source.DataSource = _this.ItemKeeper.Items;
             dgvItems.DataSource = source;
             AdjustColumns();
+            StyleEditable(_this.IsArchived);
+            StyleItemsArchived();
             dgvItems.TabAction = () => Finder.TabPressed();
             dgvItems.TabListeningColumns = new List<string>() { "PartId" };
             dgvItems.EnterAction = () => Finder.EnterPressed();
@@ -119,13 +122,46 @@ namespace JDE_Scanner_Desktop
             Looper.Hide();
         }
 
+        private void StyleEditable(bool? val)
+        {
+            bool _val = val ?? false;
+
+            dgvItems.AllowUserToAddRows = !_val;
+            dgvItems.AllowUserToDeleteRows = !_val;
+            btnArchiveItem.Enabled = !_val;
+            btnSave.Enabled = !_val;
+        }
+
         private void AdjustColumns()
         {
-            var Columns = new List<string>() { "PartId", "PartName", "Symbol", "Amount", "Unit", "Price", "Currency" };
+            var Columns = new List<string>() { "PartId", "PartName", "Symbol", "Amount", "Unit", "Delivered", "Price", "Currency", "IsArchived" };
             dgvItems.AdjustColumnVisibility(Columns);
             dgvItems.Columns["PartName"].ReadOnly = true;
             dgvItems.Columns["PartName"].MinimumWidth = 150;
             dgvItems.Columns["PartName"].DefaultCellStyle.BackColor = Color.LightGray;
+            dgvItems.Columns["IsArchived"].ReadOnly = true;
+            dgvItems.Columns["IsArchived"].DefaultCellStyle.BackColor = Color.LightGray;
+            dgvItems.Columns["Delivered"].ReadOnly = true;
+            dgvItems.Columns["Delivered"].DefaultCellStyle.BackColor = Color.LightGray;
+
+        }
+
+        private void StyleItemsArchived()
+        {
+            foreach(DataGridViewRow item in dgvItems.Rows)
+            {
+                if (item.Cells["IsArchived"].Value != null)
+                {
+                    if (item.Cells["IsArchived"].Value.ToString() == true.ToString())
+                    {
+                        foreach (DataGridViewCell cell in item.Cells)
+                        {
+                            cell.ReadOnly = true;
+                            cell.Style.BackColor = Color.LightGray;
+                        }
+                    } 
+                }
+            }
         }
 
         private async Task SetPartFinder()
@@ -425,6 +461,21 @@ namespace JDE_Scanner_Desktop
             dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Unit"].Index].Value = null;
             dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Price"].Index].Value = null;
             dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Currency"].Index].Value = null;
+        }
+
+        private void btnArchiveItem_Click(object sender, EventArgs e)
+        {
+            if (RuntimeSettings.CurrentUser.IsAuthorized(Enums.Authorizations.ARCHIVE_ORDER_ITEM))
+            {
+                if(dgvItems.SelectedRows.Count > 0)
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Żaden wiersz nie jest zaznaczony. Zaznacz wiersze, które chcesz usunąć klikając po ich lewej stronie", "Brak zaznaczenia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
     }
 }

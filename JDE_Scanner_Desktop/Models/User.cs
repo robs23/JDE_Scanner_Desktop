@@ -95,6 +95,19 @@ namespace JDE_Scanner_Desktop.Models
             return res;
         }
 
+        public bool IsAuthorized(Enums.Authorizations authorization)
+        {
+            bool res = true;
+
+            if (IsOperator == true)
+            {
+                res = false;
+                MessageBox.Show("Niestety nie posiadasz autoryzacji do wybranej funkcji!", "Brak autoryzacji", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            return res;
+        }
+
         public async void Login()
         {
             using (var client = new HttpClient())

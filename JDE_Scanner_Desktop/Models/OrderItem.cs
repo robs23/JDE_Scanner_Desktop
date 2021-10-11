@@ -36,6 +36,8 @@ namespace JDE_Scanner_Desktop.Models
         public double? Amount { get; set; }
         [DisplayName("Jednostka")]
         public string Unit { get; set; }
+        [DisplayName("Dostarczono")]
+        public double? Delivered { get; set; }
 
         [DisplayName("Koszt jednostkowy")]
         public decimal? Price { get; set; }

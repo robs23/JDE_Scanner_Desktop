@@ -35,6 +35,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.cboxArchived = new System.Windows.Forms.CheckBox();
             this.cboxShowFinder = new System.Windows.Forms.CheckBox();
+            this.btnArchiveItem = new System.Windows.Forms.Button();
             this.lblCreated = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pgGeneral = new System.Windows.Forms.TabPage();
@@ -50,7 +51,6 @@
             this.txtDeliveryDate = new System.Windows.Forms.DateTimePicker();
             this.dgvItems = new JDE_Scanner_Desktop.CustomControls.SpecKeysDataGridView();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnArchiveItem = new System.Windows.Forms.Button();
             this.tlpMain.SuspendLayout();
             this.tlpButtons.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -144,6 +144,20 @@
             this.tooltip.SetToolTip(this.cboxShowFinder, "Czy program ma podpowiadać indeksy części wg wprowadzonych liter w polu ID części" +
         "?");
             this.cboxShowFinder.UseVisualStyleBackColor = true;
+            // 
+            // btnArchiveItem
+            // 
+            this.btnArchiveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnArchiveItem.Image = global::JDE_Scanner_Desktop.Properties.Resources.delete_24;
+            this.btnArchiveItem.Location = new System.Drawing.Point(43, 3);
+            this.btnArchiveItem.Name = "btnArchiveItem";
+            this.btnArchiveItem.Size = new System.Drawing.Size(34, 28);
+            this.btnArchiveItem.TabIndex = 5;
+            this.tooltip.SetToolTip(this.btnArchiveItem, "Usuń zaznaczone pozycje");
+            this.btnArchiveItem.UseVisualStyleBackColor = true;
+            this.btnArchiveItem.Click += new System.EventHandler(this.btnArchiveItem_Click);
             // 
             // lblCreated
             // 
@@ -324,19 +338,6 @@
             this.dgvItems.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvItems_CellValidating);
             this.dgvItems.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellValueChanged);
             this.dgvItems.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvItems_EditingControlShowing);
-            // 
-            // btnArchiveItem
-            // 
-            this.btnArchiveItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnArchiveItem.Image = global::JDE_Scanner_Desktop.Properties.Resources.delete_24;
-            this.btnArchiveItem.Location = new System.Drawing.Point(43, 3);
-            this.btnArchiveItem.Name = "btnArchiveItem";
-            this.btnArchiveItem.Size = new System.Drawing.Size(34, 28);
-            this.btnArchiveItem.TabIndex = 5;
-            this.tooltip.SetToolTip(this.btnArchiveItem, "Usuń zaznaczone pozycje");
-            this.btnArchiveItem.UseVisualStyleBackColor = true;
             // 
             // frmOrder
             // 

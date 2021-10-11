@@ -39,5 +39,10 @@ namespace JDE_Scanner_Desktop.Static
             ByPart,
             ByStorageBin
         }
+
+        public enum Authorizations
+        {
+            ARCHIVE_ORDER_ITEM
+        }
     }
 }
