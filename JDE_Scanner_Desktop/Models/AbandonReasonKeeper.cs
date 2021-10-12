@@ -11,5 +11,6 @@ namespace JDE_Scanner_Desktop.Models
         protected override string ObjectName => "AbandonReason";
 
         protected override string PluralizedObjectName => "AbandonReasons";
+        protected override string ArchiveString { get; set; } = "IsArchived<>True";
     }
 }

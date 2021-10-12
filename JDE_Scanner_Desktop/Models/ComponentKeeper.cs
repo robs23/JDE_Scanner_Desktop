@@ -11,6 +11,7 @@ namespace JDE_Scanner_Desktop.Models
         protected override string ObjectName => "Component";
 
         protected override string PluralizedObjectName => "Components";
+        protected override string ArchiveString { get; set; } = "IsArchived<>True";
 
     }
 }

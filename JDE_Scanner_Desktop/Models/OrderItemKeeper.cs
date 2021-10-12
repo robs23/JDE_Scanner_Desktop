@@ -11,6 +11,5 @@ namespace JDE_Scanner_Desktop.Models
         protected override string ObjectName => "OrderItem";
 
         protected override string PluralizedObjectName => "OrderItems";
-        protected override string ArchiveString { get; set; } = null;
     }
 }

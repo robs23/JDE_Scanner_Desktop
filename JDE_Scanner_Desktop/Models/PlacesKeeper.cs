@@ -21,7 +21,7 @@ namespace JDE_Scanner_Desktop.Models
 
         protected override string PluralizedObjectName => "Places";
 
-
+        protected override string ArchiveString { get; set; } = "IsArchived<>True";
         public async Task<dynamic> GetPlacesStats(DateTime dateFrom, DateTime dateTo, int? itemsCount=null)
         {
             List<dynamic> Stats = new List<dynamic>();

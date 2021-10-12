@@ -27,7 +27,7 @@ namespace JDE_Scanner_Desktop.Models
         protected abstract string ObjectName { get;}
         protected abstract string PluralizedObjectName { get;}
 
-        protected virtual string ArchiveString { get; set; } = "IsArchived<>True";
+        protected virtual string ArchiveString { get; set; } = null;
 
         public string FilterString { get; set; } = null;
         public string QueryString { get; set; } = null;
