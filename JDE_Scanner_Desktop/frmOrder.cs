@@ -134,7 +134,7 @@ namespace JDE_Scanner_Desktop
 
         private void AdjustColumns()
         {
-            var Columns = new List<string>() { "PartId", "PartName", "Symbol", "Amount", "Unit", "Delivered", "Price", "Currency", "IsArchived" };
+            var Columns = new List<string>() {"PartId", "PartName", "Symbol", "Amount", "Unit", "Delivered", "Price", "Currency", "IsArchived" };
             dgvItems.AdjustColumnVisibility(Columns);
             dgvItems.Columns["PartName"].ReadOnly = true;
             dgvItems.Columns["PartName"].MinimumWidth = 150;
@@ -167,7 +167,7 @@ namespace JDE_Scanner_Desktop
         private async Task SetPartFinder()
         {
             Finder = new PartFinder(dgvItems, PartKeeper);
-            List<string> columns = new List<string>() { "PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
+            List<string> columns = new List<string>() {"PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
             Finder.AdjustColumns(columns);
             this.Controls.Add(Finder);
         }
@@ -463,13 +463,21 @@ namespace JDE_Scanner_Desktop
             dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["Currency"].Index].Value = null;
         }
 
-        private void btnArchiveItem_Click(object sender, EventArgs e)
+        private async void btnArchiveItem_Click(object sender, EventArgs e)
         {
             if (RuntimeSettings.CurrentUser.IsAuthorized(Enums.Authorizations.ARCHIVE_ORDER_ITEM))
             {
                 if(dgvItems.SelectedRows.Count > 0)
                 {
-
+                    List<int> SelectedRows = new List<int>();
+                    for (int i = 0; i < dgvItems.SelectedRows.Count; i++)
+                    {
+                        SelectedRows.Add((int)dgvItems.SelectedRows[i].Cells[0].Value);
+                    }
+                    MessageBox.Show("OK");
+                    await _this.ItemKeeper.Archive(SelectedRows);
+                    _this.SetArchived(SelectedRows);
+                    StyleItemsArchived();
                 }
                 else
                 {

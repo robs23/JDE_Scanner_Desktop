@@ -72,5 +72,17 @@ namespace JDE_Scanner_Desktop.Models
                 }
             }
         }
+
+        public void SetArchived(List<int> ids)
+        {
+            foreach(var id in ids)
+            {
+                var orderItem = ItemKeeper.Items.Where(i => i.OrderItemId == id).FirstOrDefault();
+                if(orderItem != null)
+                {
+                    orderItem.IsArchived = true;
+                }
+            }
+        }
     }
 }

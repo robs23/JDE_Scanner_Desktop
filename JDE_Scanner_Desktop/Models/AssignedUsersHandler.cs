@@ -57,7 +57,7 @@ namespace JDE_Scanner_Desktop.Models
             if (AssignableUsers.Any())
             {
                 Users.Clear();
-                foreach (User u in AssignableUsers)
+                foreach (User u in AssignableUsers.OrderByDescending(u=>u.IsMechanic))
                 {
                     Users.Add(new Tuple<int, string, bool>(u.UserId, u.FullName, AssignedUsers.Where(us => us.UserId == u.UserId).Any()));
                 }
