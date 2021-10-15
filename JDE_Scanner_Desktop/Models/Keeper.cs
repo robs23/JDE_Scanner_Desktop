@@ -168,7 +168,7 @@ namespace JDE_Scanner_Desktop.Models
                     url += "&query=" + query;
                     if (this.FilterString != null)
                     {
-                        url += "AND " + this.FilterString;
+                        url += " AND " + this.FilterString;
                     }
                 }
                 else
