@@ -471,5 +471,10 @@ namespace JDE_Scanner_Desktop
             frmOrders Frm = new frmOrders(this);
             Frm.Show(this);
         }
+
+        private void nowaToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

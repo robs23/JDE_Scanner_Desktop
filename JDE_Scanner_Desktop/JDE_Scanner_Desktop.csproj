@@ -161,6 +161,12 @@
     <Compile Include="Classes\MergableAttribute.cs" />
     <Compile Include="Classes\ModelValidator.cs" />
     <Compile Include="ClientSettings.cs" />
+    <Compile Include="CustomControls\CheckableDeliveryItems.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\CheckableDeliveryItems.Designer.cs">
+      <DependentUpon>CheckableDeliveryItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\SpecKeysDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -561,6 +567,9 @@
     <Compile Include="Static\RuntimeSettings.cs" />
     <Compile Include="Static\Secrets.cs" />
     <Compile Include="Static\Utilities.cs" />
+    <EmbeddedResource Include="CustomControls\CheckableDeliveryItems.resx">
+      <DependentUpon>CheckableDeliveryItems.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomControls\ImageInfoControl.resx">
       <DependentUpon>ImageInfoControl.cs</DependentUpon>
     </EmbeddedResource>
