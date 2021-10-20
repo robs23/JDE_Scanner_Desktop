@@ -114,5 +114,7 @@ namespace JDE_Scanner_Desktop
 
 
         public static string ConnectionUnavailableMessage { get; set; } = "Nie można połączyć się z serwerem, prawdopodobnie utraciłeś połączenie z internetem. Jeśli łaczysz się zdalnie, upewnij się że jesteś zalogowany do korporacyjnego VPNa";
+
+        public static PartKeeper PartBackup { get; set; }
     }
 }

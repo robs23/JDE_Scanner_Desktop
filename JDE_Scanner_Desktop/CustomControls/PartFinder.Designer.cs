@@ -49,6 +49,7 @@ namespace JDE_Scanner_Desktop.CustomControls
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(545, 105);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.UseWaitCursor = true;
             // 
             // dgvItems
             // 
@@ -68,6 +69,7 @@ namespace JDE_Scanner_Desktop.CustomControls
             this.dgvItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvItems.Size = new System.Drawing.Size(539, 99);
             this.dgvItems.TabIndex = 1;
+            this.dgvItems.UseWaitCursor = true;
             this.dgvItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellDoubleClick);
             this.dgvItems.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvItems_KeyPress);
             // 
@@ -78,8 +80,10 @@ namespace JDE_Scanner_Desktop.CustomControls
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.tableLayoutPanel1);
+            this.DoubleBuffered = true;
             this.Name = "PartFinder";
             this.Size = new System.Drawing.Size(574, 150);
+            this.UseWaitCursor = true;
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);

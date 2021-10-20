@@ -29,7 +29,6 @@ namespace JDE_Scanner_Desktop
         frmLooper Looper;
         ContextMenu buttonContextMenu;
         CompaniesKeeper SupplierKeeper;
-        PartKeeper PartKeeper;
         BindingSource source = new BindingSource();
         PartFinder Finder;
         Point CurrentRowPoint;   
@@ -59,7 +58,6 @@ namespace JDE_Scanner_Desktop
             this.Owner = parent;
             this.Location = new Point(this.Owner.Location.X + 20, this.Owner.Location.Y + 20);
             SupplierKeeper = new CompaniesKeeper();
-            PartKeeper = new PartKeeper();
         }
 
         private void StyleAsNew()
@@ -92,7 +90,6 @@ namespace JDE_Scanner_Desktop
             List<Task> LoadingTasks = new List<Task>();
             LoadingTasks.Add(Task.Run(() => SupplierKeeper.Refresh("TypeId=2")));
             LoadingTasks.Add(Task.Run(() => _this.ItemKeeper.Refresh($"OrderId={_this.OrderId}")));
-            LoadingTasks.Add(Task.Run(() => PartKeeper.Refresh(type: 't')));
             await Task.WhenAll(LoadingTasks);
             SetPartFinder();
             new AutoCompleteBehavior<Company>(this.cmbSupplier, SupplierKeeper.Items);
@@ -166,7 +163,7 @@ namespace JDE_Scanner_Desktop
 
         private async Task SetPartFinder()
         {
-            Finder = new PartFinder(dgvItems, PartKeeper);
+            Finder = new PartFinder(dgvItems);
             List<string> columns = new List<string>() {"PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
             Finder.AdjustColumns(columns);
             this.Controls.Add(Finder);
@@ -381,33 +378,45 @@ namespace JDE_Scanner_Desktop
 
         private async void PartIdTextChanged(object sender, EventArgs e)
         {
-            TextBox tb = (TextBox)sender;
-
-            if (!string.IsNullOrEmpty(tb.Text))
+            if (cboxShowFinder.Checked)
             {
-                if (dgvItems.Columns[dgvItems.CurrentCell.ColumnIndex].Name == "PartId")
+                TextBox tb = (TextBox)sender;
+
+                if (!string.IsNullOrEmpty(tb.Text))
                 {
-                    if (tb.Text.Length > 1)
+                    if (dgvItems.Columns[dgvItems.CurrentCell.ColumnIndex].Name == "PartId")
                     {
-                        await Finder.Find(tb.Text);
-                        List<string> columns = new List<string>() { "PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
-                        Finder.AdjustColumns(columns);
-                        await Finder.Show(CurrentRowPoint);
-                    } 
-                }
+                        if (tb.Text.Length > 1)
+                        {
+                            if (await Finder.Find(tb.Text))
+                            {
+                                List<string> columns = new List<string>() { "PartId", "Name", "ProducerName", "Symbol", "SupplierName", "CreatedOn" };
+                                Finder.AdjustColumns(columns);
+                                await Finder.Show(CurrentRowPoint);
+                            }
+                            else
+                            {
+                                Finder.Hide();
+                            }
+                        }
+                    }
+                } 
             }
         }
 
         private void dgvItems_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            string colName = dgvItems.Columns[e.ColumnIndex].Name;
-            if (colName == "PartId" && e.RowIndex >= 0)
+            if (cboxShowFinder.Checked)
             {
-                int rowHeight = dgvItems.Rows[e.RowIndex].Height;
-                Rectangle Cell = dgvItems.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
-                Cell.X += dgvItems.Left;
-                Cell.Y += dgvItems.Top + rowHeight;
-                CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y + dgvItems.Top));
+                string colName = dgvItems.Columns[e.ColumnIndex].Name;
+                if (colName == "PartId" && e.RowIndex >= 0)
+                {
+                    int rowHeight = dgvItems.Rows[e.RowIndex].Height;
+                    Rectangle Cell = dgvItems.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+                    Cell.X += dgvItems.Left;
+                    Cell.Y += dgvItems.Top;
+                    CurrentRowPoint = PointToScreen(new Point(Cell.X, Cell.Y + dgvItems.Top));
+                }
             }
         }
 
@@ -435,7 +444,7 @@ namespace JDE_Scanner_Desktop
             int partId; 
             if(int.TryParse(dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["PartId"].Index].Value.ToString(), out partId))
             {
-                Part CurrentPart = PartKeeper.Items.FirstOrDefault(i => i.PartId == partId);
+                Part CurrentPart = RuntimeSettings.PartBackup.Items.FirstOrDefault(i => i.PartId == partId);
                 if(CurrentPart != null)
                 {
                     dgvItems.Rows[rowNumber].Cells[dgvItems.Columns["PartName"].Index].Value = CurrentPart.Name;
@@ -470,20 +479,35 @@ namespace JDE_Scanner_Desktop
                 if(dgvItems.SelectedRows.Count > 0)
                 {
                     List<int> SelectedRows = new List<int>();
-                    for (int i = 0; i < dgvItems.SelectedRows.Count; i++)
+                    for (int i = dgvItems.SelectedRows.Count - 1; i >= 0; i--)
                     {
-                        SelectedRows.Add((int)dgvItems.SelectedRows[i].Cells[0].Value);
+                        if((int)dgvItems.SelectedRows[i].Cells[0].Value > 0)
+                        {
+                            SelectedRows.Add((int)dgvItems.SelectedRows[i].Cells[0].Value);
+                        }
+                        else
+                        {
+                            dgvItems.Rows.Remove(dgvItems.SelectedRows[i]);
+                        }
+                        
                     }
-                    MessageBox.Show("OK");
-                    await _this.ItemKeeper.Archive(SelectedRows);
-                    _this.SetArchived(SelectedRows);
-                    StyleItemsArchived();
+                    if (SelectedRows.Any())
+                    {
+                        await _this.ItemKeeper.Archive(SelectedRows);
+                        _this.SetArchived(SelectedRows);
+                        StyleItemsArchived();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Żaden wiersz nie jest zaznaczony. Zaznacz wiersze, które chcesz usunąć klikając po ich lewej stronie", "Brak zaznaczenia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
+        }
+
+        private void cboxShowFinder_CheckedChanged(object sender, EventArgs e)
+        {
+            dgvItems.AreSpecKeysEnabled = cboxShowFinder.Checked;
         }
     }
 }

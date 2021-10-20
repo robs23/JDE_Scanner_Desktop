@@ -23,16 +23,16 @@ namespace JDE_Scanner_Desktop.CustomControls
         public bool IsInitialized { get; set; } = false;
         public bool IsShown { get; set; } = false; 
 
-        public PartFinder(Control parent, PartKeeper keeper)
+        public PartFinder(Control parent)
         {
             InitializeComponent();
+            this.Visible = false;
             this.Parent = parent;
             this.CausesValidation = false;
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.Transparent;
             DGV = (DataGridView)parent;
-            Keeper = keeper;
-            this.Visible = false;
+            Keeper = RuntimeSettings.PartBackup;
             Init();
         }
 
@@ -42,13 +42,15 @@ namespace JDE_Scanner_Desktop.CustomControls
             IsInitialized = true;
         }
 
-        public async Task Find(string word)
+        public async Task<bool> Find(string word)
         {
             if (IsInitialized)
             {
                 CurrentSelection = Keeper.Items.Where(i => i.PartId.ToString().Contains(word)
                                                          || i.Name.ToLower().Contains(word.ToLower())).ToList();
             }
+            dgvItems.DataSource = CurrentSelection;
+            return CurrentSelection.Any();
             //dgvItems.DataSource = CurrentSelection;
         }
 
@@ -68,15 +70,15 @@ namespace JDE_Scanner_Desktop.CustomControls
         public async Task Show(Point position)
         {
             if (!IsShown)
-            {
-                Point pnt = this.PointToClient(position);
-                this.Left = pnt.X;
-                this.Top = pnt.Y;
+            {   
+                Point pnt = PointToClient(position);
+                this.Left = position.X;//pnt.X;
+                this.Top = position.Y;
                 this.Visible = true;
-                this.BringToFront();
+                this.BringToFront();    
                 IsShown = true;
             }
-            dgvItems.DataSource = CurrentSelection;
+            
         }
 
         public bool Hide()

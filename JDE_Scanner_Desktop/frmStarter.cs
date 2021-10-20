@@ -111,6 +111,8 @@ namespace JDE_Scanner_Desktop
             filesSync = new BackgroundWorker();
             filesSync.DoWork += (obj, ea) => SyncFiles();
             filesSyncTimer.Start();
+            RuntimeSettings.PartBackup = new PartKeeper();
+            Task.Run(() => RuntimeSettings.PartBackup.Refresh(type: 't'));
         }
 
         void Timer_Elapsed(object sender, ElapsedEventArgs e)

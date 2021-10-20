@@ -144,6 +144,7 @@
             this.tooltip.SetToolTip(this.cboxShowFinder, "Czy program ma podpowiadać indeksy części wg wprowadzonych liter w polu ID części" +
         "?");
             this.cboxShowFinder.UseVisualStyleBackColor = true;
+            this.cboxShowFinder.CheckedChanged += new System.EventHandler(this.cboxShowFinder_CheckedChanged);
             // 
             // btnArchiveItem
             // 

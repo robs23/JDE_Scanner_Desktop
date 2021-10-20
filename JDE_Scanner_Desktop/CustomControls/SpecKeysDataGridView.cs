@@ -25,6 +25,7 @@ namespace JDE_Scanner_Desktop.CustomControls
         public List<string> KeyDownListeningColumns { get; set; }
         public Func<bool> EscapeAction { get; set; }
         public List<string> EscapeListeningColumns { get; set; }
+        public bool AreSpecKeysEnabled { get; set; } = true;
 
         public SpecKeysDataGridView()
         {
@@ -75,41 +76,45 @@ namespace JDE_Scanner_Desktop.CustomControls
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Tab && TabAction !=null)
+            if (AreSpecKeysEnabled)
             {
-                if(IsCurrentColumnListening(msg, TabListeningColumns))
+                if (keyData == Keys.Tab && TabAction != null)
                 {
-                    TabAction();
-                }
+                    if (IsCurrentColumnListening(msg, TabListeningColumns))
+                    {
+                        TabAction();
+                    }
 
-            }
-            else if (keyData == Keys.Enter && EnterAction != null)
-            {
-                if (IsCurrentColumnListening(msg, EnterListeningColumns))
-                {
-                    EnterAction();
                 }
-            }
-            else if (keyData == Keys.Down && KeyDownAction != null)
-            {
-                if (IsCurrentColumnListening(msg, KeyDownListeningColumns))
+                else if (keyData == Keys.Enter && EnterAction != null)
                 {
-                    bool canEnter = KeyDownAction(); // e.g. move focus to other control
-                    if (canEnter)
+                    if (IsCurrentColumnListening(msg, EnterListeningColumns))
                     {
-                        return true;
-                    } 
+                        EnterAction();
+                    }
                 }
-            }else if(keyData == Keys.Escape && EscapeAction != null)
-            {
-                if (IsCurrentColumnListening(msg, EscapeListeningColumns))
+                else if (keyData == Keys.Down && KeyDownAction != null)
                 {
-                    bool wasShown = EscapeAction(); // e.g. hide control
-                    if (wasShown)
+                    if (IsCurrentColumnListening(msg, KeyDownListeningColumns))
                     {
-                        return true;
-                    } 
+                        bool canEnter = KeyDownAction(); // e.g. move focus to other control
+                        if (canEnter)
+                        {
+                            return true;
+                        }
+                    }
                 }
+                else if (keyData == Keys.Escape && EscapeAction != null)
+                {
+                    if (IsCurrentColumnListening(msg, EscapeListeningColumns))
+                    {
+                        bool wasShown = EscapeAction(); // e.g. hide control
+                        if (wasShown)
+                        {
+                            return true;
+                        }
+                    }
+                } 
             }
             
             return base.ProcessCmdKey(ref msg, keyData);
