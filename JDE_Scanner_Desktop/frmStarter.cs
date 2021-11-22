@@ -476,5 +476,13 @@ namespace JDE_Scanner_Desktop
         {
 
         }
+
+        private void logiUżytkownikówToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!RuntimeSettings.CurrentUser.IsAuthorized(Static.Enums.Authorizations.BROWSE_USER_LOGS))
+                return;
+            frmUserLogs Frm = new frmUserLogs(this);
+            Frm.Show(this);
+        }
     }
 }

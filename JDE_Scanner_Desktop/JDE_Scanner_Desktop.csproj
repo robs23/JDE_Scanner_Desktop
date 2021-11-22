@@ -245,6 +245,12 @@
     <Compile Include="frmGetPartData.Designer.cs">
       <DependentUpon>frmGetPartData.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUserLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserLogs.Designer.cs">
+      <DependentUpon>frmUserLogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOverview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -548,6 +554,8 @@
     <Compile Include="Models\UnitKeeper.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\PlacesKeeper.cs" />
+    <Compile Include="Models\UserLog.cs" />
+    <Compile Include="Models\UserLogKeeper.cs" />
     <Compile Include="Models\UsersKeeper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -605,6 +613,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmGetPartData.resx">
       <DependentUpon>frmGetPartData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserLogs.resx">
+      <DependentUpon>frmUserLogs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOverview.resx">
       <DependentUpon>frmOverview.cs</DependentUpon>

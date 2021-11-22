@@ -42,7 +42,8 @@ namespace JDE_Scanner_Desktop.Static
 
         public enum Authorizations
         {
-            ARCHIVE_ORDER_ITEM
+            ARCHIVE_ORDER_ITEM,
+            BROWSE_USER_LOGS
         }
     }
 }
